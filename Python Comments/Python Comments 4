@@ -1,0 +1,103 @@
+How to Comment Out a Block of Code in Python
+To comment out a block of code in Python, you can either add a # at the beginning of each line of the block or surround the entire block with triple quotes (''' or """).
+Updated Jul 19, 2024
+ · 3 min read
+Contents
+
+Why Are Block Comments in Python Important?
+Using Single-Line Block Comments in Python
+Method #1: Commenting Using Multiple Single Line #
+Python Block Comment Method #2: Commenting Using Triple-Quoted String Literals
+Final Thoughts
+Training more people?
+Get your team access to the full DataCamp for business platform.
+For a bespoke solution 
+book a demo
+.
+Comments are one of the most useful tools when working with Python. They guide us through the logic, decisions, and purposes behind blocks of code without interfering with the execution. Comments help make the code more readable and maintainable and facilitate collaboration in a team setting.
+
+This tutorial will delve into two effective methods for commenting out multiple lines of code in Python, ensuring your code is well-documented and easily understandable.
+
+Why Are Block Comments in Python Important?
+Comments are often one of the first concepts you encounter in your Python learning journey. They provide useful context over the intent behind a certain code snippet. They offer clarity and context over why a script behaves as it does. There are a variety of important reasons why you should always use comments in your scripts. Here are four of them:
+
+Documentation: Comments act as a form of documentation explaining the purpose of functions, classes, or blocks of code. This is especially useful for complex algorithms where the logic may not be immediately apparent.
+Readability: Well-commented code is easier to read and understand. This is crucial when you or others revisit the code after some time.
+Debugging: Temporarily commenting out sections of code is a common practice for isolating and identifying bugs.
+Collaboration: In a team environment, comments make code more shareable and understandable, facilitating smoother collaboration and code reviews.
+Using Single-Line Block Comments in Python
+Before we dive into commenting out multiple lines, let's start with the basics of single-line comments. In Python, a single-line comment begins with the hash symbol (#), and the Python interpreter ignores everything that follows it on that line. To create a single-line comment, follow the instructions below:
+
+Placement: Place the # symbol at the beginning of the line or after the code on the same line. Comments can be placed above the code they describe, on the same line to the right of the code, or standalone.
+Content: After the # symbol, write your comment. This can be an explanation of the line of code, a note for future reference, or any useful information related to the code.
+Learn-by-Example editor, press Tab to Enter. Press Escape and then Tab or Shift+Tab to navigate out.
+1
+2
+# This is a single-line comment explaining the next line of code
+print("Hello, world!")  # This prints a message to the console
+Powered by
+
+Method #1: Commenting Using Multiple Single Line #
+The most straightforward way to comment in Python is by using the # symbol, which comments out everything that follows it on the line. While Python does not have a specific syntax for block comments, you can use multiple # symbols to comment out each line individually. All you need to do is perform the following steps:
+
+Identify the code block: First, identify the code block you wish to comment out. This could be a function, a loop, or any segment of your code that you want to disable or explain.
+Comment each line: Place a # symbol at the beginning of each line you wish to comment out. This tells the Python interpreter to ignore these lines during execution.
+You can see the example below:
+
+Learn-by-Example editor, press Tab to Enter. Press Escape and then Tab or Shift+Tab to navigate out.
+1
+2
+3
+4
+5
+# Example of commenting out multiple lines individually 
+# print("Hello, world")
+# print("What are you up to?")
+
+print("Just floating in space. What was the question?")
+Powered by
+
+Python Block Comment Method #2: Commenting Using Triple-Quoted String Literals
+An alternative method for commenting out multiple lines is to use triple-quoted string literals (''' ''' or """ """). While not officially block comments, these string literals are often used as such, especially for multi-line comments or docstrings. To use triple-quoted strings, simply place ''' or """ before and after the block of code you wish to comment out, as such:
+
+'''
+def example_function(name):
+	print("Hello", name)
+'''
+
+Powered By 
+Triple-quoted string literals are most commonly used for documenting Python functions. For example:
+
+Learn-by-Example editor, press Tab to Enter. Press Escape and then Tab or Shift+Tab to navigate out.
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+⌄
+⌄
+# Create hello() function
+def hello(name):
+	'''
+	This function takes as input a name, 
+	and returns a salutation to the name in the form of "Hello name"
+	'''
+	# Print the output 
+	print("Hello", name)
+
+hello("John")
+Powered by
+
+These tripled quoted string literals are called docstrings — you can read more about them in our docstrings tutorial.
+
+Get certified in data literacy and land your dream role
+Our certification programs help you stand out and prove your skills are job-ready to potential employers.
+
+Timeline mobile.png
+Final Thoughts
+Comments are an indispensable part of writing clean, maintainable, and collaborative Python code. Whether you're using single-line comments with # or multi-line comments with triple-quoted strings, the goal is to enhance the readability and understanding of your code.
