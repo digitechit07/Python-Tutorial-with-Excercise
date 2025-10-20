@@ -1,0 +1,123 @@
+1. Python interactive mode programming
+This mode is based on ideology only. In interactive mode, the developer enters a command and then presses enter and it will show the output of the code. For running the code in interactive mode the programmers can command the prompt in macOS, terminal in Linux, and Windows.
+
+2. Python script mode programming
+Script mode in Python means a writing system that is written in a file. This file can be executed by using the command prompt. For using script mode after writing the code, the code should be saved by using the ".py" extension. After that type python "filename.py" and then press enter. It will show the output of the code..
+
+Identifiers in python
+Identifiers in Python are used to identify variables, objects, classes, functions, and other identifiers.
+They are significant in writing effective code in the Python programming language as they make complex programming tasks simpler.
+All identifiers have a specific set of rules that need to be followed while creating identifiers: they should begin with either an alphabet (a-z) or an underscore (_), and after that can contain any combination of alphanumeric characters (a-z, 0-9).
+Moreover, identifiers are case-sensitive so it’s important to note that 'x' and 'X' would be considered two different identifiers.
+Knowing how to use identifiers effectively is an important mastery for successful Python programming.
+Here are naming conventions for identifiers in Python:
+In the Python programming language the class names start with an uppercase letter and all the other identifiers start with a lowercase letter.
+In this language, if an identifier starts with a single leading underscore that can indicate that the particular identifier is a private identifier.
+In this language if an identifier starts with two leading underscores that can indicate a strongly private identifier.
+In Python programming language If the identifier ends with two trailing underscores then the identifier can be called by a language-defined special name.
+Python Reserved Words
+Python programming language has some reserved keywords so that the developer can use them to identify any constant or variables or other identifier's name. Those Python keywords are,
+and	as	assert
+break	class	continue
+def	del	elif
+else	except	False
+finally	for	from
+global	if	import
+in	is	lambda
+None	nonlocal	not
+or	pass	raise
+return	True	try
+while	with	yield
+Read More - Python Developer Salary in India
+
+Python Lines and Indentation
+Python programming language does not provide any braces to indicate the code blocks for function definitions or class or flow control.
+The codes are denoted by line identification. The use of indentation in Python is crucial.
+It plays an important role in making Python code easier to read, follow, and use - while incorrectly formatted code can be difficult to decipher and use.
+Indentation provides visual structure to your code and has a big impact on the readability of the code.
+Indentation also helps with debugging, as misaligned statements can easily help you identify the errors.
+In Python, indentation is used to show a group of related statements, so proper use of indentation increases the productivity of developers too.
+Without it, understanding even simple programs in Python would be almost impossible.
+Example in the Python Compiler
+# This is a comment
+# Comments start with a '#' symbol and are not executed
+# Define a variable
+my_variable = 42
+# Use an if statement with indentation
+if my_variable > 50:
+print("The variable is greater than 50")
+else:
+print("The variable is not greater than 50")
+# Define a function with indentation
+def greet(name):
+print("Hello, " + name + "!")
+# Call the function
+greet("Alice")
+greet("Bob")
+This Python code shows the usage of comments (lines beginning with '#'), variable declaration, an if-else statement for conditional execution, defining a function using indentation, & invoking the function to welcome two different names.
+
+Python Multi-Line Statements
+Python enables multi-line statements by allowing you to continue a statement onto the following line by using backslashes (\).
+This helps make code easier to comprehend and breaks up lengthy expressions into many lines for easier comprehension.
+As an alternative, you can create multi-line statements without the usage of backslashes by using parentheses or brackets for data structures like lists, dictionaries, or tuples.
+Example
+result = 1 + \
+2 + \
+3 + \
+4 + \
+5
+print(result)
+In order to make the code more readable, we separate the addition operation in this example using backslashes (\).
+
+Quotations in Python
+Python quotes are a great way to express thoughts and opinions, and Python makes it easy to use them in code.
+Double quotes in Python provide two different types of quoting: raw strings and regular string literals.
+Raw strings are best for specifying fixed patterns when a backslash is used as an escape character, whereas regular string literals must be enclosed in double quotes when the backslash needs to be used as an escape character.
+When dealing with Python quotes, it's important to remember to use the same type of quote when starting and ending your strings; otherwise, syntax errors may occur.
+With the right know-how, python quotations can help make your code more concise and readable.
+Comments in Python
+A remark is a description or annotation in the Python source code that can be read by programmers.
+They are included to make the source code more human-readable, but the Python interpreter ignores them.
+Python supports both single-line (or end-of-line) and multi-line (block) comments, just like the majority of modern languages.
+Python comments resemble those found in PHP, BASH, and Perl programming languages extremely closely.
+A comment is introduced by a hash sign (#) that is outside of a string literal.
+The Python interpreter ignores all characters that come after the # and before the end of the actual line since they are considered to be part of the comment.
+Example
+# This is a single-line comment
+print("Hello, World!") # This comment is at the end of the line
+This code includes two comments—one at the end of the print statement line and one at the end of the standalone comment—and outputs "Hello, World!" to the console. Comments serve as code documentation and are not executed.
+
+Using Blank Lines in Python Programs
+Blank lines, often referred to as empty lines or empty lines in Python programming, are lines in your code that have no visible characters, such as spaces or tabs.
+Python programs make use of blank lines to organize and make the code more readable.
+They help developers comprehend and maintain the code by graphically separating code into different blocks, methods, or classes.
+Waiting for the User
+
+In Python, "waiting for the user" often refers to pausing a program's execution to await input or responses from the user.
+This can often be done with input() or equivalent functions.
+Accepting the user's input before moving forward with its tasks, enables the program to engage with the user.
+Multiple Statements on a Single Line
+
+Semicolons (;) are used in Python to separate lines containing several statements.
+In order to ensure readability, this concise syntax should only be used sparingly.
+Example
+a = 1; b = 2; c = a + b
+To assign values and calculate c, three statements are concatenated together on a single line.
+
+Multiple Statement Groups as Suites
+In Python, a set of discrete statements that together form a single code block are referred to as suites.
+If, while, def, and class are examples of compound or complex statements that need a header line and a suite.
+One or more lines that make up the suite are placed after the header lines, which start the statement (with the keyword) and end with a colon (:).
+Example
+x = 10
+if x > 5:
+print("x is greater than 5") # This statement is part of the suite for the if condition
+print("x is still greater than 5") # This statement is also part of the suite
+else:
+print("x is not greater than 5") # This statement is part of the suite for the else condition
+print("This statement is outside the if-else block") # This statement is not indented and is not part of any suite
+In this example, the variable 'x' is checked to see if it is bigger than 5, and depending on the result, multiple messages are shown. The example ends with a statement that is always printed regardless of the result.
+
+Command Line Arguments in Python
+Python scripts that are run at the terminal get values known as command-line arguments.
+They enable users to supply input data to the script in the form of parameters, which may then be read by the script itself using the 'sys.argv' list or through libraries like 'argparse'.
