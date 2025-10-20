@@ -1,1 +1,54 @@
+Python Comments
 
+Comments in Python are the lines in the code that are ignored by the interpreter during the execution of the program.
+
+Comments enhance the readability of the code.
+Comment can be used to identify functionality or structure the code-base.
+Comment can help understanding unusual or tricky scenarios handled by the code to prevent accidental removal or changes.
+Comments can be used to prevent executing any specific part of your code, while making changes or testing.
+python
+# I am single line comment
+
+""" Multi-line comment used
+print("Python Comments") """
+Comments in Python
+In Python, single line comments starts with hashtag symbol #.
+
+Python
+# sample comment
+name = "geeksforgeeks"
+print(name)
+
+Output
+geeksforgeeks
+Multi-Line Comments
+Python does not provide the option for multiline comments. However, there are different ways through which we can write multiline comments.
+
+Multiline comments using multiple hashtags (#)
+
+We can multiple hashtags (#) to write multiline comments in Python. Each and every line will be considered as a single-line comment.
+
+Python
+# Python program to demonstrate
+# multiline comments
+print("Multiline comments")
+Also Check: Interesting Fact about Python Multi-line Comments
+
+Using String Literals as Comment
+Python ignores the string literals that are not assigned to a variable. So, we can use these string literals as Python Comments. 
+
+Python
+'Single-line comments using string literals'
+
+""" Python program to demonstrate
+ multiline comments"""
+print("Multiline comments")
+
+
+Best Practice to Write Comments
+These are some of the tips you can follow, to make your comments effective are:
+
+Comments should be short and precise.
+Use comments only when necessary, don't clutter your code with comments.
+Avoid writing generic or basic comments.
+Write comments that are self explanatory.
