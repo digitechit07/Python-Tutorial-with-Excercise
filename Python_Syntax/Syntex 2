@@ -1,0 +1,30 @@
+1.What is the syntax to write in Python?
+Python uses clean, readable syntax, relying on indentation instead of braces to define blocks of code. Simple statements like print() are easy to write.
+
+2.Is Python syntax easy?
+Yes, Python syntax is straightforward and beginner-friendly. It emphasizes readability, making it ideal for new programmers.
+
+3.How to run syntax in Python?
+Write Python code in a file with a .py extension or directly in an interpreter. Run it using python file_name.py in the terminal.
+
+4. What is the use of syntax in Python?
+Syntax defines the rules for writing code that the Python interpreter can understand and execute. It ensures consistency and clarity in programming.
+
+5.What is the basic syntax of Python?
+Python requires indentation to structure code, uses simple keywords like if, for, and while, and ends statements without semicolons.
+
+6.What is the basic function syntax in Python?
+Functions in Python are defined using the def keyword followed by the function name, parentheses, and a colon, e.g., def function_name():.
+
+7.How to create a list in Python?
+Lists are created using square brackets and can store multiple data types, e.g., my_list = [1, 2, “apple”, True].
+
+8. What should a beginner code in Python?
+Beginners can start with simple programs like “Hello World”, arithmetic calculators, or basic loops and conditionals to understand Python fundamentals.
+
+9. What is type syntax in Python?
+Use the type() function to determine the data type of a variable, e.g., type(variable) returns the type of the variable.
+
+10. Is Python difficult to learn?
+No, Python is widely regarded as one of the easiest programming languages to learn due to its simple syntax and extensive documentation.
+
