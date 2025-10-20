@@ -1,0 +1,124 @@
+Syntax and semantics
+Main article: Python syntax and semantics
+Python is meant to be an easily readable language. Its formatting is visually uncluttered and often uses English keywords where other languages use punctuation. Unlike many other languages, it does not use curly brackets to delimit blocks, and semicolons after statements are allowed but rarely used. It has fewer syntactic exceptions and special cases than C or Pascal.[77]
+
+Indentation
+Further information: Python syntax and semantics § Indentation
+Python uses whitespace indentation, rather than curly brackets or keywords, to delimit blocks. An increase in indentation comes after certain statements; a decrease in indentation signifies the end of the current block.[78] Thus, the program's visual structure accurately represents its semantic structure.[79] This feature is sometimes termed the off-side rule. Some other languages use indentation this way; but in most, indentation has no semantic meaning. The recommended indent size is four spaces.[80]
+
+Statements and control flow
+Python's statements include the following:
+
+The assignment statement, using a single equals sign =
+The if statement, which conditionally executes a block of code, along with else and elif (a contraction of else if)
+The for statement, which iterates over an iterable object, capturing each element to a local variable for use by the attached block
+The while statement, which executes a block of code as long as boolean condition is true
+The try statement, which allows exceptions raised in its attached code block to be caught and handled by except clauses (or new syntax except* in Python 3.11 for exception groups[81]); the try statement also ensures that clean-up code in a finally block is always run regardless of how the block exits
+The raise statement, used to raise a specified exception or re-raise a caught exception
+The class statement, which executes a block of code and attaches its local namespace to a class, for use in object-oriented programming
+The def statement, which defines a function or method
+The with statement, which encloses a code block within a context manager, allowing resource-acquisition-is-initialization (RAII)-like behavior and replacing a common try/finally idiom[82] Examples of a context include acquiring a lock before some code is run, and then releasing the lock; or opening and then closing a file
+The break statement, which exits a loop
+The continue statement, which skips the rest of the current iteration and continues with the next
+The del statement, which removes a variable—deleting the reference from the name to the value, and producing an error if the variable is referred to before it is redefined [c]
+The pass statement, serving as a NOP (i.e., no operation), which is syntactically needed to create an empty code block
+The assert statement, used in debugging to check for conditions that should apply
+The yield statement, which returns a value from a generator function (and also an operator); used to implement coroutines
+The return statement, used to return a value from a function
+The import and from statements, used to import modules whose functions or variables can be used in the current program
+The match and case statements, analogous to a switch statement construct, which compares an expression against one or more cases as a control-flow measure
+
+Expressions
+Python's expressions include the following:
+
+The +, -, and * operators for mathematical addition, subtraction, and multiplication are similar to other languages, but the behavior of division differs. There are two types of division in Python: floor division (or integer division) //, and floating-point division /.[87] Python uses the ** operator for exponentiation.
+Python uses the + operator for string concatenation. The language uses the * operator for duplicating a string a specified number of times.
+The @ infix operator is intended to be used by libraries such as NumPy for matrix multiplication.[88][89]
+The syntax :=, called the "walrus operator", was introduced in Python 3.8. This operator assigns values to variables as part of a larger expression.[90]
+In Python, == compares two objects by value. Python's is operator may be used to compare object identities (i.e., comparison by reference), and comparisons may be chained—for example, a <= b <= c.
+Python uses and, or, and not as Boolean operators.
+Python has a type of expression called a list comprehension, and a more general expression called a generator expression.[62]
+Anonymous functions are implemented using lambda expressions; however, there may be only one expression in each body.
+Conditional expressions are written as x if c else y.[91] (This is different in operand order from the c ? x : y operator common to many other languages.)
+Python makes a distinction between lists and tuples. Lists are written as [1, 2, 3], are mutable, and cannot be used as the keys of dictionaries (since dictionary keys must be immutable in Python). Tuples, written as (1, 2, 3), are immutable and thus can be used as the keys of dictionaries, provided that all of the tuple's elements are immutable. The + operator can be used to concatenate two tuples, which does not directly modify their contents, but produces a new tuple containing the elements of both. For example, given the variable t initially equal to (1, 2, 3), executing t = t + (4, 5) first evaluates t + (4, 5), which yields (1, 2, 3, 4, 5); this result is then assigned back to t—thereby effectively "modifying the contents" of t while conforming to the immutable nature of tuple objects. Parentheses are optional for tuples in unambiguous contexts.[92]
+Python features sequence unpacking where multiple expressions, each evaluating to something assignable (e.g., a variable or a writable property) are associated just as in forming tuple literal; as a whole, the results are then put on the left-hand side of the equal sign in an assignment statement. This statement expects an iterable object on the right-hand side of the equal sign to produce the same number of values as the writable expressions on the left-hand side; while iterating, the statement assigns each of the values produced on the right to the corresponding expression on the left.[93]
+Python has a "string format" operator % that functions analogously to printf format strings in the C language—e.g. "spam=%s eggs=%d" % ("blah", 2) evaluates to "spam=blah eggs=2". In Python 2.6+ and 3+, this operator was supplemented by the format() method of the str class, e.g., "spam={0} eggs={1}".format("blah", 2). Python 3.6 added "f-strings": spam = "blah"; eggs = 2; f'spam={spam} eggs={eggs}'.[94]
+Strings in Python can be concatenated by "adding" them (using the same operator as for adding integers and floats); e.g., "spam" + "eggs" returns "spameggs". If strings contain numbers, they are concatenated as strings rather than as integers, e.g. "2" + "2" returns "22".
+Python supports string literals in several ways:
+Delimited by single or double quotation marks; single and double quotation marks have equivalent functionality (unlike in Unix shells, Perl, and Perl-influenced languages). Both marks use the backslash (\) as an escape character. String interpolation became available in Python 3.6 as "formatted string literals".[94]
+Triple-quoted, i.e., starting and ending with three single or double quotation marks; this may span multiple lines and function like here documents in shells, Perl, and Ruby.
+Raw string varieties, denoted by prefixing the string literal with r. Escape sequences are not interpreted; hence raw strings are useful where literal backslashes are common, such as in regular expressions and Windows-style paths. (Compare "@-quoting" in C#.)
+Python has array index and array slicing expressions in lists, which are written as a[key], a[start:stop] or a[start:stop:step]. Indexes are zero-based, and negative indexes are relative to the end. Slices take elements from the start index up to, but not including, the stop index. The (optional) third slice parameter, called step or stride, allows elements to be skipped or reversed. Slice indexes may be omitted—for example, a[:] returns a copy of the entire list. Each element of a slice is a shallow copy.
+In Python, a distinction between expressions and statements is rigidly enforced, in contrast to languages such as Common Lisp, Scheme, or Ruby. This distinction leads to duplicating some functionality, for example:
+
+List comprehensions vs. for-loops
+Conditional expressions vs. if blocks
+The eval() vs. exec() built-in functions (in Python 2, exec is a statement); the former function is for expressions, while the latter is for statements
+
+Libraries
+Python's large standard library[114] is commonly cited as one of its greatest strengths. For Internet-facing applications, many standard formats and protocols such as MIME and HTTP are supported. The language includes modules for creating graphical user interfaces, connecting to relational databases, generating pseudorandom numbers, arithmetic with arbitrary-precision decimals,[110] manipulating regular expressions, and unit testing.
+
+Python Best Practices for Nicer Formatting
+Let me just list a few (non-mandatory but highly recommended) Python best practices that will make your code much nicer, more readable and more reusable.
+
+Python Best Practice #1: Use Comments
+You can add comments to your Python code. Simply use the # character. Everything that comes after the # won’t be executed.
+
+# This is a comment before my for loop.
+for i in range(0, 100, 2):
+    print(i)
+
+python best practices - comments
+#use comments!
+Python Best Practice #2: Variable Names
+Conventionally, variable names should be written with lower letters, and the words in them separated by _ characters. Also, generally I do not recommend using one letter variable names in your code. Using meaningful and easy-to-distinguish variable names helps other programmers a lot when they want to understand your code.
+
+my_meaningful_variable = 100
+
+Python Best Practice #3: Use blank lines
+If you want to separate code blocks visually (e.g. when you have a 100 line Python script in which you have 10-12 blocks that belong together) you can use blank lines. Even multiple blank lines. It won’t affect the result of your script.
+
+python best practices - blank lines
+same script – with blank lines
+Python Best Practice #4: Use white spaces around operators and assignments
+For cleaner code it’s worth using spaces around your = signs and your mathematical and comparison operators (>, <, +, -, etc.). If you don’t use white spaces, your code will run anyway, but again: the cleaner the code, the easier to read it, the easier to reuse it.
+
+number_x = 10
+number_y = 100
+number_mult = number_x * number_y 
+
+Python Best Practice #5: Max line length should be 79 characters
+If you reach 79 characters in a line, it’s recommended to break your code into more lines. Use the above-mentioned \ character. Using the \ at the end of the line, Python will ignore the line break and will read your code as if it were one line.
+(Or in some cases you can take advantage of implicit line joining.)
+
+python syntax essentials - one statement more line
+a dummy example: one statement in more lines
+Python Best Practice #6: Stay consistent
+And one of the most important rules: always stay consistent! Even if you follow the above rules, in specific situations you’ll have to create your own. Either way: make sure you are using these rules consistently. Ideally, you have to create Python scripts that you can open 6 months later without any trouble understanding them. If you randomly change your formatting rules and naming conventions, you’ll create an unnecessary headache for your future self. So stay consistent!
+
+The Zen of Python – a nice easter egg
+What else could come at the end of this article but a nice Python easter egg.
+If you type import this to your Jupyter Notebook you will get the 19 design “commandments” of Python:
+
+>>> import this
+The Zen of Python, by Tim Peters
+
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren't special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you're Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it's a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let's do more of those!
