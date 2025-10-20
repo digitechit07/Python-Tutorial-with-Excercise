@@ -1,0 +1,116 @@
+What Are Comments in Python Used For?
+Comments in Python are identified with a hash symbol, #, and extend to the end of the line. Hash characters in a string are not considered comments, however. There are three ways to write a comment - as a separate line, beside the corresponding statement of code, or as a multi-line comment block.
+
+There are multiple uses of writing comments in Python. Some significant uses include:
+
+Increasing readability
+Explaining the code to others
+Understanding the code easily after a long-term
+Including resources
+Re-using the existing code
+Want a Top Software Development Job? Start Here!
+AI-Powered Full Stack Developer ProgramExplore ProgramWant a Top Software Development Job? Start Here!
+Advantages of Comments in Python
+1. Enhanced Readability
+Comments help you and others understand the purpose and functionality of your code by clearly stating the reasoning behind it. This is particularly useful for complicated code or stuff you return to after a long break.
+
+2. Code That Documents Itself
+Well-written comments make your code almost self-documenting. Comments that provide the logic behind your coding choices become important resources for future readers who may need to comprehend or alter the code.
+
+3. Improved Cooperation
+In team projects, effective communication is essential for efficient teamwork. They enable other developers to incorporate their contributions easily and rapidly understand the operation of the code.
+
+4. Improved troubleshooting
+By describing the anticipated behavior of different code blocks, comments can serve as useful cues for troubleshooting. This can help to speed up the process of identifying and resolving program faults.
+
+Dive Deep into Core Python Concepts
+Python Certification CourseENROLL NOWDive Deep into Core Python Concepts
+5. Code Control
+Comments let you turn off certain code segments for targeted debugging. This enables you to debug individual software components without interfering with the remainder of the code's execution.
+
+6. Logic Explanation
+If there are complex algorithms or logic buried in the code, comments can explain them. Understanding the reasoning behind intricate computations or decision-making processes can be greatly aided by this.
+
+7. Code Maintainability
+Comments facilitate code maintenance and modification, particularly after prolonged usage. Developers can more confidently and effectively make the necessary modifications to the code by understanding the code's purpose through comments.
+
+8. Code Reuse
+Reusability in other program sections is encouraged by well-written comments that describe a code section's usefulness. This can leverage well-commented existing code, saving time and effort.
+
+9. Knowledge Sharing
+You can impart your coding expertise to colleagues or aspiring developers by using comments as a forum. You can aid in the development of a shared understanding of the codebase by explaining your reasoning and coding decisions.
+
+10. Learning Aid
+Even for yourself, comments can be a very beneficial learning aid. You can learn more about your coding style and process from when you wrote your code by going back and adding comments.
+
+Seize the Opportunity: Become a Python Developer!
+Python Certification CourseENROLL NOWSeize the Opportunity: Become a Python Developer!
+What Are the Different Types of Comments in Python?
+There are three types of comments: single-line, multi-line, and docstring comments. The syntax of comments varies depending on the type. This tutorial will explore every kind of comment individually, along with examples.
+
+1. Single-Line Comments
+Single-line comments begin with the “#” character. Anything that is written in a single line after ‘#’ is considered as a comment. The syntax for writing single-line comments is:
+
+# comments here
+
+There are two ways of using single-line comments in Python. You can use it before the code or next to the code. The example depicted below shows the use of comments in both ways.
+
+Single-LineComments
+
+PEP8, Python Style Guide, recommends using less than 79 characters in a single-line comment to make it easier to read. If your comment is exceeding the recommended length, you can use the next type: multi-line comments.
+
+Accelerate your career as a skilled MERN Stack Developer by enrolling in a unique Full Stack Developer - MERN Stack Master's program. Get complete development and testing knowledge on the latest technologies by opting for the MERN Stack Developer Course. Contact us TODAY!
+Skyrocket Your Career: Earn Top Salaries!
+Python Certification CourseENROLL NOWSkyrocket Your Career: Earn Top Salaries!
+2. Multi-Line Comments
+Python does not support multi-line comments. However, there are multiple ways to overcome this issue. None of these ways are technically multi-line comments, but you can use them as one. The first way is by using # at the beginning of each line of the comment.
+
+Multi-LineComments
+
+The next way is by using string literals but not assigning them to any variables. If you do not assign a string literal to a variable, the Python interpreter ignores it. Use this to your advantage to write multi-line comments. You can either use a single (‘’) quotation or double (“”) quotation.
+
+Multi-LineComments2
+
+You can also use multi-line strings for commenting. To do this, use either a ‘’ or “” quotation marks three times.
+
+Multi-LineComments3.
+
+Unleash Your Career as a Full Stack Developer!
+AI-Powered Full Stack Developer ProgramEXPLORE COURSEUnleash Your Career as a Full Stack Developer!
+3. Python Docstrings
+Python provides an in-built feature called docstrings for commenting on modules, methods, functions, objects, and classes. They are written in the first line after defining a module, function, method, etc., using three quotation marks (‘’ or “”). If you do not use it in the first line, the interpreter will not take it as a docstring. You can also access docstrings using the __doc__ attribute.
+
+PythonDocstrings
+
+4. String Literals
+Python code can be made more understandable and explained by using comments. String literals, multi-line comments, and single-line comments are the three main comments categories. Single-line comments, which are intended for succinct explanations, begin with the '#' symbol and go until the end of the line. Triple quotes (''''' or '"""') can be used to generate multi-line comments, which enable the commenting out of many lines and are appropriate for more in-depth explanations. Furthermore, string literals can be utilized as comments in classes or functions, especially regarding documentation. These unassigned string objects act as explanation notes in the code, even though they aren't comments.
+# This is a single-line comment
+
+"""
+This is a multi-line comment.
+It spans multiple lines.
+"""
+
+def example_function():
+    """This is a docstring, a type of string literal used for documentation."""
+    pass
+
+'''
+Another example of a multi-line comment
+using single quotes.
+'''
+The ‘#’ symbol is used for a single-line comment.
+Triple quotes ‘"""’ or ‘'''’ are used for multi-line comments.
+The string literal ‘"""This is a docstring..."""’ inside the function ‘example_function()’ serves as a documentation string (docstring), which is a special type of string literal used for providing information about the function.
+Advance Your Full Stack Career in 6 Months!
+AI-Powered Full Stack Developer ProgramEXPLORE COURSEAdvance Your Full Stack Career in 6 Months!
+How to Write Good Comments in Python?
+Comments are a crucial part of a program. Hence, it is essential to learn how to write good comments. Here are some characteristics that define good comments.
+
+Ensure that they are concise
+Don’t write generic comments; only have them if they add information
+(a=10 #assigning 10 to a, avoid writing such generic comments)
+
+Write comments that describe the overall task of a function or method and not specific details
+Good comments are self-explanatory
+Don’t write redundant comments
