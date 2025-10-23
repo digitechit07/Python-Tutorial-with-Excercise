@@ -1,0 +1,177 @@
+Python Variables and Data types
+2024-07-09
+justani
+Table of Contents
+Introduction to Variables
+Rules for Python Variable Names
+Data Types in Python
+Numeric Types
+String Type
+Boolean Type
+Sequence Types
+Mapping Type: Dictionaries
+Set Type
+None Type
+Type Conversion
+Checking Variable Types
+Best Practices and Common Pitfalls
+Coding Task
+Variables and Datatypes
+
+Introduction to Variables
+In programming, variables are fundamental building blocks that allow us to store, manipulate, and reuse data in our code. They are essential for creating dynamic and flexible programs.
+
+A variable is like a labeled box where you can store data. Imagine you have a box labeled "age" and you put the number 25 in it. In Python, you would do this by writing:
+
+age = 25
+When you write this, Python creates a box (variable) with the name age and stores 25 in that box (variable).
+
+Here's the cool part: whenever you use age in your code, Python will remember it is 25. For example:
+
+print(age)  # Output: 25
+To learn more about variables, watch this short video explanation:
+
+
+Rules for Python Variable Names
+When naming variables in Python, follow these rules:
+
+Use only alphabets, numbers, and underscores (A-Z, a-z, 0-9, and _). Example: user_age, total_count2
+
+Start with a letter or underscore, not a number. Valid: _count, name1 Invalid: 1name
+
+No spaces allowed. Valid: first_name Invalid: first name
+
+Case-sensitive: age, Age, and AGE are three different variables.
+
+Avoid using Python keywords (like if, for, while) as variable names.
+
+Data Types in Python
+Python has several built-in data types. Let's explore them:
+
+Numeric Types
+Integers (int)
+Whole numbers, positive or negative.
+
+age = 25
+count = -10
+Floating-point numbers (float)
+Numbers with decimal points.
+
+pi = 3.14159
+temperature = -2.5
+
+# Note: Be aware of potential floating-point precision issues
+result = 0.1 + 0.2
+print(result)  # Output: 0.30000000000000004
+String Type
+Strings store text and are created using single or double quotes.
+
+name = "Alice"
+message = 'Hello, World!'
+
+# String operations
+full_name = "John " + "Doe"  # Concatenation
+first_char = name[0]  # Indexing: 'A'
+substring = message[0:5]  # Slicing: 'Hello'
+Boolean Type
+Booleans represent True or False values.
+
+is_student = True
+has_license = False
+
+# Booleans in conditional statements
+if is_student:
+    print("You are a student")
+else:
+    print("You are not a student")
+Sequence Types
+Lists
+Lists are Ordered, mutable collections that can contain items of different types.
+
+numbers = [1, 2, 3, 4, 5]
+mixed = [1, "two", 3.0, [4, 5]]
+
+numbers.append(6)  # Add an item
+first_item = numbers[0]  # Access an item
+Tuples
+Tuples are Ordered, immutable collections.
+
+coordinates = (10, 20)
+rgb = (255, 0, 0)
+
+x, y = coordinates  # Unpacking
+Mapping Type: Dictionaries
+Dictionaries store key-value pairs.
+
+person = {'name': 'Alice', 'age': 30, 'city': 'New York'}
+
+print(person['name'])  # Accessing a value
+person['job'] = 'Engineer'  # Adding a new key-value pair
+Set Type
+Unordered collections of unique elements.
+
+unique_numbers = {1, 2, 3, 4, 5}
+unique_numbers.add(6)  # Adding an element
+unique_numbers.add(1)  # This won't add a duplicate
+None Type
+Represents the absence of a value.
+
+empty_value = None
+
+if empty_value is None:
+    print("No value assigned")
+Type Conversion
+Python allows conversion between different data types.
+
+Implicit Type Conversion
+Python automatically converts types in some cases:
+
+x = 7
+y = x / 2
+print(y)  # Output: 3.5 (float)
+Explicit Type Conversion
+You can manually convert types using built-in functions:
+
+# String to int
+num_str = "12"
+num_int = int(num_str)
+result = num_int + 10  # Result: 22
+
+# Int to float
+x = 5
+y = float(x)
+print(y)  # Output: 5.0
+
+# Float to int (truncates decimal part)
+z = int(3.14)
+print(z)  # Output: 3
+Checking Variable Types
+Use type() or isinstance() to check variable types:
+
+a = 5
+print(type(a))  # Output: <class 'int'>
+
+b = "Hello"
+print(isinstance(b, str))  # Output: True
+Best Practices and Common Pitfalls
+Use descriptive variable names: user_age is better than ua.
+Follow Python naming conventions: use snake_case for variable names.
+Avoid global variables when possible.
+Be cautious with floating-point arithmetic due to precision issues.
+Don't compare floating-point numbers for exact equality.
+Be aware of mutable vs immutable types (lists vs tuples).
+Coding Task
+Write a program to calculate the area of a circle:
+
+Declare variables radius (8.9) and pi (3.14).
+Calculate the area using the formula: pi × radius × radius.
+Output only the area.
+Here's the solution:
+
+radius = 8.9
+pi = 3.14
+area = pi * radius * radius
+print(area)
+Expected output:
+
+248.71940000000004
