@@ -1,0 +1,664 @@
+Numbers in Python
+
+Integers and Floating-Point Numbers
+Integers
+Floating-Point Numbers
+Arithmetic Operators and Expressions
+Addition
+Subtraction
+Multiplication
+Division
+Integer Division
+Exponents
+The Modulus Operator
+Arithmetic Expressions
+Make Python Lie to You
+Math Functions and Number Methods
+Round Numbers With round()
+Find the Absolute Value With abs()
+Raise to a Power With pow()
+Check if a Float Is Integral
+Print Numbers in Style
+Complex Numbers
+Conclusion: Numbers in Python
+Further Reading
+
+Remove ads
+You don’t need to be a math whiz to program well. The truth is, few programmers need to know more than basic algebra. Of course, how much math you need to know depends on the application you’re working on. In general, the level of math required to be a programmer is lower than you might expect. Although math and computer programming aren’t as correlated as some people might believe, numbers are an integral part of any programming language, and Python is no exception.
+
+Create integers and floating-point numbers
+Round numbers to a given number of decimal places
+Format and display numbers in strings
+Let’s get started!
+
+Note: This tutorial is adapted from the chapter “Numbers and Math” in Python Basics: A Practical Introduction to Python 3. If you’d prefer a video course, then check out Python Basics: Numbers and Math.
+
+The book uses Python’s built-in IDLE editor to create and edit Python files and interact with the Python shell, so you will see references to IDLE’s built-in debugging tools throughout this tutorial. However, you should have no problems running the example code from the editor and environment of your choice.
+
+Free Bonus: 5 Thoughts On Python Mastery, a free course for Python developers that shows you the roadmap and the mindset you’ll need to take your Python skills to the next level.
+
+Integers and Floating-Point Numbers
+Python has three built-in numeric data types: integers, floating-point numbers, and complex numbers. In this section, you’ll learn about integers and floating-point numbers, which are the two most commonly used number types. You’ll learn about complex numbers in a later section.
+
+
+Remove ads
+Integers
+An integer is a whole number with no decimal places. For example, 1 is an integer, but 1.0 isn’t. The name for the integer data type is int, which you can see with type():
+
+>>> type(1)
+<class 'int'>
+You can create an integer by typing the desired number. For instance, the following assigns the integer 25 to the variable num:
+
+>>> num = 25
+When you create an integer like this, the value 25 is called an integer literal because the integer is literally typed into the code.
+
+You may already be familiar with how to convert a string containing an integer to a number using int(), which is especially useful when working with user input. For example, the following converts the string "25" to the integer 25:
+
+>>> int("25")
+25
+int("25") is not an integer literal because the integer value is created from a string.
+
+When you write large numbers by hand, you typically group digits into groups of three separated by a comma or a decimal point. The number 1,000,000 is a lot easier to read than 1000000.
+
+In Python, you can’t use commas to group digits in integer literals, but you can use underscores (_). Both of the following are valid ways to represent the number one million as an integer literal:
+
+>>> 1000000
+1000000
+
+>>> 1_000_000
+1000000
+There’s no limit to how large an integer can be, which might be surprising considering that computers have a finite amount of memory. Try typing the largest number you can think of into IDLE’s interactive window. Python can handle it with no problem!
+
+Floating-Point Numbers
+A floating-point number, or float for short, is a number with a decimal place. 1.0 is a floating-point number, as is -2.75. The name of the floating-point data type is float:
+
+>>> type(1.0)
+<class 'float'>
+Like integers, floats can be created from floating-point literals or by converting a string to a float with float():
+
+>>> float("1.25")
+1.25
+There are three ways to represent a floating-point literal. Each of the following creates a floating-point literal with a value of one million:
+
+>>> 1000000.0
+1000000.0
+
+>>> 1_000_000.0
+1000000.0
+
+>>> 1e6
+1000000.0
+The first two ways are similar to the two techniques for creating integer literals. The third approach uses E notation to create a float literal.
+
+Note: E notation is short for exponential notation. You may have seen this notation used by calculators to represent numbers that are too big to fit on the screen.
+
+To write a float literal in E notation, type a number followed by the letter e and then another number. Python takes the number to the left of the e and multiplies it by 10 raised to the power of the number after the e. So 1e6 is equivalent to 1×10⁶.
+
+Python also uses E notation to display large floating-point numbers:
+
+>>> 200000000000000000.0
+2e+17
+The float 200000000000000000.0 gets displayed as 2e+17. The + sign indicates that the exponent 17 is a positive number. You can also use negative numbers as the exponent:
+
+>>> 1e-4
+0.0001
+The literal 1e-4 is interpreted as 10 raised to the power -4, which is 1/10000, or 0.0001.
+
+Unlike integers, floats do have a maximum size. The maximum floating-point number depends on your system, but something like 2e400 ought to be well beyond most machines’ capabilities. 2e400 is 2×10⁴⁰⁰, which is far more than the total number of atoms in the universe!
+
+When you reach the maximum floating-point number, Python returns a special float value, inf:
+
+>>> 2e400
+inf
+inf stands for infinity, and it just means that the number you’ve tried to create is beyond the maximum floating-point value allowed on your computer. The type of inf is still float:
+
+>>> n = 2e400
+>>> n
+inf
+>>> type(n)
+<class 'float'>
+Python also uses -inf, which stands for negative infinity and represents a negative floating-point number that is beyond the minimum floating-point number allowed on your computer:
+
+>>> -2e400
+-inf
+You probably won’t come across inf and -inf very often as a programmer unless you regularly work with extremely large numbers.
+
+Check Your Understanding
+
+Expand the block below to check your understanding:
+
+
+You can expand the block below to see a solution:
+
+
+When you’re ready, you can move on to the next section.
+
+
+Remove ads
+Arithmetic Operators and Expressions
+In this section, you’ll learn how to do basic arithmetic, such as addition, subtraction, multiplication, and division, with numbers in Python. Along the way, you’ll learn some conventions for writing mathematical expressions in code.
+
+Addition
+Addition is performed with the + operator:
+
+>>> 1 + 2
+3
+The two numbers on either side of the + operator are called operands. In the above example, both operands are integers, but operands don’t need to be the same type.
+
+You can add an int to a float with no problem:
+
+>>> 1.0 + 2
+3.0
+Notice that the result of 1.0 + 2 is 3.0, which is a float. Anytime a float is added to a number, the result is another float. Adding two integers together always results in an int.
+
+Note: PEP 8 recommends separating both operands from an operator with a space.
+
+Python can evaluate 1+1 just fine, but 1 + 1 is the preferred format because it’s generally easier to read. This rule of thumb applies to all the operators in this section.
+
+Subtraction
+To subtract two numbers, just put a - operator between them:
+
+>>> 1 - 1
+0
+
+>>> 5.0 - 3
+2.0
+Just like adding two integers, subtracting two integers always results in an int. Whenever one of the operands is a float, the result is also a float.
+
+The - operator is also used to denote negative numbers:
+
+>>> -3
+-3
+You can subtract a negative number from another number, but as you can see below, this can sometimes look confusing:
+
+>>> 1 - -3
+4
+
+>>> 1 --3
+4
+
+>>> 1- -3
+4
+
+>>> 1--3
+4
+Of the four examples above, the first is the most PEP 8 compliant. That said, you can surround -3 with parentheses to make it even clearer that the second - is modifying 3:
+
+>>> 1 - (-3)
+4
+Using parentheses is a good idea because it makes your code more explicit. Computers execute code, but humans read code. Anything you can do to make your code easier to read and understand is a good thing.
+
+
+Remove ads
+Multiplication
+To multiply two numbers, use the * operator:
+
+>>> 3 * 3
+9
+
+>>> 2 * 8.0
+16.0
+The type of number you get from multiplication follows the same rules as addition and subtraction. Multiplying two integers results in an int, and multiplying a number with a float results in a float.
+
+Division
+The / operator is used to divide two numbers:
+
+>>> 9 / 3
+3.0
+
+>>> 5.0 / 2
+2.5
+Unlike addition, subtraction, and multiplication, division with the / operator always returns a float. If you want to make sure that you get an integer after dividing two numbers, you can use int() to convert the result:
+
+>>> int(9 / 3)
+3
+Keep in mind that int() discards any fractional part of the number:
+
+>>> int(5.0 / 2)
+2
+5.0 / 2 returns the floating-point number 2.5, and int(2.5) returns the integer 2 with the .5 removed.
+
+Integer Division
+If writing int(5.0 / 2) seems a little long winded to you, Python provides a second division operator called the integer division operator (//), also known as the floor division operator:
+
+>>> 9 // 3
+3
+
+>>> 5.0 // 2
+2.0
+
+>>> -3 // 2
+-2
+The // operator first divides the number on the left by the number on the right and then rounds down to an integer. This might not give the value you expect when one of the numbers is negative.
+
+For example, -3 // 2 returns -2. First, -3 is divided by 2 to get -1.5. Then -1.5 is rounded down to -2. On the other hand, 3 // 2 returns 1 because both numbers are positive.
+
+The above example also illustrates that // returns a floating-point number when one of the operands is a float. This is why 9 // 3 returns the integer 3, and 5.0 // 2 returns the float 2.0.
+
+Let’s see what happens when you try to divide a number by 0:
+
+>>> 1 / 0
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ZeroDivisionError: division by zero
+Python gives you a ZeroDivisionError, letting you know that you just tried to break a fundamental rule of the universe.
+
+
+Remove ads
+Exponents
+You can raise a number to a power using the ** operator:
+
+>>> 2 ** 2
+4
+
+>>> 2 ** 3
+8
+
+>>> 2 ** 4
+16
+Exponents don’t have to be integers. They can also be floats:
+
+>>> 3 ** 1.5
+5.196152422706632
+
+>>> 9 ** 0.5
+3.0
+Raising a number to the power of 0.5 is the same as taking the square root, but notice that even though the square root of 9 is an integer, Python returns the float 3.0.
+
+For positive operands, the ** operator returns an int if both operands are integers and a float if any one of the operands is a floating-point number.
+
+You can also raise numbers to negative powers:
+
+>>> 2 ** -1
+0.5
+
+>>> 2 ** -2
+0.25
+Raising a number to a negative power is the same as dividing 1 by the number raised to the positive power. So, 2 ** -1 is the same as 1 / (2 ** 1), which is the same as 1 / 2, or 0.5. Similarly, 2 ** -2 is the same as 1 / (2 ** 2), which is the same as 1 / 4, or 0.25.
+
+The Modulus Operator
+The % operator, or the modulus, returns the remainder of dividing the left operand by the right operand:
+
+>>> 5 % 3
+2
+
+>>> 20 % 7
+6
+
+>>> 16 % 8
+0
+3 divides 5 once with a remainder of 2, so 5 % 3 is 2. Similarly, 7 divides 20 twice with a remainder of 6. In the last example, 16 is divisible by 8, so 16 % 8 is 0. Anytime the number to the left of % is divisible by the number to the right, the result is 0.
+
+One of the most common uses of % is to determine whether one number is divisible by another. For example, a number n is even if and only if n % 2 is 0. What do you think 1 % 0 returns? Let’s try it out:
+
+>>> 1 % 0
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ZeroDivisionError: integer division or modulo by zero
+This makes sense because 1 % 0 gives the remainder of dividing 1 by 0. But you can’t divide 1 by 0, so Python raises a ZeroDivisionError.
+
+Note: When you work in IDLE’s interactive window, errors like ZeroDivisionError don’t cause much of a problem. The error is displayed and a new prompt pops up, allowing you to continue writing code.
+
+However, when Python encounters an error while running a script, the execution stops. In other words, the program crashes. In chapter 8 of Python Basics, you’ll learn how to handle errors so that your programs don’t crash unexpectedly.
+
+Things get a little tricky when you use the % operator with negative numbers:
+
+>>> 5 % -3
+-1
+
+>>> -5 % 3
+1
+
+>>> -5 % -3
+-2
+Although potentially shocking at first glance, these results are the product of a well-defined behavior in Python. To calculate the remainder r of dividing a number x by a number y, Python uses the equation r = x - (y * (x // y)).
+
+For example, to find 5 % -3, Python first finds (5 // -3). Since 5 / -3 is about -1.67, that means 5 // -3 is -2. Now Python multiplies that by -3 to get 6. Finally, Python subtracts 6 from 5 to get -1.
+
+
+Remove ads
+Arithmetic Expressions
+You can combine operators to form complex expressions. An expression is a combination of numbers, operators, and parentheses that Python can compute, or evaluate, to return a value.
+
+Here are some examples of arithmetic expressions:
+
+>>> 2*3 - 1
+5
+
+>>> 4/2 + 2**3
+10.0
+
+>>> -1 + (-3*2 + 4)
+-3
+The rules for evaluating expressions are the same as in everyday arithmetic. In school, you probably learned these rules under the name order of operations.
+
+The *, /, //, and % operators all have equal precedence, or priority, in an expression, and each of these has a higher precedence than the + and - operators. This is why 2*3 - 1 returns 5 and not 4. 2*3 is evaluated first, because * has higher precedence than the - operator.
+
+You may notice that the expressions in the previous example do not follow the rule for putting a space on either side of all of the operators. PEP 8 says the following about whitespace in complex expressions:
+
+If operators with different priorities are used, consider adding whitespace around the operators with the lowest priority(ies). Use your own judgment; however, never use more than one space, and always have the same amount of whitespace on both sides of a binary operator. (Source)
+
+Another good practice is to use parentheses to indicate the order in which operations should be performed, even if the parentheses aren’t necessary. For instance, (2 * 3) - 1 is potentially clearer than 2*3 - 1.
+
+Make Python Lie to You
+What do you think 0.1 + 0.2 is? The answer is 0.3, right? Let’s see what Python has to say about it. Try this out in the interactive window:
+
+>>> 0.1 + 0.2
+0.30000000000000004
+Well, that’s . . . almost right. What in the heck is going on here? Is this a bug in Python?
+
+No, it’s not a bug! It’s a floating-point representation error, and it has nothing to do with Python. It’s related to the way floating-point numbers are stored in a computer’s memory.
+
+Note: This tutorial is adapted from the chapter “Numbers and Math” in Python Basics: A Practical Introduction to Python 3. If you enjoy what you’re reading, then be sure to check out the rest of the book.
+
+The number 0.1 can be represented as the fraction 1/10. Both the number 0.1 and its fraction 1/10 are decimal representations, or base-10 representations. Computers, however, store floating-point numbers in base-2 representation, more commonly called binary representation.
+
+When represented in binary, something familiar yet possibly unexpected happens to the decimal number 0.1. The fraction 1/3 has no finite decimal representation. That is, 1/3 = 0.3333... with infinitely many 3s after the decimal point. The same thing happens to the fraction 1/10 in binary.
+
+The binary representation of 1/10 is the following infinitely repeating fraction:
+
+0.00011001100110011001100110011...
+Computers have finite memory, so the number 0.1 must be stored as an approximation and not as its true value. The approximation that gets stored is slightly higher than the actual value and looks like this:
+
+0.1000000000000000055511151231257827021181583404541015625
+You may have noticed, however, that when asked to print 0.1, Python prints 0.1 and not the approximated value above:
+
+>>> 0.1
+0.1
+Python doesn’t just chop off the digits in the binary representation for 0.1. What actually happens is a little more subtle.
+
+Because the approximation of 0.1 in binary is just that—an approximation—it’s entirely possible that more than one decimal number has the same binary approximation.
+
+For example, both 0.1 and 0.10000000000000001 have the same binary approximation. Python prints out the shortest decimal number that shares the approximation.
+
+This explains why, in the first example of this section, 0.1 + 0.2 doesn’t equal 0.3. Python adds together the binary approximations for 0.1 and 0.2, which gives a number that is not the binary approximation for 0.3.
+
+If all this is starting to make your head spin, don’t worry! Unless you’re writing programs for finance or scientific computing, you don’t need to worry about the imprecision of floating-point arithmetic.
+
+
+Remove ads
+Math Functions and Number Methods
+Python has a few built-in functions that you can use to work with numbers. In this section, you’ll learn about three of the most common:
+
+round(), for rounding numbers to some number of decimal places
+abs(), for getting the absolute value of a number
+pow(), for raising a number to some power
+You’ll also learn about a method you can use with floating-point numbers to check whether they have an integer value.
+
+Round Numbers With round()
+You can use round() to round a number to the nearest integer:
+
+>>> round(2.3)
+2
+
+>>> round(2.7)
+3
+round() has some unexpected behavior when the number ends in .5:
+
+>>> round(2.5)
+2
+
+>>> round(3.5)
+4
+2.5 is rounded down to 2, and 3.5 is rounded up to 4. Most people expect a number that ends in .5 to be rounded up, so let’s take a closer look at what’s going on here.
+
+Python 3 rounds numbers according to a strategy called rounding ties to even. A tie is any number whose last digit is five. 2.5 and 3.1415 are ties, but 1.37 is not.
+
+When you round ties to even, you first look at the digit one decimal place to the left of the last digit in the tie. If that digit is even, then you round down. If the digit is odd, then you round up. That’s why 2.5 rounds down to 2 and 3.5 rounds up to 4.
+
+Note: Rounding ties to even is the rounding strategy recommended for floating-point numbers by the IEEE(Institute of Electrical and Electronics Engineers) because it helps limit the impact that rounding has on operations involving lots of numbers.
+
+The IEEE maintains a standard called IEEE 754 for dealing with floating-point numbers on a computer. It was published in 1985 and is still commonly used by hardware manufacturers.
+
+You can round a number to a given number of decimal places by passing a second argument to round():
+
+>>> round(3.14159, 3)
+3.142
+
+>>> round(2.71828, 2)
+2.72
+The number 3.14159 is rounded to three decimal places to get 3.142, and the number 2.71828 is rounded to two decimal places to get 2.72.
+
+The second argument of round() must be an integer. If it isn’t, then Python raises a TypeError:
+
+>>> round(2.65, 1.4)
+Traceback (most recent call last):
+  File "<pyshell#0>", line 1, in <module>
+    round(2.65, 1.4)
+TypeError: 'float' object cannot be interpreted as an integer
+Sometimes round() doesn’t get the answer quite right:
+
+>>> # Expected value: 2.68
+>>> round(2.675, 2)
+2.67
+2.675 is a tie because it lies exactly halfway between the numbers 2.67 and 2.68. Since Python rounds ties to the nearest even number, you would expect round(2.675, 2) to return 2.68, but it returns 2.67 instead. This error is the result of a floating-point representation error, not a bug in round().
+
+Dealing with floating-point numbers can be frustrating, but this frustration isn’t specific to Python. All languages that implement the IEEE floating-point standard have the same issues, including C/C++, Java, and JavaScript.
+
+In most cases, though, the little errors encountered with floating-point numbers are negligible, and the results of round() are perfectly useful.
+
+
+Remove ads
+Find the Absolute Value With abs()
+The absolute value of a number n is just n if n is positive and -n if n is negative. For example, the absolute value of 3 is 3, while the absolute value of -5 is 5.
+
+To get the absolute value of a number in Python, you use abs():
+
+>>> abs(3)
+3
+
+>>> abs(-5.0)
+5.0
+abs() always returns a positive number of the same type as its argument. That is, the absolute value of an integer is always a positive integer, and the absolute value of a float is always a positive float.
+
+Raise to a Power With pow()
+Earlier, you learned how to raise a number to a power using the ** operator. You can also use pow() to achieve the same result.
+
+pow() takes two arguments. The first argument is the base, or the number to be raised to a power, and the second argument is the exponent, or the power to which the number is to be raised.
+
+For example, the following uses pow() to raise 2 to the exponent 3:
+
+>>> pow(2, 3)
+8
+Just like with **, the exponent in pow() can be negative:
+
+>>> pow(2, -2)
+0.25
+So, what’s the difference between ** and pow()?
+
+The pow() function accepts an optional third argument that computes the first number raised to the power of the second number, then takes the modulo with respect to the third number. In other words, pow(x, y, z) is equivalent to (x ** y) % z.
+
+Here’s an example in which x = 2, y = 3, and z = 2:
+
+>>> pow(2, 3, 2)
+0
+First, 2 is raised to the power 3 to get 8. Then 8 % 2 is calculated, which is 0 because 2 divides 8 with no remainder.
+
+Check if a Float Is Integral
+You may be familiar with string methods like .lower(), .upper(), and .find(). Integers and floating-point numbers also have methods.
+
+Number methods aren’t used very often, but there is one that can be useful. Floating-point numbers have an .is_integer() method that returns True if the number is integral—meaning it has no fractional part—and otherwise returns False:
+
+>>> num = 2.5
+>>> num.is_integer()
+False
+
+>>> num = 2.0
+>>> num.is_integer()
+True
+One use for .is_integer() is for validating user input. For example, if you were writing an online ordering app for a pizzeria, then you would want to check that the quantity of pizzas the customer inputs is a whole number.
+
+The round(), abs(), and pow() functions are built-in functions, meaning you don’t have to import anything in order to use them. But these three functions barely scratch the surface of all of the functions available for working with numbers in Python.
+
+For even more math fun, check out The Python math Module: Everything You Need to Know!
+
+Check Your Understanding
+
+Expand the block below to check your understanding:
+
+
+You can expand the block below to see a solution:
+
+
+When you’re ready, you can move on to the next section.
+
+
+Remove ads
+Print Numbers in Style
+Displaying numbers to a user requires inserting numbers into a string. You can do this with f-strings by surrounding a variable assigned to a number with curly braces:
+
+>>> n = 7.125
+>>> f"The value of n is {n}"
+'The value of n is 7.125'
+Those curly braces support a simple formatting language that you can use to alter the appearance of the value in the final formatted string.
+
+For example, to format the value of n in the above example to two decimal places, replace the contents of the curly braces in the f-string with {n:.2f}:
+
+>>> n = 7.125
+>>> f"The value of n is {n:.2f}"
+'The value of n is 7.12'
+The colon (:) after the variable n indicates that everything after it is part of the formatting specification. In this example, the formatting specification is .2f.
+
+The .2 in .2f rounds the number to two decimal places, and the f tells Python to display n as a fixed-point number. This means that the number is displayed with exactly two decimal places, even if the original number has fewer decimal places.
+
+When n = 7.125, the result of {n:.2f} is 7.12. Just like with round(), Python rounds ties to even when formatting numbers inside strings. So, if you replace n = 7.125 with n = 7.126, then the result of {n:.2f} is 7.13:
+
+>>> n = 7.126
+>>> f"The value of n is {n:.2f}"
+'The value of n is 7.13'
+To round to one decimal place, replace .2 with .1:
+
+>>> n = 7.126
+>>> f"The value of n is {n:.1f}"
+'The value of n is 7.1'
+When you format a number as fixed point, it’s always displayed with the precise number of decimal places that you specify:
+
+>>> n = 1
+>>> f"The value of n is {n:.2f}"
+'The value of n is 1.00'
+>>> f"The value of n is {n:.3f}"
+'The value of n is 1.000'
+You can insert commas to group the integer part of large numbers by the thousands with the , option:
+
+>>> n = 1234567890
+>>> f"The value of n is {n:,}"
+'The value of n is 1,234,567,890'
+To round to some number of decimal places and also group by thousands, put the , before the . in your formatting specification:
+
+>>> n = 1234.56
+>>> f"The value of n is {n:,.2f}"
+'The value of n is 1,234.56'
+The specifier ,.2f is useful for displaying currency values:
+
+>>> balance = 2000.0
+>>> spent = 256.35
+>>> remaining = balance - spent
+
+>>> f"After spending ${spent:.2f}, I was left with ${remaining:,.2f}"
+'After spending $256.35, I was left with $1,743.65'
+Another useful option is %, which is used to display percentages. The % option multiplies a number by 100 and displays it in fixed-point format, followed by a percentage sign.
+
+The % option should always go at the end of your formatting specification, and you can’t mix it with the f option. For example, .1% displays a number as a percentage with exactly one decimal place:
+
+>>> ratio = 0.9
+>>> f"Over {ratio:.1%} of Pythonistas say 'Real Python rocks!'"
+"Over 90.0% of Pythonistas say 'Real Python rocks!'"
+
+>>> # Display percentage with 2 decimal places
+>>> f"Over {ratio:.2%} of Pythonistas say 'Real Python rocks!'"
+"Over 90.00% of Pythonistas say 'Real Python rocks!'"
+The formatting mini language is powerful and extensive. You’ve only seen the basics here. For more information, check out the official documentation.
+
+Check Your Understanding
+
+Expand the block below to check your understanding:
+
+
+You can expand the block below to see a solution:
+
+
+When you’re ready, you can move on to the next section.
+
+
+Remove ads
+Complex Numbers
+Python is one of the few programming languages that provides built-in support for complex numbers. While complex numbers don’t often come up outside the domains of scientific computing and computer graphics, Python’s support for them is one of its strengths.
+
+If you’ve ever taken a precalculus or higher-level algebra math class, then you may remember that a complex number is a number with two distinct components: a real part and an imaginary part.
+
+To create a complex number in Python, you simply write the real part, then a plus sign, then the imaginary part with the letter j at the end:
+
+>>> n = 1 + 2j
+When you inspect the value of n, you’ll notice that Python wraps the number with parentheses:
+
+>>> n
+(1+2j)
+This convention helps eliminate any confusion that the displayed output may represent a string or a mathematical expression.
+
+Imaginary numbers come with two properties, .real and .imag, that return the real and imaginary components of the number, respectively:
+
+>>> n.real
+1.0
+
+>>> n.imag
+2.0
+Notice that Python returns both the real and imaginary components as floats, even though they were specified as integers.
+
+Complex numbers also have a .conjugate() method that returns the complex conjugate of the number:
+
+>>> n.conjugate()
+(1-2j)
+For any complex number, its conjugate is the complex number with the same real part and an imaginary part that is the same in absolute value but with the opposite sign. So in this case, the complex conjugate of 1 + 2j is 1 - 2j.
+
+The .real and .imag properties don’t need parentheses after them like .conjugate() does.
+
+The .conjugate() method is a function that performs an action on a complex number, whereas .real and .imag don’t perform any action—they just return some information about the number.
+
+The distinction between methods and properties is an important aspect of object-oriented programming.
+
+Except for the floor division operator (//), all the arithmetic operators that work with floats and integers will also work with complex numbers. Since this isn’t an advanced math tutorial, we won’t discuss the mechanics of complex arithmetic. Instead, here are some examples of using complex numbers with arithmetic operators:
+
+>>> a = 1 + 2j
+>>> b = 3 - 4j
+
+>>> a + b
+(4-2j)
+
+>>> a - b
+(-2+6j)
+
+>>> a * b
+(11+2j)
+
+>>> a ** b
+(932.1391946432212+95.9465336603415j)
+
+>>> a / b
+(-0.2+0.4j)
+
+>>> a // b
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: can't take floor of complex number.
+Interestingly, although not surprising from a mathematical point of view, int and float objects also have .real and .imag properties as well as the .conjugate() method:
+
+>>> x = 42
+>>> x.real
+42
+>>> x.imag
+0
+>>> x.conjugate()
+42
+
+>>> y = 3.14
+>>> y.real
+3.14
+>>> y.imag
+0.0
+>>> y.conjugate()
+3.14
+For floats and integers, .real and .conjugate() always return the number itself, and .imag always returns 0. One thing to notice, however, is that n.real and n.imag return an integer if n is an integer and a float if n is a float.
+
+Now that you’ve seen the basics of complex numbers, you might be wondering when you would ever need to use them. If you’re learning Python for web development, data science, or general-purpose programming, the truth is that you may never need to use complex numbers.
+
+On the other hand, complex numbers are important in domains such as scientific computing and computer graphics. If you ever work in those domains, then you may find Python’s built-in support for complex numbers useful.
