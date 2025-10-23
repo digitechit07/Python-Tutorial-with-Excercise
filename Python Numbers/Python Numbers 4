@@ -1,0 +1,79 @@
+numbers
+The Python numbers module provides an abstract hierarchy of numeric types. It defines a set of abstract base classes (ABCs) that describe the various numeric types and their behaviors in Python.
+
+This module is useful for checking whether an object is a number and for creating your own numeric types.
+
+Here’s an example:
+
+>>> import numbers
+>>> isinstance(5, numbers.Number)
+True
+Key Features
+Provides abstract base classes for numeric types
+Enables type checking for numbers
+Allows creation of custom numeric types
+Frequently Used Classes and Functions
+Object	Type	Description
+numbers.Number	Class	Provides an ABC for all numbers
+numbers.Complex	Class	Provides an ABC for complex numbers
+numbers.Real	Class	Provides an ABC for real numbers
+numbers.Rational	Class	Provides an ABC for rational numbers
+numbers.Integral	Class	Provides an ABC for integral numbers
+Examples
+Check whether a number is an instance of a numeric type:
+
+>>> import numbers
+
+>>> isinstance(3.14, numbers.Real)
+True
+Define a custom numeric type by subclassing:
+
+>>> class RealNumber(numbers.Real):
+...     def __float__(self):
+...         return 3.14
+...
+...     # Rest of the implementation here...
+Note: For this class to work, it has to provide concrete implementations for all the abstract methods in the numbers.Real abstract base class:
+
+>>> import numbers
+
+>>> numbers.Real.__abstractmethods__
+frozenset(
+   {
+       '__float__',
+       '__radd__',
+       '__floordiv__',
+       ...
+       '__pos__',
+       '__neg__'}
+)
+Common Use Cases
+Verifying whether a value is of a numeric type
+Implementing custom numeric types with specific behaviors
+Ensuring type compatibility in numeric computations
+Real-World Example
+Suppose you want to create a custom numeric type that represents a constant value. You can use the numbers module to ensure your custom type behaves like a real number:
+
+>>> import numbers
+
+>>> class Constant(numbers.Real):
+...     def __init__(self, value):
+...         self.value = value
+...
+...     def __float__(self):
+...         return float(self.value)
+...
+...     def __add__(self, other):
+...         return Constant(self.value + float(other))
+...
+...     def __repr__(self):
+...         return f"Constant({self.value})"
+...
+...     # Rest of the implementation here...
+
+>>> c = Constant(10)
+>>> c + 5
+Constant(15.0)
+>>> isinstance(c, numbers.Real)
+True
+By subclassing numbers.Real, you ensure that your Constant class behaves like a real number, allowing you to integrate it seamlessly with existing numeric operations.
