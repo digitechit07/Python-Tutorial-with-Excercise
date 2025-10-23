@@ -1,0 +1,105 @@
+Type Casting in Python
+Type casting is a method used to change the data type of a variable to match the operation you want to perform. In Python, you can use built-in functions like int(), str(), float(), etc., to achieve this.
+
+Convert an Integer to a Float
+You can convert an integer to a float using the float() function.
+
+Python 3.12.4 (tags/v3.12.4:8e8a4ba, Jun  6 2024, 19:30:16) [MSC v.1940 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> num = 100  # integer
+>>> num = float(num)  # convert to float
+>>> print(num)
+100.0
+>>> print(type(num))
+<class 'float'>
+Here, the integer 100 is converted to a float 100.0.
+
+Convert a Float to an Integer
+You can convert a float to an integer using the int() function.
+
+num = 99.9  # float
+num = int(num)  # convert to integer
+print(num)
+99
+print(type(num))
+<class 'int'>
+In this example, the float 99.9 is converted to the integer 99.
+
+Convert a String Literal to an Integer and a Float
+You can convert a string literal to an integer and a float using int() and float().
+
+s = '132'  # string
+n = int(s)  # convert to integer
+print(n)
+132
+print(type(n))
+<class 'int'>
+f = float(s)  # convert to float
+print(f)
+132.0
+print(type(f))
+<class 'float'>
+Here, the string '132' is converted to the integer 132 and the float 132.0.
+
+Note on Converting Strings with Decimals
+If your string contains a decimal point, you can’t directly convert it to an integer. First, convert the string to a float and then to an integer.
+
+s = '132.564'  # string
+n = int(float(s))  # convert to integer
+print(n)
+132
+print(type(n))
+<class 'int'>
+In this case, the string '132.564' is first converted to the float 132.564 and then to the integer 132.
+
+Useful Built-in Functions
+Python comes with several built-in functions that you can use right away. Here are some of the most useful ones:
+
+len() Function
+The len() function returns the number of characters in a string.
+
+print(len('hello'))
+5
+This function counts the number of characters in the string 'hello', which is 5.
+
+bin() Function
+The bin() function converts an integer to its binary representation.
+
+num = 100
+print(bin(num))  # print binary number
+0b1100100
+The integer 100 is converted to its binary representation 0b1100100.
+
+oct() Function
+The oct() function converts an integer to its octal representation.
+
+num = 100
+print(oct(num))  # print octal number
+0o144
+The integer 100 is converted to its octal representation 0o144.
+
+hex() Function
+The hex() function converts an integer to its hexadecimal representation.
+
+num = 100
+print(hex(num))  # print hex number
+0x64
+The integer 100 is converted to its hexadecimal representation 0x64.
+
+round() Function
+The round() function returns a floating-point number rounded to a specified number of decimal places.
+
+num = round(5.12345, 2)
+print(num)
+5.12
+Here, the number 5.12345 is rounded to 5.12.
+
+id() Function
+The id() function returns a unique identifier for an object, which is its memory address.
+
+num = 5.12
+print(id(num))
+1562211743472
+The id() function returns the memory address of the object num.
+
+These examples demonstrate how you can use type casting and built-in functions to manipulate and format data in Python.
