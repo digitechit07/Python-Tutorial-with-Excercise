@@ -1,0 +1,367 @@
+Python Number Basics
+
+
+Working with integers and floats
+The is_integer() method of floats
+Scientific notation using e
+Floor division
+Exponentiation
+Special numbers — inf and nan
+Become confident with JavaScript, not frustrated
+
+Work your way through a large collection of practice material and put your knowledge into real action.
+
+Start practicing 
+
+Introduction
+Python provides functionality for almost everything one can think of. Taking numbers as an example, we see that the language is overloaded with features to help developers in dealing with numbers.
+
+In this chapter, we shall get to know the basics of numbers in Python. In particular, we'll see the two most common classes of numbers i.e integers and floats; how to convert between these classes; the behavior of some arithmetic operators; the e symbol to represent numbers in scientific form; and a lot more.
+
+Let's begin!
+
+Integers
+The concept of an integer is pretty trivial — it's a whole number without any fractional component.
+
+Examples are -5, 0, 3, 100, -1856 and so on.
+
+We can create an integer in Python just how we define it normally:
+
+Python
+x = 10
+y = -3
+Here x holds an integer 10 while y holds another integer -3.
+
+Integers in Python belong to the class int.
+We've already seen an evidence to this when we were inspecting integers using type(), back in the Python Data Types chapter.
+
+Let's review it.
+
+On integers, the type() function returns the following:
+
+type(10)
+<class 'int'>
+The term 'int' following the word class here represents the fact that the provided value (i.e. 10) belongs to the class int.
+
+What is a class?
+A class is basically a template for an object - it defines all the traits of an object belonging to it. The int class is the template here — it defines everything related to integers in Python. The value 10 is referred to as an instance of this class — it is an object belonging to this class.
+
+As an analogy, think of the books around you. What traits do books have — they have an author, a category, number of pages, book format and so on. All these traits can be defined by the class 'Book'.
+
+Every book that you have would then belong to the class 'Book' — in other words, each book would be an instance of this class.
+
+We'll learn more about classes and instances in the Python Classes chapter.
+
+The int class can also be called like a normal function in Python — using (), following the word int.
+
+When called without an argument, int() returns 0.
+
+int()
+0
+On the other hand, when called with an argument, int() tries to coerce the argument into an integer and return it.
+
+For example, let's suppose that we have a string holding the number 10 in it, as '10'.
+
+Doing arithmetic with this string is not possible — we have have to first convert it into a numeric type to be able to perform arithmetic operations on it.
+
+And for this, we could use the int() function, if it's desired to convert the string into an integer, as shown below:
+
+Python
+num = '10'
+
+# convert num into an integer
+num = int(num)
+
+print(num + 5) # 15
+As you start programming more often, you'll notice this type of conversion pretty mainstream in your applications.
+
+Now, int() doesn't just convert strings into integers — it can do this for other data types as well, such as floats, Booleans, and so on.
+
+Consider the snippet below where we demonstrate this:
+
+int(3.5)
+3
+int(True)
+1
+int(False)
+0
+When passed a float, int() removes the fractional part of the float, and returns the left off integer. Taking an example, this means that 1.1 would convert to 1, 1.999 would convert to 1 and -1.2 would convert to -1.
+
+Just remove the fractional part. That's it!
+
+Shown below are more examples using int():
+
+int(10.8)
+10
+int(100.9)
+100
+int(-30.5)
+-30
+int(-59.85)
+-59
+Remember one thing! The int() function would throw an error if the value provided to it couldn't be coerced into an integer.
+
+For example, if we provide 'Hello' to int(), the function would throw an error. This is because 'Hello' doesn't have any sensible conversion into an integer.
+
+int('Hello')
+Traceback (most recent call last):
+  File "stdin", line 1, in <module>
+    int('Hello')
+ValueError: invalid literal for int() with base 10: 'Hello'
+Surprisingly, even if the string holds a float, then also would int() throw an error as shown below:
+
+int('10.0')
+Traceback (most recent call last):
+  File "stdin", line 1, in <module>
+    int('10.0')
+ValueError: invalid literal for int() with base 10: '10.0'
+Moving on, unlike most languages including C, C++, Java, JavaScript, that otherwise have a limit to the size of integers, in Python there is no sort of limit to the size of integers — they can be as large as you want.
+
+Consider the example below, where we multiply three large numbers together, to get an even larger number. The result of this expression is also an integer, and capable of being stored in Python and being used in any valid expression.
+
+15654 ** 13078
+200121077656112916287980565121231342257501316589888301570768989741909627704598510709392343073908163916462828592111643871959658332122489177611861493039668471643475494405903366513014572245758232098075613459405523816588074019863906314088552661224334419611989049807454580220271577511551547279225373174806482159894415254856776581811235902375383415681718192696986379416032696477821811014196192203489049858262817091399946298696280427702938558231912067383697451584945471265296706907509898478375045058947227927718496049576914922607292394839270529723006976
+And guess what — arithmetic with such humongous integers is not slow at all (in most calculations)!
+
+Floats
+Floating-point numbers, or floats, are numbers that have a fractional part to them, where the fractional part can also be zero.
+
+Examples include 3.0, 1.5, 3.142, 0.0, -100.0003 and so on.
+
+Creating a floating-point number in Python is as easy as creating an integer:
+
+Python
+x = 3.01
+y = -0.5
+Here, x holds the number 3.01 and y holds the number -0.5.
+
+All floating-point numbers in Python belong to the class float.
+Python uses the IEEE-754 double precision floating-point format to represent floats. In this format, each float takes exactly 64 bits of memory.
+
+The internal details of how the IEEE-754 format works is not important for you to know at the moment. But, there's nothing stopping you from exploring it!
+Unlike integers in Python, floating-point numbers have a size limit; thanks to the IEEE-754 floating-point format that imposes this limit.
+
+The maximum value possible is 1.8 x 10308 while the minimum -1.8 x 10308 is its negation. Going below the minimum or above the maximum value results in a special value known as infinity.
+
+Consider the code below:
+
+Python
+x = 2e500
+print(x) # inf
+The value of x is not what we've written — but rather it is inf. The value inf is a special value that means infinity.
+
+We'll explore inf in detail in the following sections.
+When we compute a float that's large than the maximum value capable of being stored in a floating-point number, Python replaces it with the value inf.
+
+Moving on, just like the class int, float can can be called like a function — float().
+
+When called without an argument, float() returns 0.0 (pretty similar to how int() returns 0):
+
+float()
+0.0
+When called without an integer, float() puts .0 at the end of the integer. Simple!
+
+float(5)
+5.0
+float(-10)
+-10.0
+Following from the fact that floats have a size limit while integers don't, there can be case when you try to convert a very big integer into a float that can't be accomodated in it. In such a case, Python simply throws an error:
+float(2 ** 50000) # a very big integer
+Traceback (most recent call last):
+  File "stdin", line 1, in <module>
+    float(2 ** 50000)
+OverflowError: int too large to convert to float
+When called with a stringified number, float() parses the number in the string and returns back the corresponding float.
+
+float('5')
+5.0
+float('3.56')
+3.56
+This can be very useful when you want the user to input some number (integer or float) in the shell and then convert that into a real number in Python (recall that shell inputs are always strings).
+
+If we use int() here, inputting a float would lead to an error. So with int(), the user is just confined to entering integers. But with float(), he/she can enter any valid number.
+
+The is_integer() method
+Often times, a floating point number has a fractional part of 0, as in 10.0, 0.0, -3.0 and so on.
+
+Such a float is technically an integer, since its fractional part is 0, and Python realizes this fact by giving a simple way to check such a case.
+
+What is that?
+
+Using the is_integer() method of float objects, we can check whether a given float is actually an integer or not. If it's an integer, is_integer() returns True, otherwise False.
+
+Consider the following code:
+
+Python
+f = 30.1
+print(f.is_integer())
+
+f = 30.0
+print(f.is_integer())
+False
+True
+30.1 is not an integer, and likewise f.is_integer(), in line 2, returns False. On the other hand, 30.0 is an integer and likewise f.is_integer() returns True in line 5.
+
+The e symbol
+It's common in mathematics to represent extremely large or extremely small numbers in standard form, also known as scientific form, or scientific notation.
+
+m x 10n
+
+m is called the significand, or the mantissa, and n is called the order of magnitude of m.
+
+For example, 156.2 would be represented as 1.562 x 102 in standard form. Here 1.562 is the significand and 2 is its order of magnitude.
+
+Representing numbers in this way in Python is possible via the e symbol.
+
+The e symbol denotes the power of 10 by which to multiply a given significand with.
+Let's see how to use e to represent 156.2 in standard form in Python:
+
+1.562e2
+156.2
+156.2 in scientific form is 1.562 x 102; hence, we write 1.562e2. The number preceding e is the significand, while the number following it is the order of magnitude (the exponent of 10).
+
+Negative exponents are also possible:
+
+10e-2
+0.1
+10e-2 simply means 10 x 10-2, which is equal to 0.1.
+
+In both the cases above, the order of magnitude was small enough such that Python expanded the number into normal form. 1.562e2 was expanded into 156.2, while 10e-2 was expanded into 0.1.
+
+However, sometimes, when the exponent is large enough, Python would keep the number in standard form.
+
+An example follows:
+
+1.8648e300
+1.8648e+300
+Python automatically adds a + sign before the order of magnitude, if it is a positive integer, when representing a number in standard form.
+Special numbers
+Following from the IEEE-754 format, that Python uses to represent floats internally, there are two special numbers in the language: inf and nan.
+
+Both these numbers are available on the math module, by the names inf and nan respectively.
+
+inf
+Let's start by exploring inf.
+
+inf is used to represent infinity — something beyond calculation.
+Creating a float that's larger than the maximum value ≈ 1.8 x 10308 or lesser than the minimum value ≈ -1.8 x 10308 results in inf and -inf, respectively.
+
+Shown below are two examples for inf:
+
+2e500
+inf
+1.8e308
+inf
+Both the numbers 2e500 and 1.8e308 are above the maximum value capable of being stored in Python, and so boil down to inf.
+
+Similarly, below we have two examples for -inf:
+
+-2e500
+-inf
+-1.8e308
+-inf
+-2e500 and -1.8e308 are below the minimum value capable of being stored in Python, and so boil down to -inf.
+
+nan
+Apart from inf, nan is another special kind of a number.
+
+nan stands for 'not a number', and is used to represent something that's not computable in Python.
+Consider the code below:
+
+Python
+import math
+
+print(math.inf - math.inf)
+nan
+There is no bound to inf and so subtracting inf from inf won't return 0, rather it would return nan.
+
+Different languages have different rules to define what's called nan in Python. In JavaScript, computing 1 / 0 evaluates down to NaN, but in Python 1 / 0 throws an error. You can read more about NaN in JavaScript at JavaScript Numbers — Basics.
+Floor division
+Starting from Python 3.3, there is a special division operator denoted using two forward slashes //. It performs what is known as floor division.
+
+Floor division operates just like normal division except for that it floors the result of the division in the end. Flooring the result means that it rounds it to the largest integer lesser than or equal to it.
+
+Consider the example below:
+
+10 // 4
+2
+9 // 5
+1
+In computing 10 // 4, first 10 / 4 is computed. This returns 2.5. Then, this value is floored to give 2. Similarly, in 9 // 5, first 9 / 5 is computed which returns 1.8. This value is floored to give 1.
+
+As can be seen in the examples above, the result of a floor division is an integer.
+
+Why is there a floor division operator?
+There are numerous uses of flooring the result of the division of two numbers in computer science. Many many algorithms rely on this idea, and so the // operator can be a shortcut to the flooring needs of these algorithms.
+
+Otherwise, we would have to take a longer way to floor the result of the normal division (done by the / operator), using the floor() function from the math module.
+
+In versions prior to Python 3.3, the / operator (which performs normal division from Python 3.3 onwards) performs floor division.
+Exponentiation
+Raising a number to the power of another number is a common operation we do all the time in mathematics. It's known as exponentiation.
+
+It's possible to do exponentiation in Python, and almost all programming languages. There are essentially 3 ways to exponentiate in Python:
+
+Using the ** exponentiation operator
+Using the pow() function
+Using math.pow()
+We shall cover the first two ways right now.
+
+Using the ** exponentiation operator
+The exponentiation operator raises its first operand to the power of the second operand. It can be represented as follows:
+
+base ** exponent
+
+The first operand is known as the base, while the second one is known as the exponent.
+
+If either of the operands of the exponentiation operator is a float, the result of the exponentiation will also be a float. If this isn't the case — that is, both the operands are integers — then the result would be an integer.
+
+Let's take a quick example:
+
+2 ** 3
+8
+5 ** 5
+3125
+Using the exponentiation operator, we can also compute the square root of any number using an exponent of 0.5.
+
+Following we compute the square root of a couple of integers:
+
+16 ** 0.5
+4
+100 ** 0.5
+10
+In general, we can compute the nth root of a given number by setting the exponent operand to 1 / n (given that the result turns out to be a real number).
+
+Let's compute the cube root of 8 and the quartic root of 81:
+
+8 ** (1 / 3)
+2.0
+81 ** (1 / 4)
+3.0
+Using the pow() function
+The second way to exponentiate a number is using the global function pow(), which stands for 'power'.
+
+It raises its first argument to the power of the second argument. The pow() function operates exactly like the exponentiation operator.
+
+Below we perform the same computations as we did above:
+
+pow(8, 1 / 3)
+2.0
+pow(81, 1 / 4)
+3.0
+What's the difference between ** and pow()?
+On the first sight, one would think that both the exponentiation operator and the pow() function are exactly the same thing — and indeed they are. The thing is that, if they are the same, then what's the point of having two ways to accomplish the same thing?
+
+Well ** and pow() operate similarly only if pow() is provided two arguments. If an optional third argument is provided to pow(), then the difference between these two becomes pretty much apparent.
+
+The third argument to pow() applies the modulo operation over the result of exponentiating the first argument with the second one. And this is done superbly efficiently using theorems from number theory. Overall the operation is known as modular exponentiation.
+
+In general terms, pow(b, n, m) returns the same result as b ** n % m, but in the blink of an eye!
+
+Computing the remainder manually by applying the modulo operator over b ** n can be highly inefficient when the numbers b and n are huge.
+
+So the difference between ** and pow() is now clear: pow() can also compute modular exponentiations.
+
+If you ever want to compute the remainder when a huge number bn is divided by a number m, you should definitely go for the pow() function. Otherwise, you should stick with the ** operator to exponentiate numbers, since it's relatively faster than the pow() function (although very slightly!)
+
+The reason why ** is relatively faster than pow() is because it involves no function invocation — a concept we shall understand later on in this course.
