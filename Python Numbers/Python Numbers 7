@@ -1,0 +1,125 @@
+Python Numbers
+Number Types
+int: integral number
+
+float: floating point number, usually IEEE 754 (64 bits, base 2)
+
+complex: complex number, implemented as two floats
+
+decimal.Decimal: floating point number stored in base 10, arbitrary precision
+
+fractions.Fraction: rational, numerator/denominator; automatically compute the greatest common divisor (GCD) to simplify the fraction
+
+Number Tower
+The numbers module is specified by the PEP 3141 – A Type Hierarchy for Numbers.
+
+numbers.Number: base class
+
+numbers.Complex: Add real, imag, conjugate()
+
+numbers.Real: subclass of Complex; add many float operations.
+
+numbers.Rational: subclass of Real; add numerator and denominator attributes
+
+numbers.Integral: subclass of Rational
+
+Subclasses:
+
+numbers.Number: int, float, complex, decimal.Decimal, fractions.Fraction
+
+numbers.Complex: int, float, complex, fractions.Fraction
+
+numbers.Real: int, float, fractions.Fraction
+
+numbers.Rational: int, fractions.Fraction
+
+numbers.Integral: int
+
+int, float, complex methods and attributes:
+
+conjugate()
+
+imag
+
+real
+
+int and Fraction attributes:
+
+denominator
+
+numerator
+
+Conversions in Python
+int(obj) and float(obj) accept:
+
+int
+
+float
+
+decimal.Decimal
+
+fractions.Fraction
+
+bytes
+
+str
+
+int(obj) rounds towards zero (ROUND_DOWN, ex: int(0.9) == 0 and int(-0.9) == 0).
+
+But int(obj) and float(obj) reject:
+
+complex
+
+complex(obj) accepts:
+
+int
+
+float
+
+complex
+
+decimal.Decimal
+
+fractions.Fraction
+
+str
+
+But complex(obj) rejects:
+
+bytes
+
+decimal.Decimal(obj) accepts:
+
+int
+
+float
+
+decimal.Decimal
+
+str
+
+But decimal.Decimal(obj) rejects:
+
+complex
+
+fractions.Fraction
+
+bytes
+
+fractions.Fraction(obj) accepts:
+
+int
+
+float
+
+decimal.Decimal
+
+fractions.Fraction
+
+str (ex: "1" or "1/2")
+
+But fractions.Fraction(obj) rejects:
+
+complex
+
+bytes
