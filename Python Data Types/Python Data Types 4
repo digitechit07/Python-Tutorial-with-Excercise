@@ -1,0 +1,103 @@
+Understanding Python data types is fundamental in programming, as it helps identify the kind of data being used, its size, and the associated functions. Knowledge of these data types can make coding efficient because the specific data type you use can determine the values you assign to it and the operations you can perform. 
+
+This article serves as a guide to the different data types in Python and their applications. 
+
+What are the data types of Python?
+Python has many data types, some of which are built-in, such as numerics, classes, and exceptions, and others specialised, such as dates and times, double-ended queues, and fixed-type arrays. Data types distinguish data items according to their characteristics and structure. Classifying data this way can make it easier for computer systems to process information. 
+
+Data types represent the value type that helps understand what operations you can perform on a particular piece of data. Python programming relies on objects, where data types are considered classes, and variables are instances of these classes.
+
+ Five common data types that you will likely work with in Python are:
+
+Numeric
+
+Sequence type
+
+Boolean
+
+Set
+
+Dictionary
+
+The following sections will take you through each of these data types of Python and some examples. 
+
+Numeric data types of Python
+Numeric data types in Python represent the data containing numeric values. Numbers can be described in various ways, including floating, integers, or complex numbers. 
+
+Python has three numeric data types: float, integer, and complex. Float stores decimal numbers, integers can store whole numbers, and complex is for storing complex numbers.
+
+Integers (int)
+The integer class represents negative and positive whole numbers. You will not find fractions or decimals in an integer class. Also, the length of an integer value has no limits, and in Python, you can separate long numbers by using underscores, whereas commas might usually go in regular integers. For example, 1,000,000 could be written as 1000000 or 1_000_000 in Python.
+
+Example: x = 20
+
+Float (float)
+The float class represents an actual number with a numerical value that can be expressed with a decimal point, commonly known as its floating-point representation. A decimal point specifies it and is accurate up to 15 decimal places. Float values are positive or negative. 
+
+When writing out numbers in scientific notation, you can use the letter E or e before a number to indicate the number should be multiplied by 10, raised to the power of the number. This is called exponential notation. Therefore, you can write the value for one million as 1000000.0, 1_000_000, or 1e6.
+
+Example: x = 20.5
+
+Complex numbers (complex)
+The complex class represents a complex number data type. Complex numbers are expressed as (real part) + (imaginary part) j, where j denotes the imaginary unit. These numeric data sets are primarily used in computer graphics and scientific computing.
+
+Example: 3j
+
+It is important to understand that, unlike C or C++, you need not declare a data type in Python when declaring a variable. Variables can be used to store values. However, you can see the value data type using type (). 
+
+Sequence data type of Python
+Python offers various data structures consisting of similar or dissimilar data types. The sequence data type allows you to organise and store multiple values efficiently. Sequence data types in Python include the following:
+
+Basic sequence types: list, tuple, and range
+
+Text sequence type: string
+
+Binary sequence types: bytes, bytearray, and memoryview
+
+We'll describe and give examples of three of these sequence data types. 
+
+String
+Strings in Python are sequences of characters and how Python handles textual data. Strings represent Unicode characters. Python does not have a character data type. A single character is a "string of length one."
+
+A collection of one or more characters is always put in a single quote, double quote, or triple quote. Indexing is an effective way of accessing individual characters in a string, and it is helpful for processing and analysing texts in various ways. Strings in programming languages usually support indexing from the back, known as negative indexing. For example, if -1 is the last character, -2 is the second-last character.
+
+Example: x = "Coursera"
+
+List
+In Python, lists group together related data. List sequences are mutable, meaning you can change their value (mutate them) without changing their identity. You can construct lists in various ways, often involving square brackets and commas, creating lists that are either the same or in the same order as iterable items (items that can be looped over). 
+
+Example: x = ["apple", "grapes", "cherry"]
+
+Tuple
+Tuples are ordered collections of objects similar to lists. One of the main distinctions between tuples and other data types is that they are immutable, meaning they cannot be modified after they have been created. They are also write-protected. Tuples can hold any number of elements. 
+
+You can create tuples by placing values and separating them by a comma, with or without using parentheses to group the data sequence. 
+
+Example: x = ("apple", "grapes", "cherry")
+
+Boolean data type of Python
+Boolean is a built-in data type of Python that has two constant values: true or false. Boolean objects with a true value are considered truthful, while those that equal false are said to be false.
+
+You can also evaluate non-Boolean objects in a Boolean context and identify them as true or false. The function bool creates Boolean data types in Python.
+
+Example: x = True
+
+Set data type of Python
+In Python, a "set" is an unorganised compilation of data elements. Unlike a list or tuple, it doesn't have any particular order. Although it comprises various elements, their order is undefined. The set is iterable and mutable, and it contains no duplicate elements, although frozen sets (frozen set) are immutable. Also, the type of elements in a set is sometimes different. You can pass several mixed-up data type values to the set.
+
+You can create sets using the built-in set () function with an iterable object. You can also opt for a sequence by placing it inside curly braces and separating by commas to create a set. 
+
+Sets can compute mathematical operations like union, difference, and intersection. Other common uses in Python include removing duplicates from a sequence and membership testing.
+
+Example: x = {"apple", "grapes", "cherry"}
+
+Dictionary data type of Python
+A dictionary is an unordered set of key-value pairs that is a useful data structure for storing data. It can store multiple values under a single name, allowing easy access and retrieval of information. In its functioning, a dictionary is similar to a map. 
+
+Unlike other data types in Python that store only one value per element, a dictionary stores key-value pairs. You must separate every pair by a colon in the dictionary and every key by a comma. Values can be present as duplicates in a dictionary, but keys cannot. 
+
+Dictionary keys are also case-sensitive. Keys with the same name but different cases (upper and lower) are considered distinct. 
+
+You can create a dictionary by putting elements within curly {} braces and splitting them by commas. Refer to the key names of items to access them in a dictionary. You can retrieve an element from a dictionary using the get () method.
+
+Example: x = {"name" : "Rose", "age" : 16}
