@@ -1,0 +1,161 @@
+Python Booleans: Definition & Examples
+Python Booleans: Key Takeaways 
+Python Booleans Values
+Python Bool( ) Function
+The Importance of “==” Operator In Python Booleans
+Python Boolean: Evaluate Values 
+False Values In Python Booleans 
+Return Boolean Result With Functions
+The Not Python Booleans Operator 
+Syntax of the Not Python Booleans 
+Example of Not Operator
+Python Booleans with And (&) / OR Operators
+Master Data Science with Generative AI 
+Python Booleans FAQs
+Q1. What are Python booleans?
+Q2. What are the two values in Python booleans?
+Q3. When the Python boolean evaluates to false?
+Q4. What is the not Python boolean operator?
+Python Booleans: Definition & Examples
+Boolean is a built-in data type in Python which can have only two values possible as an output i,e. True or False. When you assign a true or false to a variable then Python will store it as a boolean value. 
+
+For example, in an expression given 1>2? Is it true or false? Well obviously it is false as 2 is greater than 1 in all formats. Hence, the result we will get is “false”. 
+
+Python Booleans: Key Takeaways 
+Python booleans can deliver two outputs i,e. True or False.
+In Python, integer 0 will always be false and every other number including 1 to any negative number can be true.
+The Python booleans can be written as “bool”.
+The “bool” data type is not a keyword in Python and can be used to name a variable.
+Python Booleans Values
+The Python booleans have only two possible values, check them below.
+
+True
+False
+Every value having the outcome as true or false is counted as a “bool” value. You can check the data type of false and true with the following method i,e. type().
+
+>>> type (True)
+<class ‘bool’>
+
+>>>type (False)
+
+<class ‘bool’>
+
+Both the values i,e, true and false belong to the ‘bool’ data type. Python contains this data type by default and it needs not to be installed or imported. 
+
+Python Bool( ) Function
+The bool( ) function in Python returns the boolean value of an object. The object in the Python function will return true if it contains an element. If the function is empty or contains 0 or none then it returns false. 
+
+bool (object)
+The description of any object, like string, number, list, etc. It will return true if the value has true content. It will return false if the value is false like 0, none, ‘’, [] and more. 
+
+Value	Description
+None 	Null value
+False	Boolean false
+0, 0.0	Zero (int/float)
+‘ ’, “ ”	Empty string
+[ ]	Empty list
+{ }	Empty Dictionary 
+( )	Empty tuple
+The Importance of “==” Operator In Python Booleans
+The double equals “==” operator tests if the given two values are equal or not. If they are equal it returns true and if not it returns false. The result will always be a boolean value. Let us understand it more with the help of an example.
+
+>>>print (“Will you get 8 when you add 5+3?”)
+>>>print ( 8 == (5 + 3))
+
+>>>print ( “Is 9 equal six”)
+
+>>>print ( 9 == 6)
+
+In the second expression, when you add 5+3 you get 8 as the result and hence the expression will yield “true” boolean value. While in the fourth expression we can see whether 9 equals 6 but it is not and hence we will get “false” as the result of this expression.
+
+Read More: Python Scripting: Automate Python Coding For Beginners 
+
+Python Boolean: Evaluate Values 
+You can use the bool() function to evaluate any value in Python and obtain a true or false value in return.
+
+print (“Hello World”)
+This will return “true” as a result of the expression. Suppose we take one variable with a string in it and another with a number in it and try to use the bool () function, let us see the results.
+
+x = “PWSkills”
+y = 20
+
+print (bool(x))
+
+print (bool(y))
+
+For both the above expressions we will get true as a result of the expression. In Python booleans most of the values are evaluated as true if it consists of any content inside. 
+
+“Every number is true if it is not a 0 and every string is true if it is not empty.”
+
+Read More: Python For Loops: Learn How to Use Python For Loops
+
+False Values In Python Booleans 
+We do have a large variety of variables that evaluate to true. However, some of the variables also evaluate to false let us know about them.
+
+Variables or containers having empty values are evaluated to a false result in Python booleans. For example, (), [ ], {}, “”, and more.
+The number 0 is also evaluated as “False” along with the value “None”.
+Whenever the value of a variable is “false” it will also evaluate to “false” in Python booleans.
+Return Boolean Result With Functions
+You can create a function and return a boolean value using the function.
+
+def is_even(number):
+    return number % 2 == 0
+
+print(is_even(4))   
+
+print(is_even(7))   
+
+You will get true as a return value for this function when the value of number is 4 but return false when the value of number is 7. Let us consider another example where we have to check if a word is palindrome or not.
+
+def is_palindrome(word):
+    return word == word[::-1]
+
+print(is_palindrome(“madam”))  
+
+print(is_palindrome(“hello”))   
+
+The above function is_palindrome() will check whether the given word is palindrome or not. However, in this example, the value of word i,e. “madam” is a palindrome and you will get true as a result of this expression.
+
+Let us get an example where we have to compare two numbers and find out whether or not the first one is greater than the first one. 
+
+def is_greater(a, b):
+    return a > b
+
+print(is_greater(10, 5))  
+
+print(is_greater(3, 7))   
+
+For the first expression i,e, 10, 5 we know that the digit 10 is greater than 5 and hence it will return true as a result. However, for the second expression we know that 3 is not greater than 7 and hence we will get false as an output for this expression. 
+
+The Not Python Booleans Operator 
+In Python, not operator is a logical operator that reverses the boolean value of an expression. 
+
+If the expression is True, then the “not” operator will make it “false”.
+If the expression is False, then the “not” operator will make it “true”.
+Syntax of the Not Python Booleans 
+not condition
+Example of Not Operator
+Let us take an example to understand the working of the not Python boolean operator.
+
+x = True
+print ( not x)
+
+y = false 
+
+print (not y)
+
+You will get the inverted result for both the expression with the x value changing to false and the y value changing to true. 
+
+Python Booleans with And (&) / OR Operators
+We can use the Python boolean operators with And and OR operators below.
+
+The “and” operator in Python is used to combine two conditions. It returns true only if both conditions are true. 
+condition 1 and condition 2
+We get true as a result when both conditions are true. Let us understand with the help of an example.
+
+x = 5
+print(x > 0 and x < 10)   
+
+print(x > 0 and x > 10) 
+
+print(x < 0 and x < 10)  
