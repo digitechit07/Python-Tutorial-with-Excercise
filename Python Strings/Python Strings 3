@@ -1,0 +1,84 @@
+Must Know String Functions
+Function	Description
+format()	It’s used to create a formatted string from the template string and the supplied values.
+split()	Python string split() function is used to split a string into the list of strings based on a delimiter.
+join()	This function returns a new string that is the concatenation of the strings in iterable with string object as a delimiter.
+strip()	Used to trim whitespaces from the string object.
+format_map()	Python string format_map() function returns a formatted version of the string using substitutions from the mapping provided.
+upper()	We can convert a string to uppercase in Python using str.upper() function.
+lower()	This function creates a new string in lowercase.
+replace()	Python string replace() function is used to create a new string by replacing some parts of another string.
+find()	Python String find() method is used to find the index of a substring in a string.
+translate()	Python String translate() function returns a new string with each character in the string replaced using the given translation table.
+Good to Know String Functions
+Function	Description
+encode()	Python string encode() function is used to encode the string using the provided encoding.
+count()	Python String count() function returns the number of occurrences of a substring in the given string.
+startswith()	Python string startswith() function returns True if the string starts with the given prefix, otherwise it returns False.
+endswith()	Python string endswith() function returns True if the string ends with the given suffix, otherwise it returns False.
+capitalize()	Python String capitalize() function returns the capitalized version of the string.
+center()	Python string center() function returns a centered string of specified size.
+casefold()	Python string casefold() function returns a casefolded copy of the string. This function is used to perform case-insensitive string comparison.
+expandtabs()	Python string expandtabs() function returns a new string with tab characters (\t) replaced with one or more whitespaces.
+index()	Python String index() function returns the lowest index where the specified substring is found.
+__contains__()	Python String class has __contains__() function that we can use to check if it contains another string or not. We can also use “in” operator to perform this check.
+Miscellaneous String Functions
+Function	Description
+isalnum()	Python string isalnum() function returns True if it’s made of alphanumeric characters only.
+isalpha()	Python String isalpha() function returns True if all the characters in the string are alphabets, otherwise False.
+isdecimal()	Python String isdecimal() function returns True if all the characters in the string are decimal characters, otherwise False.
+isdigit()	Python String isdigit() function returns True if all the characters in the string are digits, otherwise False.
+isidentifier()	Python String isidentifier() function returns True if the string is a valid identifier according to the Python language definition.
+islower()	Python String islower() returns True if all cased characters in the string are lowercase and there is at least one cased character, otherwise it returns False.
+isnumeric()	Python String isnumeric() function returns True if all the characters in the string are numeric, otherwise False. If the string is empty, then this function returns False.
+isprintable()	Python String isprintable() function returns True if all characters in the string are printable or the string is empty, False otherwise.
+isspace()	Python String isspace() function returns True if there are only whitespace characters in the string, otherwise it returns False.
+istitle()	Python String istitle() returns True if the string is title cased and not empty, otherwise it returns False.
+isupper()	Python String isupper() function returns True if all the cased characters are in Uppercase.
+rjust(), ljust()	Utility functions to create a new string of specified length from the source string with right and left justification.
+swapcase()	Python String swapcase() function returns a new string with uppercase characters converted to lowercase and vice versa.
+partition()	Python String partition() function splits a string based on a separator into a tuple with three strings.
+splitlines()	Python String splitlines() function returns the list of lines in the string.
+title()	Python String title() function returns a title cased version of the string.
+zfill()	Python String zfill(width) function returns a new string of specified width. The string is filled with 0 on the left side to create the specified width.
+Built-in Functions that work on String
+Function	Description
+len()	Python String length can be determined by using built-in len() function.
+ascii()	Python ascii() function returns the string representation of the object. This function internally calls repr() function and before returning the representation string, escapes the non-ASCII characters using \x, \u or \U escapes.
+bool()	Python bool() function returns Boolean value for an object. The bool class has only two instances – True and False.
+bytearray()	Python bytearray() function returns a bytearray object that contains the array of bytes from the input source.
+bytes()	This function returns bytes object that is an immutable sequence of integers in the range 0 <= x < 256.
+ord()	Python ord() function takes string argument of a single Unicode character and return its integer Unicode code point value.
+enumerate()	Python enumerate function takes a sequence, and then make each element of the sequence into a tuple.
+float()	As the name says, python float() function returns a floating point number from the input argument.
+hash()	This function returns the hash value of the given object.
+id()	Python id() function returns the “identity” of the object. The identity of an object is an integer, which is guaranteed to be unique and constant for this object during its lifetime.
+int()	Python int() function returns an integer object from the specified input. The returned int object will always be in base 10.
+map()	Python map() function is used to apply a function on all the elements of specified iterable and return map object.
+print()	Python print() function is used to print data into console.
+slice()	Python slice() function returns a slice object representing the set of indices specified by range(start, stop, step).
+type()	This function returns the type of the object.
+Useful String Operations
+f-string in Python - New and better way of formatting string introduced in Python 3.6.
+Substring in Python
+Generate Random String
+Python string module
+Raw String
+Multiline String
+String Equality Check
+String Comparison
+String Concatenation
+String Slicing
+Reverse a String
+String to datetime - strptime()
+Convert String to int
+Convert String to bytes
+Convert String to float
+Convert List to String
+String Template Class
+Check if variable is String?
+Concatenate String and int
+Remove character from String
+How to Append Strings
+Find String in List
+Remove spaces from String
