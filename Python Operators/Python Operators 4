@@ -1,0 +1,82 @@
+Python Operators
+Python has different types of operators for different operations. They are as follows:
+
+Arithmetic operators:
+Arithmetic operators are used to perform arithmetic/mathematical operations.
+
+Name	Operator	Example
+Addition	+	a+b
+Subtraction	-	a-b
+Multiplication	*	a*b
+Division	/	a/b
+Exponential	**	a**b
+Modulus	%	a%b
+Floor Division	//	a//b
+Assignment operators:
+These operators are used to assign values to variables.
+
+Name	Evaluated As
+=	a=b
++=	a+=b or a=a+b
+-=	a-=b or a=a-b
+*=	a*=b or a=a*b
+**=	a**=b or a=a**b
+/=	a/=b or a=a/b
+//=	a//=b or a=a//b
+%=	a%=b or a=a%b
+&=	a&=b or a=a&b
+**	=**
+^=	a^=b or a=a^b
+>>=	a>>=b or a=a>>b
+<<=	a<<=b or a=a<<b
+Bitwise operators:
+Bitwise operators are used to deal with binary operations.
+
+Name	Operator	Example
+Bitwise AND	&	a & b
+Bitwise OR	|	a | b
+Bitwise NOT	~	~a
+Bitwise XOR	^	a ^ b
+Bitwise right shift	>>	a>>
+Bitwise left shift	<<	b<<
+Comparison operators:
+These operators are used to compare values.
+
+Name	Operator	Example
+Equal	==	a==b
+Not Equal	!=	a!=b
+Less Than	<	a<b
+Greater Than	>	a>b
+Less Than or Equal to	<=	a<=b
+Greater Than or Equal to	>=	a>=b
+Identity operators:
+Name	Example	Evaluated As
+is	a is b	Returns True if a and b are same
+is not	a is not b	Returns True if a and b are not same
+Logical operators:
+These operators are used to deal with logical operations.
+
+Name	Operator	Example
+AND	and	a=2 and b=3
+OR	or	a=2 or b=3
+NOT	not	Not(a=2 or b=3)
+Membership operators:
+Name	Example	Evaluated As
+in	a in b	Returns True if a is present in given sequence or collection
+not in	a not in b	Returns True if a is not present in given sequence or collection
+Operator Precedence in Python:
+Name	Operator
+Parenthesis	()
+Exponential	**
+Complement, unary plus, unary minus	~ , +, -
+Multiply, divide, modulus, floor division	*, /, %, //
+Addition, subtraction	+, -
+Left shift and right shift operators	<<, >>
+Bitwise and	&
+Bitwise or and xor	^, |
+Comparison operators	<, >, >=, <=
+Equality operators	==, !=
+Assignment operators	=, %=, /=, //=, -=, +=, *= , **=
+Identity operators	is, is not
+Membership operators	in, not in
+Logical operators	and, or, not
