@@ -1,0 +1,292 @@
+Python Operators (Examples and Practice)
+Operators in Python
+
+Operators are used to perform certain operations on variables and values in Python. They are mathematical symbols which you can use on Numbers, Text or any other data type in Python to get desired result.
+
+Let me list the top category of operators in Python:
+
+Arithmetic Operators
+Assignment Operators
+Relational Operators
+Logical Operators
+Let's look into each operator one by one. Along the way, you will also get to solve 10 practice problems.
+
+Arithmetic Operators
+In Python, you can perform various basic mathematical operations with numbers. Let's explore some commonly used arithmetic operators with examples:
+
+1. Addition (+)
+You can use the plus sign (+) to add two numbers.
+
+a = 6
+b = 3
+print(a + b)  # prints 9
+2. Subtraction (-)
+You can use the minus sign (-) to subtract one number from another.
+
+print(a - b)  # prints 3
+3. Multiplication (*)
+You can use the asterisk (*) to multiply two numbers.
+
+print(a * b)  # prints 18
+4. Division (/)
+You can use the forward slash (/) to divide one number by another. This will give you a float (decimal number) as a result.
+
+print(a / b)  # prints 2.0
+5. Integer Division (//)
+You can use the double forward slash (//) to perform integer division. This will divide the numbers and return the whole number part of the result, discarding the remainder.
+
+result = 10 // 3
+print(result)  # prints 3
+
+#In this example, 10 divided by 3 equals 3.333.... The integer division returns only the whole number part, which is 3.
+6. Modulo (%)
+You can use the percent symbol (%), known as the modulo operator, to get the remainder of a division.
+
+print(a % b)  # prints 0
+
+# Here, `6 modulo 3` is `0` because `6` divided by `3` leaves no remainder.
+7. Exponentiation (**)
+You can use the double asterisk (**) to raise a number to the power of another number.
+
+print(a ** b)  # prints 216
+
+# In this example, `6 to the power of 3` is `216` (`6 * 6 * 6`).
+Task 1 - Coding problem
+Try printing the sum of 21 and 40.
+
+print(21 + __ ) # Replace the _ with the correct value
+Submit your solution to the task here.
+
+Assignment operators
+In Python, assignment operators are used to set or update the value of a variable. There are basic assignment operators and compound assignment operators. Let's break these down with examples for better understanding.
+
+Basic Assignment Operator
+The basic assignment operator is the = sign. It assigns the value on its right to the variable on its left. Here's a simple example:
+
+length = 15
+In this example, the = operator sets the value of length to 15.
+
+Compound Assignment Operators
+Compound Assignment Operators combine arithmetic operations with assignment. They are just a shorthand way of performing operations on a variable and assigning the result back to the variable.
+
+Without using the compound assignment operators we write -
+
+length = 15
+length = length + 5  # Updates length by adding 5 to its current value
+The same thing using Compound Assignment Operator would be written as-
+
+length = 15
+length += 5  # Shorthand for length = length + 5
+print(length)  # Output: 20
+We can use any other operator in the same way:
+- x -= 5  (Subtracts 5 from `x` and assigns the result back to `x`)
+- x *= 3  (Multiplies `x` by 3 and assigns the result back to `x`)
+- x /= 3  (Divides `x` by 3 and assigns the result back to `x`)*
+- x %= 3  (Finds the remainder when `x` is divided by 3 and assigns the result back to `x`)
+Task 2 - Coding problem
+Using an assignment operator, output the remainder when length is divided by 3.
+length = 11
+# Update your code below this line
+length _____
+print(length)
+Submit your code for the task here
+
+Task 3 - MCQ
+What will be the value of x after the following statement?
+
+x = 7
+x *= 3
+print(x)
+Options:
+
+10
+4
+15
+21
+Check your answer here.
+
+Task 4 - MCQ
+What would be the output of the code below?
+
+a = 10
+b = 2
+a /= b
+print(a)
+Options:
+
+10
+4
+5
+21
+Check your answer here.
+
+Relational Operators
+Relational operators help you compare two values or variables. They give you a result of either True or False based on the comparison.
+
+Basic Comparison
+Let's start with a simple example:
+
+height1 = 12
+height2 = 14
+print(height1 < height2) # Outputs True because 12 is less than 14
+
+#In this example, the `<` operator compares `height1` and `height2`. Since `height1` is less than `height2`, it returns `True`.
+Other Relational Operators
+Here are some more examples of relational operators:
+
+- a > b   (Checks if `a` is greater than `b`)
+- a == b  (Checks if `a` is equal to `b`)
+- a != b  (Checks if `a` is not equal to `b`)
+- a >= b  (Checks if `a` is greater than or equal to `b`)
+- a <= b  (Checks if `a` is less than or equal to `b`)
+Task 5 - Coding problem
+You are given two variables height1 and height2 - use relation operators to output 
+F
+a
+l
+s
+e
+False if they are equal else 
+T
+r
+u
+e
+True.
+
+height1 = 15
+height2 = 13
+# Update the '_' below to solve the problem
+print(_______  __  _______)
+Submit your code for this practice problem here
+
+Task 6 - MCQ
+What will be the result of the following code
+
+print((5 + 3) < (2 * 5))
+Options:
+
+True
+False
+1
+Compilation Error
+Check your answer here. You will find more problem to practice relational opearators on the link provided.
+
+Task 7 - Coding problem
+You are given the age of a person as the variable age.
+Will this person be able to vote?
+
+Output True or False assuming that the voting age is 
+18
+18 i.e., a person's age has to be greater than or equal to 
+18
+18 to vote.
+
+age = 20
+# Update your code below this line
+Submit your code to the above problem here.
+
+Logical operators
+Logical operators help you combine multiple conditions to check if they are True or False. They are often used to make decisions based on multiple criteria.
+
+Basic Logical Operations
+Here are the basic logical operators and their usage:
+
+1. Logical AND
+# The AND operator returns True only if both conditions are True.
+
+a = 7
+condition = a > 5 and a < 10  # Only True if a is greater than 5 AND less than 10
+print(condition)  # Output: True
+2. Logical OR
+# The OR operator returns True if at least one of the conditions is True.
+
+a = 7
+condition = a > 10 or a < 5  # True if a is greater than 10 OR less than 5
+print(condition)  # Output: False
+3. Logical NOT
+# The NOT operator reverses the result of the condition. If the condition is True, `not` makes it False. If the condition is False, `not` makes it True.
+
+a = 7
+condition = not(a > 5)  # Reverses the result of a > 5
+print(condition)  # Output: False
+Task 8 - Coding problem
+You are given a variable height.
+You are allowed to enter the waterpark only if your height is between 5 and 10.
+Apply the condition and output True or False as applicable.
+
+height = 15
+# Update the '_' in the code below to solve the problem
+print(_____ _ _   ___   _____ _ _)
+To submit your answer to this problem, go here. You will find more MCQ and practice problems on the above link.
+
+Precedence of operators
+You may be familiar with BODMAS (or PEMDAS in some regions) rule for evaluating arithmetic expressions.
+
+It says we solve parenthesis first, then divide, then multiply, then add and then subtract.
+
+Similarly there are two main rules a program follows to evaluate an arithmetic expression:
+
+Precedence - It tells the priority of operations.
+Associativity - It tells what order the operations with the same priority will be performed in.
+Operator precedence determines the order in which different operators are evaluated in an expression.
+Operators with higher precedence are evaluated before those with lower precedence.
+This concept is similar to the rules of arithmetic, where multiplication and division takes precedence over addition and subtraction.
+
+Here's the order of operator precedence in Python from highest to lowest:
+
+Parentheses: ()
+Exponentiation: **
+Unary operators: ~
+Multiplication, division, floor division, and modulus operators: *, /, //, %
+Addition and subtraction operators: +, -
+Relational operators: <, >, <=, >=
+Equality operators: ==, !=
+Logical AND operator: and
+Logical OR operator: or
+Assignment operators: =, +=, -= ... and so on
+Task 9 - MCQ
+Given the expression: 
+a
++
+b
+∗
+c
+/
+d
+a+b∗c/d. Choose the order in which the operations are preformed in the expression.
+
+Options:
+
++/*
+/*+
+*/+
++*/
+Submit and check your answer here
+
+Operator Associativity
+When operators of the same precedence appear in an expression, associativity determines the order in which they are evaluated. Operators can be either left-associative or right-associative.
+
+Left-Associative:
+On Left-Associative Operators, operations are performed from left to right. Most operators are left-associative. For instance, in (A - B + C), addition and subtraction, being left-associative, will first evaluate (A - B), and then add (C) to the result.
+
+result = 10 - 2 + 3  # Both - and + have the same precedence and are left-associative
+print(result)       # Output: 11 ((10 - 2) + 3 is evaluated as 8 + 3)
+
+result = 10 / 2 * 3  # Both / and * have the same precedence and are left-associative
+print(result)       # Output: 15.0 ((10 / 2) * 3 is evaluated as 5.0 * 3)
+Right-Associative:
+Although less common, some operators are right-associative, meaning they are evaluated from right to left. An example is the exponentiation operator **.
+In (2 ** 2 ** 3) Python will first calculate (2 ** 3) which is 
+8
+8 and then calculate 
+2
+8
+2 
+8
+  which evaluates to 
+256
+256.
+
+result = 2 ** 2 ** 3  # Exponentiation is right-associative
+print(result)        # Output: 256 (2 ** (2 ** 3) is evaluated as 2 ** 8)
+Understanding these principles is crucial for correctly interpreting and writing Python programming expressions.
