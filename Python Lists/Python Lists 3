@@ -1,0 +1,244 @@
+Python Lists
+A list contains series of any data type: strings, ints, other lists. The things inside a list are generically called "elements". Unlike strings, lists are "mutable" - they can be changed.
+
+Using the standard indexing scheme, the first element is at index 0, the next at index 1, and so on up to index length-1. Here is the code to create a list of the four strings 'a' 'b' 'c' and 'd'. The list is written within square brackets with the elements separated by commas.
+
+>>> lst = ['a', 'b', 'c', 'd']
+Here is what that list looks like in memory
+
+alt: list of ['a', 'b', 'c', 'd']
+
+Basic Operations
+You can get a lot done with just a few basic list features:
+
+lst = [] - create an empty list
+
+lst = [1, 2, 3] - create a list with data in it
+
+lst.append(value) - add value to the end of a list, increasing the list's length by 1. Of all the list functions, this one is used the most.
+
+len(lst) - access length of a list
+
+lst[0] - access individual elements with square brackets and int index
+
+for var in lst: - loop over a list. On each iteration of the loop, Python points the variable var to the next element
+
+value in lst - boolean test if value is in lst (just like for string)
+
+Here is example code of the above basic features:
+
+>>> lst = []           # Start with empty list
+>>> lst.append('a')    # Add elements with lst.append()
+>>> lst.append('b')
+>>> lst.append('c')
+>>> lst.append('d')
+>>> lst
+['a', 'b', 'c', 'd']
+>>> len(lst)
+4
+>>> lst[0]              # Access element with brackets
+'a'
+>>> lst[2]
+'c'
+>>> lst[4]              # Oops, 4 is too big!
+IndexError: list index out of range
+>>> 
+>>> lst
+['a', 'b', 'c', 'd']
+>>> lst[0] = 'apple'   # Change element at index 0
+>>> 
+>>> lst
+['apple', 'b', 'c', 'd']
+>>> 
+>>> 'b' in lst         # "in" check
+True
+>>>
+>>> # for-loop over list
+>>> words = ['thus', 'solving', 'the', 'problem']
+>>> for s in words:
+      print(s)
+
+thus
+solving
+the
+problem
+>>>
+The above shows the common list features. Below are some of the more specialized list function.
+
+List pop()
+lst.pop() - remove the element from the end of the list and return it, decreasing the length of the list by 1. Mnemonic: the exact opposite of append().
+
+lst.pop(index) - alternate version with the index to remove is given, e.g. lst.pop(0) removes the element at index 0. Raises an error if the index is not valid.
+
+>>> lst = ['a', 'b', 'c', 'd']
+>>> lst.pop()   # default = remove from end
+'d'
+>>> lst
+['a', 'b', 'c']
+>>> lst.pop(0)  # can specify index to pop
+'a'
+>>> lst
+['b', 'c']
+List remove()
+lst.remove(elem) - search the list for the first instance of elem and remove it. It's an error to remove() an elem not in the list - could use in to check first. Note that pop() uses index numbers, but remove() uses the value, e.g. 'b', to search for and remove.
+
+>>> lst = ['a', 'b', 'c', 'd']
+>>> lst.remove('b')
+>>> lst
+['a', 'c', 'd']
+>>> lst.remove('b')
+ValueError: list.remove(x): x not in list
+List extend()
+lst.extend(lst2) - add all the elements of lst2 on to the end of lst. This is similar to append(), but adding all the elements in a list instead of adding just a single element.
+
+>>> lst = [1, 2, 3]
+>>> x = [4, 5]
+>>> lst.extend(x)   # extend = add all
+>>> lst
+[1, 2, 3, 4, 5]
+List +
+The + operator is similar to the extend() function, adding two lists together to make a new bigger list (analogous to + with strings). The += operator also works, modifying the list by adding a list of new elements.
+
+>>> lst = [1, 2, 3]
+>>> x = [4, 5]
+>>> lst + x         # Make new combined list
+[1, 2, 3, 4, 5]
+>>> lst             # Original is unchanged
+[1, 2, 3]
+>>>
+>>> lst += [9, 10]  # += modifies and adds
+>>> lst
+[1, 2, 3, 9, 10]
+List += Error
+Sometimes a programmer will mistakenly write += to add a single element to a list. This does not work, since List + and += only add a lists of elements, not a single element. Use append() to add a single element.
+
+>>> lst = [1, 3, 2]
+>>> lst += 4
+TypeError: 'int' object is not iterable
+>>>
+>>> lst.append(4)
+>>> lst
+[1, 3, 2, 4]
+I think programmers do this because they are so accustomed to += with strings, it's easy to accidentally use the same pattern with lists.
+
+List index()
+lst.index(x) - Look for first instance of x in lst and return its index. Raises an error if x is not in there - this is rather inconvenient. Therefore check with in first, and only if x is in there call index(). In other words, there is nothing as simple as str.find() for lists which IMHO seems like a real omission.
+
+>>> lst = ['a', 'b', 'c']
+>>> lst.index('c')
+2
+>>> lst.index('x')     # Error if not in
+ValueError: 'x' is not in list
+>>> 'x' in lst         # Therefore, check before calling .index()
+False
+>>>
+List insert(), copy()
+lst.insert(index, x) - insert the element x so it is at the given index, shifting elements towards the end of the list as needed. Use len(lst) as the index to insert at the end. Append() is simpler since it just goes on the end without any shifting and you don't have to think about index numbers.
+
+lst.copy() - returns a copy of lst, a new list populated with elements from the original list. This is rarely used. Example use of copy(): the for-loop says to not modify a list while looping over it. If you want to loop over a list and also add and remove from it, you could use copy() — loop over one copy of the list while modifying the other. This is not a common situation.
+
+Algorithms: sorted(), min(), max(), sum()
+The sorted(lst) function returns a new list with the elements sorted into increasing order according to the < operator. The related functions min(lst) max(lst) return the smallest or largest element in lst, but taking significantly less time than the full sorted(). (See the sorting chapter for more information).
+
+The sum(lst) function returns the arithmetic sum of a collection numbers. Note that these are regular functions, not noun.verb, since they work with any iterable input, not just lists.
+
+>>> sorted([2, 5, 6, 1])
+[1, 2, 5, 6]
+>>> min([2, 5, 6, 1])
+1
+>>> max([2, 5, 6, 1])
+6
+>>> sum([2, 5, 6, 1])
+14
+More details at official Python List Docs
+
+List Slices
+Slices work to pull out parts of list just as with strings.
+
+lst = ['a', 'b', 'c']
+lst[:2] -> ['a', 'b']
+lst[2:] -> ['c']
+The original list is not modified, this creates a new list populated with elements from the original. Omitting both start and end indexes yields a copy of the whole list — lst[:]
+
+List For loop
+The for-loop makes it easy to access each element in a list.
+
+alt: for loop points var s to each element in turn
+
+In the for-loop, Python takes control of the variable after the word "for", setting that variable to point to each element in the list in turn, one at a time. In this example, the variable s points to 'a' on the first iteration of the loop, 'b' on the second iteration, and so on through all the elements. Do not modify the list during iteration.
+
+Loop Variable Names
+>>> urls = ['http..', 'http..', ..]
+>>> for url in urls:
+      print(url)
+Style: list variables hold many elements, so it's a good style to name a list variable with a plural word ending in "s", like "urls" in the above example. Then a variable that points to a single url can be named "url". Both names then appear in the for-loop, with the names reinforcing which variable is one url and which is the list of urls. Confusing two related but different values such as we have here is a common source of Python bugs, so the clear names are helping us keep things straight.
+
+Index loop - for i in range
+The standard for/i/range loop works on lists too, using square brackets to access each element. Use this form if you want to know the index number of each element during iteration.
+
+lst = [...]
+for i in range(len(lst)):
+    # use lst[i]
+Load a list with data
+A common pattern to load up a list is to start with the empty list, and then in a loop of some sort, perhaps reading lines from a file, use .append() to load elements into the list.
+
+lst = []
+for i in range(10):
+  lst.append(i)
+# lst = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+List Del
+The del feature is Python deletes items out of a list or dict, modifying the structure in place. For its syntax, basically write a square bracket expression to refer to an element, and then add del to its left to delete that element. Like this:
+
+>>> lst = ['a', 'b', 'c']
+>>> lst[0]
+'a'
+>>> del lst[0]  # delete the [0] element, lst is modified
+>>> lst
+['b', 'c']
+>>>
+>>> # Elements shift over to stay in 0..len-1, so now [0] is 'b'
+>>> lst[0]
+'b'
+Python list elements are are kept in a contiguous block, with index numbers 0..len-1. Therefore, deleting an element from a list, Python will automatically shift over the elements to its right to keep the elements contiguous.
+
+Del works with slices too, deleting a range deletes that sub-part of the list:
+
+>>> lst = ['a', 'b', 'c', 'd']
+>>> del lst[1:3]
+>>> lst
+['a', 'd']
+Del works with dicts too.
+
+Iterable
+Many Python functions, such as range(), return an "iterable" which is list-like, but is not a list exactly. Fortunately, most Python features that work with lists, work with iterables too:
+
+Suppose we have iterable, all of these forms work fine:
+for elem in iterable:
+len(iterable)
+iterable[0]
+sorted(iterable)
+Look, for example, at the familiar loop to go through a series of numbers
+
+>>> for i in range(10):
+...   print(i)
+... 
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+How does that for loop work? The call to range(10) is not returning a list. It returns an iterable representing the series of numbers, and fortunately the for-loop works fine with an iterable.
+
+However, list-specific functions like append() and remove() do not work on iterables. If you have an iterable and need a list, it's easy to construct a list from the iterable like this:
+
+>>> lst = list(range(10))
+>>> lst.append(99)
+
+Why do Python functions return an iterable instead of a full list? Because the iterable is more lightweight and efficient compared to a list. In particular, the iterable does not allocate memory for all its elements the way a list does. Therefore, it's generally a little more efficient to do a computation with an iterable.
+
+Behind the scenes: how does the iterable work? The Python iterator strategy uses a special function, __next__(). Each call to __next__() returns the next element of the sequence. Your code does not need to call the __next__() function explicitly. Behind the scenes, the for-loop calls __next__() again and again to get all the elements needed for the loop.
