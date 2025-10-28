@@ -1,0 +1,149 @@
+Python has a built-in set data type that you can use to store collections of unique items. The set() method is used to create a new set or modify an existing one. In this article, we’ll take a look at the different ways you can use the set() method and the different operations you can perform on sets. 
+
+You will learn the fundamentals of Python: from basic syntax to mastering data structures, loops, and functions. You will also explore OOP concepts and objects to build robust programs.
+
+11.5 Hrs
+51 Coding Exercises
+Start Free Trial
+Set in Python
+A set, in Python, is an unordered collection of unique items. It’s a data structure that’s similar to a list, but it has some unique properties. It’s a great choice for when you want to store a collection of data that isn’t constrained by a particular order or sequence. You can add, remove, and modify elements in a set very easily, and the set will always keep track of the changes. 
+
+Creating a Set in Python – Syntax: 
+
+Let us create a set named setA, The syntax for the same is as shown below: Syntax: 
+
+1
+setA = set(<iter>), 
+where <iter> : iterable can be anything like list, tuple,etc. List and tuple are the other built-in data structures in python just like settings. 
+
+To create a set, you use the set() function. The set() function takes any number of arguments, which are all items that will be added to the set. 
+
+In Python, the set() constructor creates a new set object. The set() constructor takes a list of items as an argument and makes a new set that contains only those items. 
+
+Example: 
+
+setA = set([‘hello’,’world’]) 
+print(setA) 
+Output: {'hello', 'world'}
+The following two examples are worth noting, In Ex1, a set is created using one string ‘foo’, while in Ex2, notice the output when using the set() function. 
+Ex1: >>>{'foo'} 
+O/P: {'foo'} 
+Ex2: >>> set('foo') 
+O/P:{'o', 'f'} 
+The other way to create a set in python is to define the elements in a set of curly braces: The syntax for the same is shown as follows: 
+
+Example: 
+
+setA = {“hello”, “world ”} 
+print(setA) 
+Output: {'hello', 'world'} 
+Once you have created a set, you can’t add or remove items from it. The only way to change the contents of a set is to create a new set that contains the old set and the new items you want to add. 
+
+Operation of Set in python
+Set operations are important in Python programming because they allow you to quickly and easily manipulate large sets of data. There are several operators that you can use to interact with sets, including: 
+
+union: This function combines two sets into a single set 
+intersection: This function returns the intersection of two sets 
+difference: This function returns the difference between two sets 
+symmetric_difference: This function of the set returns the symmetric difference between two sets 
+Adding elements into a set
+Python has a set() data structure that can be used to store unique values. You can add elements to a set in python by using the add() function. 
+
+Ex1 : setA = {1,2,3} 
+setA.add(15) 
+print(setA) 
+O/p: {1,15,2,3} 
+How to create an empty set in python? 
+You can create an empty set in python by using the set() function. One can think an empty set can be created using the curly braces {}, but notice that python interprets empty curly braces as a dictionary. Let us look at this scenario using an example: 
+
+Ex1: 
+
+>>> a ={} 
+>>> type(a) 
+O/p: <class 'dict'> 
+Ex2: 
+
+>>> a= set() 
+>>> type(a) 
+O/p: <class 'set'> 
+Removing elements from a set
+Now that you know how to create and modify sets, let’s take a look at how you can remove elements from a set. There are a few different ways to do this, depending on what you want to achieve. This will delete an element from the set immediately. Alternatively, you can use 
+
+the remove() method to remove an element from the set over time. This is useful if you want to keep track of which elements have been removed. There are various ways of removing elements from a set in python.One can also use pop() function, discard() function.
+
+discard() function: 
+Ex1: setA = {‘hello’,’world’,’python’} 
+setA.discard(‘python’) 
+print(setA) 
+O/p: {'world',’hello’} 
+remove() function: 
+Ex2: setA = {‘hello’,’world’,’python’} 
+setA.remove(‘python’) 
+print(setA) 
+O/p: {‘hello’,'world'} 
+
+The difference between discard and remove is that discard removes the elements if exist else does nothing, but remove throws an error if the element doesn’t exist. 
+
+pop() function: 
+Ex3: setA = {‘hello’,’world’,’python’} 
+setA.pop() 
+print(setA) 
+O/p: {'world',’hello’} 
+clear() function: 
+clear() removes all the elements from a given set. 
+Ex :a = {1,2,3} 
+a.clear() 
+O/p: set()
+
+You’ve probably heard the terms mutable and immutable before, but what do they mean? In Python, a mutable object can be changed, meaning the elements of it can be modified once declared while an immutable meaning the contents of it cannot be changed once declared. Sets are mutable which means the elements can be added or removed (modified) after defining a set. 
+
+Disjoint sets: 
+
+Two sets are said to be disjoint when the two sets have no elements in common. Let us see what method of the set is used to identify if two sets are disjoint or not. a = {4,5,6} 
+
+b = {1,2,3} 
+c = {6} 
+a.isdisjoint(b) #=> True 
+a.isdisjoint(c) #=> False 
+
+Operations of set: 
+
+To add an element to a set, use the add() method. Similarly, using the remove() method to remove an element from the set, we have seen the various ways of removing an element from the set above. To check if an element is in a set, use the keyword ”in”. 
+
+Ex: a = set([‘hello’,’world’]) 
+print(‘hello’ in a) 
+O/p: True 
+Explain set methods in python? 
+There are also a few methods you can use to join two or more sets together. The union of two sets is the set of items in either set. The union() method will combine all of the elements from both sets into one set, To union two sets, also the Python operator | can be used. While the intersection() method will only include the elements that are common to both sets, To intersect two sets, the Python operator & can also be used. Finally, the difference() method will create a set containing all of the elements in the first set, minus any elements that are also in the second set. 
+
+Set Difference in Python
+There are three ways to find the difference between two sets in Python. The first is set difference, which returns the elements in set A that are not in set B. The second is set symmetric difference, which returns the elements in set A that are not in set B, as well as the elements in set B that are not in set A. The third is the Cartesian product, which returns a new set that is the result of pairing every element in set A with every element in set B. 
+
+Ex1 : 
+
+Set Difference: 
+s1 = {1,2,3,4,5} 
+s2 = {4,5,6,7,8} 
+s1.difference(s2) 
+O/p: {1, 2, 3} 
+Symmetric difference: 
+x= {1,2,4} 
+y={2,5,6} 
+z = x.symmetric_difference(y) 
+
+O/p: {1, 4, 5, 6} 
+Passing a dictionary to set() constructor
+You can also use the set constructor to create a new set from a dictionary. When you pass a dictionary to the set constructor, it will create a new set where only the keys in the dictionary are returned 
+
+Ex:
+
+d = {'dog': 1, 'cat':2, 'fish':3} 
+set(d) 
+O/p: {'cat', 'dog', 'fish'} 
+We can also zip two sets using the zip() function, but the order cannot be preserved. Look at the example below to get a clear understanding. 
+Ex: z = zip({1,2,3},{'a','b','c'}) 
+list(z) 
+O/p: [(1, 'c'), (2, 'b'), (3, 'a')] 
+
+You’ve learned about the different ways you can create a set() in python, as well as how to modify it. We hope you find this information helpful and that you’re now empowered to create and work with sets in your python programs!
+
