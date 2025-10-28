@@ -1,0 +1,171 @@
+The main difference between sets and lists is that sets are unordered and cannot have duplicate values. Also, you should remember that sets cannot be sliced or indexed. In a nutshell, the main features of sets are the following:
+
+Sets are unordered.
+All elements in a Set are unique.
+All the elements in a Set are immutable.
+You can generate a setin Python using an iterable, such as a list, a tuple, or a string:
+
+Press enter or click to view image in full size
+You can generate a set in Python by giving an iterable like list, tuple, or a string to the set() function. You can also generate a list using curly braces.
+different ways to generate a set in Python
+How to define an empty set in Python
+If you ever need to define an empty set in Python, you can do so by calling the set() function without any inputs:
+
+Press enter or click to view image in full size
+In order to generate an empty Python set, you can use the set() function
+generate an empty Python set
+Take into account that curly braces in Python are interpreted as dictionary, so the only way to define an empty Python set is using the set() function:
+
+Press enter or click to view image in full size
+using curly braces without any input can result in generating an empty dictionary. If you need to make an empty set, you can use the set() function.
+don’t use curly braces to define an empty set in python
+Python set operators and methods
+Some developers might use Python setonly when they need to make sure every member is unique; but set() has some great operators and methods that can help you out in a lot of cases.
+
+1. union:
+
+.union()might be the most used method for Python sets. This method will return a new set containing the items from the originals sets. You can get the union of two Python sets by using either the .union() method or the | operator:
+
+Press enter or click to view image in full size
+You can use the .union() method or the | operator the get a new Python set, containing all the elements in the originals sets.
+use either the .union() method or the | operator to get the union of two Python sets
+You can see the number 4 has appeared only once in the result. That’s because Python sets only allow unique elements.
+
+Note that there is a difference between using the .union() method and the | operator. The .union() method takes any iterable as input argument, converts it to a set, and then performs the union operation. But the | operator works only on sets.
+
+2. intersection:
+
+Intersection for sets is kinda the exact opposite of union; it returns a new set, containing the common elements from the original sets. If you need to intersect two Python sets, you can use the .intersection() method or the & operator:
+
+Press enter or click to view image in full size
+You can use the .intersection() method or the & operator the get a new Python set, containing the common elements from the originals sets.
+use either the .intersection() method or the & operator to get the intersection of two Python sets
+Just like what we had with set union, you can pass any iterable to the .intersection() method as input argument; but if you want to use the & operator, you should only use set data type.
+
+3. difference:
+
+Another usefull method for Python sets is .difference(). Using this method, you can get all the elements that are in the first set, but not in the second one. To get the difference between two Python sets, you can use the .difference() method, or the — operator:
+
+Press enter or click to view image in full size
+You can use the .difference() method or the - operator the get a new Python set, containing the elements that are present in the first set, and not in the second one.
+use either the .difference() method or the - operator to get the difference of two Python sets
+4. symmetric_difference:
+
+The .symmetric_difference() method returns a new set, containing all the items that are in either of the sets, but not in both ones. We might be able to say that symmetric_difference is the exact opposite of the intersection method; as the intersection method returns all the common items, but the symmetric_difference excludes the common elements.
+
+To get the symmetric_difference of two sets, you can use the .symmetric_difference() method, or the ^ operator:
+
+Press enter or click to view image in full size
+You can use the .symmetric_difference() method or the ^  operator the get a new Python set, containing the elements that are present in either of the sets, but not in both ones.
+use either the .symmetric_difference() method or the ^ operator to get the symmetric_difference of two Python sets
+5. isdisjoint:
+
+.isdisjoint() returns a boolean, determining if two sets have any elements in common(are disjoint or not). It returns True if two sets don’t have any common elements, and False otherwise. So, we can say if .isdisjoint() returns True for two sets, the inersection of them will be an empty set.
+
+Press enter or click to view image in full size
+.isdisjoint() method returns True if two sets don’t have any items in common. If the result of .isdisjoint() is True, the intersection of two sets will be an empty set.
+use the .isdisjoint() method to see if two python sets have any items in common
+6. issubset:
+
+The .issubset() method returns a boolean, determining if the second set has all the items that are present in the first one. When you need to know if a Python set is a subset of another set, you can either use the .issubset() method, or the <= operator:
+
+Press enter or click to view image in full size
+using the .issubset() method or the ≤ operator in Python returns True if one set has all the items from another set.
+use either the .issubset() method or the ≤ operator to see if a Python set is a subset of another.
+7. proper subset:
+
+Proper subset is the same as subset; the only difference is that the proper subset does not include the identical sets. So, if a Python set is exactly the same as another one, they are a subset of each other, but not a proper subset.
+
+To see if a Python set is a proper subset of another one, you can use the < operator:
+
+Press enter or click to view image in full size
+using the < operator in Python returns True if one set has all the items from another set, while not being identical to it.
+use the < operator to see if a Python set is a proper subset of another.
+8. issuperset:
+
+Get Fateme Fouladkar’s stories in your inbox
+Join Medium for free to get updates from this writer.
+
+Enter your email
+Subscribe
+Using .issuperset() or the >= operator returns True if a Python set is a superset of another:
+
+Press enter or click to view image in full size
+using the .issuperset() method or the ≥ operator in Python returns True if one set contains all the items from another set.
+use either the .issuperset() method or the ≥ operator to see if a Python set is a superset of another.
+9. proper superset:
+
+Just like subset and proper subset, proper superset is the same as superset, the only difference is when two sets are identical. If two Python sets are identical, they are not considered a proper superset. You can use the > operator to see if a Python set is the proper superset of another:
+
+Press enter or click to view image in full size
+using the > operator in Python returns True if one set contains all the items from another set, while not being identical to it.
+use the > operator to see if a Python set is a proper superset of another.
+10. update:
+
+By using the .update() or the |= operator, you can add new elements to your original set:
+
+Press enter or click to view image in full size
+You can use the .update() method or the |= operator to add new items to a set
+use either .update() or the |= operator to update a set
+Take into account that using .update() or the |= operator changes your original set.
+
+11. intersection_update:
+
+The .intersection_update() method can update your set to contain only the common items from two sets. You can also use the &= operator to do the same:
+
+Press enter or click to view image in full size
+you can use the .intersection_update() method or the &= operator to keep only the common items from two sets.
+use either .intersection_update() or the &= operator to keep the common items of two sets
+12. difference_update:
+
+The .difference_update() method or the -= operator can remove the items that are in the second set from your original set:
+
+Press enter or click to view image in full size
+you can use the .difference_update() method or the -= operator to remove the second set items from the first one.
+use either .difference_update() or the -= operator to remove the second set items from the first one
+13. symmetric_difference_update:
+
+You can use the .symmetric_difference_update() method or the ^= operator to keep only the items that are in either the first or the second set, but not in both of them. Basically, the .symmetric_difference_update() method can remove the common items from your original set.
+
+Press enter or click to view image in full size
+
+use either .symmetric_difference_update() or the ^= operator to remove the common items from your original set
+14. add:
+
+Another usefull method for Python sets is the .add() method. Using this method, you can add a new element to your original set. Take into account that the input argument for the .add() method should be a single immutable object.
+
+Press enter or click to view image in full size
+You can use the .add() method to add a new item to your set
+use the .add() method to add a single immutable object to your Python set.
+If you try to add an item that already exists in your set, your new set will remove the duplicate values; aka it stays the same.
+
+15. remove:
+
+The .remove() method can remove a single immutable object from your original Python set. Take into account that Python will raise a KeyError exeption if the element is not present in your set:
+
+Press enter or click to view image in full size
+You can use the .remove() method to remove an item from your Python set
+use the .remove() method to remove a single immutable object from your Python set.
+16. discard:
+
+The .discard() method also removes an element from your set. The only difference is that is does not raise an exception if the element is not found in the set:
+
+Press enter or click to view image in full size
+You can use the .discard() method to remove an item from your Python set without raising an error.
+use the .discard() method to remove a single immutable object from your Python set, without raising an exception.
+17. pop:
+
+The .pop() method will pop a random element from your Python set. Take into account that the .pop() method will raise a KeyError exception if the set is empty.
+
+Press enter or click to view image in full size
+use the .pop() method to pop a random item from your Python set.
+use the .pop() method to pop a random item from your Python set
+18. clear:
+
+By using the .clear() method, you can remove all the items from your set:
+
+Press enter or click to view image in full size
+use the .clear() method to remove all elements from your Python set
+use the .clear() method to remove all elements from your Python set
+In a nutshell
+In this article, you learned how to define and work with a set in Python. You also got familiar with different methods and operators of Python sets. Using the right method at the right time can save you a lot of headache and speed up the coding process.
