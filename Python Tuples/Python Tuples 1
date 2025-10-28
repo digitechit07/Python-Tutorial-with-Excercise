@@ -1,0 +1,1348 @@
+
+Getting Started With Python’s tuple Data Type
+Constructing Tuples in Python
+Creating Tuples Through Literals
+Using the tuple() Constructor
+Accessing Items in a Tuple: Indexing
+Retrieving Multiple Items From a Tuple: Slicing
+Exploring Tuple Immutability
+Packing and Unpacking Tuples
+Returning Tuples From Functions
+Creating Copies of a Tuple
+Concatenating and Repeating Tuples
+Concatenating Tuples Together
+Repeating the Content of a Tuple
+Reversing and Sorting Tuples
+Reversing a Tuple With reversed()
+Reversing a Tuple With the Slicing Operator
+Sorting a Tuple With sorted()
+Traversing Tuples in Python
+Using a for Loop to Iterate Over a Tuple
+Using a Comprehension or a Generator Expression to Traverse Tuples
+Exploring Other Features of Tuples
+Finding Items in a Tuple
+Getting the Length of a Tuple
+Comparing Tuples
+Common Gotchas of Python Tuples
+Using Alternatives to the Built-in tuple Type
+Tuples With Named Fields: collections.namedtuple
+Tuples With Named Fields and Type Hints: typing.NamedTuple
+Data Classes: dataclasses.dataclass
+Deciding Whether to Use Tuples
+Conclusion
+
+Remove ads
+ Watch Now This tutorial has a related video course created by the Real Python team. Watch it together with the written tutorial to deepen your understanding: Exploring Python's tuple Data Type With Examples
+
+In Python, a tuple is a built-in data type that allows you to create immutable sequences of values. The values or items in a tuple can be of any type. This makes tuples pretty useful in those situations where you need to store heterogeneous data, like that in a database record, for example.
+
+Through this tutorial, you’ll dive deep into Python tuples and get a solid understanding of their key features and use cases. This knowledge will allow you to write more efficient and reliable code by taking advantage of tuples.
+
+In this tutorial, you’ll learn how to:
+
+Create tuples in Python
+Access the items in an existing tuple
+Unpack, return, copy, and concatenate tuples
+Reverse, sort, and traverse existing tuples
+Explore other features and common gotchas of tuples
+In addition, you’ll explore some alternative tools that you can use to replace tuples and make your code more readable and explicit.
+
+To get the most out of this tutorial, you should have a good understanding of a few Python concepts, including variables, functions, and for loops. Familiarity with other built-in data structures, especially lists, is also a plus.
+
+Get Your Code: Click here to download the free sample code that shows you how to write more readable code with tuples in Python.
+
+Getting Started With Python’s tuple Data Type
+The built-in tuple data type is probably the most elementary sequence available in Python. Tuples are immutable and can store a fixed number of items. For example, you can use tuples to represent Cartesian coordinates (x, y), RGB colors (red, green, blue), records in a database table (name, age, job), and many other sequences of values.
+
+In all these use cases, the number of elements in the underlying tuple is fixed, and the items are unchangeable. You may find several situations where these two characteristics are desirable. For example, consider the RGB color example:
+
+>>> red = (255, 0, 0)
+Once you’ve defined red, then you won’t need to add or change any components. Why? If you change the value of one component, then you won’t have a pure red color anymore, and your variable name will be misleading. If you add a new component, then your color won’t be an RGB color. So, tuples are perfect for representing this type of object.
+
+Note: Throughout this tutorial, you’ll find the terms items, elements, and values used interchangeably to refer to the objects stored in a tuple.
+
+Some of the most relevant characteristics of tuple objects include the following:
+
+Ordered: They contain elements that are sequentially arranged according to their specific insertion order.
+Lightweight: They consume relatively small amounts of memory compared to other sequences like lists.
+Indexable through a zero-based index: They allow you to access their elements by integer indices that start from zero.
+Immutable: They don’t support in-place mutations or changes to their contained elements. They don’t support growing or shrinking operations.
+Heterogeneous: They can store objects of different data types and domains, including mutable objects.
+Nestable: They can contain other tuples, so you can have tuples of tuples.
+Iterable: They support iteration, so you can traverse them using a loop or comprehension while you perform operations with each of their elements.
+Sliceable: They support slicing operations, meaning that you can extract a series of elements from a tuple.
+Combinable: They support concatenation operations, so you can combine two or more tuples using the concatenation operators, which creates a new tuple.
+Hashable: They can work as keys in dictionaries when all the tuple items are immutable.
+Tuples are sequences of objects. They’re commonly called containers or collections because a single tuple can contain or collect an arbitrary number of other objects.
+
+Note: In Python, tuples support several operations that are common to other sequence types, such as lists, strings, and ranges. These operations are known as common sequence operations. Throughout this tutorial, you’ll learn about several operations that fall into this category.
+
+In Python, tuples are ordered, which means that they keep their elements in the original insertion order:
+
+>>> record = ("John", 35, "Python Developer")
+
+>>> record
+('John', 35, 'Python Developer')
+The items in this tuple are objects of different data types representing a record of data from a database table. If you access the tuple object, then you’ll see that the data items keep the same original insertion order. This order remains unchanged during the tuple’s lifetime.
+
+You can access individual objects in a tuple by position, or index. These indices start from zero:
+
+>>> record[0]
+'John'
+>>> record[1]
+35
+>>> record[2]
+'Python Developer'
+Positions are numbered from zero to the length of the tuple minus one. The element at index 0 is the first element in the tuple, the element at index 1 is the second, and so on.
+
+Cool! You’ve had a first glance at tuples. It’s time to dive deeper into all of the above characteristics of tuples and more. To kick things off, you’ll start by learning the different ways to create tuples in Python.
+
+
+Remove ads
+Constructing Tuples in Python
+A tuple is a sequence of comma-separated objects. To store objects in a tuple, you need to create the tuple object with all its content at one time. You’ll have a couple of ways to create tuples in Python. For example, you can create tuples using one of the following alternatives:
+
+Tuple literals
+The tuple() constructor
+In the following sections, you’ll learn how to use the tools listed above to create new tuples in your code. You’ll start off with tuple literals.
+
+Creating Tuples Through Literals
+Tuple literals are probably the most common way to create tuples in Python. These literals are fairly straightforward. They consist of a comma-separated series of objects.
+
+Here’s the general syntax of a tuple literal:
+
+item_0, item_1, ..., item_n
+This syntax creates a tuple of n items by listing the items in a comma-separated sequence. Note that you don’t have to declare the items’ type or the tuple’s size beforehand. Python takes care of this for you.
+
+In most situations, you’ll create tuples as a series of comma-separated values surrounded by a pair of parentheses:
+
+(item_0, item_1, ..., item_n)
+The pair of parentheses in this construct isn’t required. However, in most cases, the parentheses improve your code’s readability. So, using the parentheses is a best practice that you’ll see in many codebases out there. In contrast, the commas are required in the tuple literal syntax.
+
+Here are a few examples of creating tuples through literals:
+
+>>> jane = ("Jane Doe", 25, 1.75, "Canada")
+>>> point = (2, 7)
+>>> pen = (2, "Solid", True)
+
+>>> days = (
+...     "Monday",
+...     "Tuesday",
+...     "Wednesday",
+...     "Thursday",
+...     "Friday",
+...     "Saturday",
+...     "Sunday",
+... )
+In the first three examples, you create tuples of heterogeneous objects that include strings, numbers, and Boolean values. Note that in these examples, each tuple represents a single object with different elements. So, the name of the underlying tuple is a singular noun.
+
+In the final example, you create a tuple of homogeneous objects. All the items are strings representing the weekdays. The name of the tuple is a plural noun.
+
+In the case of days, you should note that Python ignores any extra comma at the end of a tuple, as it happens after "Sunday". So, it’s optional but common practice because it allows you to quickly add a new item if needed. It’s also the default format that code formatters like Black apply to multiline tuples.
+
+Note: In all of the above examples, the tuples have a fixed number of items. Those items are mostly constant in time, which means that you don’t have to change or update them during your code’s execution. This idea of a fixed and unchangeable series of values is the key to deciding when to use a tuple in your code.
+
+Even though the parentheses aren’t necessary to define most tuples, you do have to include them when creating an empty tuple:
+
+>>> empty = ()
+>>> empty
+()
+
+>>> type(empty)
+<class 'tuple'>
+Note that once you’ve created an empty tuple, you can’t populate it with new data as you can do with lists. Remember that tuples are immutable. So, why would you need empty tuples?
+
+For example, say that you have a function that builds and returns a tuple. In some situations, the function doesn’t produce items for the resulting tuple. In this case, you can return the empty tuple to keep your function consistent regarding its return type.
+
+You’ll find a couple of other situations where using the parentheses is required. For example, you need it when you’re interpolating values in a string using the % operator:
+
+>>> "Hello, %s! You're %s years old." % ("Linda", 24)
+'Hello, Linda! You're 24 years old.'
+
+>>> "Hello, %s! You're %s years old." % "Linda", 24
+Traceback (most recent call last):
+    ...
+TypeError: not enough arguments for format string
+In the first example, you use a tuple wrapped in parentheses as the right-hand operand to the % operator. In this case, the interpolation works as expected. In the second example, you don’t wrap the tuple in parentheses, and you get an error.
+
+Another distinctive feature of tuple literals appears when you need to create a single-item tuple. Remember that the comma is the only required part of the syntax. So, how would you define a tuple with a single item? Here’s the answer:
+
+>>> one_word = "Hello",
+>>> one_word
+('Hello',)
+
+>>> one_number = (42,)
+>>> one_number
+(42,)
+To create a tuple with a single item, you need to place the item followed by a comma. In this example, you define two tuples using this pattern. Again, the parentheses aren’t required. However, the trailing comma is required.
+
+Single-item tuples are quite useful. For example, if you have a class that generates a large number of instances, then a recommended practice would be to use the .__slots__ special attribute in order to save memory. You’ll typically use a tuple as the value of this attribute. If your class has only one instance attribute, then you’ll define .__slots__ as a single-item tuple.
+
+
+Remove ads
+Using the tuple() Constructor
+You can also use the tuple() class constructor to create tuple objects from an iterable, such as a list, set, dictionary, or string. If you call the constructor without arguments, then it’ll build an empty tuple.
+
+Here’s the general syntax:
+
+tuple([iterable])
+To create a tuple, you need to call tuple() as you’d call any class constructor or function. Note that the square brackets around iterable mean that the argument is optional, so the brackets aren’t part of the syntax.
+
+Here are a few examples of how to use the tuple() constructor:
+
+>>> tuple(["Jane Doe", 25, 1.75, "Canada"])
+('Jane Doe', 25, 1.75, 'Canada')
+
+>>> tuple("Pythonista")
+('P', 'y', 't', 'h', 'o', 'n', 'i', 's', 't', 'a')
+
+>>> tuple({
+...     "manufacturer": "Boeing",
+...     "model": "747",
+...     "passengers": 416,
+... }.values())
+('Boeing', '747', 416)
+
+>>> tuple()
+()
+In these examples, you create different tuples using the tuple() constructor, which accepts any type of iterable object.
+
+Note: The tuple constructor also accepts sets. However, remember that sets are unordered data structures. This characteristic will affect the final order of items in the resulting tuple.
+
+Finally, note that calling tuple() without an argument returns a new empty tuple. This way of creating empty tuples is rare in practice. However, it can be more explicit and help you communicate your intent: creating an empty tuple. But in most cases, assigning an empty pair of parentheses to a variable is okay.
+
+The tuple() constructor comes in handy when you need to create a tuple out of an iterator object. An iterator yields items on demand. So, you don’t have access to all of its data at one time. The tuple() constructor will consume the iterator, build a tuple from its data, and return it back to you.
+
+Here’s an example of using the tuple() constructor to create a tuple out of a generator expression, which is a special kind of iterator:
+
+>>> tuple(x**2 for x in range(10))
+(0, 1, 4, 9, 16, 25, 36, 49, 64, 81)
+In this example, you use tuple() to build a tuple of square values. The argument to tuple() is a generator expression that yields square values on demand. The tuple constructor consumes the generator and builds the tuple containing all the data.
+
+Note: It’s important to note that to create a stand-alone generator expression, you do need an enclosing pair of parentheses. In the above example, the required parentheses are provided by the call to tuple().
+
+You could’ve also done something like tuple((x**2 for x in range(10))), but this would be less readable and clean.
+
+As a side note, you need to consider that potentially infinite iterators will hang your code if you feed them to the tuple() constructor.
+
+Accessing Items in a Tuple: Indexing
+You can extract the items of a tuple using their associated indices. What’s an index? Each item in a tuple has an integer index that specifies its position in the tuple. Indices start at 0 and go up to the number of items in the tuple minus 1.
+
+To access an item through its index, you can use the following syntax:
+
+tuple_object[index]
+This construct is known as an indexing operation. The [index] part is the indexing operator, which consists of a pair of square brackets enclosing the target index. You can read this construct as from tuple_object give me the item at index.
+
+Here’s how this syntax works in practice:
+
+>>> jane = ("Jane Doe", 25, 1.75, "Canada")
+
+>>> jane[0]
+'Jane Doe'
+>>> jane[1]
+25
+>>> jane[3]
+'Canada'
+Indexing a tuple with different indices gives you direct access to the associated values. If you use Big O notation for time complexity, then you can say that indexing is an O(1) operation. This means that tuples are quite good for those situations where you need to quickly access specific items from a series.
+
+Here’s a visual representation of how indices map to items in a tuple:
+
+“Jane Doe”	25	1.75	“Canada”
+0	1	2	3
+In any Python tuple, the index of the first item is 0, the index of the second item is 1, and so on. The index of the last item is the number of items minus 1. In this example, the tuple has four items, so the last item’s index is 4 - 1 = 3.
+
+The number of items in a tuple defines its length. You can learn this number by using the built-in len() function:
+
+>>> len(jane)
+4
+With a tuple as an argument, the len() function returns a value representing the number of items in the target tuple. This number is the tuple’s length.
+
+It’s important to note that, if you use an index greater than or equal to the tuple’s length, then you get an IndexError exception:
+
+>>> jane[4]
+Traceback (most recent call last):
+    ...
+IndexError: tuple index out of range
+In this example, you get an IndexError as a result. Using out-of-range indices might be a common issue when you’re starting to use tuples or other sequences in Python. So, keep in mind that indices are zero-based, so the last item in this example has an index of 3.
+
+You can also use negative indices while indexing tuples. This feature is common to all Python sequences, such as lists and strings. Negative indices give you access to the tuple items in backward order:
+
+>>> jane[-1]
+'Canada'
+
+>>> jane[-2]
+1.75
+A negative index specifies an element’s position relative to the right end of the tuple and back to the beginning. Here’s a representation of how negative indices work:
+
+“Jane Doe”	25	1.75	“Canada”
+-4	-3	-2	-1
+You can access the last item in a tuple using the index -1. Similarly, the index -2 identifies the item next to the last, and so forth.
+
+As you can see, negative indices don’t start from 0. That’s because 0 already points to the first item. This may be confusing when you’re first learning about negative and positive indices. Don’t worry, you’ll get used to this behavior.
+
+If you use negative indices, then -len(tuple_object) will be the first item in the tuple. If you use an index lower than this value, then you’ll get an IndexError:
+
+>>> jane[-5]
+Traceback (most recent call last):
+    ...
+IndexError: tuple index out of range
+Using an index lower than -len(tuple_object) produces an error because the target index is out of range.
+
+As you already know, tuples can contain items of any type, including other sequences. When you have a tuple that contains other sequences, you can access the items in any nested sequence by chaining indexing operations.
+
+To illustrate, say that you have the following tuple:
+
+>>> employee = (
+...     "John",
+...     35,
+...     "Python Developer",
+...     ("Django", "Flask", "FastAPI", "CSS", "HTML"),
+... )
+Your employee tuple has an embedded tuple containing a series of skills. How can you access individual skills? You can use the following indexing syntax:
+
+tuple_of_sequences[index_0][index_1]...[index_n]
+The numbers at the end of each index represent the different levels of nesting in the tuple. So, to access individual skills in the employee tuple, you first need to access the last item and then access the desired skill:
+
+>>> employee[-1][0]
+'Django'
+
+>>> employee[-1][1]
+'Flask'
+You can access items in the nested sequence by applying multiple indexing operations in a row. This syntax is extensible to other nested sequences like lists and strings. It’s even valid for dictionaries, in which case you’ll have to use keys instead of indices.
+
+
+Remove ads
+Retrieving Multiple Items From a Tuple: Slicing
+Like other Python sequences, tuples allow you to extract a portion or slice of their content with a slicing operation, which uses the following syntax:
+
+tuple_object[start:stop:step]
+The [start:stop:step] part of this construct is known as the slicing operator. It consists of a pair of square brackets and three optional indices: start, stop, and step. The second colon is optional too. You typically use it only in those cases where you need a step value different from 1.
+
+All the indices in the slicing operator are optional. Here’s summary of their meanings and default values:
+
+Index	Description	Default Value
+start	Specifies the index at which you want to start the slicing. The item at this index is included in the final slice.	0
+stop	Specifies the index at which you want the slicing to stop extracting items. The item at this index isn’t included in the final slice.	len(tuple_object)
+step	Provides an integer value representing how many items the slicing will jump through on each step. If step is greater than 1, then jumped items won’t be in the resulting slice.	1
+You can combine these indices in different ways to obtain specific portions of a given tuple. Here are a couple of examples of slicing variations:
+
+>>> days = (
+...     "Monday",
+...     "Tuesday",
+...     "Wednesday",
+...     "Thursday",
+...     "Friday",
+...     "Saturday",
+...     "Sunday",
+... )
+
+>>> days[:5]
+('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
+
+>>> days[5:]
+('Saturday', 'Sunday')
+In these examples, the first slicing allows you to extract the business days, while the second slicing gives you the weekend.
+
+You can experiment with different combinations of indices and different tuples to get a grasp of how this construct works.
+
+To dive deeper into slicing operations, check out the Retrieving Multiple Items From a List: Slicing section of Python’s list Data Type: A Deep Dive With Examples. For the most part, the same slicing operations that apply to lists are valid for tuples, except for those that mutate a list in place.
+
+Speaking of mutations, immutability is a fundamental feature of tuples. This feature affects how you use tuples in practice. In the following section, you’ll learn how immutability impacts the behavior of tuples.
+
+Exploring Tuple Immutability
+Python’s tuples are immutable, which means that once you’ve created a tuple, you can’t change or update its items in place. This characteristic of tuples implies that you can’t use indices to update individual items in an existing tuple:
+
+>>> jane = ("Jane Doe", 25, 1.75, "Canada")
+
+>>> jane[3] = "United States"
+Traceback (most recent call last):
+    ...
+TypeError: 'tuple' object does not support item assignment
+Because tuples are immutable, if you try to change the value of a tuple item through an assignment, then you get a TypeError telling you that tuples don’t support item assignments. So, once you’ve created a tuple, there’s no way to update its content. You can only create a new tuple object with the new or updated content.
+
+Another implication of tuples being immutable is that you can’t grow or shrink an existing tuple. Unlike lists, tuples don’t have .append(), .extend(), .insert(), .remove(), and .clear() methods.
+
+Additionally, tuples don’t support the del statement on items:
+
+>>> point = (7, 14, 21)
+
+>>> del point[2]
+Traceback (most recent call last):
+    ...
+TypeError: 'tuple' object doesn't support item deletion
+You can’t delete tuple items using the del statement. If you try to do it, then you get a TypeError telling you that tuples don’t support item deletion, as you can confirm in the example above.
+
+Even though Python tuples are immutable, there’s a subtle detail that you need to keep in mind when working with tuples in your code. Tuples can store any type of object, including mutable ones. This means that you can store lists, sets, dictionaries, and other mutable objects in a tuple:
+
+>>> student_info = ("Linda", 18, ["Math", "Physics", "History"])
+This tuple stores information about a student. The first two items are immutable. The third item is a list of subjects. Python’s lists are mutable, and therefore, you can change their items in place. This is possible even if your target list is nested in an immutable data type like tuple.
+
+To change or update the list of subjects in your student_info tuple, you can use chained indices as in the following example:
+
+>>> student_info[2][2] = "Computer science"
+>>> student_info
+('Linda', 22, ['Math', 'Physics', 'Computer science'])
+As you can conclude from this example, you can change the content of mutable objects even if they’re nested in a tuple. This behavior of tuples may have further implications. For example, because tuples are immutable, you can use them as keys in a dictionary:
+
+>>> student_courses = {
+...     ("John", "Doe"): ["Physics", "Chemistry"],
+...     ("Jane", "Doe"): ["English", "History"],
+... }
+
+>>> student_courses[("Jane", "Doe")]
+['English', 'History']
+In this code, you use tuples as keys for the student_courses dictionary. The example works as expected. However, what will happen if the tuples that you want to use as keys contain mutable objects? Consider the following variation of the previous example:
+
+>>> student_courses = {
+...     (["John", "Miguel"], "Doe"): ["Physics", "Chemistry"],
+...     (["Fatima", "Jane"], "Doe"): ["English", "History"],
+... }
+Traceback (most recent call last):
+    ...
+TypeError: unhashable type: 'list'
+In summary, you can use tuples as keys in a dictionary only if all their items are of hashable types. Otherwise, you’ll get an error.
+
+
+Remove ads
+Packing and Unpacking Tuples
+Python has the notion of packing and unpacking tuples. For example, when you write an assignment statement like point = x, y, z, you’re packing the values of x, y, and z in point. That’s how you create new tuple objects.
+
+You can also do the inverse operation and unpack the values of a tuple into an appropriate number of variables. To continue with the point example, consider the following code:
+
+>>> point = (7, 14, 21)
+
+>>> x, y, z = point
+>>> x
+7
+>>> y
+14
+>>> z
+21
+The highlighted line does the magic of unpacking the content of point into three variables. Note that the values go to the variables in order. The first value goes to the first variable, the second value goes to the second variable, and so on.
+
+Note: Python 3.5 extended the tuple unpacking syntax to work with all kinds of iterables. So, nowadays, you can say iterable unpacking instead of just tuple unpacking.
+
+In regular unpacking, the number of variables must match the number of values to unpack. Otherwise, you get an error:
+
+>>> point = (7, 14, 21)
+
+>>> x, y = point
+Traceback (most recent call last):
+    ...
+ValueError: too many values to unpack (expected 2)
+In this case, you’re trying to unpack a three-item tuple into two variables. You get an error because Python doesn’t know how to unambiguously perform the unpacking.
+
+The unpacking syntax works like a charm and has several common use cases. One of the most popular use cases is to take advantage of unpacking for swapping values between variables. For example, to swap values between two variables with regular assignments, you have to use a temporary variable:
+
+>>> a = 200
+>>> b = 400
+
+>>> temp = a
+>>> a = b
+>>> b = temp
+
+>>> a
+400
+>>> b
+200
+If you have to do this operation often in your code, then this approach can become cumbersome. Fortunately, the unpacking syntax can help you do the swapping in a quick, elegant way:
+
+>>> a = 200
+>>> b = 400
+
+>>> a, b = b, a
+
+>>> a
+400
+>>> b
+200
+In the highlighted line, the left-hand operand provides the variables, while the right-hand operand provides the values to unpack. This expression allows you to quickly swap values between variables without an intermediate step.
+
+Parallel assignment is another cool use case of tuple unpacking. For example, say that you often do something like the following:
+
+>>> employee = ("John Doe", 35, "Python Developer")
+
+>>> name = employee[0]
+>>> age = employee[1]
+>>> job = employee[2]
+In this example, you use independent assignment to grab values from the employee tuple. Even though this code works, the index handling can be error-prone and confusing. Here’s a Pythonic solution using tuple unpacking:
+
+>>> name, age, job = ("John Doe", 35, "Python Developer")
+With tuple unpacking, you solve the problem in a single line without using indices. This Pythonic approach will make your code easier to read and understand. It’ll also make the code less error-prone.
+
+Python also has a packing and unpacking operator (*) that you can use to make your unpacking statements more flexible. For example, you can use this operator to collect multiple values in a single variable when the number of variables on the left doesn’t match the number of items in the tuple on the right:
+
+>>> numbers = (1, 2, 3, 4, 5)
+
+>>> *head, last = numbers
+>>> head
+[1, 2, 3, 4]
+>>> last
+5
+
+>>> first, *middle, last = numbers
+>>> first
+1
+>>> middle
+[2, 3, 4]
+>>> last
+5
+
+>>> first, second, *tail = numbers
+>>> first
+1
+>>> second
+2
+>>> tail
+[3, 4, 5]
+
+>>> first, *_ = numbers
+>>> first
+1
+In these examples, the original tuple has five items. In the first unpacking, you use the unpacking operator to collect four items in head and one item in last. Note that the * operator collects the values in a new list object rather than in a tuple.
+
+In the second and third examples, you collect several values from the middle and tail of numbers using the packing operator (*).
+
+The final example shows how you can grab the first value from a tuple and pack the rest of the values in a disposable variable. This construct can be useful when you only need the first value. However, it may be confusing to others. Doing something like first = number[0] would probably be more intuitive and natural.
+
+Another interesting use case of the packing and unpacking operator is when you need to merge a few tuples together to build a new one:
+
+>>> name = ("John", "Doe")
+>>> contact = ("john@example.com", "55-555-5555")
+
+>>> (*name, *contact)
+('John', 'Doe', 'john@example.com', '55-555-5555')
+In the highlighted line, you use the * operator to unpack the content of name and contact, merging them to create a new tuple with all the data from both. This syntax provides a quick way to merge tuples in your code.
+
+
+Remove ads
+Returning Tuples From Functions
+In some situations, you’ll need to return multiple values from a function or method. To do that, you can build a return statement with a comma-separated series of arguments. Yes, that’s a tuple. As a result, whenever you call the function, you’ll get a tuple of values.
+
+Note: You can also return multiple values from a function using a list, in which case you need to explicitly use square brackets to wrap the values or build the list beforehand. This approach is useful when you need to continue mutating the data after receiving it from the function. If you don’t need to mutate the resulting data, then using a tuple is the way to go.
+
+The built-in divmod() function is a good example of a function that returns multiple values. This function takes two numbers and returns a tuple containing the quotient and the remainder when doing integer division:
+
+>>> divmod(4, 2)
+(2, 0)
+
+>>> quotient, remainder = divmod(8, 2)
+>>> quotient
+4
+>>> remainder
+0
+This function returns two values as a tuple. Because the function returns a tuple, you can use the unpacking syntax to store each value in its dedicated variable. You can use this pattern in your custom functions too.
+
+For example, say that you want to write a function that returns the minimum and maximum value from an input iterable:
+
+>>> def find_extremes(iterable):
+...     data = tuple(iterable)
+...     if len(data) == 0:
+...         raise ValueError("input iterable must not be empty")
+...     return min(data), max(data)
+...
+
+>>> extremes = find_extremes([3, 4, 2, 6, 7, 1, 9])
+>>> extremes
+(1, 9)
+
+>>> type(extremes)
+<class 'tuple'>
+In this function, you first create a tuple from the input iterable. This step guarantees that the data container supports the built-in len() function. With the conditional statement, you check if the input iterable is empty, in which case you raise an exception.
+
+If the input iterable contains at least one value, then you use the built-in min() and max() functions to determine the minimum and maximum values in the input data.
+
+Finally, you return both values from the function. Again, when you separate a series of values with commas, you create a tuple. So, this function returns a tuple object.
+
+Note: If your functions needs several different return types, then you’re dealing with a more complex scenario. In this case, you can get some help from How to Use Type Hints for Multiple Return Types in Python.
+
+You’ll note that returning multiple values as a tuple is one of those use cases where the parentheses don’t add much to the readability of your code. So, most Python developers don’t use them here.
+
+Creating Copies of a Tuple
+You typically make copies of an object when you need to transform the data while preserving the original data unchanged. Copies are quite useful when you’re working with mutable data types, such as lists and dictionaries. They allow you to make changes in the copy without affecting the original data.
+
+Note: If you’d like to learn more about copying objects in general, then check out How to Copy Objects in Python: Shallow vs Deep Copy Explained.
+
+Because tuples are immutable data types, there’s no way to mutate their items in place. So, creating copies of an existing tuple isn’t really necessary. The usual shallow copying techniques that you use with lists, such as the slicing operator or the copy.copy() function, create aliases instead of copies:
+
+>>> student_info = ("Linda", 18, ["Math", "Physics", "History"])
+
+>>> student_profile = student_info[:]
+>>> id(student_info) == id(student_profile)
+True
+>>> id(student_info[0]) == id(student_profile[0])
+True
+>>> id(student_info[1]) == id(student_profile[1])
+True
+>>> id(student_info[2]) == id(student_profile[2])
+True
+Both student_info and student_profile hold references to the same tuple object. You can confirm this fact by using the built-in id() function, which takes an object as an argument and returns its identity. So, student_profile is an alias of student_info rather than a copy. Also, note how items at the same index position in both aliases share the same identity.
+
+Note: In Python, an object’s identity is a unique identifier that distinguishes it from other objects. You can use the built-in id() function to get the identity of any Python object. In Python’s CPython implementation, an object’s identity coincides with the memory address where the object is stored.
+
+The copy() function from the copy module produces an equivalent result:
+
+>>> from copy import copy
+
+>>> student_info = ("Linda", 18, ["Math", "Physics", "History"])
+
+>>> student_profile = copy(student_info)
+>>> id(student_info) == id(student_profile)
+True
+>>> id(student_info[0]) == id(student_profile[0])
+True
+>>> id(student_info[1]) == id(student_profile[1])
+True
+>>> id(student_info[2]) == id(student_profile[2])
+True
+Again, both variables hold references to the same tuple object and the same items. So, the copy() function doesn’t make any difference.
+
+Wait, the tuple in the above example hosts a list object, which is mutable. What would happen if you changed one of its items? Would the change affect both student_profile and student_info? Run the code below to answer these questions:
+
+>>> student_profile[2][2] = "Computer science"
+
+>>> student_profile
+('Linda', 18, ['Math', 'Physics', 'Computer science'])
+>>> student_info
+('Linda', 18, ['Math', 'Physics', 'Computer science'])
+In this example, you change the "History" subject to "Computer science" in student_profile. The change also affects the original data in student_info.
+
+Maybe you’ve made deep copies of lists using the deepcopy() function from the copy module, and you’re wondering if you can do the same with tuples. In this case, you’re looking for a new tuple that contains copies of the contained elements. Does that work with tuples? Take a look at the following example:
+
+>>> from copy import deepcopy
+
+>>> student_info = ("Linda", 18, ["Math", "Physics", "History"])
+>>> student_profile = deepcopy(student_info)
+
+>>> id(student_info) == id(student_profile)
+False
+>>> id(student_info[0]) == id(student_profile[0])
+True
+>>> id(student_info[1]) == id(student_profile[1])
+True
+>>> id(student_info[2]) == id(student_profile[2])
+False
+In this example, you use deepcopy() to create a copy of your original tuple, student_info. Note that both variables now point to different tuple objects with different identities. However, the items at the same index in both tuples hold references to the same objects.
+
+Now go ahead and change the subject again:
+
+>>> student_profile[2][2] = "Computer science"
+>>> student_profile
+('Linda', 18, ['Math', 'Physics', 'Computer science'])
+>>> student_info
+('Linda', 18, ['Math', 'Physics', 'History'])
+This time, changes to the mutable object in student_profile don’t affect the original data in student_info.
+
+In summary, shallow copies of tuples don’t create copies but aliases. Deep copies create new tuple objects with references to the same items. If the deep-copied tuple contains mutable objects, then Python creates a new copy of these objects so that mutations to them in the copy won’t affect the original data.
+
+
+Remove ads
+Concatenating and Repeating Tuples
+Like lists and strings, tuples also support concatenation and repetition. You can use the plus operator (+) to concatenate tuples together and the star operator (*) to repeat the content of an existing tuple.
+
+In the following sections, you’ll learn how these two operations work on Python tuples and how to use them in your code.
+
+Concatenating Tuples Together
+Concatenation consists of joining two things together. To concatenate two tuples in Python, you can use the plus operator (+). In this context, this operator is known as the concatenation operator.
+
+Here’s how it works:
+
+>>> personal_info = ("John", 35)
+>>> professional_info = ("Computer science", ("Python", "Django", "Flask"))
+
+>>> profile = personal_info + professional_info
+>>> profile
+('John', 35, 'Computer science', ('Python', 'Django', 'Flask'))
+In this example, you combine two tuples containing personal and professional information to build an employee’s profile. Note that the concatenation operator creates a new tuple object every time.
+
+Note: You can only concatenate a tuple with another tuple. If you try to concatenate a tuple with a list, then you’ll get an exception:
+
+>>> (0, 1, 2, 3, 4, 5) + [6, 7, 8, 9]
+Traceback (most recent call last):
+    ...
+TypeError: can only concatenate tuple (not "list") to tuple
+Python’s concatenation operator raises a TypeError exception when you try to concatenate a tuple with a different sequence data type, such as a list.
+
+The concatenation operator has an augmented variation, which uses the += operator. Here’s how this operator works:
+
+>>> profile = ("John", 35)
+>>> id(profile)
+4420700928
+
+>>> profile += ("Computer science", ("Python", "Django", "Flask"))
+>>> id(profile)
+4406635200
+
+>>> profile
+('John', 35, 'Computer science', ('Python', 'Django', 'Flask'))
+The augmented concatenation operator works on an existing tuple, like profile in this example. It takes a second tuple and creates a new one containing all the items from the two original tuples. The augmented concatenation operator is a shortcut to an assignment like x = x + y, where x and y are tuples.
+
+Because tuples are immutable, the augmented concatenation operator creates a new tuple every time. That’s why the identity of profile changes after running the concatenation.
+
+Repeating the Content of a Tuple
+Repetition is all about cloning the content of a given container a specific number of times. Tuples support this feature with the repetition operator (*), which takes two operands:
+
+The tuple whose content you want to repeat
+The number of times that you need to repeat the content
+To illustrate how repetition works with tuples, consider the following example:
+
+>>> numbers = (1, 2, 3)
+
+>>> numbers * 3
+(1, 2, 3, 1, 2, 3, 1, 2, 3)
+
+>>> 4 * numbers
+(1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3)
+Here, you first repeat the content of numbers three times and get a new tuple as a result. Then you repeat the content of numbers four times. Note that the order of the operands doesn’t affect the repetition result.
+
+The repetition operator also has an augmented variation that you’ll call the augmented repetition operator. This variation is represented by the *= operator. Here’s how it works:
+
+>>> numbers = (1, 2, 3)
+>>> id(numbers)
+4407400448
+
+>>> numbers *= 3
+>>> numbers
+(1, 2, 3, 1, 2, 3, 1, 2, 3)
+>>> id(numbers)
+4407458624
+In the highlighted line, the *= operator takes the current content of numbers, repeats it three times, and assigns it back to the numbers variable. Note that this operator always creates a new tuple object because tuples are immutable. You can confirm this fact by checking the identity of numbers before and after the repetition.
+
+
+Remove ads
+Reversing and Sorting Tuples
+In Python, you’ll have the built-in reversed() and sorted() functions that you can use when you need to reverse and sort tuples. You can also create reversed tuples using the slicing operator with a step of -1. In the following sections, you’ll learn how to reverse and sort tuples using these tools.
+
+Reversing a Tuple With reversed()
+The built-in reversed() function takes a sequence as an argument and returns an iterator that yields the values from the input sequence in reverse order. Tuples support this function:
+
+>>> days = (
+...     "Monday",
+...     "Tuesday",
+...     "Wednesday",
+...     "Thursday",
+...     "Friday",
+...     "Saturday",
+...     "Sunday",
+... )
+
+>>> reversed(days)
+<reversed object at 0x107032b90>
+
+>>> tuple(reversed(days))
+(
+    'Sunday',
+    'Saturday',
+    'Friday',
+    'Thursday',
+    'Wednesday',
+    'Tuesday',
+    'Monday'
+)
+When you call reversed() with a tuple as an argument, you get an iterator object that yields items in reverse order. So, in this example, you create a reversed tuple out of the days of the week. Because reversed() returns an iterator, you need to use the tuple() constructor to consume the iterator and create a new tuple out of it.
+
+Reversing a Tuple With the Slicing Operator
+You can also create a new reversed tuple by slicing an existing one with a step of -1. The following code shows how to do it:
+
+>>> reversed_days = days[::-1]
+
+>>> reversed_days
+(
+    'Sunday',
+    'Saturday',
+    'Friday',
+    'Thursday',
+    'Wednesday',
+    'Tuesday',
+    'Monday'
+)
+
+>>> id(days) == id(reversed_days)
+False
+The [::-1] variation of the slicing operator does the magic in this code example. It creates a copy of the original tuple with the items in reverse order. But how does it work?
+
+When the third index (step) in a slicing operation is a positive number, the slicing extracts the items from left to right. In contrast, when step is a negative number, such as -1, the slicing extracts the items from right to left. That’s why this variation of the slicing operator allows you to get a reversed copy of an existing tuple.
+
+Sorting a Tuple With sorted()
+Sorting a tuple may be a requirement in your code. In this case, you can use the built-in sorted() function, which takes an iterable of values as an argument and returns a list of sorted values:
+
+>>> numbers = (2, 9, 5, 1, 6)
+
+>>> sorted(numbers)
+[1, 2, 5, 6, 9]
+When you pass a tuple to sorted(), you get a list of sorted values as a result. In this example, you use a tuple of numbers and sort them using sorted().
+
+Note: It’s important to recognize that sorted() returns a list rather than an iterator. This behavior differs from reversed(), which returns an iterator instead of a list.
+
+When it comes to sorting tuples, you need to consider that they typically contain heterogeneous data, in which case sorting may not make sense. A typical example of a tuple use case is a database record. In this scenario, you can find strings, numbers, dates, and many other data types.
+
+When you’re working with tuples containing heterogeneous data, then using sorted() won’t be an option:
+
+>>> employee = ("John Doe", 35, "Python Developer")
+
+>>> sorted(employee)
+Traceback (most recent call last):
+    ...
+TypeError: '<' not supported between instances of 'int' and 'str'
+In this example, sorted() raises an exception because it can’t compare strings and integer numbers using the less than operator (<).
+
+By default, the sorted() function sorts items in ascending order. If you need to sort the items in descending order, then you can use the reverse keyword-only argument. If you set reverse to True, then you get the data in descending order:
+
+>>> numbers = (2, 9, 5, 1, 6)
+
+>>> sorted(numbers, reverse=True)
+[9, 6, 5, 2, 1]
+When you set the reverse argument to True, you tell sorted() to return a list of items sorted in reverse order.
+
+The sorted() function accepts another keyword-only argument called key. This argument allows you to specify a one-argument function that sorted() will use to extract a comparison key from each item in the input iterable.
+
+The key argument is quite useful in those situations where the tuple that you need to sort holds other container types, such as other tuples. The example below shows how to sort a tuple of tuples by the second item of each nested tuple:
+
+>>> fruits = (("apple", 0.40), ("banana", 0.25), ("orange", 0.35))
+
+>>> sorted(fruits, key=lambda fruit: fruit[1])
+[('banana', 0.25), ('orange', 0.35), ('apple', 0.4)]
+In this example, you have a tuple containing two-item tuples. The first item is the name of a fruit, and the second item is the corresponding price. You sort the nested tuples by price. To do this, you use a lambda function as the key argument to sorted(). This lambda takes a fruit as an argument and returns its price, which is the value at index 1.
+
+In practice, the key argument to sorted() is quite useful because it allows you to fine-tune the sorting process by changing the sorting criteria according to your specific needs.
+
+
+Remove ads
+Traversing Tuples in Python
+Sometimes, you’ll need to loop over each value in a tuple. Python provides a few tools that allow you to do this. The most popular are for loops, comprehensions, and generator expressions. However, you can also use some of Python’s functional programming tools that implement an implicit loop, such as the map() and filter() functions.
+
+In the following sections, you’ll learn how to traverse tuples using these tools. To kick things off, you’ll start with for loops.
+
+Using a for Loop to Iterate Over a Tuple
+To illustrate how to iterate over a tuple using a Python for loop, say that you have a tuple of tuples. Each nested tuple contains a month of the year and the income of a company during that month. Now say that you want to know the year’s income. You can do something like the following:
+
+>>> monthly_incomes = (
+...     ("January", 5000),
+...     ("February", 5500),
+...     ("March", 6000),
+...     ("April", 5800),
+...     ("May", 6200),
+...     ("June", 7000),
+...     ("July", 7500),
+...     ("August", 7300),
+...     ("September", 6800),
+...     ("October", 6500),
+...     ("November", 6000),
+...     ("December", 5500)
+... )
+
+>>> total_income = 0
+>>> for income in monthly_incomes:
+...     total_income += income[1]
+...
+
+>>> total_income
+75100
+To use a for loop with a tuple, you just have to provide a suitable loop variable and then place the tuple after the in keyword. In this example, you loop over monthly_incomes. Inside the loop, you use the accumulator variable, total_incomes, to compute the year’s income using the augmented addition operator.
+
+You can also use tuple unpacking in the header of a for loop. For example, say that you want to create a short report that computes the income per quarter. In this case, you can do something like this:
+
+>>> quarter_income = 0
+
+>>> for index, (month, income) in enumerate(monthly_incomes, start=1):
+...     print(f"{month:>10}: {income}")
+...     quarter_income += income
+...     if index % 3 == 0:
+...         print("-" * 20)
+...         print(f"{'Quarter':>10}: {quarter_income}", end="\n\n")
+...         quarter_income = 0
+...
+   January: 5000
+  February: 5500
+     March: 6000
+--------------------
+   Quarter: 16500
+
+     April: 5800
+       May: 6200
+      June: 7000
+--------------------
+   Quarter: 19000
+
+      July: 7500
+    August: 7300
+ September: 6800
+--------------------
+   Quarter: 21600
+
+   October: 6500
+  November: 6000
+  December: 5500
+--------------------
+   Quarter: 18000
+Wow! There’s a lot happening in the loop’s header. It goes over the items in monthly_incomes. The built-in enumerate() function allows you to enumerate your months starting from 1 up to 12. In this example, enumerate() yields nested tuples of the form (index, (month, income)). That’s why the loop variables reflect this pattern.
+
+Note: For a deep dive into using the built-in enumerate() function, check out Python enumerate(): Simplify Loops That Need Counters.
+
+Then, you compute the quarter’s income using the accumulator variable, quarter_income. If the current index is divisible by 3, then you print the quarter’s income and reset the accumulator to start the computation for the next new quarter. The code’s output shows a report with information about each month and the summary of every quarter. Isn’t that cool?
+
+Using a Comprehension or a Generator Expression to Traverse Tuples
+Comprehensions and generator expressions provide another quick way to iterate through your tuples. For example, say that you have a tuple of numbers as strings and need to create a new tuple of numbers out of your original data.
+
+In this situation, you can use a list comprehension to iterate over the tuple while converting each string to a number. Then you can use the tuple() constructor to get your new tuple:
+
+>>> numbers = ("2", "9", "5", "1", "6")
+
+>>> tuple([int(number) for number in numbers])
+(2, 9, 5, 1, 6)
+In this example, the comprehension goes through numbers and converts every string into an integer number using int(). Then, you use the resulting list directly as an argument to the tuple() constructor, which gives you a new tuple object.
+
+You can also make this example more efficient and concise by using a generator expression instead of a comprehension. To do that, you only need to remove the square brackets that delimit the comprehension:
+
+>>> tuple(int(number) for number in numbers)
+(2, 9, 5, 1, 6)
+This updated version of your code looks cleaner, and it’s more efficient regarding memory consumption. You turned the comprehension into a generator expression that yields converted values on demand. The tuple() constructor consumes the iterator and builds a new tuple out of the resulting data.
+
+
+Remove ads
+Exploring Other Features of Tuples
+Python’s tuple is a pretty lightweight data type with limited functionality. Tuples are immutable, so they don’t need methods to add, update, or remove items. In consequence, they have only two methods as part of their public API: .count() and .index().
+
+With .count(), you can count the number of occurrences of a given item in a tuple. The method allows you to check how many times a given item is present in the target tuple:
+
+>>> fruits = (
+...     "apple",
+...     "banana",
+...     "orange",
+...     "apple",
+...     "apple",
+...     "kiwi",
+...     "banana"
+... )
+
+>>> fruits.count("apple")
+3
+>>> fruits.count("banana")
+2
+>>> fruits.count("mango")
+0
+The .count() method takes a potential item as an argument, traverses the underlying tuple, and finds out how many times the target item is present. If the item isn’t present in the tuple, then .count() returns 0.
+
+Because most tuple use cases imply storing items of different types, such as those in a record of a database, the .count() method may have limited practical applications. You’ll probably find .count() more useful when you’re working with list objects, where the items are often of the same type and represent homogeneous and related values.
+
+On the other hand, the .index() method allows you to locate the first occurrence of an item in an existing tuple. If the target item is in the tuple, then the method returns its index. Otherwise, the tuple raises a ValueError exception:
+
+>>> fruits.index("apple")
+0
+
+>>> fruits.index("mango")
+Traceback (most recent call last):
+    ...
+ValueError: tuple.index(x): x not in tuple
+In the first call to .index(), you get the index of the first occurrence of "apple" in the underlying tuple. In the second call, because "mango" isn’t present in fruits, you get a ValueError with a self-explanatory message.
+
+Finding Items in a Tuple
+If you need to quickly determine whether a value is present in a tuple, then you can use the in or not in operators, which will run a membership test on your target tuple.
+
+Note: To learn more about the in and not in operators and how to perform membership tests, check out Python’s “in” and “not in” Operators: Check for Membership. These operators can also be useful when you need to check if a Python string contains a substring.
+
+As its name suggests, a membership test allows you to determine whether an object is a member of a collection of values. The general syntax for membership tests on a tuple looks something like this:
+
+item in tuple_object
+
+item not in tuple_object
+The first expression allows you to determine whether item is in tuple_object. The second expression works in the opposite way, allowing you to check if item is not in list_object.
+
+Here’s how membership tests work in practice:
+
+>>> skills = ("Python", "Django", "Flask", "CSS")
+
+>>> "Flask" in skills
+True
+>>> "Flask" not in skills
+False
+
+>>> "pandas" in skills
+False
+>>> "pandas" not in skills
+True
+In this example, you have a tuple of skills, and you use in and not in to determine whether a given skill is in the tuple. If the target skill is present in the underlying tuple, then you get True with in and False with not in. In contrast, if the target skill isn’t in the tuple, then you get False with in and True with not in.
+
+For tuples and lists, the membership operators use a search algorithm that iterates over the items in the underlying collection. Therefore, as your iterable gets longer, the search time increases in direct proportion. Using Big O notation, you’d say that membership operations on tuples have a time complexity of O(n).
+
+If your code runs a lot of membership tests on tuples, then you may consider opting for sets if possible. Python implements sets as hash tables, so lookup operations on sets have a time complexity of O(1), which makes them more efficient than tuples and lists in the context of membership tests.
+
+
+Remove ads
+Getting the Length of a Tuple
+While working with tuples, you may need to know the number of items in a given tuple. This number is commonly known as the tuple’s length and can be pretty useful. To determine the length of a tuple, you can use the built-in len() function:
+
+>>> employee = ("John Doe", "Python Developer", "Remote", "Canada")
+
+>>> len(employee)
+4
+In this example, you use len() to determine the number of items in a tuple. Internally, tuples keep track of their length, so calling len() with a tuple as an argument is a fast operation with a time complexity of O(1).
+
+Comparing Tuples
+You may need to compare tuples at some point in your coding journey. Fortunately, tuples support the standard comparison operators.
+
+When you compare two tuples, Python uses lexicographical ordering. It compares the first two items of each involved tuple. If they’re different, then this difference determines the comparison result. If they’re equal, then Python compares the next two items, and so on, until either tuple is exhausted.
+
+Here are some examples that compare tuples of integer values:
+
+>>> (2, 3) == (2, 3)
+True
+
+>>> (5, 6, 7) < (7, 5, 6)
+True
+
+>>> (4, 3, 2) <= (4, 3, 2)
+True
+In these examples, you compare tuples of numbers using the standard comparison operators. Python runs an item-by-item comparison. So, for example, in the first expression above, Python compares the 2 in the left tuple and the 2 in the right one. They’re equal, and Python continues by comparing 3 and 3 to conclude that both tuples are equal.
+
+In the second expression, Python compares 5 and 7. They’re different. Because 5 is less than 7, this individual comparison determines the result of the entire expression, and you get True as a result.
+
+In the third expression, both tuples contain the same values. Because equality is included in the comparison, you get True as a result.
+
+You can also compare tuples of different lengths:
+
+>>> (5, 6, 7) < (8,)
+True
+
+>>> (5, 6, 7) < (5,)
+False
+
+>>> (5, 6, 7) == (5, 6)
+False
+In the first expression, you get True because 5 is less than 8. This comparison determines the final result.
+
+In the second example, Python compares 5 and 5. They’re equal. So, Python tries to continue the comparison. Because there are no more items in the right-hand tuple, Python concludes that the left-hand tuple is greater and, therefore, the comparison is False.
+
+In the process of comparing sequences, Python applies specific rules depending on the type of the compared items. This behavior is pretty relevant for tuples because they typically hold heterogeneous objects.
+
+Consider the following example:
+
+>>> ("Python", 42, 3.14, (1, 2)) == ("Python", 42, 3.14, (1, 2))
+True
+
+>>> ("Python", 42, 3.14, (1, 2)) == ("Python", "42", 3.14, (1, 2))
+False
+
+>>> ("Python", 42, 3.14, (1, 2)) > ("Python", "42", 3.14, (1, 2))
+Traceback (most recent call last):
+    ...
+TypeError: '>' not supported between instances of 'int' and 'str'
+The tuples in the first comparison contain the same data. The values are a string, an integer, a floating-point number, and a tuple. When comparing item by item, Python uses its internal rules for comparing strings, integers, floating-point numbers, and tuples, respectively.
+
+Note that in the second example, the second element in the right-hand tuple is a string rather than a number. Numbers and strings aren’t equal, so the comparison is false. This comparison only works because of the equality operator.
+
+If you use most other comparison operators, such as < or >, then the comparison raises a TypeError exception, as you can conclude from the final example.
+
+Common Gotchas of Python Tuples
+If you’re new to Python and are just starting out with tuples, then you should know about a couple of gotchas that can cause subtle issues in your code. Arguably, the most common gotcha with tuples is to forget the trailing comma when defining one-item tuples:
+
+>>> numbers = (42)
+
+>>> numbers.index(42)
+Traceback (most recent call last):
+    ...
+AttributeError: 'int' object has no attribute 'index'
+
+>>> type(numbers)
+<class 'int'>
+In this example, you attempt to create a one-item tuple using a pair of parentheses. Later in the code, when you call the .index() method, you get an error telling you that integer objects don’t have this method.
+
+What just happened? When you define a tuple, the parentheses are superfluous. They help you enhance readability but nothing else. The commas are what really defines a tuple. To create a one-item tuple, you need to include a trailing comma after the item:
+
+>>> numbers = (42,)
+
+>>> numbers.index(42)
+0
+
+>>> type(numbers)
+<class 'tuple'>
+The trailing comma after 42 creates the actual tuple. Now the code works correctly, and you can call .index() as needed.
+
+Another gotcha that can bite you when you’re working with tuples is hashability, which is the possibility of using a hash function to calculate a unique hash code out of a given value or data structure. In Python, it’s common to hear people say that because tuples are immutable, you can use them as keys in a dictionary.
+
+However, this assumption isn’t always true. When you store mutable objects in a tuple, that tuple won’t be hashable and won’t work as a dictionary key. You already saw an example of this issue in the Exploring Tuple Immutability section.
+
+Here’s another example. This time, you create a dictionary of cities. The keys include the city name and its geographical coordinates. The values hold the population of each city:
+
+>>> cities = {
+...     ("Vancouver", [49.2827, -123.1207]): 631_486,
+...     ("Denver", [39.7392, -104.9903]): 716_492,
+...     ("Oslo", [59.9139, 10.7522]): 693_491,
+...     ("Berlin", [52.5200, 13.4050]): 3_769_495,
+...     ("Vienna", [48.2082, 16.3738]): 1_900_000,
+...     ("Warsaw", [52.2297, 21.0122]): 1_791_000,
+...     ("Belgrade", [44.7866, 20.4489]): 1_395_000,
+... }
+Traceback (most recent call last):
+    ...
+TypeError: unhashable type: 'list'
+In this example, you use tuples as the keys of your cities dictionary. Tuples are immutable, but this fact doesn’t guarantee that all tuples can work as dictionary keys. In this specific case, your tuples contain lists, which are mutable. Therefore, your code fails with a TypeError exception.
+
+Using Alternatives to the Built-in tuple Type
+Up to this point, you’ve learned a lot about Python tuples. You now know that they’re immutable sequences that can contain heterogeneous data. Even though tuples have a few cool features, their functionality is pretty limited.
+
+For example, you can only access tuple items using numeric indices. This can be error-prone and annoying because it forces you to remember the right index every time.
+
+Consider the following example:
+
+>>> person = ("John", 35, "Python Developer")
+
+>>> name = person[0]
+>>> name
+'John'
+
+>>> age = person[2]
+>>> age
+'Python Developer'
+In this example, you have a tuple that contains information about a person. Later in your code, you access the first item, which is the person’s name. However, the index to access the person’s age in the last expression is wrong, and the age variable ends up holding the incorrect data.
+
+Fortunately, Python has other classes that can emulate a tuple but offer a more readable and explicit interface that doesn’t rely on numeric indices. In the following sections, you’ll learn the basics of these classes. To kick things off, you’ll start with traditional named tuples.
+
+Tuples With Named Fields: collections.namedtuple
+A named tuple is a tuple subclass that incorporates named fields into its public interface. These named fields allow you to access the items in the underlying tuple using dot notation and the appropriate field name, which is more readable and explicit than using an index.
+
+Note: To learn more about named tuples in Python, check out Write Pythonic and Clean Code With namedtuple.
+
+To illustrate how this idea of named fields works, say that you want to store the person data from the previous section in an immutable sequence—like a tuple—that allows you to access its items using descriptive names. For example, you’d like to do something like person.name to access the name instead of doing person[0], which is much less readable and explicit.
+
+In that situation, you can use the namedtuple() factory function from the collections module:
+
+>>> from collections import namedtuple
+
+>>> Person = namedtuple("Person", "name age position")
+In this code snippet, you first import the namedtuple() factory function. Next up, you create the Person class by calling the function with two arguments. The first argument is the class name, while the second argument is a string that provides the field names separated by whitespaces. In this specific example, your tuple-like class will have three fields: name, age, and position.
+
+Here’s how you can use this tuple-like class in your code:
+
+>>> person = Person("John", 35, "Python Developer")
+>>> person.name
+'John'
+>>> person.age
+35
+>>> person.position
+'Python Developer'
+
+>>> person[0]
+'John'
+In this example, you instantiate Person using concrete values for all three fields. Note how you can access each field by using dot notation and the field name. Because Person is a subclass of tuple, you can also access its items by index, as you’d do with a regular tuple.
+
+Another important aspect to take into account is that the instances of a named tuple are also immutable like their superclass, tuple:
+
+>>> person.name = "John Doe"
+Traceback (most recent call last):
+    ...
+AttributeError: can't set attribute
+
+>>> person[0] = "John Doe"
+Traceback (most recent call last):
+    ...
+TypeError: 'Person' object does not support item assignment
+There’s no way to change the content of a named tuple in place. Note that both assignments fail. If you use dot notation for attribute assignment, then you get an AttributeError because the fields are immutable. If you try to use an index assignment, then you get a TyperError exception.
+
+A cool use case of named tuples is to return multiple values from a function. Consider the following function, which wraps the return value of divmod() in a named tuple:
+
+>>> from collections import namedtuple
+
+>>> def custom_divmod(a, b):
+...     DivMod = namedtuple("DivMod", "quotient remainder")
+...     return DivMod(*divmod(a, b))
+...
+
+>>> custom_divmod(8, 4)
+DivMod(quotient=2, remainder=0)
+Your function returns a tuple of values just like the original divmod() function does. However, the returned tuple object is more readable and allows you to quickly identify the meaning of each value in the result.
+
+Tuples With Named Fields and Type Hints: typing.NamedTuple
+Python 3.5 introduced a module called typing to support type hints. This module exports the NamedTuple class, which is a typed version of namedtuple. With NamedTuple, you can create tuple subclasses with type hints and default values.
+
+To illustrate how NamedTuple can be helpful, say that you have the following CSV file containing data from your company’s employees:
+
+name,age,position
+"Fatima",28,"Technical Lead"
+"Joe",32,"Senior Web Developer"
+"Lara",40,"Project Manager"
+"Miguel",25,"Data Analyst"
+"Jane",40,"Senior Python Developer"
+You want to load the content of this file and extract every record or line to a tuple-like object. In this situation, you can do something like the following:
+
+>>> from typing import NamedTuple
+
+>>> class Employee(NamedTuple):
+...     name: str
+...     age: int
+...     position: str = "Python Developer"
+...
+In this code snippet, you import the NamedTuple class from the typing module. This class will allow you to create the employee records.
+
+Then you define a NamedTuple subclass called Employee to hold the data of every employee. Note that in this class, you provide the named fields as class attributes with their corresponding type hint. In the case of the position field, you also provide a default value, "Python Developer". This default can be handy in many situations.
+
+Now you’re ready to load the data from your CSV file:
+
+>>> import csv
+
+>>> with open("employees.csv", mode="r") as csv_file:
+...     reader = csv.reader(csv_file)
+...     next(reader)  # Skip headers
+...     employees = []
+...     for name, age, position in reader:
+...         employees.append(Employee(name, int(age), position))
+...
+In this code, you first import the csv module to manipulate the CSV file. In the with statement, you open employees.csv for reading. Then, you use reader() to load the file content. The call to the built-in next() function skips the file’s first line, which contains the headers.
+
+The for loop iterates over the rest of the rows in the CSV file and appends them to a list of employees. To create a record for each employee, you use the Employee class with the data for each field as arguments. Note how you use the built-in int() function to convert the age to an integer value and make it type-consistent.
+
+That’s it! Now you have a list of employee records from your original data in the CSV file. You can use this list in your code:
+
+>>> employees
+[
+    Employee(name='Fatima', age='28', position='Technical Lead'),
+    Employee(name='Joe', age='32', position='Senior Web Developer'),
+    Employee(name='Lara', age='40', position='Project Manager'),
+    Employee(name='Miguel', age='25', position='Data Analyst'),
+    Employee(name='Jane', age='40', position='Senior Python Developer')
+]
+
+>>> fatima = employees[0]
+
+>>> fatima.name
+'Fatima'
+>>> fatima.age
+'28'
+>>> fatima.position
+'Technical Lead'
+This way, you keep your employees’ data in an immutable tuple-like object that has the additional benefit of providing named fields to access the data in an explicit and readable manner.
+
+Data Classes: dataclasses.dataclass
+Python 3.7 added data classes to the standard library. According to PEP 557, they’re similar to named tuples but mutable by default. You can use data classes to replace your named tuples with a more powerful tool that has many additional features, including the possibility of having type hints, default attribute values, methods, and more. They also have the capability of becoming immutable.
+
+Note: To learn more about data classes and what you can do with them, check out Data Classes in Python 3.7+ (Guide).
+
+You can use the @dataclass decorator from dataclasses to create a data class. Here’s a data class–based version of your Employee class:
+
+>>> from dataclasses import dataclass
+
+>>> @dataclass
+... class Employee:
+...     name: str
+...     age: int
+...     position: str = "Python Developer"
+...
+This class is quite similar to the NamedTuple version. Instead of inheriting from another class, you use the @dataclass decorator, which you need to import from the dataclasses module. The rest of the code is the same.
+
+Additionally, this new version of Employee works the same as its old version based on NamedTuple:
+
+>>> import csv
+
+>>> with open("employees.csv", mode="r") as csv_file:
+...     reader = csv.reader(csv_file)
+...     next(reader)  # Skip headers
+...     employees = []
+...     for name, age, position in reader:
+...         employees.append(Employee(name, int(age), position))
+...
+
+>>> employees
+[
+    Employee(name='Fatima', age='28', position='Technical Lead'),
+    Employee(name='Joe', age='32', position='Senior Web Developer'),
+    Employee(name='Lara', age='40', position='Project Manager'),
+    Employee(name='Miguel', age='25', position='Data Analyst'),
+    Employee(name='Jane', age='40', position='Senior Python Developer')
+]
+
+>>> fatima = employees[0]
+
+>>> fatima.name
+'Fatima'
+>>> fatima.age
+'28'
+>>> fatima.position
+'Technical Lead'
+Note that you’ve used the same code to process the data class–based version of your Employee class.
+
+However, there’s a detail that you must keep in mind. Now your records are mutable by default, which means that you can update an employee’s data:
+
+>>> joe = employees[1]
+>>> joe.name
+'Joe'
+
+>>> joe.name = "Joe Smith"
+>>> joe.name
+'Joe Smith'
+In this example, you update Joe’s name by assigning a new value to its .name attribute. If you’d like to avoid this behavior, then you can pass the frozen argument to the @dataclass decorator on the definition of Employee:
+
+>>> @dataclass(frozen=True)
+... class Employee:
+...     name: str
+...     age: int
+...     position: str = "Python Developer"
+...
+Setting frozen to True makes your data class immutable. From this point on, you won’t be able to modify its data fields. To confirm this, run the code to build the employees list again and try to update Joe’s name:
+
+>>> with open("employees.csv", mode="r") as csv_file:
+...     reader = csv.reader(csv_file)
+...     next(reader)  # Skip headers
+...     employees = []
+...     for name, age, position in reader:
+...         employees.append(Employee(name, int(age), position))
+...
+
+>>> joe = employees[1]
+>>> joe.name
+'Joe'
+>>> joe.name = "Joe García"
+Traceback (most recent call last):
+    ...
+dataclasses.FrozenInstanceError: cannot assign to field 'name'
+Now, when you try to modify the value of one of the instance attributes of your Employee class, you get a FrozenInstanceError error. This is equivalent to an immutable data type like a tuple.
+
+Deciding Whether to Use Tuples
+As you’ve learned throughout this tutorial, tuples are quite basic immutable sequences with a reduced set of features. However, they’re suitable for those use cases where you need to store heterogeneous data in a sequence that doesn’t change at all or doesn’t change frequently.
+
+Database records are a good example of a typical use case of tuples. In this scenario, a tuple will provide a good representation of records or rows, where you have many fields containing heterogeneous values that shouldn’t change frequently.
+
+In contrast, a list will be the right data type to represent database fields or columns because lists typically store homogeneous data that can change frequently. This will allow you to add or remove rows in your database and to update their content.
+
+In general, you should use tuples when you need to:
+
+Ensure data integrity: Tuples are immutable, meaning that you can’t modify their elements after creation. This immutability guarantees data stability, ensuring that the values in the tuple remain unchanged.
+Reduce memory consumption: Tuples have less memory overhead compared to lists since they allocate a fixed amount of memory. This is particularly advantageous when working with large collections of data or in memory-constrained environments.
+Improve performance: Tuples are generally more efficient than lists in terms of creation, iteration, and element access. This can result in improved performance, especially when working with large datasets.
+If you’re in one of these scenarios, then favor using tuples over other similar sequences like lists, for example.
+
+Some more concrete use cases of tuples include the following:
+
+Associating two or more values (pairs, trios, and so on)
+Representing database records
+Providing multi-value keys in dictionaries
+Here are a few quick examples of these use cases:
+
+>>> color = (0, 2, 255)
+
+>>> car = ("Toyota", "Camry", 2020, "Blue")
+
+>>> capital_cities = {
+...    ("Ottawa", (45.4215, -75.6972)): "Canada",
+...    ("Washington D.C.", (38.9072, -77.0369)): "USA",
+...    ("Berlin", (52.5200, 13.4050)): "Germany",
+...    ("Belgrade", (44.7866, 20.4489)): "Serbia",
+...    ("Vienna", (48.2082, 16.3738)): "Austria",
+...    ("Oslo", (59.9139, 10.7522)): "Norway",
+...    ("Warsaw", (52.2297, 21.0122)): "Poland"
+... }
+The first tuple represents a color using the RGB color model. This is an example of related values that you group together in a trio that may remain unchanged over time. The second tuple holds a car’s information, which you may have retrieved from a database.
+
+Finally, the capital_cities dictionary has tuples as keys. Each key contains the capital city of a given country and the corresponding geographical coordinates.
+
+
+You’ve delved into the core features and functionalities of Python’s tuples. You now know that tuples are immutable sequences that provide a reliable container for data that’s likely to remain unmodified during your code’s lifetime.
+
+You’ve also learned about various aspects of tuple usage, including their most common use cases. Tuples are a great tool for any Python developer, and you’ll find them in most codebases out there.
+
+In this tutorial, you’ve learned how to:
+
+Create tuples using different approaches in Python
+Access one or more items in a tuple using indexing and slicing
+Unpack, return, copy, and concatenate tuples
+Reverse, sort, and traverse tuples using loops and other tools
+Explore other features and common gotchas of tuples
