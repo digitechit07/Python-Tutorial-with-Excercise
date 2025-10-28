@@ -1,0 +1,204 @@
+sets in Python to store a collection of data in a single variable.
+
+Each of the built-in data structures in Python like lists, dictionaries, and tuples have their distinguishing features.
+
+Here are some of the features of sets in Python:
+
+Duplicate items are not allowed. If items appear multiple times, only one will be recognized in the set.
+The items in a set are unordered. The order of the set changes every time it is used.
+The value of items in a set cannot be modified/changed once the set has been created.
+In this article, you'll learn how to create sets. You'll also learn how to access, add, and remove items in a set in Python.
+
+We'll conclude by talking about some of the use cases of sets in Python programming and mathematics.
+
+How to Create Sets in Python
+We use curly brackets to store the items in a set. Here's what a set looks like:
+
+nameSet = {"John", "Jane", "Doe"}
+
+print(nameSet)
+# {'Jane', 'Doe', 'John'}
+In the code above, we created a set called nameSet.
+
+You'll notice that when the set was printed out, the values appeared in a different order. This is one of the features of sets in Python I mentioned above.
+
+Here's another example with one duplicated item:
+
+nameSet = {"John", "Jane", "Doe", "Jane"}
+
+print(nameSet)
+# {'Jane', 'Doe', 'John'}
+The duplicate of "Jane" was ignored in the example above. This is because duplicate items are not allowed.
+
+How to Access Items in a Set in Python
+You can use a loop to access and print the items in a set. You cannot use the index of the items to access them since the order is always changing–- no item retains its index.
+
+Here's an example:
+
+nameSet = {"John", "Jane", "Doe"}
+
+for names in nameSet:
+    print(names)
+    # John
+    # Doe
+    # Jane
+We use a for loop to print the items in nameSet
+
+In the next section, you'll see how to add items to a set.
+
+How to Add Items to a Set in Python
+You can add an item to a set in Python by using the add() method with the new item to be added passed in as a parameter.
+
+Here's an example:
+
+nameSet = {"John", "Jane", "Doe"}
+
+nameSet.add("Ihechikara")
+
+print(nameSet)
+# {'John', 'Ihechikara', 'Doe', 'Jane'}
+We added a new item – "Ihechikara" – to the set: nameSet.add("Ihechikara").
+
+You can also add an item from another set or other data structures (lists, dictionaries, and tuples) to a set by using the update() method.
+
+Here's an example:
+
+nameSet = {"John", "Jane", "Doe"}
+
+nameSet2 = {"Jade", "Jay"}
+
+nameSet.update(nameSet2)
+
+print(nameSet)
+# {'Doe', 'Jay', 'Jane', 'Jade', 'John'}
+In order to add the names from nameSet2 to nameSet, we passed in nameSet2 as a parameter to the update() method: nameSet.update(nameSet2).
+
+How to Remove Items in a Set in Python
+There are different methods you can use to remove an item(s) in a set. Let's look at them now.
+
+How to Remove Items in a Set in Python Using the discard() Method
+You can use the discard() method to remove a specified item. Here's an example:
+
+nameSet = {"John", "Jane", "Doe"}
+
+nameSet.discard("John")
+
+print(nameSet)
+# {'Doe', 'Jane'}
+In the example above, "John" was passed as a parameter to the discard() method so it got removed from the set.
+
+How to Remove Items in a Set in Python Using the remove() Method
+The remove() method works the same way as the discard() method.
+
+nameSet = {"John", "Jane", "Doe"}
+
+nameSet.remove("Jane")
+
+print(nameSet)
+# {'John', 'Doe'}
+How to Empty a Set in Python Using the clear() Method
+To clear all the items in a set, we use the clear() method.
+
+Here's an example:
+
+nameSet = {"John", "Jane", "Doe"}
+
+nameSet.clear()
+
+print(nameSet)
+# set()
+When to Use Sets in Python
+In this section, we'll discuss two important use cases of sets in Python.
+
+We can use sets to remove duplicate items in other data structures.
+
+We can also perform some cool mathematical operations like getting the union, intersection, difference, and symmetric difference of two or more sets.
+
+How to Use Sets to Remove Duplicate Items in Other Data Structures
+We can use sets to get rid of duplicate items in other data structures like lists and tuples.
+
+This is useful when you are dealing with a very large data set that requires only the individual unit of items returned instead of the number of occurrences of the items.
+
+Here's an example:
+
+numberList = [2, 2, 4, 8, 9, 10, 8, 2, 5, 7, 3, 4, 7, 9]
+
+numberSet = set(numberList)
+
+print(numberSet)
+# {2, 3, 4, 5, 7, 8, 9, 10}
+In the code above, we create a list of numbers called numberList which had multiple occurrences of some of the numbers: [2, 2, 4, 8, 9, 10, 8, 2, 5, 7, 3, 4, 7, 9].
+
+Using the set() method, we converted the list numberList to a set: numberSet = set(numberList).
+
+When the new set was printed out, all the duplicates of the numbers were removed – we only got one occurrence of each number returned: {2, 3, 4, 5, 7, 8, 9, 10}.
+
+How to Perform Mathematical Operations Using Sets in Python
+Sets in Python are similar to sets in mathematics, and we can get various results based on the relationship that exists between sets.
+
+In this section, you'll see how to get the union, intersection, difference and symmetric difference between sets in Python.
+
+You can perform all the operations in this section using more than two sets. To keep it as simple as possible, we'll make use of just two sets for each example.
+
+How to Get the Union of Sets in Python
+The union of two sets is the set of all the individual items that exist in both sets. In the union, duplicates are ignored.
+
+Here's an example:
+
+firstSet = {2, 3, 4, 5}
+
+secondSet = {1, 3, 5, 7}
+
+print(firstSet | secondSet)
+# {1, 2, 3, 4, 5, 7}
+In the example above, we have two sets – firstSet = {2, 3, 4, 5} and secondSet = {1, 3, 5, 7}.
+
+Using the vertical bar operator (|), we were able to get the union of the two sets: firstSet | secondSet.
+
+The union of the sets is as follows: {1, 2, 3, 4, 5, 7}. You can see that the two sets have been combined to form one set without any duplicates.
+
+How to Get the Intersection of Sets in Python
+The intersection of two sets is the set of items that are common to both sets. In our case, it is the set of items that appears in both firstSet and secondSet.
+
+Here's an example:
+
+firstSet = {2, 3, 4, 5}
+
+secondSet = {1, 3, 5, 7}
+
+print(firstSet & secondSet)
+# {3, 5}
+In this example, we're using the & operator to get the intersection of firstSet and secondSet: firstSet & secondSet.
+
+We got {3, 5} returned because 3 and 5 appear in both sets.
+
+How to Get the Difference Between Sets in Python
+The difference between two sets is the set of all the items that exist in one set but not the other.
+
+Here's an example:
+
+firstSet = {2, 3, 4, 5}
+
+secondSet = {1, 3, 5, 7}
+
+print(firstSet - secondSet)
+# {2, 4}
+In the example above, we are getting a set of the items that exist in firstSet but not in secondSet.
+
+We used the - operator to achieve this: firstSet - secondSet.
+
+The result from the operation is 2 and 4.
+
+How to Get the Symmetric Difference of Sets in Python
+The symmetric difference of two sets is the set of all items that exist in either of the two sets but not in both.
+
+In the last section, we saw the result of items that exist in just one set but not the other. The symmetric difference is the result of items that exist in each set but not in both.
+
+firstSet = {2, 3, 4, 5}
+
+secondSet = {1, 3, 5, 7}
+
+print(firstSet ^ secondSet)
+# {1, 2, 4, 7}
+We used the ^ operator to get the symmetric difference of two sets: firstSet ^ secondSet.
+
