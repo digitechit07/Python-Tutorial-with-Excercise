@@ -1,0 +1,203 @@
+What Is An if Statement in Python?
+An if statement is also known as a conditional statement, and conditional statements are a staple of decision-making.
+
+A conditional statement takes a specific action based on a check or comparison.
+
+All in all, an if statement makes a decision based on a condition.
+
+The condition is a Boolean expression. A Boolean expression can only be one of two values – True or False.
+
+So, essentially, an if statement says: "Only run the following code once if and only if this condition evaluates to True. If it doesn’t, then don’t run this code at all. Just ignore it and skip it altogether ".
+
+How to Create an if Statement in Python - A Syntax Breakdown
+The general syntax for an if statement in Python is the following:
+
+if expression:
+   #run this code if expression evaluates to True
+   code statement(s)
+Let’s break it down:
+
+You start the if statement using the if keyword.
+You leave a space and then add a Boolean value. A Boolean value will be an expression that evaluates to True or False.
+You then add a colon, :.
+On a new line, add one level of indentation. Many code editors will do this automatically for you. For example, when using the Visual Studio Code editor with the Python extension, right after you write the colon from the previous step and hit Enter, it will automatically indent your code with the right level of indentation. This level of indentation is how Python knows that the code statements you will write are associated with the if statement.
+Lastly, write any lines of code statements. These lines will run if and only if the expression evaluates to True. If the expression evaluates to False they will not run.
+What Is An example Of An if Statement in Python?
+Next, let’s see an example of an if statement in action.
+
+I want to prompt the user to enter their favorite programming language and store their answer in a variable named language.
+
+language = input("Please enter your favorite programming language: ")
+Then, I will set a condition.
+
+If the user enters Python as their favorite language, then and only then, I want to print a message to the console saying that this is the correct answer.
+
+So, the condition will check whether the value stored in the variable language is equal to Python.
+
+For this, you use the equality operator( == ) to check if the value stored in the variable language is equal to the string Python.
+
+language = input("Please enter your favorite programming language: ")
+
+if language == "Python":
+    print("Correct! Of course it is Python!")
+I run my code, and when the prompt “Please enter your favorite programming language:” appears, I enter Python.
+
+I then get the following output:
+
+# output
+
+# Please enter your favorite programming language: Python
+# Correct! Of course it is Python!
+The condition (language == "Python") is True, so the code in the if statement executes.
+
+If I re-run my program and enter a different programming language, there will be no output because the condition will be False.
+
+The code inside the if statement will not run, and the if statement will be skipped entirely:
+
+#output 
+
+# Please enter your favorite programming language: Java
+At this point, it is also worth mentioning that you should make sure to indent the code inside theif statement. If you forget to indent that print statement, you will end up getting the following indentation error:
+
+language = input("Please enter your favorite programming language: ")
+
+if language == "Python":
+# Don't do this!
+print("Correct! Of course it is Python!")
+
+#output
+
+# print("Correct! Of course it is Python!")
+# ^
+# IndentationError: expected an indented block after 'if' statement on line 3
+What Is An if else Statement in Python?
+Writing if statements on their own, especially multiple of them, is not that helpful. It's also not considered best practice when the program grows larger and larger. This is why an if statement is usually accompanied by an else statement.
+
+The if else statement essentially says: "if this condition is True do the following thing, else do this thing instead".
+
+The code inside an else statement is the code you want to run if and only if the condition you set in your if statement evaluates to False.
+
+If the condition in your if statement evaluates to True the code inside the else statement will never run.
+
+The else keyword is the solution for when the if condition is False and the code inside the if block doesn't run. It provides an alternative.
+
+The general syntax for an if else statement in Python is the following:
+
+if condition:
+    #run this code if condition is True
+    code statement(s)
+else:
+    # if the condition above is False run this code
+    code statement(s)
+What Is An Example Of An if else Statement in Python?
+Let’s revisit the example from earlier on:
+
+language = input("Please enter your favorite programming language: ")
+
+if language == "Python":
+    print("Correct! Of course it is Python!")
+As you saw previously, when I enter the string Python, the code in the print() function runs because the condition evaluates to True.
+
+However, there is no alternative when a user enters something that is not equal to the string Python.
+
+This is where the else statement comes in handy and is added to the if statement:
+
+language = input("Please enter your favorite programming language: ")
+
+if language == "Python":
+    print("Correct! Of course it is Python!")
+else:
+    print("Hmm..Are you sure that it is not Python??")
+If the condition is False, the code in the if statement is skipped and ignored. Instead, the code in the else statement runs:
+
+# output
+
+# Please enter your favorite programming language: Java
+# Hmm..Are you sure that it is not Python??
+One thing to note at this point is the fact that you can’t write any extra code in between the if else statement:
+
+language = input("Please enter your favorite programming language: ")
+
+if language == "Python":
+    print("Correct! Of course it is Python!")
+# Don't do this!!
+print("Hello world")
+else:
+    print("Hmm..Are you sure that it is not Python??")
+
+# output
+# else:
+    ^^^^
+# SyntaxError: invalid syntax
+What Is An elif Statement in Python?
+elif means else if.
+
+When you want to set more conditions and not only have the if and else statements to choose from, you can introduce elif statements.
+
+If the if statement is False Python will move on to the elif statement and try to check the condition set in that block.
+
+You can also write multiple elif blocks, depending on the variety of options you want to have.
+
+An elif statement essentially means: "If this condition is True, do the following. If it isn't, try doing this instead. However, if none of the above is True and all else fails, finally do this."
+
+The general syntax for an elif statement is the following:
+
+if condition:
+    #if condition is True run this code
+    code statement(s)
+elif:
+    #if the above condition was False and this condition is True,
+   # run the code in this block
+    code statement(s)
+else:
+    #if the two above conditions are False run this code
+    code statement
+The code is evaluated in the order it is written, from top to bottom.
+
+When Python finds a condition that evaluates to True, it will run the code in that block and ignore the rest.
+
+So, if the code in the if block is True, none of the other blocks will run. They will be skipped and ignored.
+
+If the code in the if block is False, it will move to the elif block.
+
+If that is True, then the rest of the blocks are ignored.
+
+If it is False, Python will move to other elif blocks if there are any present.
+
+Finally, if all of the conditions are False, then and only then the code in the else block will run. The else block essentially means that "when all else fails, run this code instead".
+
+What Is An Example Of An elif Statement in Python?
+Let’s see an example of how the elif statement works.
+
+Let’s take the following example:
+
+age = int(input("Please enter your age: "))
+
+if age < 18:
+    print("You need to be over 18 years old to continue")
+elif age < 21:
+    print("You need to be over 21 years old")
+else:
+    print("You are over 18 and 21 so you can continue")
+If the if statement is True, the rest of the code is skipped:
+
+# output
+
+# Please enter your age: 14
+# You need to be over 18 years old to continue
+When the if statement is False, Python moves on to the elif block and checks that condition.If the elif statement is True, the rest of the code is skipped:
+
+If it is True, Python will run the code in the elif block and ignore the rest of the code:
+
+# output
+
+# Please enter your age: 19
+# You need to be over 21 years old
+If both of the previous conditions are all False, then the last resort is the else block:
+
+# output
+
+# Please enter your age: 45
+# You are over 18 and 21 so you can continue
+
+And there you have it! You now know how to write if, if else, and elif statements in Python.
