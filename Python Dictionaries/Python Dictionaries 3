@@ -1,0 +1,89 @@
+You might be surprised to know that there are actually 6 types of Python dictionaries in the standard library! There might be scenarios where you do not want to use the standard Python dictionary, dict. In this article, we’re talking about other 5 lesser-known dictionaries in Python.
+
+Press enter or click to view image in full size
+
+Photo by Pakata Goh on Unsplash
+Each of these types are made for specific requirements. Understanding these dictionary types lets Python developers to choose the right dictionary for their specific needs, enhancing coding efficiency and flexibility.
+
+What is a Python Dictionary
+In Python, a Dictionary(dict) is a built-in data structure, which is used to store collections of data in the form of key-value pairs. You might hear other names for Python dictionaries, like lookup tables, map, hashmaps, or associative arrays.
+
+Press enter or click to view image in full size
+
+Photo by Alex Chumak on Unsplash
+One of the most comprehensive examples for python dictionaries are phone books. You can use a phone book to quickly retrieve the information(value) associated with a given name(key). Python Dictionaries allow you to store and retrieve the data you want in the most efficient way; and that’s why Python dict is the most frequently used data type in this programming language.
+
+Types of Python Dictionaries
+Most of Python developers usually just use the standard dictionary(dict). The interesting thing is that Python comes in with a couple of more built-in dictionary data structures. Even though the regular Python Dictionary is enough in most cases, it would be beneficial for you to at least get to know the other dictionary types too, you know, in case they come in handy someday. Different types of Python Dictionaries are as follows:
+
+dict
+collections.defaultdict
+collections.OrderedDict
+collections.ChainMap
+collections.Counter
+collections.UserDict
+We’ll go through each type of Python dictionary one by one, explaining them by example.
+
+1. dict
+As I mentioned earlier, the most common type of dictionary in Python is the standard type. This type of Python dictionary can easily be used with curly braces {}. The standard Python dictionary comes in with a lot of built-in functions to make your life (and work) much easier.
+
+Press enter or click to view image in full size
+a code snippet, defining a Python dictionary and updating it’s keys.
+example of using standard Python dictionary
+Note that values in Python dictionaries can be of any type, but the keys must be unique and immutable. For an average case, it takes O(1) time complexity for lookup, insert, update, and delete operations in stndard Python dictionary.
+
+2. collections.defaultdict
+Another type of Python dictionary in Python is the defaultdict which can be imported from collections. Python defaultdictdictionary is used when you want to return a default value at the time of calling a non-existent key from the dictionary.
+
+Press enter or click to view image in full size
+a code snippet, defining a Python defaultdict dictionary of type int, and retrieving a non-existent key from it.
+example of using Python defaultdict
+Python developers usually use the get() method or just handle the KeyError exception while working with regular dictionaries. In this case, using the collections.defaultdict can make your intentions clearer.
+
+3. collections.OrderedDict
+collections.OrderedDict is a Python dictionary subclass which was introduced in Python 3.1. As you might guess from the name, this type of Python dictionary can remember the order of key insertions. If you specifically care about the order of key insertions in your Python dictionary, you can make use of collections.OrderedDict.
+
+Press enter or click to view image in full size
+a code snippet, defining a Python OrderedDict dictionary and updating it’s keys.
+example of using Python OrderedDict
+collections.OrderedDict also has a cool function to change the order of some of the keys. You can use move_to_end to move one of the keys to the end(last=True), or the beginning(last=False) of your Python dictionary:
+
+Press enter or click to view image in full size
+a code snippet, defining a Python OrderedDict dictionary and using the move_to_end function.
+example of using Python OrderedDict
+4. collections.ChainMap
+Another type of Python dictionary is the ChainMap. Python ChainMap is a dictionary-like class which can combine multiple dictionaries into a single view. This type of dictionary in Python allows you to search for a key across multiple dictionaries as if they are all merged into a single one.
+
+Press enter or click to view image in full size
+a code snippet, defining a Python ChainMap dictionary and a showing a key lookup from it.
+example of using Python ChainMap
+Note that the ChainMap will return only the first occurrence of the key you’re searching for. Also, remember that ChainMap stores only the reference to the actual objects; so, if you make a change in any of the original dictionaries, the ChainMap will also be updated.
+
+Press enter or click to view image in full size
+a code snippet, defining a Python ChainMap dictionary and see the effect of changing one of the key values from the original dict.
+example of using Python ChainMap
+5. collections.Counter
+Counter is another one of the Python dictionaries that is able to count hashable objects. Python developers usually use collections.Counter to count the frequency of elements in an iterable; for example, you can use this type of Python dictionary to calculate the number of words used in a sentence.
+
+Press enter or click to view image in full size
+a code snippet, defining a Python Counter dictionary and using the most_common function.
+example of using Python Counter
+If you need to List the n most common elements and their counts from the most common to the least, you can use the most_common function on your Counter object. If n is None, then it’ll list all element counts.
+
+6. collections.UserDict
+The last type of Python Dictionary we’re going to talk about is the UserDict dictionary. UserDict is also a class provided by collections module. This class is designed to be used as a base class to create custom dictionary-like objects.
+
+
+Press enter or click to view image in full size
+a code snippet, defining a Python UserDict dictionary and overriding the __setitem__ function.
+example of using Python UserDict
+You can always override other functions such as __setitem__(), __getitem__(), and __delitem__() to customize your dictionary behavior even more.
+
+Wanna learn about 18 methods and operators for Python sets? Check this out:
+Python Sets - Everything you need to know + Examples
+work with Python sets using 15+ methods!
+python.plainenglish.io
+
+In a nutshell
+In this article, we checked out different types of Python dictionaries that can be used in various situations. Even though a lot of Python developers use the regular dictionary, you’re always free to make use of other types of Python dictionaries in your projects. If none of the dictionaries are suitable for you, you can use the UserDict class to make your own dictionary-like classes.
+
