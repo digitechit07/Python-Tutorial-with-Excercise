@@ -1,0 +1,324 @@
+Python Dictionary (Dict) Tutorial
+
+Python Dictionary is a set of key-value pairs. A dictionary is an object of class dict. It’s an unordered collection means that while iterating the order of retrieval is not guaranteed. The dictionary keys and values can be of any type. They can also be None. The key and its value are separated using a colon. Dictionary records are indexed using the key.
+
+Python Dictionary Items
+The key-value pairs are also called items or elements of the dictionary. We can use dict.items() method to get the iterable to loop through the dictionary items. There is no restriction on the values of the dictionary items.
+
+Python Dictionary Keys
+The keys are unique in a dictionary. It is used to retrieve the records from the dictionary. A dictionary is created using a pair of braces. The key-value pairs are separated using a comma.
+
+Dictionary keys must be immutable. So we can use strings, numbers, and tuples as dict keys. If the tuple contains any mutable objects, we can’t use it as a dictionary key.
+
+Can we use List as Dictionary Keys?
+We can’t use a List as a dictionary key because it can be modified. If we try to use a list as a key, it will throw “TypeError: unhashable type: list”.
+
+Creating a Dictionary
+The dictionary items are separated using commas and the key-value pair is separated using a colon. The curly braces are used to define the dictionary with all the items. Let’s look at a simple example to create a dictionary and print it.
+
+>>> fruits_dict = {"1": "Apple", "2": "Banana", 3: "Orange", None: "NA"}
+>>> print(fruits_dict)
+{'1': 'Apple', '2': 'Banana', 3: 'Orange', None: 'NA'}
+>>> type(fruits_dict)
+<class 'dict'>
+Notice that the type of dictionary class is dict and the keys-values are of different types too.
+
+Creating A Python Dictionary
+Creating a Dictionary
+Accessing Dictionary Values
+We can access a dictionary value using the key name in the square brackets.
+
+>>> fruits_dict["1"]
+'Apple'
+>>> fruits_dict["2"]
+'Banana'
+>>> fruits_dict[3]
+'Orange'
+>>> fruits_dict[None]
+'NA'
+Accessing Dictionary Values
+Accessing Dictionary Values
+If the key doesn’t exist, this way to access the dictionary element will raise KeyError. It’s better to use the get() method that returns None if the key is not present.
+
+Adding/Updating Dictionary Value
+We can add or update dictionary elements using the assignment operator. If the key doesn’t exist in the dictionary, the key-value pair gets added to the dictionary. Otherwise, the value is updated with the new value.
+
+fruits_dict = {"1": "Apple", "2": "Banana"}
+ 
+print(f'Original Dictionary = {fruits_dict}')
+ 
+# insert
+fruits_dict["3"] = "Orange"
+ 
+# update
+fruits_dict["1"] = "Kiwi"
+ 
+print(f'Updated Dictionary = {fruits_dict}')
+Adding Updating Python Dictionary Items
+Adding Updating Dictionary Items
+Deleting Dictionary Items
+We can use the del keyword to delete a dictionary key-value pair. If we use the del keyword with the dictionary, the complete dictionary will be deleted, which is different from deleting all the elements of the dictionary.
+
+>>> my_dict = {1:"1", 2:"2"}
+>>> del my_dict[1]
+>>> print(my_dict)
+{2: '2'}
+>>> del my_dict
+>>> print(my_dict)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'my_dict' is not defined
+>>> 
+Iterating over Dictionary using for loop
+We can iterate over a dictionary using the for loop. There are many ways to use for loop with a dictionary.
+
+1. Dictionary items() function
+The items() function returns an object of dict_items, which is iterable. We can use it with the for loop and unpack its elements to key and value and then use them inside the for loop.
+
+fruits_dict = {"1": "Apple", "2": "Banana", "3": "Orange"}
+ 
+print(fruits_dict.items())
+ 
+for key, value in fruits_dict.items():
+    print(f'{key}={value}')
+Output:
+
+dict_items([('1', 'Apple'), ('2', 'Banana'), ('3', 'Orange')])
+1=Apple
+2=Banana
+3=Orange
+2. Loop through Dictionary Keys
+If we use the dictionary object in the for loop, it will return keys one by one. Since the dictionary is unordered, the returned keys can be in any order.
+
+fruits_dict = {"1": "Apple", "2": "Banana", "3": "Orange"}
+ 
+for key in fruits_dict:
+    print(key)
+Output:
+
+1
+2
+3
+3. Python Dictionary values()
+We can use the values() function to get the dictionary values and then iterate over them. The values() function returns an object of dict_values, which is the list of values in the dict.
+
+fruits_dict = {"1": "Apple", "2": "Banana", "3": "Orange"}
+ 
+print(fruits_dict.values())
+ 
+for value in fruits_dict.values():
+    print(value)
+Output:
+
+dict_values(['Apple', 'Banana', 'Orange'])
+Apple
+Banana
+Orange
+Check if the key exists in the Dictionary
+We can use the “in” keyword to check if the key exists in the dictionary or not. Similarly, we can use the “not in” keyword to check if the key is missing or not.
+
+fruits_dict = {"1": "Apple", "2": "Banana", "3": "Orange"}
+ 
+if "3" in fruits_dict:
+    print(f'Key "3" is present in the dictionary and its value is {fruits_dict["3"]}')
+ 
+if "10" not in fruits_dict:
+    print("Key '10' doesn't exists in the dictionary")
+Length of Dictionary
+We can use len() function to find out the length or size of the dictionary.
+
+>>> fruits_dict = {"1": "Apple", "2": "Banana", "3": "Orange"}
+>>> print(f'Dictionary length is {len(fruits_dict)}')
+Dictionary length is 3
+>>> 
+Python dict() Constructor
+We can use the built-in dict() constructor to create a dictionary object.
+
+>>> empty_dict = dict()
+>>> 
+>>> empty_dict
+{}
+>>> my_dict = dict(id=1, name="Pankaj", skill="Python")
+>>> 
+>>> my_dict
+{'id': 1, 'name': 'Pankaj', 'skill': 'Python'}
+>>> 
+Python Dictionary Methods
+Python dict class has many methods. Let’s look into some of the important methods of dict class.
+
+1. values()
+This method returns an object that contains the values from the dictionary. The type of returned object is ‘dict_values’ and we can iterate over it to perform some operations on the dictionary values.
+
+num_dict = {1: "one", 2: "two", 3: "three"}
+ 
+values = num_dict.values()
+print(f'Dictionary values are {values} and its type is {type(values)}')
+ 
+for v in values:
+    print(v, end=" ")
+Python Dictionary Values
+2. items()
+This method provides a set-like view of Dictionary items. It’s mostly used to unpack dictionary key-value pairs to different values and then iterate over them.
+
+num_dict = {1: "one", 2: "two", 3: "three"}
+ 
+items = num_dict.items()
+ 
+print(items)
+print(type(items))
+ 
+for k, v in items:  # unpacking
+    print(k, v)
+Output:
+
+dict_items([(1, 'one'), (2, 'two'), (3, 'three')])
+<class 'dict_items'>
+1 one
+2 two
+3 three
+3. pop(key[,default])
+This method removes the specified key from the dictionary and returns the corresponding value. If the key is not found, the optional default value is returned. If the key is not found and the default value is not given, KeyError is raised.
+
+num_dict = {1: "one", 2: "two", 3: "three"}
+ 
+value = num_dict.pop(1)
+ 
+print(f'Updated Dictionary = {num_dict} and the removed value = {value}')
+ 
+value = num_dict.pop(1, "NA")
+print(f'Updated Dictionary = {num_dict} and the removed value = {value}')
+ 
+try:
+    value = num_dict.pop(1)
+except KeyError as ke:
+    print("Key Not Found: 1")
+We are using a try-except block to catch KeyError and print the error message.
+
+4. copy()
+This function returns a shallow copy of the dictionary. If the underlying object is mutable and changed, then the change will reflect in the dict returned using the copy() method too.
+
+num_dict = {1: "one", 2: "two", 3: "three"}
+ 
+num_dict_copy = num_dict.copy()
+ 
+print(num_dict)
+print(num_dict_copy)
+ 
+num_dict[4] = "four"
+num_dict_copy[5] = "five"
+ 
+print(num_dict)
+print(num_dict_copy)
+Output:
+
+{1: 'one', 2: 'two', 3: 'three'}
+{1: 'one', 2: 'two', 3: 'three'}
+{1: 'one', 2: 'two', 3: 'three', 4: 'four'}
+{1: 'one', 2: 'two', 3: 'three', 5: 'five'}
+5. clear()
+This method removes all the items from the dictionary. It’s similar to assigning the variable to an empty dictionary.
+
+num_dict = {1: "one", 2: "two", 3: "three"}
+ 
+num_dict.clear()  # same as num_dict = {}
+ 
+print(num_dict)
+6. fromKeys(iterable, value)
+This static method creates a new dictionary with the keys from the iterable and the values set to the value provided. If the value is not given, the values are set to None.
+
+seq = (1, 3)
+sub_dict = dict.fromkeys(seq)
+print(sub_dict)
+ 
+sub_dict = dict.fromkeys([1, 2], "NA")
+print(sub_dict)
+ 
+sub_dict = dict.fromkeys("15", "Hello")
+print(sub_dict)
+Output:
+
+{1: None, 3: None}
+{1: 'NA', 2: 'NA'}
+{'1': 'Hello', '5': 'Hello'}
+7. get(key[,default])
+This method returns the value for the key. If the key is not found, the optional default value is returned. If the key is not found and the default value is not provided, None is returned.
+
+>>> num_dict = {1: "one", 2: "two", 3: "three"}
+>>> 
+>>> num_dict.get(1)
+'one'
+>>> num_dict.get(10, "ten")
+'ten'
+>>> num_dict.get(10)
+>>> print(num_dict.get(10))
+None
+>>> 
+8. keys()
+This function returns a list of keys in the dict_keys object. We can iterate over this list to process dictionary values.
+
+num_dict = {1: "one", 2: "two", 3: "three"}
+ 
+keys = num_dict.keys()
+ 
+print(keys)
+print(type(keys))
+ 
+for k in keys:
+    print(k, num_dict[k])
+Output:
+
+dict_keys([1, 2, 3])
+<class 'dict_keys'>
+1 one
+2 two
+3 three
+9. popitem()
+This method removes and returns some dictionary items as a key-value tuple. If the dictionary is empty, KeyError is raised. We can use this function with a while loop to process dictionary items in random order.
+
+num_dict = {1: "one", 2: "two", 3: "three", 0: "zero"}
+ 
+while len(num_dict) != 0:
+    item = num_dict.popitem()
+    print(item)
+Output:
+
+(0, 'zero')
+(3, 'three')
+(2, 'two')
+(1, 'one')
+10. setdefault(key[,default])
+This method is used to add a key to the dictionary if and only if it’s not present in the dictionary. This method sets the key value to the default value provided, otherwise None.
+
+The method returns the value for the key if it’s present in the dictionary, otherwise returns the default value.
+
+num_dict = {1: "one", 2: "two", 3: "three"}
+ 
+# new key
+value = num_dict.setdefault(4, "NA")
+print(f'Updated Dictionary = {num_dict} and the returned value = {value}')
+ 
+# new key with no default
+value = num_dict.setdefault(5)
+print(f'Updated Dictionary = {num_dict} and the returned value = {value}')
+ 
+# existing key, no effect on the dict
+value = num_dict.setdefault(1, "ONE")
+print(f'Updated Dictionary = {num_dict} and the returned value = {value}')
+Output:
+
+Updated Dictionary = {1: 'one', 2: 'two', 3: 'three', 4: 'NA'} and the returned value = NA
+Updated Dictionary = {1: 'one', 2: 'two', 3: 'three', 4: 'NA', 5: None} and the returned value = None
+Updated Dictionary = {1: 'one', 2: 'two', 3: 'three', 4: 'NA', 5: None} and the returned value = one
+11. update(dict)
+This method is used to update the dictionary items from the given dictionary. If the given dictionary key is not found, it gets added to the dictionary. If the key is found, the value gets updated.
+
+num_dict = {1: "one", 2: "two", 3: "three"}
+dict1 = {1: "ONE", 2: "TWO", 5: "FIVE"}
+ 
+# update from another dict
+num_dict.update(dict1)
+print(num_dict)
+Output: {1: 'ONE', 2: 'TWO', 3: 'three', 5: 'FIVE'}
+
+
+Dictionary is a map-like collection to store key-value pairs. The items in the dictionary are accessed via a key-based index. We can update, add, and delete dictionary items. There are various ways to use for loop to iterate over the dictionary keys, values, or items.
