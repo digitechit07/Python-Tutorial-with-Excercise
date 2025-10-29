@@ -1,0 +1,366 @@
+Python dictionaries, an incredibly helpful built-in data type that you will definitely use in your projects.
+
+In particular, you will learn:
+
+What dictionaries are used for and their main characteristics.
+Why they are important for your programming projects.
+The "anatomy" of a dictionary: keys, values, and key-value pairs.
+The specific rules that determine if a value can be a key.
+How to access, add, modify, and delete key-value pairs.
+How to check if a key is in a dictionary.
+What the length of a dictionary represents.
+How to iterate over dictionaries using for loops.
+What built-in dictionary methods you can use to leverage the power of this data type.
+At the end of this article, we will dive into a simple project to apply your knowledge: we will write a function that creates and returns a dictionary with a particular purpose.
+
+Let's begin! ⭐️
+
+🔹 Dictionaries in Context
+Let's start by discussing the importance of dictionaries. To illustrate this, let me do a quick comparison with another data type that you are probably familiar with: lists.
+
+When you work with lists in Python, you can access an element using a index, an integer that describes the position of the element in the list. Indices start from zero for the first element and increase by one for every subsequent element in the list. You can see an example right here:
+
+Image
+
+But what if we need to store two related values and keep this "connection" in our code? Right now, we only have single, independent values stored in a list.
+
+Let's say that we want to store names of students and "connect" each name with the grades of each particular student. We want to keep the "connection" between them. How would you do that in Python?
+
+If you use nested lists, things would get very complex and inefficient after adding only a few items because you would need to use two or more indices to access each value, depending on the final list. This is where Python dictionaries come to the rescue.
+
+Meet Dictionaries
+A Python dictionary looks like this (see below). With a dictionary, you can "connect" a value to another value to represent the relationship between them in your code. In this example,"Gino" is "connected" to the integer 15 and the string "Nora" is "connected" to the integer 30.
+
+Image
+
+Let's see the different elements that make a dictionary.
+
+🔸 The "Anatomy" of a Python Dictionary
+Since a dictionary "connects" two values, it has two types of elements:
+
+Keys: a key is a value used to access another value. Keys are the equivalent of "indices" in strings, lists, and tuples. In dictionaries, to access a value, you use the key, which is a value itself.
+Values: these are the values that you can access with their corresponding key.
+Image
+
+These two elements form what is called a key-value pair (a key with its corresponding value).
+
+Syntax
+This is an example of a Python Dictionary mapping the string "Gino" to the number 15 and the string "Nora" to the number 30:
+
+>>> {"Gino": 15, "Nora": 30}
+Image
+
+To create a dictionary, we use curly brackets { } .
+Between these curly brackets, we write key-value pairs separated by a comma.
+For the key-value pairs, we write the key followed by a colon, a space, and the value that corresponds to the key.
+💡 Tips:
+
+For readability and style purposes, it is recommended to add a space after each comma to separate the key-value pairs.
+You can create an empty dictionary with an empty pair of curly brackets {}.
+Important Rules for Keys
+Not every value can be a key in a Python dictionary. Keys have to follow a set of rules:
+
+According to the Python Documentation:
+
+Keys have to be unique within one dictionary.
+It is best to think of a dictionary as a set of key: value pairs, with the requirement that the keys are unique (within one dictionary).
+
+Keys have to be immutable.
+Unlike sequences, which are indexed by a range of numbers, dictionaries are indexed by keys, which can be any immutable type; strings and numbers can always be keys.
+
+If the key is a tuple, it can only contain strings, numbers or tuples.
+Tuples can be used as keys if they contain only strings, numbers, or tuples; if a tuple contains any mutable object either directly or indirectly, it cannot be used as a key.
+
+Lists cannot be keys because they are mutable. This is a consequence of the previous rule.
+You can’t use lists as keys, since lists can be modified in place using index assignments, slice assignments, or methods like append() and extend().
+
+💡 Note: Values have no specific rules, they can be either mutable or immutable values.
+
+🔹 Dictionaries in Action
+Now let's see how we can work with dictionaries in Python. We are going to access, add, modify, and delete key-value pairs.
+
+We will start working with this dictionary, assigned to the ages variable:
+
+>>> ages = {"Gino": 15, "Nora": 30}
+Access Values using Keys
+If we need to access the value associated with a specific key, we write the name of the variable that references the dictionary followed by square brackets [] and, within the square brackets, the key that corresponds to the value:
+
+<variable>[<key>]
+Image
+
+This is an example of how we can access the value that corresponds to the string "Gino":
+
+>>> ages = {"Gino": 15, "Nora": 30}
+>>> ages["Gino"]
+15
+Notice that the syntax is very similar to indexing a string, tuple, or list, but now we are using the key as the index instead of an integer.
+
+If we want to access the value that corresponds to "Nora", we would do this:
+
+>>> ages = {"Gino": 15, "Nora": 30}
+>>> ages["Nora"]
+30
+💡 Tip: If you try to access a key that does not exist in the dictionary, you will get a KeyError:
+
+>>> ages = {"Gino": 15, "Nora": 30}
+>>> ages["Talina"]
+Traceback (most recent call last):
+  File "<pyshell#10>", line 1, in <module>
+    ages["Talina"]
+KeyError: 'Talina'
+Add Key-Value Pairs
+If a key-value pair doesn't exist in the dictionary, we can add it. To do this, we write the variable that references the dictionary followed by the key within square brackets, an equal sign, and the new value:
+
+Image
+
+This is an example in IDLE:
+
+>>> ages = {"Gino": 15, "Nora": 30}
+
+# Add the key-value pair "Talina": 24
+>>> ages["Talina"] = 24
+
+# The dictionary now has this key-value pair
+>>> ages
+{'Gino': 15, 'Nora': 30, 'Talina': 24}
+Modify a Key-Value Pair
+To modify the value associated to a specific key, we use the same syntax that we use to add a new key-value pair, but now we will be assigning the new value to an existing key:
+
+>>> ages = {"Gino": 15, "Nora": 30}
+
+# The key "Gino" already exists in the dictionary, so its associated value
+# will be updated to 45.
+>>> ages["Gino"] = 45
+
+# The value was updated to 45.
+>>> ages
+{'Gino': 45, 'Nora': 30}
+Deleting a Key-Value Pair
+To delete a key-value pair, you would use the del keyword followed by the name of the variable that references the dictionary and, within square brackets [], the key of the key-value pair:
+
+Image
+
+This is an example in IDLE:
+
+>>> ages = {"Gino": 15, "Nora": 30, "Talina": 45}
+
+# Delete the key-value pair "Gino": 15.
+>>> del ages["Gino"]
+
+# The key-value pair was deleted.
+>>> ages
+{'Nora': 30, 'Talina': 45}
+🔸 Check if a Key is in a Dictionary
+Sometimes, it can be very helpful to check if a key already exists in a dictionary (remember that keys have to be unique).
+
+According to the Python Documentation:
+
+To check whether a single key is in the dictionary, use the in keyword.
+
+>>> ages = {"Gino": 15, "Nora": 30, "Talina": 45}
+>>> "Talina" in ages
+True
+>>> "Gino" in ages
+True
+>>> "Lulu" in ages
+False
+The in operator checks the keys, not the values. If we write this:
+
+>>> 15 in ages
+False
+We are checking if the key 15 is in the dictionary, not the value. This is why the expression evaluates to False.
+
+💡 Tip: You can use the in operator to check if a value is in a dictionary with .values().
+
+>>> ages = {"Gino": 15, "Nora": 30, "Talina": 45}
+>>> 30 in ages.values()
+True
+>>> 10 in ages.values()
+False
+🔹 Length of a Python Dictionary
+The length of a dictionary is the number of key-value pairs it contains. You can check the length of a dictionary with the len() function that we commonly use, just like we check the length of lists, tuples, and strings:
+
+# Two key-value pairs. Length 2.
+>>> ages = {"Gino": 15, "Nora": 30}
+>>> len(ages)
+2
+
+# Three key-value pairs. Length 3.
+>>> ages = {"Gino": 15, "Nora": 30, "Talina": 45}
+>>> len(ages)
+3
+🔸 Iterating over Dictionaries in Python
+You can iterate over dictionaries using a for loop. There are various approaches to do this and they are all equally relevant. You should choose the approach that works best for you, depending on what you are trying to accomplish.
+
+First Option - Iterate over the Keys
+We can iterate over the keys of a dictionary like this:
+
+for <key> in <dictionary>:
+    # Do this
+For example:
+
+>>> ages = {"Gino": 15, "Nora": 30, "Talina": 45}
+>>> for student in ages:
+    print(student)
+
+Gino
+Nora
+Talina
+Second Option - Iterate over the Key-Value Pairs
+To do this, we need to use the built-in method .items(), which allows us to iterate over the key-value pairs as tuples of this format (key, value).
+
+for <key-value-pair-as-tuple> in <dictionary>.items():
+    # Do this
+For example:
+
+>>> ages = {"Gino": 15, "Nora": 30, "Talina": 45}
+
+>>> for pair in ages.items():
+    print(pair)
+
+('Gino', 15)
+('Nora', 30)
+('Talina', 45)
+Third Option - Assign Keys and Values to Individual Variables
+With .items() and for loops, you can use the power of a tuple assignment to directly assign the keys and values to individual variables that you can use within the loop:
+
+>>> ages = {"Gino": 15, "Nora": 30, "Talina": 45}
+
+# Tuple assignment to assign the key to the variable key 
+# and the value to the variable value.
+>>> for key, value in ages.items():
+    print("Key:", key, "; Value:", value)
+
+
+Key: Gino ; Value: 15
+Key: Nora ; Value: 30
+Key: Talina ; Value: 45
+Fourth Option - Iterate over the Values
+You can iterate over the values of a dictionary using the .values() method.
+
+>>> ages = {"Gino": 15, "Nora": 30, "Talina": 45}
+>>> for age in ages.values():
+    print(age)
+
+15
+30
+45
+🔹 Dictionary Methods
+Dictionaries include very helpful built-in methods that can save you time and work to perform common functionality:
+
+.clear()
+This method removes all the key-value pairs from the dictionary.
+
+>>> ages = {"Gino": 15, "Nora": 30, "Talina": 45}
+>>> ages.clear()
+>>> ages
+{}
+.get(, )
+This method returns the value associated with the key. Otherwise, it returns the default value that was provided as the second argument (this second argument is optional).
+
+>>> ages = {"Gino": 15, "Nora": 30, "Talina": 45}
+>>> ages.get("Nora")
+30
+>>> ages.get("Nor", "Not Found")
+'Not Found'
+If you don't add a second argument, this is equivalent to the previous syntax with square brackets []that you learned:
+
+>>> ages = {"Gino": 15, "Nora": 30, "Talina": 45}
+>>> ages["Nora"]
+30
+>>> ages.get("Nora")
+30
+.pop(, )
+This method removes the key-value pair from the dictionary and returns the value.
+
+>>> ages = {"Gino": 15, "Nora": 30, "Talina": 45}
+>>> ages.pop("Talina")
+45
+>>> ages
+{'Gino': 15, 'Nora': 30}
+.update()
+This method replaces the values of a dictionary with the values of another dictionary only for those keys that exist in both dictionaries.
+
+An example of this would be a dictionary with the original grades of three students (see code below). We only want to replace the grades of the students who took the make-up exam (in this case, only one student took the make-up exam, so the other grades should remain unchanged).
+
+>>> grades = {"Gino": 0, "Nora": 98, "Talina": 99}
+>>> new_grades = {"Gino": 67}
+>>> grades.update(new_grades)
+>>> grades
+{'Gino': 67, 'Nora': 98, 'Talina': 99}
+By using the .update() method, we could update the value associated with the string "Gino" in the original dictionary since this is the only common key in both dictionaries.
+
+The original value would be replaced by the value associated with this key in the dictionary that was passed as argument to .update().
+
+💡 Tips: To learn more about dictionary methods, I recommend reading this article in the Python Documentation.
+
+🔸 Mini Project - A Frequencies Dictionary
+Now you will apply your knowledge by writing a function freq_dict that creates and returns a dictionary with the frequency of each element of a list, string, or tuple (the number of times the element appears). The elements will be the keys and the frequencies will be the values.
+
+Code
+We will be writing the function step-by-step to see the logic behind each line of code.
+
+Step 1: The first thing that we need to do is to write the function header. Notice that this function only takes one argument, the list, string or tuple, which we call data.
+def freq_dict(data):
+Step 2: Then, we need to create an empty dictionary that will map each element of the list, string, or tuple to its corresponding frequency.
+def freq_dict(data):
+    freq = {}
+Step 3: Then, we need to iterate over the list, string, or tuple to determine what to do with each element.
+def freq_dict(data):
+    freq = {}
+    for elem in data:
+Step 4: If the element has already been included in the dictionary, then the element appears more than once and we need to add 1 to its current frequency. Else, if the element is not in the dictionary already, it's the first time it appears and its initial value should be 1.
+def freq_dict(data):
+    freq = {}
+    for elem in data:
+        if elem in freq:
+            freq[elem] += 1
+        else:
+            freq[elem] = 1
+Step 5: Finally, we need to return the dictionary.
+def freq_dict(data):
+    freq = {}
+    for elem in data:
+        if elem in freq:
+            freq[elem] += 1
+        else:
+            freq[elem] = 1
+    return freq
+❗️Important: Since we are assigning the elements as the keys of the dictionary, they have to be of an immutable data type.
+
+Examples
+Here we have an example of the use of this function. Notice how the dictionary maps each character of the string to how many times it occurs.
+
+>>> def freq_dict(data):
+    freq = {}
+    for elem in data:
+        if elem in freq:
+            freq[elem] += 1
+        else:
+            freq[elem] = 1
+    return freq
+
+>>> freq_dict("Hello, how are you?")
+{'H': 1, 'e': 2, 'l': 2, 'o': 3, ',': 1, ' ': 3, 'h': 1, 'w': 1, 'a': 1, 'r': 1, 'y': 1, 'u': 1, '?': 1}
+This is another example applied to a list of integers:
+
+>>> def freq_dict(data):
+    freq = {}
+    for elem in data:
+        if elem in freq:
+            freq[elem] += 1
+        else:
+            freq[elem] = 1
+    return freq
+
+>>> freq_dict([5, 2, 6, 2, 6, 5, 2, 2, 2])
+{5: 2, 2: 5, 6: 2}
+Great Work! Now we have the final function.
+
+🔹 In Summary
+Dictionaries are built-in data types in Python that associate (map) keys to values, forming key-value pairs.
+You can access a value with its corresponding key.
+Keys have to be of an immutable data type.
+You can access, add, modify, and delete key-value pairs.
+Dictionaries offer a wide variety of methods that can help you perform common functionality.
+
