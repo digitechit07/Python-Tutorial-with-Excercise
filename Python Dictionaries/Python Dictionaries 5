@@ -1,0 +1,151 @@
+What is a dictionary in Python?
+A dictionary in Python is a collection of key-value pairs, where each key is associated with a value.
+It is similar to a real-world dictionary, where each word is associated with a definition.
+In Python, the keys and values can be of any data type, and they are stored in a way that allows for fast retrieval.
+
+Creating a dictionary in Python
+A dictionary can be created in Python using curly braces {} or the built-in dict() function. Here's an example:
+
+# Creating a dictionary using curly braces
+my_dict = {"apple": 2, "banana": 4, "orange": 6}
+
+# Creating a dictionary using the dict() function
+my_dict = dict(apple=2, banana=4, orange=6)
+In the above examples, we have created a dictionary with three key-value pairs. The keys are “apple”, “banana”, and “orange”, and the values are 2, 4, and 6, respectively.
+
+Accessing values in a dictionary
+Values in a dictionary can be accessed using the keys. To access a value in a dictionary, we use square brackets [] and provide the key. Here's an example:
+
+my_dict = {"apple": 2, "banana": 4, "orange": 6}
+print(my_dict["apple"])  # Output: 2
+In the above example, we have accessed the value associated with the key “apple” in the dictionary my_dict.
+
+Adding or modifying values in a dictionary
+To add or modify a value in a dictionary, we use square brackets [] and provide the key. Here's an example:
+
+my_dict = {"apple": 2, "banana": 4, "orange": 6}
+my_dict["apple"] = 3  # Modifying value associated with key "apple"
+my_dict["grape"] = 8  # Adding a new key-value pair
+print(my_dict)  # Output: {"apple": 3, "banana": 4, "orange": 6, "grape": 8}
+In the above example, we have modified the value associated with the key “apple” and added a new key-value pair with the key “grape” and the value 8.
+
+Removing values from a dictionary
+To remove a value from a dictionary, we use the del keyword and provide the key. Here's an example:
+
+my_dict = {"apple": 2, "banana": 4, "orange": 6}
+del my_dict["banana"]
+print(my_dict)  # Output: {"apple": 2, "orange": 6}
+In the above example, we have removed the key-value pair associated with the key “banana” from the dictionary my_dict.
+
+Dictionary Methods in Python
+
+Python provides a number of built-in methods to work with dictionaries. Some of the important methods are:
+
+get()
+The get() method returns the value associated with the specified key. If the key does not exist, it returns the specified default value (or None if no default value is specified).
+
+my_dict = {"apple": 2, "banana": 4, "orange": 6}
+print(my_dict.get("apple"))  # Output: 2
+print(my_dict.get("grape"))  # Output: None
+print(my_dict.get("grape", 0))  # Output: 0
+In the above example, we have used the get() method to retrieve the value associated with the keys "apple" and "grape". The first call returns the value 2, the second call returns None since the key "grape" does not exist in the dictionary, and the third call returns the default value 0 since the key "grape" does not exist in the dictionary.
+
+The time complexity of the get() method is O(1) on average, as it uses hashing to quickly locate the key.
+
+keys(), values(), and items()
+The keys() method returns a list of all the keys in the dictionary, the values() method returns a list of all the values in the dictionary, and the items() method returns a list of all the key-value pairs in the dictionary as tuples.
+
+my_dict = {"apple": 2, "banana": 4, "orange": 6}
+print(my_dict.keys())  # Output: dict_keys(['apple', 'banana', 'orange'])
+print(my_dict.values())  # Output: dict_values([2, 4, 6])
+print(my_dict.items())  # Output: dict_items([('apple', 2), ('banana', 4), ('orange', 6)])
+In the above example, we have used the keys(), values(), and items() methods to retrieve a list of keys, values, and key-value pairs from the dictionary my_dict.
+
+Get Binary Beats’s stories in your inbox
+Join Medium for free to get updates from this writer.
+
+Enter your email
+Subscribe
+The time complexity of these methods is O(n), where n is the number of key-value pairs in the dictionary, as they need to iterate over all the items in the dictionary.
+
+pop()
+The pop() method removes and returns the value associated with the specified key. If the key does not exist, it raises a KeyError. An optional default value can be provided, which is returned if the key does not exist.
+
+my_dict = {"apple": 2, "banana": 4, "orange": 6}
+print(my_dict.pop("banana"))  # Output: 4
+print(my_dict)  # Output: {"apple": 2, "orange": 6}
+print(my_dict.pop("grape", 0))  # Output: 0
+In the above example, we have used the pop() method to remove and return the value associated with the key "banana". We have also used the method with a default value of 0 for the key "grape", which does not exist in the dictionary.
+
+The time complexity of the pop() method is O(1) on average, as it uses hashing to quickly locate the key.
+
+Time and space complexity of dictionaries
+The time complexity of dictionary operations in Python depends on the size of the dictionary and the specific operation being performed. Here’s a summary of the time complexity of some common dictionary operations:
+
+Accessing a value by key: O(1) on average, O(n) worst case if there are many collisions
+Adding a key-value pair: O(1) on average, O(n) worst case if the dictionary needs to be resized
+Modifying a value by key: O(1) on average, O(n) worst case if there are many collisions
+Removing a key-value pair by key: O(1) on average, O(n) worst case if there are many collisions
+Iterating over the keys, values, or items: O(n), where n is the number of key-value pairs in the dictionary.
+The space complexity of a dictionary is O(n), where n is the number of key-value pairs in the dictionary. This is because a dictionary stores each key-value pair as a separate object in memory.
+
+Examples
+Word Count
+One common use case for dictionaries is counting the frequency of words in a piece of text. Here’s an example implementation:
+
+def word_count(text):
+    """
+    Count the frequency of each word in the given text.
+    Args:
+        text (str): The text to count words in.
+    Returns:
+        dict: A dictionary mapping each unique word to its frequency.
+    """
+    words = text.split()
+    freq = {}
+    for word in words:
+        freq[word] = freq.get(word, 0) + 1
+    return freq
+In this implementation, we split the text into a list of words using the split() method. We then iterate over the words and use a dictionary to keep track of the frequency of each word. The get() method is used to safely retrieve the current frequency of a word, initializing it to 0 if the word has not been seen before.
+
+Here’s an example usage:
+
+text = "the quick brown fox jumps over the lazy dog"
+freq = word_count(text)
+print(freq)
+# Output: {'the': 2, 'quick': 1, 'brown': 1, 'fox': 1, 'jumps': 1, 'over': 1, 'lazy': 1, 'dog': 1}
+Inverted Index
+Another common use case for dictionaries is building an inverted index for a collection of documents. An inverted index is a data structure that maps each unique word in the collection to the documents that contain it. Here’s an example implementation:
+
+def inverted_index(documents):
+    """
+    Build an inverted index for the given collection of documents.Args:
+        documents (list): A list of strings, where each string is a document.
+    Returns:
+        dict: A dictionary mapping each unique word to a set of document indices.
+    """
+    index = {}
+    for i, doc in enumerate(documents):
+        words = set(doc.split())
+        for word in words:
+            if word not in index:
+                index[word] = set()
+            index[word].add(i)
+    return index
+In this implementation, we iterate over the documents and split each one into a set of unique words. We then iterate over the words and add the document index to the set associated with each word in the index. If a word has not been seen before, we create a new set to store its document indices.
+
+Here’s an example usage:
+
+documents = [
+    "the quick brown fox jumps over the lazy dog",
+    "the quick brown fox",
+    "the lazy dog",
+    "over the lazy dog",
+    "the quick fox jumps over the lazy dog"
+]
+index = inverted_index(documents)
+print(index)
+# Output: {'the': {0, 1, 2, 3, 4}, 'quick': {0, 1, 4}, 'brown': {0, 1}, 'fox': {0, 1, 4}, 'jumps': {0, 4}, 'over': {0, 3, 4}, 'lazy': {0, 2, 3, 4}, 'dog': {0, 2, 3, 4}}
+Conclusion
+Dictionaries are a powerful and flexible data structure in Python that can be used tostore and retrieve key-value pairs efficiently.
+They can be used for a wide variety of applications, including counting the frequency of items, building inverted indexes, implementing caches, and more.
