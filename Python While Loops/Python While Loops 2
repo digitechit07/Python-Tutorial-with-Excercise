@@ -1,0 +1,144 @@
+What is A while Loop in Python? A Definition for Beginners
+A while loop repeats a block of code an unknown number of times until a condition is no longer met. for loops, on the other hand, repeat a block of code a fixed number of times.
+
+So, a while loop is useful when you don’t know how many times you want a block of code to execute beforehand.
+
+A while loop repeats the block of code based on a given Boolean condition.
+
+A Boolean condition is a condition that evaluates to either True or False.
+
+A while loop will always first check the condition before running. If the condition evaluates to True, then the loop will run the code within the loop's body and continue to run the code while the condition remains True.
+
+It will keep executing the desired set of code statements until that condition is no longer True.
+
+Let’s take a hypothetical example.
+
+You may ask a user to submit a secret keyword so they can access a specific part of your site.
+
+Say that for them to be able to view some content, they first have to enter the keyword ‘Python’.
+
+To do this, you would ask them to enter that keyword. That said, you don’t know how many times the user will enter the wrong keyword.
+
+Each time they enter the wrong one, you continue to prompt them for the correct keyword. And for as long as they enter the wrong keyword, you will not allow them to continue.
+
+When they finally enter the keyword ‘Python’ you will allow them to view that content, you will stop prompting them, and that block of code will stop executing.
+
+To do something similar to this example, you would need to make use of Python's while loop.
+
+How To Write A while Loop in Python - A Syntax Breakdown for Beginners
+The general syntax for writing a while loop in Python looks like this:
+
+while condition:
+    body of while loop containing code that does something
+Let's break it down:
+
+You start the while loop by using the while keyword.
+Then, you add a condition which will be a Boolean expression. A Boolean expression is an expression that evaluates to either True or False.
+The condition is followed by a colon, :.
+On a new line, you add a level of indentation. Many code editors will do this automatically for you. For example, when using the Visual Studio Code editor with thePython extension, right after you write the colon from the previous step and hit Enter, it will automatically indent your code with the right level of indentation. This level of indentation is how Python knows that the code statements you will write are associated with the while statement.
+Then, the code you want to run goes in the body of the while statement.
+While the condition evaluates to True, the code inside the body of the while loop will execute. The code inside the body will continue to execute until the condition is no longer met and evaluates to False.
+What Is An Example of A while Loop in Python?
+Now, let’s write the example I mentioned earlier using a Python while loop.
+
+First, I will store the secret keyword Python in a variable named secret_keyword.
+
+secret_keyword = "Python"
+Then, I will ask the user to input the required secret keyword they are supposed to know to access the rest of the content.
+
+To do this, I will use the input() function and store the result in a variable named user_input.
+
+user_input = input("Please enter the secret keyword: ")
+Something to note here is that the user input by default is case-sensitive, which means that if the user enters 'python' instead of 'Python' they still won't be able to continue.
+
+To fix this, you can use a string method such as .capitalize() to capitalize the first letter of the word the user enters.
+
+user_input = input("Please enter the secret keyword: ").capitalize()
+Next, it is time to construct the while loop.
+
+I am going to check if the variable user_input is not equal to the contents of the variable secret_keyword.
+
+Essentially, I am checking whether what the user has entered is not equal to the string 'Python'.
+
+To write this condition in Python, I will use the != operator, which checks for inequality.
+
+secret_keyword = "Python"
+
+user_input = input("Please enter the secret keyword: ").capitalize()
+
+while user_input != secret_keyword:
+Inside the body of the while loop, I will again prompt the user to enter the secret keyword.
+
+secret_keyword = "Python"
+
+user_input = input("Please enter the secret keyword: ").capitalize()
+
+while user_input != secret_keyword:
+    user_input = input("Please enter the secret keyword: ").capitalize()
+The way this works is that if the user enters the string 'Python' the loop will terminate, and the program will not run anymore. However, if the string that the user enters is not equal to 'Python', the loop will continue.
+
+So, if the user_input is not equal to secret_keyword the loop will continue to execute.
+
+And there is no set amount of times this will run and then stop, which means that for as long as the user doesn’t enter the string 'Python', the while loop will continue to execute. This is because the condition I set continues to evaluate to True.
+
+Please enter the secret keyword: Hello
+Please enter the secret keyword: Hi
+Please enter the secret keyword: CSS
+Please enter the secret keyword: css
+Please enter the secret keyword: 
+..
+..
+..
+If you are following along and want to terminate the program, type Control C to escape the infinite loop. An infinite loop is when a loop never stops executing.
+
+Now, if I re-run the program and finally enter the correct secret keyword, the loop will exit, and the code will stop running.
+
+Please enter the secret keyword: Java
+Please enter the secret keyword: Python
+And this happens if also I enter 'python' thanks to the capitalize() method:
+
+Please enter the secret keyword: java
+Please enter the secret keyword: python
+The loop terminates because the condition no longer evaluates to True anymore.
+
+What Is A while True Loop in Python?
+Earlier, you saw what an infinite loop is.
+
+Essentially, a while True loop is a loop that is continuously True and therefore runs endlessly. It will never stop until you force it to stop.
+
+#this creates an infinite loop
+
+while True:
+    print("I am always true")
+As you saw earlier, the way to escape this is by typing Control C.
+
+Another way to explicitly escape this is by using the break statement.
+
+Since True will always evaluate to True and therefore execute repeatedly, the break statement will force the loop to stop when needed.
+
+Let's take the following example:
+
+i = 0
+
+# this creates an infinite loop
+
+while True:
+    print(i)
+    i = i + 1
+In this example, i will continue to increase by one repeatedly – there is no condition to stop it from increasing since True will always evaluate to True.
+
+To stop this from being an infinite loop, I first introduce an if statement.
+
+The if statement checks whether i is equal to 5. If it is, then the loop will come to an end thanks to the break statement inside the if statement, which essentially tells the loop to stop.
+
+i = 0
+
+while True:
+    print(i)
+    i = i + 1
+
+    if i == 5:
+        break
+
+And there you have it! You now know how to write while and while True loops in Python.
+
