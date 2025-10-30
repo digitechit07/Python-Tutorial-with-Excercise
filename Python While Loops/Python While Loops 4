@@ -1,0 +1,196 @@
+On the other hand, the while loop takes in a condition and continues the execution as long as the condition is met. In other words, it stops the execution when the condition becomes false (i.e. is not met).
+
+The for loop requires a collection of items to loop over. The while loop is more general and does not require a collection; we can use it by providing a condition only.
+
+In this article, we will examine 8 examples to help you obtain a comprehensive understanding of while loops in Python.
+
+Example 1: Basic Python While Loop
+Let’s go over a simple Python while loop example to understand its structure and functionality:
+
+>>> i = 0
+>>> while i < 5:
+>>>     print(i)
+>>>     i += 1
+Result:
+
+0
+1
+2
+3
+4
+The condition in this while loop example is that the variable i must be less than 5. The initial value of the variable i is set to 0 before the while loop. The while loop first checks the condition. Since 0 is less than 5, the code inside the while loop is executed: it prints the value of i and then increments i’s value by 1. Now the value of i is 1. Then the code returns to the beginning of the while loop. Since 1 is less than 5, the code inside the while loop is executed again.
+
+This looping is repeated until the i variable becomes 5. When the i variable becomes 5, the condition i < 5 stops being true and the execution of the while loop stops. This Python while loop can be translated to plain English as “while i is less than 5, print i and increment its value by 1”.
+
+There are several use cases for while loops. Let’s discover them by solving some Python while loop examples. Make sure to visit our Python Basics: Part 1 course to learn more about while loops and other basic concepts.
+
+Example 2: Using a Counter in a while Loop
+We don’t always know beforehand how many times the code inside a while loop will be executed. Hence, it’s a good practice to set up a counter inside the loop. In the following Python while loop example, you can see how a counter can be used:
+
+>>> counter = 0
+>>> num = 0
+>>> while num != 5:
+>>>     num = int(input("Tell me a number between 0 and 10: "))
+>>>     counter += 1
+>>> print(f"You guessed the correct number in {counter} times.")
+We start by creating the counter variable by setting its value to 0. In this case, we ask the user to input a number between 0 and 10. The condition in the while loop checks if the user input is equal to 5. As long as the input is not equal to 5, the code inside the loop will be executed so the user will be prompted to enter a number.
+
+When the user guesses the correct number (i.e. the input is equal to 5), the code exits the loop. Then we tell the user how many guesses it took to guess the correct number by printing the value of the counter. Feel free to test it yourself in your coding environment to see how the counter works in this example.
+
+Example 3: A while Loop with a List
+Although for loops are preferred when you want to loop over a list, we can also use a while loop for this task. If we do, we need to set the while loop condition carefully. The following code snippet loops over a list called cities and prints the name of each city in the list:
+
+>>> cities = ["London", "Istanbul", "Houston", "Rome"]
+>>> i = 0
+>>> while i < len(cities):
+>>>     print(cities[i])
+>>>     i += 1
+Result:
+
+London
+Istanbul
+Houston
+Rome
+There are two things to understand about how this while loop works. The len() function gives us the length of the cities list, which is equal to the number of items in the list. The variable i is used in two places. The first one is in the while loop condition, where we compare it to the length of the list. The second one is in the list index to select the item to be printed from the list. The variable is initialized with the value of 0. The expression cities[0] selects the first item in the list, which is London.
+
+After the print() function is executed inside the while loop, the value of i is incremented by 1 and cities[1] selects the second item from the list, and so on. The code exits the loop when i becomes 4. By then, all the items in the list will have been printed out.
+
+It's free now. Try our Python Basics course.
+Lists are one of the most frequently used data structures in Python. To write efficient programs, you need to have a comprehensive understanding of lists and how to interact with them. You can find beginner-level Python list exercises in this article.
+
+Example 4: A while Loop with a Dictionary
+Constructing a while loop with a dictionary is similar to constructing a while loop with a list. However, we need a couple of extra operations because a dictionary is a more complex data structure.
+
+If you want to learn more about Python data structures, we offer the Python Data Structures in Practice course that uses interactive exercises to explain the said data structures.
+
+A dictionary in Python consists of key-value pairs. What do we mean by key-value pairs? This describes a two-part data structure where the value is associated with the key.  In the following dictionary, names are the keys and the corresponding numeric scores are the dictionary values:
+
+>>> scores = {"Jane": 88, "John": 85, "Emily": 92}
+There are different ways of iterating over a dictionary. We’ll create a Python while loop that goes over the scores dictionary and prints the names and their scores:
+
+>>> scores = {"Jane": 88, "John": 85, "Emily": 92}
+>>> keys = list(scores.keys())
+>>> i = 0
+>>> while i < len(scores):
+>>>     print(keys[i], ":", scores[keys[i]])
+>>>     i += 1
+Result:
+
+Jane : 88
+John : 85
+Emily : 92
+The keys() method returns the dictionary keys, which are then converted to a list using the list() constructor. Thus, the keys variable created before the while loop is ['Jane', 'John', 'Emily']. The while loop condition is similar to the previous example. The code inside the loop is executed until the value of i becomes more than the number of items in the dictionary (i.e. the length of the dictionary). The expression keys[i] gives us the ith item in the keys list. The expression scores[keys[i]] gives us the value of the key given by keys[i]. For example, the first item in the keys list is Jane and scores['Jane'] returns the value associated with Jane in the scores dictionary, which is 88.
+
+Example 5: Nested while Loops
+A nested while loop is simply a while loop inside another while loop. We provide separate conditions for each while loop. We also need to make sure to do the increments properly so that the code does not go into an infinite loop.
+
+In the following Python while loop example, we have a while loop nested in another while loop:
+
+>>> i = 1
+>>> while i < 10:
+>>>     j = 1
+>>>     while j < 10:
+>>>         print(i, "*", j, "=", i*j)
+>>>         j += 1
+>>>     i += 1
+Result:
+
+1 * 1 = 1
+1 * 2 = 2
+1 * 3 = 3
+1 * 4 = 4
+1 * 5 = 5
+1 * 6 = 6
+1 * 7 = 7
+1 * 8 = 8
+1 * 9 = 9
+2 * 1 = 2
+2 * 2 = 4
+2 * 3 = 6
+2 * 4 = 8
+…
+The result output has been shortened for demonstration purposes.
+
+The first loop goes over integers from 1 to 9. For each iteration of the first while loop (i.e. for each number from 1 to 9), the while loop inside (i.e. the nested loop) is executed. The nested loop in our example also goes over integers from 1 to 9.
+
+The execution inside the second while loop is multiplying the values of i and j. The i is the value from the outer while loop and j is the value from the nested while loop. Thus, the code iterates integers from 1 to 9 for every integer from 1 to 9.
+
+In the result, we have a multiplication table. The important point here is to do the increments accurately. The variables i and j must each be incremented inside their own while loop.
+
+Example 6: Infinite Loops and the break Statement
+Since while loops continue execution until the given condition is no longer met, we can end up in an infinite loop if the condition is not set properly.
+
+The following is an example of an infinite while loop. The initial value of i is 10 and the while loop checks if the value of i is greater than 5, which is true. Inside the loop, we print the value of i and increment it by 1 so it’ll always be more than 5 and the while loop will continue execution forever.
+
+>>> i = 10
+>>> while i > 5:
+>>>     print(i)
+>>>     i += 1
+Another way to create infinite while loops is by giving the condition as while True.
+
+>>> while True:
+>>>     # execute this code
+The break statement provides a way to exit the loop. Even if the condition is still true, when the code sees the break, it’ll exit the loop. Let’s do a Python while loop example to show how break works:
+
+>>> scores = [54, 83, 67, 74, "fifty", 65, 87]
+>>> i = 0
+>>> while i < len(scores):
+>>>     if not isinstance(scores[i], int):
+>>>         break
+>>>     print(scores[i])
+>>>     i += 1
+Result:
+
+54
+83
+67
+74
+The while loop goes over the scores list and prints the items in it. Before it prints the item, there is an if statement that checks if the item is an integer. If not, the code exits the while loop because of the break statement. If the item is an integer, the loop execution continues and the item is printed.
+
+Example 7: Using continue in a while Loop
+The continue statement is quite similar to the break statement. The break command exits the while loop so the code continues executing the next piece of code if there is any. On the other hand, continue returns the control to the beginning of the while loop so the execution of the while loop continues using the next value. Let’s repeat the previous while loop example, this time using continue instead of break to understand the difference:
+
+>>> scores = [54, 83, 67, 74, "fifty", 65, 87]
+>>> i = 0
+>>> while i < len(scores):
+>>>     if not isinstance(scores[i], int):
+>>>         continue
+>>>     print(scores[i])
+>>>     i += 1
+Result:
+
+54
+83
+67
+74
+65
+87
+When there’s a break statement and the condition is not met for the value "fifty", the code exits the while loop. However, when we use the continue statement, the execution of the while loop continues from the next item, which is 65.
+
+Example 8: A while Loop with the else Clause
+In Python, a while loop can be used with an else clause. When the condition in the while loop becomes false, the else block is executed. However, if there is a break statement inside the while loop block, the code exits the loop without executing the else block.
+
+Let’s do an example to better understand this case:
+
+>>> names = ["Jane", "John", "Matt", "Emily"]
+>>> names_to_search = "John"
+>>> i = 0
+>>> while i < len(names):
+>>>     if name_to_search == names[i]:
+>>>         print("Name found!")
+>>>         break
+>>>     i += 1
+>>> else:
+>>>     print("Name not found!")
+Result:
+
+This code searches for a name in the given names list. When the name is found, it prints “Name found!” and exits the loop. If the name is not found after going through all the names in the names list, the else block is executed, which prints “Name not found!”.
+
+If we did not have the break statement inside the while loop, the code block would print both “Name found!” and “Name not found!” if the name exists in the list. Feel free to test it yourself.
+
+Common while Mistakes and Tips
+Python while loops are very useful for writing robust and efficient programs. However, there are some important points to keep in mind if you want to use them properly.
+
+The biggest mistake is to forget about incrementing the loop variable – or not incrementing it correctly. Both may result in infinite loops or loops that do not function as expected. This might need extra attention, especially when working with nested loops.
+
+Another tip: Do not overuse the break statement. Keep in mind that it exits the while loop entirely. If you place a break statement with an if condition, the while loop does not execute the remaining part. Recall the examples we have done on the break and continue statements. It’s better to use the continue statement if you want to complete the entire loop.
