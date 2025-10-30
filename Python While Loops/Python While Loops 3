@@ -1,0 +1,161 @@
+Loops are a useful and frequently used feature in all modern programming languages.
+
+If you want to automate a specific repetitive task or prevent yourself from writing repetitive code in your programs, using a loop is the best option for that.
+
+Loops are a set of instructions that run repeatedly until a condition is met. Let's learn more about how loops work in Python.
+
+Loops in Python
+There are two types of loops built into Python:
+
+for loops
+while loops
+Let's focus on how you can create a while loop in Python and how it works.
+
+What is a while loop in Python?
+The general syntax of a while loop in Python looks like this:
+
+while condition:
+    execute this code in the loop's body
+A while loop will run a piece of code while a condition is True. It will keep executing the desired set of code statements until that condition is no longer True.
+
+A while loop will always first check the condition before running.
+
+If the condition evaluates to True then the loop will run the code within the loop's body.
+
+For example, this loop runs as long as number is less than 10:
+
+number = 0
+while number < 10:
+    print(f"Number is {number}!")
+    number = number + 1
+Output:
+
+Number is 0!
+Number is 1!
+Number is 2!
+Number is 3!
+Number is 4!
+Number is 5!
+Number is 6!
+Number is 7!
+Number is 8!
+Number is 9!
+Here, the variable number is set to 0 initially.
+
+Before any code is run, Python checks the condition (number < 10). It evaluates to True so the print statement gets executed and Number is 0! is printed to the console.
+
+number is then incremented by 1. The condition is re-evaluated and it is again True, so the whole procedure repeats until number is equal to 9.
+
+This time Number is 9! is printed and number is incremented, but now number is equal to 10 so the condition is no longer met and therefore the loop is terminated.
+
+It's possible that the while loop never runs if it doesn't meet the condition, like in this example:
+
+number = 50
+while number < 10 :
+    print(f"Number is {number}!")
+Since the condition is always False, the instructions in the loop's body don't execute.
+
+Don't create infinite loops
+As you saw from the example above, while loops are typically accompanied by a variable whose value changes throughout the duration of the loop. And it ultimately determines when the loop will end.
+
+If you do not add this line, you will create an infinite loop.
+
+number will not be incremented and updated. It will always be set and remain at 0 and therefore the condition number < 10 will be True forever. This means that the loop will continue to loop forever.
+
+
+# don't run this
+
+number = 0
+while number < 10:
+    print(f"Number is {number}!")
+Output:
+
+Number is 0!
+Number is 0!
+Number is 0!
+Number is 0!
+Number is 0!
+Number is 0!
+Number is 0!
+...
+It runs infinitely.
+
+It is the same as doing this:
+
+
+#don't run this
+while True:
+    print("I am always true")
+What if you find yourself in a situation like this?
+
+Press Control C to escape and end the loop.
+
+What is a do while loop?
+The general syntax of a do while loop in other programming languages looks something like this:
+
+do {
+  loop block statement to be executed;
+  }
+while(condition);
+For example, a do while loop in C looks like this:
+
+#include <stdio.h>
+
+int main(void)
+ {
+   int i = 10;
+   do {
+      printf("the value of i: %i\n", i);
+      i++;
+      }
+  while( i < 20 );
+ }
+What is unique in do while loops is the fact that the code in the loop block will be executed at least one time.
+
+The code in the statement runs one time and then the condition is checked only after the code is executed.
+
+So the code runs once first and then the condition is checked.
+
+If the condition checked evaluates to true, the loop continues.
+
+There are cases where you would want your code to run at least one time, and that is where do while loops come in handy.
+
+For example, when you're writing a program that takes in input from users you may ask for only a positive number. The code will run at least once. If the number the user submits is negative, the loop will keep on running. If it is positive, it will stop.
+
+Python does not have built-in functionality to explicitly create a do while loop like other languages. But it is possible to emulate a do while loop in Python.
+
+How to emulate a do while loop in Python
+To create a do while loop in Python, you need to modify the while loop a bit in order to get similar behavior to a do while loop in other languages.
+
+As a refresher so far, a do while loop will run at least once. If the condition is met, then it will run again.
+
+The while loop, on the other hand, doesn't run at least once and may in fact never run. It runs when and only when the condition is met.
+
+So, let's say we have an example where we want a line of code to run at least once.
+
+secret_word = "python"
+counter = 0
+
+while True:
+    word = input("Enter the secret word: ").lower()
+    counter = counter + 1
+    if word == secret_word:
+        break
+    if word != secret_word and counter > 7: 
+        break
+The code will run at least one time, asking for user input.
+
+It is always guaranteed to run at least once, with True, which otherwise creates an infinite loop.
+
+If the user inputs the correct secret word, the loop is terminated.
+
+If the user enters the wrong secret word more than 7 times, then the loop will be completely exited.
+
+The break statement allows you to control the flow of a while loop and not end up with an infinite loop.
+
+break will immediately terminate the current loop all together and break out of it.
+
+So this is how you create the a similar effect to a do while loop in Python.
+
+The loop always executes at least once. It will continue to loop if a condition is not met and then terminate when a condition is met.
+
