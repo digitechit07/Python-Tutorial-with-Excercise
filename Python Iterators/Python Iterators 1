@@ -1,0 +1,1195 @@
+Understanding Iteration in Python
+Getting to Know Python Iterators
+What Is an Iterator in Python?
+What Is the Python Iterator Protocol?
+When to Use an Iterator in Python?
+Creating Different Types of Iterators
+Yielding the Original Data
+Transforming the Input Data
+Generating New Data
+Coding Potentially Infinite Iterators
+Inheriting From collections.abc.Iterator
+Creating Generator Iterators
+Creating Generator Functions
+Using Generator Expressions to Create Iterators
+Exploring Different Types of Generator Iterators
+Doing Memory-Efficient Data Processing With Iterators
+Returning Iterators Instead of Container Types
+Creating a Data Processing Pipeline With Generator Iterators
+Understanding Some Constraints of Python Iterators
+Using the Built-in next() Function
+Getting to Know Python Iterables
+The Iterable Protocol
+The Built-in iter() Function
+The Built-in reversed() Function
+The Sequence Protocol
+Working With Iterables in Python
+Iterating Through Iterables With for Loops
+Iterating Through Comprehensions
+Unpacking Iterables
+Exploring Alternative Ways to Write .__iter__() in Iterables
+Comparing Iterators vs Iterables
+Coding Asynchronous Iterators
+Conclusion
+Frequently Asked Questions
+
+Remove ads
+ Watch Now This tutorial has a related video course created by the Real Python team. Watch it together with the written tutorial to deepen your understanding: Efficient Iterations With Python Iterators and Iterables
+
+Understanding iterators and iterables in Python is crucial for running efficient iterations. Iterators control loops, allowing you to traverse arbitrary data containers one item at a time. Iterables, on the other hand, provide the data that you want to iterate over. By mastering these concepts, you can create robust code that handles data efficiently, even when working with large datasets or infinite data streams.
+
+By the end of this tutorial, you’ll understand that:
+
+Python iterators are objects with .__iter__() and .__next__() methods.
+Iterables are objects that can return an iterator using the .__iter__() method.
+Generator functions use the yield statement to create generator iterators.
+Asynchronous iterators use .__aiter__() and .__anext__() for async operations.
+Iterators are memory-efficient and can handle infinite data streams.
+Before diving deeper into these topics, you should be familiar with some core concepts like loops and iteration, object-oriented programming, inheritance, special methods, and asynchronous programming in Python.
+
+Free Sample Code: Click here to download the free sample code that shows you how to use and create iterators and iterables for more efficient data processing.
+
+ Take the Quiz: Test your knowledge with our interactive “Iterators and Iterables in Python: Run Efficient Iterations” quiz. You’ll receive a score upon completion to help you track your learning progress:
+
+Iterators and Iterables in Python: Run Efficient Iterations
+Interactive Quiz
+
+Iterators and Iterables in Python: Run Efficient Iterations
+In this quiz, you'll test your understanding of Python's iterators and iterables. By working through this quiz, you'll revisit how to create and work with iterators and iterables, the differences between them, and review how to use generator functions.
+
+Understanding Iteration in Python
+When writing computer programs, you often need to repeat a given piece of code multiple times. To do this, you can follow one of the following approaches:
+
+Repeating the target code as many times as you need in a sequence
+Putting the target code in a loop that runs as many times as you need
+The first approach has a few drawbacks. The most troublesome issue is the repetitive code itself, which is hard to maintain and not scalable. For example, the following code will print a greeting message on your screen three times:
+
+greeting.py
+print("Hello!")
+print("Hello!")
+print("Hello!")
+If you run this script, then you’ll get 'Hello!' printed on your screen three times. This code works. However, what if you decide to update your code to print 'Hello, World!' instead of just 'Hello!'? In that case, you’ll have to update the greeting message three times, which is a maintenance burden.
+
+Now imagine a similar situation but with a larger and more complex piece of code. It can become a nightmare for maintainers.
+
+Using a loop will be a much better way to solve the problem and avoid the maintainability issue. Loops allow you to run a piece of code as often as you need. Consider how you’d write the above example using a while loop:
+
+>>> times = 0
+
+>>> while times < 3:
+...     print("Hello!")
+...     times += 1
+...
+Hello!
+Hello!
+Hello!
+This while loop runs as long as the loop-continuation condition (times < 3) remains true. In each iteration, the loop prints your greeting message and increments the control variable, times. Now, if you decide to update your message, then you just have to modify one line, which makes your code way more maintainable.
+
+Python’s while loop supports what’s known as indefinite iteration, which means executing the same block of code over and over again, a potentially undefined number of times.
+
+You’ll also find a different but similar type of iteration known as definite iteration, which means going through the same code a predefined number of times. This kind of iteration is especially useful when you need to iterate over the items of a data stream one by one in a loop.
+
+To run an iteration like this, you typically use a for loop in Python:
+
+>>> numbers = [1, 2, 3, 4, 5]
+
+>>> for number in numbers:
+...     print(number)
+...
+1
+2
+3
+4
+5
+In this example, the numbers list represents your stream of data, which you’ll generically refer to as an iterable because you can iterate over it, as you’ll learn later in this tutorial. The loop goes over each value in numbers and prints it to your screen.
+
+When you use a while or for loop to repeat a piece of code several times, you’re actually running an iteration. That’s the name given to the process itself.
+
+In Python, if your iteration process requires going through the values or items in a data collection one item at a time, then you’ll need another piece to complete the puzzle. You’ll need an iterator.
+
+
+Remove ads
+Getting to Know Python Iterators
+Iterators were added to Python 2.2 through PEP 234. They were a significant addition to the language because they unified the iteration process and abstracted it away from the actual implementation of collection or container data types. This abstraction allows iteration over unordered collections, such as sets, ensuring every element is visited exactly once.
+
+In the following sections, you’ll get to know what a Python iterator is. You’ll also learn about the iterator protocol. Finally, you’ll learn when you might consider using iterators in your code.
+
+What Is an Iterator in Python?
+In Python, an iterator is an object that allows you to iterate over collections of data, such as lists, tuples, dictionaries, and sets.
+
+Python iterators implement the iterator design pattern, which allows you to traverse a container and access its elements. The iterator pattern decouples the iteration algorithms from container data structures.
+
+Iterators take responsibility for two main actions:
+
+Returning the data from a stream or container one item at a time
+Keeping track of the current and visited items
+In summary, an iterator will yield each item or value from a collection or a stream of data while doing all the internal bookkeeping required to maintain the state of the iteration process.
+
+Python iterators must implement a well-established internal structure known as the iterator protocol. In the following section, you’ll learn the basics of this protocol.
+
+What Is the Python Iterator Protocol?
+A Python object is considered an iterator when it implements two special methods collectively known as the iterator protocol. These two methods make Python iterators work. So, if you want to create custom iterator classes, then you must implement the following methods:
+
+Method	Description
+.__iter__()	Called to initialize the iterator. It must return an iterator object.
+.__next__()	Called to iterate over the iterator. It must return the next value in the data stream.
+The .__iter__() method of an iterator typically returns self, which holds a reference to the current object: the iterator itself. This method is straightforward to write and, most of the time, looks something like this:
+
+def __iter__(self):
+    return self
+The only responsibility of .__iter__() is to return an iterator object. So, this method will typically just return self, which holds the current instance. Don’t forget that this instance must define a .__next__() method.
+
+The .__next__() method will be a bit more complex depending on what you’re trying to do with your iterator. This method must return the next item from the data stream. It should also raise a StopIteration exception when no more items are available in the data stream. This exception will make the iteration finish. That’s right. Iterators use exceptions for control flow.
+
+When to Use an Iterator in Python?
+The most generic use case of a Python iterator is to allow iteration over a stream of data or a container data structure. Python uses iterators under the hood to support every operation that requires iteration, including for loops, comprehensions, iterable unpacking, and more. So, you’re constantly using iterators without being conscious of them.
+
+In your day-to-day programming, iterators come in handy when you need to iterate over a dataset or data stream with an unknown or a huge number of items. This data can come from different sources, such as your local disk, a database, and a network.
+
+In these situations, iterators allow you to process the datasets one item at a time without exhausting the memory resources of your system, which is one of the most attractive features of iterators.
+
+
+Remove ads
+Creating Different Types of Iterators
+Using the two methods that make up the iterator protocol in your classes, you can write at least three different types of custom iterators. You can have iterators that:
+
+Take a stream of data and yield data items as they appear in the original data
+Take a data stream, transform each item, and yield transformed items
+Take no input data, generating new data as a result of some computation to finally yield the generated items
+The first kind of iterator is what you’d call a classic iterator because it implements the original iterator pattern. The second and third types of iterators take the pattern further by adding new capabilities and leveraging the power of iterators.
+
+Note: The second and third types of iterators may bring to mind some techniques that sound similar to mapping and filtering operations from functional programming.
+
+In the following sections, you’ll learn how to use the iterator protocol to create iterators of all three different types.
+
+Yielding the Original Data
+Okay, now it’s time to learn how to write your own iterators in Python. As a first example, you’ll write a classic iterator called SequenceIterator. It’ll take a sequence data type as an argument and yield its items on demand.
+
+Fire up your favorite code editor or IDE and create the following file:
+
+sequence_iter.py
+class SequenceIterator:
+    def __init__(self, sequence):
+        self._sequence = sequence
+        self._index = 0
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self._index < len(self._sequence):
+            item = self._sequence[self._index]
+            self._index += 1
+            return item
+        else:
+            raise StopIteration
+Your SequenceIterator will take a sequence of values at instantiation time. The class initializer, .__init__(), takes care of creating the appropriate instance attributes, including the input sequence and an ._index attribute. You’ll use this latter attribute as a convenient way to walk through the sequence using indices.
+
+Note: You’ll note that the instance attributes in this and the next examples are non-public attributes whose names start with an underscore (_). That’s because you don’t need direct access to those attributes from outside the class.
+
+The .__iter__() method does only one thing: returns the current object, self. In this case, self is the iterator itself, which implies it has a .__next__() method.
+
+Finally, you have the .__next__() method. Inside it, you define a conditional statement to check if the current index is less than the number of items in the input sequences. This check allows you to stop the iteration when the data is over, in which case the else clause will raise a StopIteration exception.
+
+In the if clause, you grab the current item from the original input sequence using its index. Then you increment the ._index attribute using an augmented assignment. This action allows you to move forward in the iteration while you keep track of the visited items. The final step is to return the current item.
+
+Here’s how your iterator works when you use it in a for loop:
+
+>>> from sequence_iter import SequenceIterator
+
+>>> for item in SequenceIterator([1, 2, 3, 4]):
+...     print(item)
+...
+1
+2
+3
+4
+Great! Your custom iterator works as expected. It takes a sequence as an argument and allows you to iterate over the original input data.
+
+Note: You can create an iterator that doesn’t define an .__iter__() method, in which case its .__next__() method will still work. However, you must implement .__iter__() if you want your iterator to work in for loops. This loop always calls .__iter__() to initialize the iterator.
+
+Before diving into another example, you’ll learn how Python’s for loops work internally. The following code simulates the complete process:
+
+>>> sequence = SequenceIterator([1, 2, 3, 4])
+
+>>> # Get an iterator over the data
+>>> iterator = sequence.__iter__()
+>>> while True:
+...     try:
+...         # Retrieve the next item
+...         item = iterator.__next__()
+...     except StopIteration:
+...         break
+...     else:
+...         # The loop's code block goes here...
+...         print(item)
+...
+1
+2
+3
+4
+After instantiating SequenceIterator, the code prepares the sequence object for iteration by calling its .__iter__() method. This method returns the actual iterator object. Then, the loop repeatedly calls .__next__() on the iterator to retrieve values from it.
+
+Note: You shouldn’t use .__iter__() and .__next__() directly in your code. Instead, you should use the built-in iter() and next() functions, which fall back to calling the corresponding special methods.
+
+When a call to .__next__() raises the StopIteration exception, you break out of the loop. In this example, the call to print() under the else clause of the try block represents the code block in a normal for loop. As you can see, the for loop construct is a kind of syntactic sugar for a piece of code like the one above.
+
+
+Remove ads
+Transforming the Input Data
+Say that you want to write an iterator that takes a sequence of numbers, computes the square value of each number, and yields those values on demand. In this case, you can write the following class:
+
+square_iter.py
+class SquareIterator:
+    def __init__(self, sequence):
+        self._sequence = sequence
+        self._index = 0
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self._index < len(self._sequence):
+            square = self._sequence[self._index] ** 2
+            self._index += 1
+            return square
+        else:
+            raise StopIteration
+The first part of this SquareIterator class is the same as your SequenceIterator class. The .__next__() method is also pretty similar. The only difference is that before returning the current item, the method computes its square value. This computation performs a transformation on each data point.
+
+Here’s how the class will work in practice:
+
+>>> from square_iter import SquareIterator
+
+>>> for square in SquareIterator([1, 2, 3, 4, 5]):
+...     print(square)
+...
+1
+4
+9
+16
+25
+Using an instance of SquareIterator in a for loop allows you to iterate over the square values of your original input values.
+
+The option of performing data transformation on a Python iterator is a great feature. It can make your code quite efficient in terms of memory consumption. Why? Well, imagine for a moment that iterators didn’t exist. In that case, if you wanted to iterate over the square values of your original data, then you’d need to create a new list to store the computed squares.
+
+This new list would consume memory because it would have to store all the data simultaneously. Only then would you be able to iterate over the square values.
+
+However, if you use an iterator, then your code will only require memory for a single item at a time. The iterator will compute the following items on demand without storing them in memory. In this regard, iterators are lazy objects.
+
+Generating New Data
+You can also create custom iterators that generate a stream of new data from a given computation without taking a data stream as input. Consider the following iterator, which produces Fibonacci numbers:
+
+fib_iter.py
+class FibonacciIterator:
+    def __init__(self, stop=10):
+        self._stop = stop
+        self._index = 0
+        self._current = 0
+        self._next = 1
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self._index < self._stop:
+            self._index += 1
+            fib_number = self._current
+            self._current, self._next = (
+                self._next,
+                self._current + self._next,
+            )
+            return fib_number
+        else:
+            raise StopIteration
+This iterator doesn’t take a data stream as input. Instead, it generates each item by performing a computation that yields values from the Fibonacci sequence. You do this computation inside the .__next__() method.
+
+You start this method with a conditional that checks if the current sequence index hasn’t reached the ._stop value, in which case you increment the current index to control the iteration process. Then you compute the Fibonacci number that corresponds to the current index, returning the result to the caller of .__next__().
+
+When ._index grows to the value of ._stop, you raise a StopIteration, which terminates the iteration process. Note that you should provide a stop value when you call the class constructor to create a new instance. The stop argument defaults to 10, meaning the class will generate ten Fibonacci numbers if you create an instance without arguments.
+
+Here’s how you can use this FibonacciIterator class in your code:
+
+>>> from fib_iter import FibonacciIterator
+
+>>> for fib_number in FibonacciIterator():
+...     print(fib_number)
+...
+0
+1
+1
+2
+3
+5
+8
+13
+21
+34
+Instead of yielding items from an existing data stream, your FibonacciIterator class computes every new value in real time, yielding values on demand. Note that in this example, you relied on the default number of Fibonacci numbers, which is 10.
+
+Coding Potentially Infinite Iterators
+An interesting feature of Python iterators is that they can handle potentially infinite data streams. Yes, you can create iterators that yield values without ever reaching an end! To do this, you just have to skip the StopIteration part.
+
+For example, say that you want to create a new version of your FibonacciIterator class that can produce potentially infinite Fibonacci numbers. To do that, you just need to remove the StopIteraton and the condition that raises it:
+
+inf_fib.py
+class FibonacciInfIterator:
+    def __init__(self):
+        self._index = 0
+        self._current = 0
+        self._next = 1
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        self._index += 1
+        self._current, self._next = (self._next, self._current + self._next)
+        return self._current
+The most relevant detail in this example is that .__next__() never raises a StopIteration exception. This fact turns the instances of this class into potentially infinite iterators that would produce values forever if you used the class in a for loop.
+
+Note: Infinite loops will cause your code to hang. To stop a program that’s entered an unexpected infinite loop, you may need to use your operating system’s tools, such as a task manager, to terminate the program’s execution.
+
+If you’re working in a Python interactive REPL, then you can press the Ctrl+C key combination, which raises a KeyboardInterrupt exception and terminates the loop.
+
+To check if your FibonacciInfIterator works as expected, go ahead and run the following loop. But remember, it’ll be an infinite loop:
+
+>>> from inf_fib import FibonacciInfIterator
+
+>>> for fib_number in FibonacciInfIterator():
+...     print(fib_number)
+...
+0
+1
+1
+2
+3
+5
+8
+13
+21
+34
+Traceback (most recent call last):
+    ...
+KeyboardInterrupt
+When you run this loop in your Python interactive session, you’ll notice that the loop prints numbers from the Fibonacci sequence without stopping. To stop the loops, go ahead and press Ctrl+C.
+
+As you’ve confirmed in this example, infinite iterators like FibonacciInfIterator will make for loops run endlessly. They’ll also cause functions that accept iterators—such as sum(), max(), and min()—to never return. So, be careful when using infinite iterators in your code, as you can make your code hang.
+
+
+Remove ads
+Inheriting From collections.abc.Iterator
+The collections.abc module includes an abstract base class (ABC) called Iterator. You can use this ABC to create your custom iterators quickly. This class provides basic implementations for the .__iter__() method.
+
+It also provides a .__subclasshook__() class method that ensures only classes implementing the iterator protocol will be considered subclasses of Iterator.
+
+Check out the following example, in which you change your SequenceIterator class to use the Iterator ABC:
+
+sequence_iter.py
+from collections.abc import Iterator
+
+class SequenceIterator(Iterator):
+    def __init__(self, sequence):
+        self._sequence = sequence
+        self._index = 0
+
+    def __next__(self):
+        if self._index < len(self._sequence):
+            item = self._sequence[self._index]
+            self._index += 1
+            return item
+        else:
+            raise StopIteration
+If you inherit from Iterator, then you don’t have to write an .__iter__() method because the superclass already provides one with the standard implementation. However, you do have to write your own .__next__() method because the parent class doesn’t provide a working implementation.
+
+Here’s how this class works:
+
+>>> from sequence_iter import SequenceIterator
+
+>>> for number in SequenceIterator([1, 2, 3, 4]):
+...     print(number)
+...
+1
+2
+3
+4
+As you can see, this new version of SequenceIterator works the same as your original version. However, this time you didn’t have to code the .__iter__() method. Your class inherited this method from Iterator.
+
+The features inherited from the Iterator ABC are useful when you’re working with class hierarchies. They’ll take work off your plate and save you headaches.
+
+Creating Generator Iterators
+Generator functions are special types of functions that allow you to create iterators using a functional style. Unlike regular functions, which typically compute a value and return it to the caller, generator functions return a generator iterator that yields a stream of data one value at a time.
+
+Note: In Python, you’ll commonly use the term generators to collectively refer to two separate concepts: the generator function and the generator iterator. The generator function is the function that you define using the yield statement. The generator iterator is what this function returns.
+
+A generator function returns an iterator that supports the iterator protocol out of the box. So, generators are also iterators. In the following sections, you’ll learn how to create your own generator functions.
+
+Creating Generator Functions
+To create a generator function, you must use the yield keyword to yield the values one by one. Here’s how you can write a generator function that returns an iterator that’s equivalent to your SequenceIterator class:
+
+>>> def sequence_generator(sequence):
+...     for item in sequence:
+...         yield item
+...
+
+>>> sequence_generator([1, 2, 3, 4])
+<generator object sequence_generator at 0x108cb6260>
+
+>>> for number in sequence_generator([1, 2, 3, 4]):
+...     print(number)
+...
+1
+2
+3
+4
+In sequence_generator(), you accept a sequence of values as an argument. Then you iterate over that sequence using a for loop. In each iteration, the loop yields the current item using the yield keyword. This logic is then packed into a generator iterator object, which automatically supports the iterator protocol.
+
+You can use this iterator in a for loop as you would use a class-based iterator. Internally, the iterator will run the original loop, yielding items on demand until the loop consumes the input sequence, in which case the iterator will automatically raise a StopIteration exception.
+
+Generator functions are a great tool for creating function-based iterators that save you a lot of work. You just have to write a function, which will often be less complex than a class-based iterator. If you compare sequence_generator() with its equivalent class-based iterator, SequenceIterator, then you’ll note a big difference between them. The function-based iterator is way simpler and more straightforward to write and understand.
+
+
+Remove ads
+Using Generator Expressions to Create Iterators
+If you like generator functions, then you’ll love generator expressions. These are particular types of expressions that return generator iterators. The syntax of a generator expression is almost the same as that of a list comprehension. You only need to turn the square brackets ([]) into parentheses:
+
+>>> [item for item in [1, 2, 3, 4]]  # List comprehension
+[1, 2, 3, 4]
+
+>>> (item for item in [1, 2, 3, 4])  # Generator expression
+<generator object <genexpr> at 0x7f55962bef60>
+
+>>> generator_expression = (item for item in [1, 2, 3, 4])
+>>> for item in generator_expression:
+...     print(item)
+...
+1
+2
+3
+4
+Wow! That was really neat! Your generator expression does the same as its equivalent generator function. The expression returns a generator iterator that yields values on demand. Generator expressions are an amazing tool that you’ll probably use a lot in your code.
+
+Exploring Different Types of Generator Iterators
+As you’ve already learned, classic iterators typically yield data from an existing iterable, such as a sequence or collection data structure. The examples in the above section show that generators can do just the same.
+
+However, as their name suggests, generators can generate streams of data. To do this, generators may or may not take input data. Like class-based iterators, generators allow you to:
+
+Yield the input data as is
+Transform the input and yield a stream of transformed data
+Generate a new stream of data out of a known computation
+To illustrate the second use case, check out how you can write an iterator of square values using a generator function:
+
+>>> def square_generator(sequence):
+...     for item in sequence:
+...         yield item**2
+...
+
+>>> for square in square_generator([1, 2, 3, 4, 5]):
+...     print(square)
+...
+1
+4
+9
+16
+25
+This square_generator() function takes a sequence and computes the square value of each of its items. The yield statement yields square items on demand. When you call the function, you get a generator iterator that generates square values from the original input data.
+
+Alternatively, generators can just generate the data by performing some computation without the need for input data. That was the case with your FibonacciIterator iterator, which you can write as a generator function like the following:
+
+>>> def fibonacci_generator(stop=10):
+...     current_fib, next_fib = 0, 1
+...     for _ in range(0, stop):
+...         fib_number = current_fib
+...         current_fib, next_fib = (
+...            next_fib, current_fib + next_fib
+...         )
+...         yield fib_number
+...
+
+>>> list(fibonacci_generator())
+[0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+>>> list(fibonacci_generator(15))
+[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377]
+This functional version of your FibonacciIterator class works as expected, producing Fibonacci numbers on demand. Note how you’ve simplified the code by turning your iterator class into a generator function. Finally, to display the actual data, you’ve called list() with the iterator as an argument. These calls implicitly consume the iterators, returning lists of numbers.
+
+In this example, when the loop finishes, the generator iterator automatically raises a StopIteration exception. If you want total control over this process, then you can terminate the iteration yourself by using an explicit return statement:
+
+def fibonacci_generator(stop=10):
+    current_fib, next_fib = 0, 1
+    index = 0
+    while True:
+        if index == stop:
+            return
+        index += 1
+        fib_number = current_fib
+        current_fib, next_fib = next_fib, current_fib + next_fib
+        yield fib_number
+In this version of fibonacci_generator(), you use a while loop to perform the iteration. The loop checks the index in every iteration and returns when the index has reached the stop value.
+
+You’ll use a return statement inside a generator function to explicitly indicate that the generator is done. The return statement will make the generator raise a StopIteration.
+
+Just like class-based iterators, generators are useful when you need to process a large amount of data, including infinite data streams. You can pause and resume generators, and you can iterate over them. They generate items on demand, so they’re also lazy. Both iterators and generators are pretty efficient in terms of memory usage. You’ll learn more about this feature in the following section.
+
+Doing Memory-Efficient Data Processing With Iterators
+Iterators and generators are pretty memory-efficient when you compare them with regular functions, container data types, and comprehensions. With iterators and generators, you don’t need to store all the data in your compter’s memory at the same time.
+
+Iterators and generators also allow you to completely decouple iteration from processing individual items. They let you connect multiple data processing stages to create memory-efficient data processing pipelines.
+
+In the following sections, you’ll learn how to use iterators, specifically generator iterators, to process your data in a memory-efficient manner.
+
+
+Remove ads
+Returning Iterators Instead of Container Types
+Regular functions and comprehensions typically create a container type like a list or a dictionary to store the data that results from the function’s intended computation. All this data is stored in memory at the same time.
+
+In contrast, iterators keep only one data item in memory at a time, generating the next items on demand or lazily. For example, get back to the square values generator. Instead of using a generator function that yields values on demand, you could’ve used a regular function like the following:
+
+>>> def square_list(sequence):
+...     squares = []
+...     for item in sequence:
+...         squares.append(item**2)
+...     return squares
+...
+
+>>> numbers = [1, 2, 3, 4, 5]
+>>> square_list(numbers)
+[1, 4, 9, 16, 25]
+In this example, you have two list objects: the original sequence of numbers and the list of square values that results from calling square_list(). In this case, the input data is fairly small. However, if you start with a huge list of values as input, then you’ll be using a large amount of memory to store the original and resulting lists.
+
+In contrast, if you use a generator, then you’ll only need memory for the input list and for a single square value at a time.
+
+Similarly, generator expressions are more memory-efficient than comprehensions. Comprehensions create container objects, while generator expressions return iterators that produce items when needed.
+
+Another important memory-related difference between iterators, functions, data structures, and comprehensions is that iterators are the only way to process infinite data streams. In this situation, you can’t use a function that creates a new container directly, because your input data is infinite, which will hang your execution.
+
+Creating a Data Processing Pipeline With Generator Iterators
+As mentioned before, you can use iterators and generators to build memory-efficient data processing pipelines. Your pipeline can consist of multiple separate generator functions performing a single transformation each.
+
+For example, say you need to perform a bunch of mathematical tranformations on a sample of integer numbers. You may need to raise the values to the power of two or three, filter even and odd numbers, and finally convert the data into string objects. You also need your code to be flexible enough that you can decide which specific set of transformations you need to run.
+
+Here’s your set of individual generator functions:
+
+math_pipeline.py
+def to_square(numbers):
+    return (number**2 for number in numbers)
+
+def to_cube(numbers):
+    return (number**3 for number in numbers)
+
+def to_even(numbers):
+    return (number for number in numbers if number % 2 == 0)
+
+def to_odd(numbers):
+    return (number for number in numbers if number % 2 != 0)
+
+def to_string(numbers):
+    return (str(number) for number in numbers)
+All these functions take some sample data as their numbers argument. Each function performs a specific mathematical transformation on the input data and returns an iterator that produces transformed values on demand.
+
+Here’s how you can combine some of these generator functions to create different data processing pipelines:
+
+>>> import math_pipeline as mpl
+
+>>> list(mpl.to_string(mpl.to_square(mpl.to_even(range(20)))))
+['0', '4', '16', '36', '64', '100', '144', '196', '256', '324']
+
+>>> list(mpl.to_string(mpl.to_cube(mpl.to_odd(range(20)))))
+['1', '27', '125', '343', '729', '1331', '2197', '3375', '4913', '6859']
+Your first pipeline takes some numbers, extracts the even ones, finds the square value of those even numbers, and finally converts each resulting value into a string object. Note how each function provides the required argument for the next function on the pipeline. The second pipeline works similarly.
+
+Understanding Some Constraints of Python Iterators
+Python iterators have several neat and useful features that make them amazing. Because of these features, iterators are a fundamental tool for most Python developers. Iterators allow you to:
+
+Generate and yield a stream of data on demand
+Pause the iteration completely until the next value is required, which makes them lazy
+Save memory by keeping only one value in memory at a given time
+Manage data streams of infinite or unknown size
+However, iterators have a few constraints and limitations that you must remember when working with them in your Python code. The first and probably the most overlooked constraint is that you can’t iterate over an iterator more than once.
+
+Consider the following code, which reuses your SequenceIterator class:
+
+>>> from sequence_iter import SequenceIterator
+
+>>> numbers_iter = SequenceIterator([1, 2, 3, 4])
+
+>>> for number in numbers_iter:
+...     print(number)
+...
+1
+2
+3
+4
+
+>>> for number in numbers_iter:
+...     print(number)
+...
+The second loop in this example doesn’t print anything on your screen. The problem is that the first loop consumed all the items from your numbers_iter iterator. Once you’ve consumed all the items from an iterator, that iterator is exhausted.
+
+In this example, the iterator is exhausted when you start the second loop. An exhausted iterator’s only action is to raise a StopIteration exception, which immediately terminates any loop.
+
+This behavior leads to the second constraint: you can’t reset an exhausted iterator to start iteration again. If you want to iterate over the same data again, then you must create a new iterator:
+
+>>> another_iter = SequenceIterator([1, 2, 3, 4])
+
+>>> for number in another_iter:
+...     print(number)
+...
+1
+2
+3
+4
+Here, you create a completely new iterator called another_iter by instantiating SequenceIterator again. This new iterator allows you to iterate through the original data once again.
+
+As you already learned, one of the responsibilities of an iterator is to keep track of the current and visited items in an iteration. Therefore, you can partially consume iterators. In other words, you can retrieve a definite number of items from an iterator and leave the rest untouched:
+
+>>> numbers_iter = SequenceIterator([1, 2, 3, 4, 5, 6])
+
+>>> for number in numbers_iter:
+...     if number == 4:
+...         break
+...     print(number)
+...
+1
+2
+3
+
+>>> next(numbers_iter)
+5
+>>> next(numbers_iter)
+6
+>>> next(numbers_iter)
+Traceback (most recent call last):
+    ...
+StopIteration
+In this example, you use a conditional statement to break the loop when the current number equals 4. Now the loop only consumes the first four numbers in numbers_iter. You can access the rest of the values using .__next__() or a second loop. Note that there’s no way to access consumed values.
+
+Another constraint of iterators is that they only define the .__next__() method, which gets the next item each time. There’s no .__previous__() method or anything like that. This means that you can only move forward through an iterator. You can’t move backward.
+
+Because iterators only keep one item in memory at a time, you can’t know their length or number of items, which is another limitation. If your iterator isn’t infinite, then you’ll only know its length when you’ve consumed all its data.
+
+Finally, unlike lists and tuples, iterators don’t allow indexing and slicing operations with the [] operator:
+
+>>> numbers_iter = SequenceIterator([1, 2, 3, 4, 5, 6])
+
+>>> numbers_iter[2]
+Traceback (most recent call last):
+    ...
+TypeError: 'SequenceIterator' object is not subscriptable
+
+>>> numbers_iter[1:3]
+Traceback (most recent call last):
+    ...
+TypeError: 'SequenceIterator' object is not subscriptable
+In the first example, you try to get the item at index 2 in numbers_iter, but you get a TypeError because iterators don’t support indexing. Similarly, when you try to retrieve a slice of data from numbers_iter, you get a TypeError too.
+
+Fortunately, you can create iterators that overcome some of the above constraints. For example, you can create an iterator that allows you to iterate over the underlying data multiple consecutive times:
+
+reusable_range.py
+class ReusableRange:
+    def __init__(self, start=0, stop=None, step=1):
+        if stop is None:
+            stop, start = start, 0
+        self._range = range(start, stop, step)
+        self._iter = iter(self._range)
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        try:
+            return next(self._iter)
+        except StopIteration:
+            self._iter = iter(self._range)
+            raise
+This ReusableRange iterator mimics some of the core behavior of the built-in range class. The .__next__() method creates a new iterator over the range object every time you consume the data.
+
+Here’s how this class works:
+
+>>> from reusable_range import ReusableRange
+
+>>> numbers = ReusableRange(10)
+
+>>> list(numbers)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+>>> list(numbers)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+Here, you instantiate ReusableRange to create a reusable iterator over a given range of numbers. To try it out, you call list() several times with the numbers iterator object as an argument. In all cases, you get a new list of values.
+
+
+Remove ads
+Using the Built-in next() Function
+The built-in next() function lets you retrieve the next item from an iterator. To do this, next() automatically falls back to calling the iterator’s .__next__() method. In practice, you shouldn’t call special methods like .__next__() directly in your code, so if you need to get the next item from an iterator, then you should use next().
+
+The next() function can play an important role in your code when you’re working with Python iterators. This function allows you to traverse an iterator without a formal loop. This possibility can be helpful when you’re working with infinite iterators or with iterators that have an unknown number of items.
+
+A common use case of next() is when you need to manually skip over the header line in a CSV file. File objects are also iterators that yield lines on demand. So, you can call next() with a CSV file as an argument to skip its first line and then pass the rest of the file to a for loop for further processing:
+
+with open("sample_file.csv") as csv_file:
+    next(csv_file)
+    for line in csv_file:
+        # Process file line by line here...
+        print(line)
+In this example, you use the with statement to open a CSV file containing some target data. Because you just want to process the data, you need to skip the first line of the file, which contains headers for each data column rather than data. To do this, you call next() with the file object as an argument.
+
+This call to next() falls back to the file object’s .__next__() method, which returns the next line in the file. In this case, the next line is the first line because you haven’t started to consume the file.
+
+You can also pass a second and optional argument to next(). The argument is called default and allows you to provide a default value that’ll be returned when the target iterator raises the StopIteration exception. So, default is a way to skip the exception:
+
+>>> numbers_iter = SequenceIterator([1, 2, 3])
+>>> next(numbers_iter)
+1
+>>> next(numbers_iter)
+2
+>>> next(numbers_iter)
+3
+>>> next(numbers_iter)
+Traceback (most recent call last):
+    ...
+StopIteration
+
+>>> numbers_iter = SequenceIterator([1, 2, 3])
+>>> next(numbers_iter, 0)
+1
+>>> next(numbers_iter, 0)
+2
+>>> next(numbers_iter, 0)
+3
+>>> next(numbers_iter, 0)
+0
+>>> next(numbers_iter, 0)
+0
+If you call next() without a default value, then your code will end with a StopIteration exception. On the other hand, if you provide a suitable default value in the call to next(), then you’ll get that value as a result when the iterator gets exhausted.
+
+So far, you’ve learned a lot about iterators in Python. It’s time for you to get into iterables, which are slightly different tools.
+
+Getting to Know Python Iterables
+When it comes to iteration in Python, you’ll often hear people talking about iterable objects or just iterables. As the name suggests, an iterable is an object that you can iterate over. To perform this iteration, you’ll typically use a for loop.
+
+Pure iterable objects typically hold the data themselves. For example, Python built-in container types—such as lists, tuples, dictionaries, and sets—are iterable objects. They provide a stream of data that you can iterate over. However, iterators are also iterable objects even if they don’t hold the data themselves. You’ll learn more about this fact in the section Comparing Iterators vs Iterables.
+
+Python expects iterable objects in several different contexts, the most important being for loops. Iterables are also expected in unpacking operations and in built-in functions, such as all(), any(), enumerate(), max(), min(), len(), zip(), sum(), map(), and filter().
+
+Other definitions of iterables include objects that:
+
+Implement the iterable protocol
+Make the built-in iter() function return an iterator
+Implement the sequence protocol
+In the following sections, you’ll learn about these three ways to define iterables in Python. To kick things off, you’ll start by understanding the iterable protocol.
+
+The Iterable Protocol
+The iterable protocol consists of a single special method that you already know from the section on the iterator protocol. The .__iter__() method fulfills the iterable protocol. This method must return an iterator object, which usually doesn’t coincide with self unless your iterable is also an iterator.
+
+Note: An iterable is an object implementing the .__iter__() special method or the .__getitem__() method as part of the sequence protocol. In this sense, you can think of iterables as a class implementing the iterable protocol, even if this term isn’t officially defined. In Python, a protocol is a set of dunder methods that allows you to support a given feature in a class.
+
+You already know .__iter__() from the section on the iterator protocol. This method must return an iterator object, which usually doesn’t coincide with self unless your iterable is also an iterator.
+
+To quickly jump into an example of how the iterable protocol works, you’ll reuse the SequenceIterator class from previous sections. Here’s the implementation:
+
+sequence_iterable.py
+from sequence_iter import SequenceIterator
+
+class Iterable:
+    def __init__(self, sequence):
+        self.sequence = sequence
+
+    def __iter__(self):
+        return SequenceIterator(self.sequence)
+In this example, your Iterable class takes a sequence of values as an argument. Then, you implement an .__iter__() method that returns an instance of SequenceIterator built with the input sequence. This class is ready for iteration:
+
+>>> from sequence_iterable import Iterable
+
+>>> for value in Iterable([1, 2, 3, 4]):
+...     print(value)
+...
+1
+2
+3
+4
+The .__iter__() method is what makes an object iterable. Behind the scenes, the loop calls this method on the iterable to get an iterator object that guides the iteration process through its .__next__() method.
+
+Note that iterables aren’t iterators on their own. So, you can’t use them as direct arguments to the next() function:
+
+>>> numbers = Iterable([1, 2, 3, 4])
+>>> next(numbers)
+Traceback (most recent call last):
+    ...
+TypeError: 'Iterable' object is not an iterator
+
+>>> letters = "ABCD"
+>>> next(letters)
+Traceback (most recent call last):
+    ...
+TypeError: 'str' object is not an iterator
+
+>>> fruits = [
+...     "apple",
+...     "banana",
+...     "orange",
+...     "grape",
+...     "lemon",
+... ]
+>>> next(fruits)
+Traceback (most recent call last):
+    ...
+TypeError: 'list' object is not an iterator
+You can’t pass an iterable directly to the next() function because, in most cases, iterables don’t implement the .__next__() method from the iterator protocol. This is intentional. Remember that the iterator pattern intends to decouple the iteration algorithm from data structures.
+
+Note: You can add a .__next__() method to a custom iterable and return self from its .__iter__() method. This will turn your iterable into an iterator on itself. However, this addition imposes some limitations. The most relevant limitation may be that you won’t be able to iterate several times over your iterable.
+
+So, when you create your own container data structures, make them iterables, but think carefully to decide if you need them to be iterators too.
+
+Note how both custom iterables and built-in iterables, such as strings and lists, fail to support next(). In all cases, you get a TypeError telling you that the object at hand isn’t an iterator.
+
+If next() doesn’t work, then how can iterables work in for loops? Well, for loops always call the built-in iter() function to get an iterator out of the target stream of data. You’ll learn more about this function in the next section.
+
+
+Remove ads
+The Built-in iter() Function
+From Python’s perspective, an iterable is an object that can be passed to the built-in iter() function to get an iterator from it. Internally, iter() falls back to calling .__iter__() on the target objects. So, if you want a quick way to determine whether an object is iterable, then use it as an argument to iter(). If you get an iterator back, then your object is iterable. If you get an error, then the object isn’t iterable:
+
+>>> fruits = [
+... "apple",
+... "banana",
+... "orange",
+... "grape",
+... "lemon",
+... ]
+
+>>> iter(fruits)
+<list_iterator object at 0x105858760>
+
+>>> iter(42)
+Traceback (most recent call last):
+    ...
+TypeError: 'int' object is not iterable
+When you pass an iterable object, like a list, as an argument to the built-in iter() function, you get an iterator for the object. In contrast, if you call iter() with an object that’s not iterable, like an integer number, then you get a TypeError exception.
+
+The Built-in reversed() Function
+Python’s built-in reversed() function allows you to create an iterator that yields the values of an input iterable in reverse order. Аs iter() falls back to calling .__iter__() on the underlying iterable, reversed() delegates on a special method called .__reversed__() that’s present in ordered built-in types, such as lists, tuples, and dictionaries.
+
+Other ordered types, such as strings, also support reversed() even though they don’t implement a .__reversed__() method.
+
+Here’s an example of how reversed() works:
+
+>>> digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+>>> reversed(digits)
+<list_reverseiterator object at 0x1053ff490>
+
+>>> list(reversed(digits))
+[9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+In this example, you use reversed() to create an iterator object that yields values from the digits list in reverse order.
+
+To do its job, reversed() falls back to calling .__reversed__() on the input iterable. If that iterable doesn’t implement .__reversed__(), then reversed() checks the existence of .__len__() and .__getitem___(index). If these methods are present, then reversed() uses them to iterate over the data sequentially. If none of these methods are present, then calling reversed() on such an object will fail.
+
+The Sequence Protocol
+Sequences are container data types that store items in consecutive order. Each item is quickly accessible through a zero-based index that reflects the item’s relative position in the sequence. You can use this index and the indexing operator ([]) to access individual items in the sequence:
+
+>>> numbers = [1, 2, 3, 4]
+>>> numbers[0]
+1
+>>> numbers[2]
+3
+Integer indices give you access to individual values in the underlying list of numbers. Note that the indices start from zero.
+
+All built-in sequence data types—like lists, tuples, and strings—implement the sequence protocol, which consists of the following methods:
+
+.__getitem__(index) takes an integer index starting from zero and returns the items at that index in the underlying sequence. It raises an IndexError exception when the index is out of range.
+.__len__() returns the length of the sequence.
+When you use an object that supports these two methods, Python internally calls .__getitem__() to retrieve each item sequentially and .__len__() to determine the end of the data. This means that you can use the object in a loop directly.
+
+Note: Python dictionaries also implement .__getitem__() and .__len__(). However, they’re considered mapping data types rather than sequences because the lookups use arbitrary immutable keys rather than integer indices.
+
+To check this internal behavior of Python, consider the following class, which implements a minimal stack data structure using a list to store the actual data:
+
+stack.py
+class Stack:
+    def __init__(self):
+        self._items = []
+
+    def push(self, item):
+        self._items.append(item)
+
+    def pop(self):
+        try:
+            return self._items.pop()
+        except IndexError:
+            raise IndexError("pop from an empty stack") from None
+
+    def __getitem__(self, index):
+        return self._items[index]
+
+    def __len__(self):
+        return len(self._items)
+This Stack class provides the two core methods that you’ll typically find in a stack data structure. The push() method allows you to add items to the top of the stack, while the pop() method removes and returns items from the top of the stack. This way, you guarantee that your stack works according to the LIFO (last in, first out) principle.
+
+The class also implements the Python sequence protocol. The .__getitem__() method returns the item at index from the underlying list object, ._items. Meanwhile, the .__len__() method returns the number of items in the stack using the built-in len() function.
+
+These two methods make your Stack class iterable:
+
+>>> from stack import Stack
+
+>>> stack = Stack()
+>>> stack.push(1)
+>>> stack.push(2)
+>>> stack.push(3)
+>>> stack.push(4)
+
+>>> iter(stack)
+<iterator object at 0x104e9b460>
+
+>>> for value in stack:
+...     print(value)
+...
+1
+2
+3
+4
+You Stack class doesn’t have an .__iter__() method. However, Python is smart enough to build an iterator using .__getitem__() and .__len__(). So, your class supports iter() and iteration. You’ve created an iterable without formally implementing the iterable protocol.
+
+
+Remove ads
+Working With Iterables in Python
+Up to this point, you’ve learned what an iterable is in Python and how to create them using different techniques. You’ve learned that iterables themselves contain the data. For example, lists, tuples, dictionaries, strings, and sets are all iterables.
+
+Iterables are present in many contexts in Python. You’ll use them in for loops, unpacking operations, comprehensions, and even as arguments to functions. They’re an important part of Python as a language.
+
+In the following sections, you’ll explore how iterables work in most of the contexts mentioned before. To start off, you’ll use iterables in definite iteration.
+
+Iterating Through Iterables With for Loops
+Iterables shine in the context of iteration. They’re especially useful in definite iteration, which uses for loops to access the items in iterable objects. Python’s for loops are specially designed to traverse iterables. That’s why you can use iterables directly in this type of loop:
+
+>>> for number in [1, 2, 3, 4]:
+...     print(number)
+...
+1
+2
+3
+4
+Internally, the loop creates the required iterator object to control the iteration. This iterator keeps track of the item currently going through the loop. It also takes care of retrieving consecutive items from the iterable and finishing the iteration when the data is over.
+
+Iterating Through Comprehensions
+Python also allows you to use iterables in another kind of iteration known as comprehensions. Comprehensions work similarly to for loops but have a more compact syntax.
+
+You can use comprehensions to create new lists, dictionaries, and sets from existing iterables of data. In all cases, the comprehension construct will iterate over the input data, transform it, and generate a new container data type.
+
+For example, say that you want to process a list of numeric values and create a new list with cube values. In this case, you can use the following list comprehension to perform the data transformation:
+
+>>> numbers = [1, 2, 3, 4]
+
+>>> [number**3 for number in numbers]
+[1, 8, 27, 64]
+This list comprehension builds a new list of cube values from the original data in numbers. Note how the syntax of a comprehension resembles a for loop with the code block at the beginning of the construct.
+
+You can also use comprehensions to process iterables conditionally. To do this, you can add one or more conditions at the end of the comprehension construct:
+
+>>> numbers = [1, 2, 3, 4, 5, 6]
+
+>>> [number for number in numbers if number % 2 == 0]
+[2, 4, 6]
+The condition at the end of this comprehension filters the input data, creating a new list with even numbers only.
+
+Comprehensions are popular tools in Python. They provide a great way to process iterables of data quickly and concisely. To dive deeper into list comprehensions, check out When to Use a List Comprehension in Python.
+
+Unpacking Iterables
+In Python, you can use iterables in a type of operation known as iterable unpacking. Unpacking an iterable means assigning its values to a series of variables one by one. The variables must come as a tuple or list, and the number of variables must match the number of values in the iterable.
+
+Iterable unpacking can help you write more concise, readable code. For example, you may find yourself doing something like this:
+
+>>> numbers = [1, 2, 3, 4]
+
+>>> one = numbers[0]
+>>> two = numbers[1]
+>>> three = numbers[2]
+>>> four = numbers[3]
+
+>>> one
+1
+>>> two
+2
+>>> three
+3
+>>> four
+4
+If this is your case, then go ahead and replace the series of individual assignments with a more readable iterable unpacking operation using a single, elegant assignment like the following:
+
+>>> numbers = [1, 2, 3, 4]
+
+>>> one, two, three, four = numbers
+
+>>> one
+1
+>>> two
+2
+>>> three
+3
+>>> four
+4
+In this example, numbers is an iterable containing numeric data. The assignment unpacks the values in numbers into the four target variables. To do this, Python internally runs a quick loop over the iterable on the right-hand side to unpack its values into the target variables.
+
+Note: Because Python sets are also iterables, you can use them in an iterable unpacking operation. However, because sets are unordered data structures, it won’t be clear which value goes to which variable.
+
+The above example shows the most common form of iterable unpacking in Python. The main condition for the example to work is that the number of variables must match the number of values in the iterable.
+
+
+Remove ads
+Exploring Alternative Ways to Write .__iter__() in Iterables
+As you’ve learned in previous sections, if you want an object to be iterable, then you’ll have to provide it with an .__iter__() method that returns an iterator. That iterator must implement the iterator protocol, which requires the .__iter__() and .__next__() methods.
+
+In this section, you’ll walk through a few alternative ways to create iterators using the standard iterable protocol. In other words, you’ll learn different ways to write your .__iter__() methods and make your objects iterable. Note that you’ll typically define this method in classes that work as data containers or collections.
+
+A quick way to create an .__iter__() method is to take advantage of the built-in iter() function, which returns an iterator out of an input data stream. As an example, get back to your Stack class and make the following changes to the code:
+
+stack.py
+class Stack:
+    def __init__(self):
+        self._items = []
+
+    def push(self, item):
+        self._items.append(item)
+
+    def pop(self):
+        try:
+            return self._items.pop()
+        except IndexError:
+            raise IndexError("pop from an empty stack") from None
+
+    def __iter__(self):
+        return iter(self._items)
+In this example, you use iter() to get an iterator out of your original data stored in ._items. This is a quick way to write an .__iter__() method. However, it’s not the only way to do it.
+
+You can also turn your .__iter__() method into a generator function using the yield statement in a loop over ._items:
+
+stack.py
+class Stack:
+    # ...
+
+    def __iter__(self):
+        for item in self._items:
+            yield item
+Generator functions return an iterator object that yields items on demand. In this example, the items will come from your class’s ._items attribute, which holds the original data in the stack.
+
+Finally, you can also use the yield from <iterable> syntax, which was introduced in PEP 380 as a quick way to create generator iterators:
+
+stack.py
+class Stack:
+    # ...
+
+    def __iter__(self):
+        yield from self._items
+This syntax is pretty concise and readable. It comes in handy when you need to yield items directly from an existing iterable, like in this example.
+
+Comparing Iterators vs Iterables
+Up to this point, you’ve learned a lot about iterators and iterables in Python. When you’re beginning with Python, it’s common to run into errors because you confuse iterables and iterators. Iterables have an .__iter__() method that produce items on demand. Iterators implement an .__iter__() method that typically returns self and a .__next__() method that returns an item in every call.
+
+According to this internal structure, you can conclude that all iterators are iterables because they meet the iterable protocol. However, not all iterables are iterators—only those implementing the .__next__() method.
+
+The immediate consequence of this difference is that you can’t use pure iterables as arguments to the next() function:
+
+>>> fruits = [
+...     "apple",
+...     "banana",
+...     "orange",
+...     "grape",
+...     "lemon",
+... ]
+>>> next(fruits)
+Traceback (most recent call last):
+    ...
+TypeError: 'list' object is not an iterator
+
+>>> hello = "Hello, World!"
+>>> next(hello)
+Traceback (most recent call last):
+    ...
+TypeError: 'str' object is not an iterator
+When you call next() with an iterable as an argument, you get a TypeError. This is because pure iterables don’t provide a .__next__() special method that the next() function can internally call to retrieve the next data item.
+
+In the above examples, you call next() with a list and a string object, respectively. These data types are iterables but not iterators, so you get errors.
+
+It’s important to note that .__iter__() is semantically different for iterables and iterators. In iterators, the method returns the iterator itself, which must implement a .__next__() method. In iterables, the method should yield items on demand.
+
+You may feel tempted to add a .__next__() method to a custom iterable. This addition will make it an iterable and an iterator at the same time. However, this practice isn’t recommended because it prevents multiple iterations over the underlying data. To support multiple iterations through the data, you must be able to obtain multiple independent iterators from it.
+
+With iterator objects, it’s unlikely that you’ll get a new iterator every time, because their .__iter__() method typically returns self. This means that you’ll be getting the same iterator every time. In contrast, the .__iter__() method of an iterable will return a new and different iterator object every time you call it.
+
+Another difference has to do with the underlying data. Pure iterables typically hold the data themselves. In contrast, iterators don’t hold the data but produce it one item at a time, depending on the caller’s demand. Therefore, iterators are more efficient than iterables in terms of memory consumption.
+
+Here’s a summary of the above and other differences between iterators and iterables in Python:
+
+Feature	Iterators	Iterables
+Can be used in for loops directly	✅	✅
+Can be iterated over many times	❌	✅
+Support the iter() function	✅	✅
+Support the next() function	✅	❌
+Keep information about the state of iteration	✅	❌
+Optimize memory use	✅	❌
+The first feature in this list is possible because Python’s for loops always call iter() to get an iterator out of the target data. If this call succeeds, then the loop runs. Otherwise, you get an error.
+
+In general, when dealing with huge datasets, you should take advantage of iterators and write memory-efficient code. In contrast, if you’re coding custom container or collection classes, then provide them with the iterable protocol so that you can use them later in for loops.
+
+Coding Asynchronous Iterators
+Concurrency and parallelism are expansive subjects in modern computing. Python has made multiple efforts in this direction. Since Python 3.7, the language has included the async and await keywords and a complete standard-library framework called asyncio for asynchronous programming.
+
+Note: Concurrency and parallelism are two popular topics in modern computer programming. Parallelism consists of performing multiple operations or tasks simultaneously by taking advantage of multiple CPU cores. Concurrency suggests that multiple tasks have the ability to run in an overlapping manner.
+
+Among other async features, you’ll find that you can now write asynchronous for loops and comprehensions, and also asynchronous iterators.
+
+Similar to normal iterators, asynchronous iterators implement the asynchronous iterator protocol, which consists of two methods:
+
+.__aiter__() returns an asynchronous iterator, typically self.
+.__anext__() must return an awaitable object from a stream. It must raise a StopAsyncIteration exception when the iterator is exhausted.
+Note that these methods look pretty similar to those used in normal iterators. The .__aiter__() method replaces .__iter__(), while .__anext__() replaces .__next__(). The leading a on their names signifies that the iterator at hand is asynchronous.
+
+Another detail is that .__anext__() must raise StopAsyncIteration instead of StopIteration at the end to signal that the data is over, and the iteration must end.
+
+As an example of an asynchronous iterator, consider the following class, which produces random integers:
+
+async_rand.py
+import asyncio
+from random import randint
+
+class AsyncIterable:
+    def __init__(self, stop):
+        self._stop = stop
+        self._index = 0
+
+    def __aiter__(self):
+        return self
+
+    async def __anext__(self):
+        if self._index >= self._stop:
+            raise StopAsyncIteration
+        await asyncio.sleep(value := randint(1, 3))
+        self._index += 1
+        return value
+This class takes a stop value at instantiation time. This value defines the number of random integers to produce. The .__aiter__() method returns self, the standard practice in iterators. There’s no need for this method to be asynchronous. So, you don’t have to use the async def keywords on the method’s definition.
+
+The .__anext__() method must be an asynchronous coroutine, so you must use the async def keywords to define it. This method must return an awaitable object, which is an object that you can use in an asynchronous operation like, for example, an async for loop.
+
+In this example, .__anext__() raises a StopAsyncIteration when the ._index attribute reaches the value in ._stop. Then, the method runs an await expression that computes a random integer number wrapped in a call to asyncio.sleep() to simulate an awaitable operation. Finally, the method returns the computed random number.
+
+Here’s how you can use this iterator in an async for loop:
+
+>>> import asyncio
+>>> from async_rand import AsyncIterable
+
+>>> async def main():
+...     async for number in AsyncIterable(4):
+...         print(number)
+...
+
+>>> asyncio.run(main())
+3
+3
+2
+1
+This code will issue a different output for you because it deals with random numbers. It’s crucial to remember that asynchronous iterators, async for loops, and asynchronous comprehensions don’t make the iteration process parallel. They just allow the iteration to give up control to the asyncio event loop for some other coroutine to run.
+
+In the above example, the asyncio event loop runs when you call the asyncio.run() function with your main() function as an argument.
+
+
+You’ve learned a lot about Python iterators and iterables. Now you know what they are and what their main differences are. You learned how to create different types of iterators according to their specific behavior regarding input and output data.
+
+You studied generator iterators and learned how to create them in Python. Additionally, you learned how to build your own iterables using different techniques. Finally, you touched on asynchronous iterators and asynchronous loops in Python.
+
