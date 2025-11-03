@@ -1,0 +1,167 @@
+Introduction
+Creating Arrays in Python
+Accessing Array Elements
+Modifying Array Elements
+Array Operations
+Adding Elements
+Removing Elements
+Combining Arrays
+User Input for Arrays
+Conclusion
+Arrays in Python
+
+Introduction
+Arrays are powerful tools that allow you to store multiple values in a single variable, making your code more organized and efficient. In this guide, we'll explore the basics of Python arrays, from creating them to performing various operations. We will solve a lot of practice problems along the way.
+
+Creating Arrays in Python
+In Python, we use the term "list" instead of "array," but they serve the same purpose. Creating a list is simple - just use square brackets [] and separate the items with commas.
+
+Here's an example:
+
+fruits = ["apple", "banana", "orange", "grape"]
+numbers = [20, 10, 0, -5]
+In this example, fruits is a list of strings, and numbers is a list of integers. Python lists are versatile and can hold different types of data, even other lists!
+
+Coding Task
+Let's practice creating a list:
+
+# Create a list of the first 5 positive integers
+integers = [1, 2, 3, 4, 5]
+print("Done")
+This task creates a list called integers with the first five positive whole numbers. After creating the list, it prints "Done" to show the task is complete.
+
+Try it on CodeChef
+
+Accessing Array Elements
+To access elements in a list, we use index numbers. In Python, indexing starts at 0, so the first element is at index 0, the second at index 1, and so on.
+
+Here's how it works:
+
+colors = ["red", "green", "blue"]
+# Indexes:   0      1       2
+
+print(colors[0])  # Output: red
+print(colors[2])  # Output: blue
+You can also use negative indexing to access elements from the end of the list. For example, -1 refers to the last element, -2 to the second-to-last, and so on.
+
+print(colors[-1])  # Output: blue
+print(colors[-2])  # Output: green
+Coding Task
+Let's practice accessing list elements:
+
+months = ["Jan", "Feb", "Apr", "May", "Jun"]
+# Output the 3rd element (remember, indexing starts at 0)
+print(months[2])
+Try it on CodeChef
+
+Modifying Array Elements
+Python lists are mutable, which means you can change their elements after creating them. To modify an element, simply assign a new value to a specific index.
+
+Example:
+
+fruits = ["apple", "banana", "orange", "grape"]
+fruits[1] = "kiwi"
+print(fruits)  # Output: ["apple", "kiwi", "orange", "grape"]
+Coding Task
+Let's update an element in a list:
+
+months = ["Jan", "Feb", "Dec", "Apr", "May"]
+# Update the 3rd month (index 2) to "Mar"
+months[2] = "Mar"
+print(months)
+Try it on CodeChef
+
+Array Operations
+Now that we know how to create and access lists, let's look at some common operations we can perform on them.
+
+Finding the length
+We use the len() function to find the length of an array.
+
+Example:
+
+pets = ['cat', 'dog', 'mouse']
+print(len(pets)) # Output: 3
+This code will print 3, the length of the array pets.
+
+Adding Elements
+To add elements to a list, you can use two main methods:
+
+append(): Adds an element to the end of the list.
+insert(): Adds an element at a specific position in the list.
+Examples:
+
+fruits = ["apple", "banana", "cherry"]
+fruits.append("orange")
+print(fruits)  # Output: ["apple", "banana", "cherry", "orange"]
+
+fruits.insert(1, "kiwi")
+print(fruits)  # Output: ["apple", "kiwi", "banana", "cherry", "orange"]
+Coding Task
+Let's practice adding elements to a list:
+
+numbers = [1, 2, 3, 4, 5]
+# Take a number as input and add it to the end of the list
+new_number = _____
+numbers._____(new_number)
+print(numbers)
+Try it on CodeChef
+
+Removing Elements
+To remove elements from a list, you can use these methods:
+
+remove(): Removes the first occurrence of a specified item.
+pop(): Removes and returns an item at a specified index (or the last item if no index is specified).
+Examples:
+
+fruits = ["apple", "banana", "cherry", "banana"]
+fruits.remove("banana")
+print(fruits)  # Output: ["apple", "cherry", "banana"]
+
+removed_fruit = fruits.pop(1)
+print(removed_fruit)  # Output: cherry
+print(fruits)  # Output: ["apple", "banana"]
+Coding Task
+Let's practice removing elements from a list. Take an index as input and remove the item at that index.
+
+colors = ['black', 'blue', 'white', 'cyan', 'yellow', 'green']
+index = _____
+colors.___(index)
+print(colors)
+Try it on CodeChef
+
+Combining Arrays
+You can combine two lists using the + operator. This is called list concatenation.
+
+Example:
+
+list1 = [1, 2, 3]
+list2 = [4, 5, 6]
+combined_list = list1 + list2
+print(combined_list)  # Output: [1, 2, 3, 4, 5, 6]
+Coding Task
+Let's practice combining lists. Combine list2 and list1 in that order.
+
+list1 = ['Hero', 'Maybe Man', 'Run', 'Enemy']
+list2 = ['Annihilate', 'Die for you', 'Am I dreaming', 'Burn the house down']
+combined_list = _____
+print(combined_list)
+Try it on CodeChef
+
+User Input for Arrays
+Sometimes, you might want to create a list based on user input. Here's how you can do that:
+
+For strings:
+fruits = input().split()
+print(fruits)
+For integers:
+numbers = list(map(int, input().split()))
+print(numbers)
+In both cases, the user should enter items separated by spaces.
+
+Coding Task
+Let's practice creating a list from user input. Read a list of integers and print it in reverse order.
+
+
+You've just learned the basics of working with arrays (lists) in Python. We've covered creating lists, accessing and modifying elements, adding and removing items, combining lists, and even taking user input to create lists.
+
+Remember, practice is key to mastering these concepts. Try creating your own lists and experimenting with different operations. As you become more comfortable with these basics, you'll be able to use lists to solve more complex problems and write more efficient code.
