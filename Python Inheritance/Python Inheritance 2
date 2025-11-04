@@ -1,0 +1,286 @@
+What is Inheritance in Python?
+Inheritance in Python allows a class (child class) to inherit attributes and methods from another class (parent class). It promotes code reusability, making it easier to create new classes based on existing ones. Types of inheritance include single, multiple, multilevel, hierarchical, and hybrid inheritance.
+
+Benefits of Inheritance
+Code Reuse: Inheritance allows us to use code from an existing class without rewriting it. Imagine having a toolbox; inheritance lets you add new tools without discarding or duplicating the existing ones.
+ 
+Simplifies Code: It makes your code cleaner & easier to understand because you don’t have to repeat yourself. It's like having a set of blueprints that you can customize for different buildings without starting from scratch each time.
+ 
+Extensibility: You can add new features to a class without modifying it. This is similar to adding a new app on your phone; you get new functionalities without changing the phone itself.
+ 
+Hierarchy: It creates a hierarchy of classes that can classify complex relationships and is intuitive to understand. Think of it as organizing files in folders & subfolders on your computer.
+ 
+Override: Inheritance makes it possible to override or modify methods of the parent class, giving flexibility to the child class. It's like customizing settings on a device; you can keep the default settings or change them to suit your needs.
+Python Inheritance Syntax
+Defining a Parent Class: This is your base class from which other classes will inherit. Here’s a simple example:
+
+class Vehicle:
+    def __init__(self, name, max_speed):
+        self.name = name
+        self.max_speed = max_speed
+
+    def show_info(self):
+        print(f"Vehicle Name: {self.name}, Max Speed: {self.max_speed}")
+
+In this code, Vehicle is a parent class with attributes like name and max_speed, and a method show_info() that prints the vehicle's information.
+ 
+
+Creating a Child Class: A child class inherits from the parent class. Here's how you can create one:
+
+class Car(Vehicle):  # This means Car inherits from Vehicle
+    def __init__(self, name, max_speed, mileage):
+        super().__init__(name, max_speed)  # super() lets you call the parent class
+        self.mileage = mileage
+    def show_car_info(self):
+        print(f"Car Name: {self.name}, Max Speed: {self.max_speed}, Mileage: {self.mileage}")
+
+In this example, Car is a child class that inherits from Vehicle. It adds an additional attribute mileage. The super().__init__(name, max_speed) line calls the __init__ method of the Vehicle class, allowing the Car class to inherit its properties.
+
+Creating a Parent Class
+In Python, creating a parent class is the first step towards using inheritance. A parent class, also known as a base or superclass, defines attributes and methods that child classes can inherit. Here's how you can create a simple parent class:
+
+Class Definition: Start with the class keyword followed by the class name. For example, class Animal: defines a new class named Animal.
+ 
+
+Initialization Method: Use the __init__ method to initialize your class attributes. It's like setting up the basic details when you first create something.
+
+class Animal:
+    def __init__(self, species, habitat):
+        self.species = species
+        self.habitat = habitat
+
+In this example, every Animal has a species and a habitat which are set when the Animal object is created.
+
+ 
+
+Adding Methods: Methods are functions defined within a class. They describe what an object can do.
+
+class Animal:
+    def __init__(self, species, habitat):
+        self.species = species
+        self.habitat = habitat
+
+    def describe(self):
+        print(f"I am a {self.species} living in {self.habitat}.")
+
+Here, the describe method prints a description of the animal using its attributes.
+
+Creating a parent class like Animal is straightforward. This class can now serve as a foundation for child classes that wish to inherit its properties and behaviors, reducing the need to duplicate code for similar objects.
+
+Creating a Child Class
+Once you have a parent class in place, you can create a child class that inherits from it. A child class, also known as a subclass or derived class, gets access to the methods and attributes of the parent class. Here's how to set it up:
+
+Class Definition: Like with the parent class, you start with the class keyword. The difference is in how you define the class name. For a child class, you follow the class name with the parent class name in parentheses.
+ 
+class Bird(Animal):  # Bird is the child class, Animal is the parent class
+ 
+Use super() to Call Parent __init__: The super() function is used to give the child class access to the parent class's __init__ method. This means the child class can inherit the parent's attributes.
+ 
+class Bird(Animal):
+    def __init__(self, species, habitat, can_fly):
+        super().__init__(species, habitat)  # Inherits species and habitat from Animal
+        self.can_fly = can_fly  # New attribute for Bird
+ 
+
+Adding or Overriding Methods
+You can add new methods to the child class or override the existing ones from the parent class.
+
+class Bird(Animal):
+    def __init__(self, species, habitat, can_fly):
+        super().__init__(species, habitat)
+        self.can_fly = can_fly
+
+    def describe(self):  # Overrides the describe method from Animal
+        if self.can_fly:
+            print(f"I am a {self.species} living in {self.habitat}, and I can fly.")
+        else:
+            print(f"I am a {self.species} living in {self.habitat}, but I cannot fly.")
+
+In this example, the Bird class inherits the species and habitat attributes from the Animal class and adds a new attribute can_fly. It also overrides the describe method to include flying ability.
+
+This process shows how inheritance allows child classes to reuse and extend the functionality of parent classes, making your code more modular and manageable.
+
+Example of Inheritance in Python
+We'll create a parent class named Shape with a child class called Rectangle. The Rectangle class will inherit properties and methods from Shape and also have some of its own.
+
+Parent Class: Shape
+
+class Shape:
+    def __init__(self, color='Red', filled=True):
+        self.color = color
+        self.filled = filled
+
+    def describe_shape(self):
+        fill_status = 'filled' if self.filled else 'not filled'
+        print(f"I am a {self.color} shape & I am {fill_status}.")
+
+In this Shape class, each shape has a color and a filled status. There's also a method describe_shape() that prints information about the shape.
+
+Child Class: Rectangle
+
+class Rectangle(Shape):  # Inherits from Shape
+    def __init__(self, length, width, color='Red', filled=True):
+        super().__init__(color, filled)  # Calls the __init__ of the parent class
+        self.length = length
+        self.width = width
+
+    def area(self):
+        return self.length * self.width
+
+    def describe_rectangle(self):
+        print(f"This rectangle is {self.length} units long & {self.width} units wide.")
+        # Calls method from the parent class
+        self.describe_shape()
+
+Here, the Rectangle class inherits from Shape. It has its own attributes, length and width, and an additional method, area(), that calculates the area of the rectangle. It also has a method describe_rectangle() that prints details about the rectangle, including information inherited from the Shape class.
+
+
+Testing the Inheritance
+
+Python
+# Creating an instance of Rectangle
+
+my_rectangle = Rectangle(5, 3, 'Blue', False)
+
+# Using methods from both the parent and child classes
+
+my_rectangle.describe_rectangle()  # Child class method
+
+# Output: This rectangle is 5 units long & 3 units wide.
+
+#         I am a Blue shape & I am not filled.
+
+print(f"The area of the rectangle is: {my_rectangle.area()} units.")  # Child class method
+You can also try this code with Online Python Compiler
+Run Code
+ 
+
+Output: 
+
+The area of the rectangle is: 15 units.
+
+This example demonstrates how the Rectangle class can use attributes and methods from the Shape class while also having its own unique properties and behaviors. It shows the power of inheritance in creating organized and reusable code.
+
+Different Types of Python Inheritance
+Single Inheritance
+Single inheritance occurs when a child class inherits from only one parent class. It's straightforward and the most common use of inheritance.
+
+Python
+class Parent:
+    def parent_method(self):
+        print("This is the parent method.")
+
+class Child(Parent):  # Child inherits from Parent
+    def child_method(self):
+        print("This is the child method.")
+
+# Using the classes
+child_instance = Child()
+child_instance.parent_method()  # Accessing the parent's method
+child_instance.child_method()  # Accessing the child's own method
+You can also try this code with Online Python Compiler
+Run Code
+ 
+
+Output
+
+This is the parent method.
+This is the child method.
+Multiple Inheritance
+A child class can inherit from more than one parent class, known as multiple inheritance.
+
+Python
+class Mother:
+    def mother_method(self):
+        print("This method comes from Mother.")
+
+class Father:
+    def father_method(self):
+        print("This method comes from Father.")
+
+class Child(Mother, Father):  # Inherits from both Mother and Father
+    def child_method(self):
+        print("This is the child method.")
+
+# Using the Child class
+child_instance = Child()
+child_instance.mother_method()
+child_instance.father_method()
+child_instance.child_method()
+You can also try this code with Online Python Compiler
+Run Code
+ 
+
+Output
+
+This method comes from Mother.
+This method comes from Father.
+This is the child method.
+Multilevel Inheritance
+This form of inheritance involves a chain of inheritance. A class inherits from a second class, which in turn inherits from a third class.
+
+Python
+class Grandparent:
+    def grandparent_method(self):
+        print("This is from Grandparent.")
+
+class Parent(Grandparent):  # Inherits from Grandparent
+    def parent_method(self):
+        print("This is from Parent.")
+
+class Child(Parent):  # Inherits from Parent, which inherits from Grandparent
+    def child_method(self):
+        print("This is from Child.")
+
+# Using the Child class
+child_instance = Child()
+child_instance.grandparent_method()
+child_instance.parent_method()
+child_instance.child_method()
+You can also try this code with Online Python Compiler
+Run Code
+ 
+
+Output
+
+This is from Grandparent.
+This is from Parent.
+This is from Child.
+Hierarchical Inheritance
+In hierarchical inheritance, multiple child classes inherit from a single parent class.
+
+Python
+class Parent:
+    def parent_method(self):
+        print("This method is from the parent.")
+
+class FirstChild(Parent):  # Inherits from Parent
+    def first_child_method(self):
+        print("This is from the first child.")
+
+class SecondChild(Parent):  # Inherits from Parent
+    def second_child_method(self):
+        print("This is from the second child.")
+
+# Using the child classes
+first_child_instance = FirstChild()
+second_child_instance = SecondChild()
+
+first_child_instance.parent_method()
+first_child_instance.first_child_method()
+
+second_child_instance.parent_method()
+second_child_instance.second_child_method()
+You can also try this code with Online Python Compiler
+Run Code
+ 
+
+Output
+
+This method is from the parent.
+This is from the first child.
+This method is from the parent.
+This is from the second child.
+Hybrid Inheritance
+Hybrid inheritance is a combination of two or more types of inheritance. For example, it could involve some classes in a multilevel inheritance relationship and others in a multiple or hierarchical relationship.
+
