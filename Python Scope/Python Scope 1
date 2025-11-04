@@ -1,0 +1,985 @@
+Understanding the Concept of Scope
+Names and Scopes in Python
+Scope vs Namespace in Python
+Resolving Names in Python: The LEGB Rule
+The Local Scope
+The Enclosing Scope
+The Global Scope
+The Built-in Scope
+Modifying the Behavior of a Python Scope
+The global Statement
+The nonlocal Statement
+Using the Enclosing Scope to Create Closures
+Bringing Names to Scope With import
+Exploring Other Scope Behaviors in Python
+The Scope of Comprehension Variables
+The Scope of Exception Variables
+The Scope of Class and Instance Attributes
+Using Scope-Related Built-in Functions
+The globals() Function
+The locals() Function
+Conclusion
+Frequently Asked Questions
+
+Remove ads
+ Watch Now This tutorial has a related video course created by the Real Python team. Watch it together with the written tutorial to deepen your understanding: The LEGB Rule & Understanding Python Scope
+
+The scope of a variable in Python determines where in your code that variable is visible and accessible. Python has four general scope levels: local, enclosing, global, and built-in. When searching for a name, Python goes through these scopes in order. It follows the LEGB rule, which stands for Local, Enclosing, Global, and Built-in.
+
+Understanding how Python manages the scope of variables and names is a fundamental skill for you as a Python developer. It helps you avoid unexpected behavior and errors related to name collisions or referencing the wrong variable.
+
+By the end of this tutorial, you’ll understand that:
+
+A scope in Python defines where a variable is accessible, following the local, enclosing, global, and built-in (LEGB) rule.
+A namespace is a dictionary that maps names to objects and determines their scope.
+The four scope levels—local, enclosing, global, and built-in—each control variable visibility in a specific context.
+Common scope-related built-in functions include globals() and locals(), which provide access to global and local namespaces.
+To get the most out of this tutorial, you should be familiar with Python concepts like variables, functions, inner functions, exception handling, comprehensions, and classes.
+
+Get Your Code: Click here to download the free sample code that you’ll use to learn about Python scope and the LEGB rule.
+
+ Take the Quiz: Test your knowledge with our interactive “Python Scope and the LEGB Rule: Resolving Names in Your Code” quiz. You’ll receive a score upon completion to help you track your learning progress:
+
+Python Scope and the LEGB Rule: Resolving Names in Your Code
+Interactive Quiz
+
+Python Scope and the LEGB Rule: Resolving Names in Your Code
+Test your Python scope skills with this quiz. Practice the LEGB rule, scope vs namespace, globals vs locals, and cases like comprehensions and exceptions.
+
+Understanding the Concept of Scope
+In programming, the scope of a name defines the region of a program where you can unambiguously access that name, which could identify a variable, constant, function, class, or any other object. In most cases, you’ll only be able to access a name within its own scope or from an inner or nested scope.
+
+Nearly all programming languages use the concept of scope to avoid name collisions and unpredictable behavior. Most often, you’ll distinguish between two main types of scope:
+
+Global scope: Names in this scope are available to all your code.
+Local scope: Names in this scope are only available or visible to the code within the scope.
+Scope came about because early programming languages like BASIC only had global names. With this type of name, any part of the program could modify any variable at any time, making large programs difficult to maintain and debug. To work with global names, you’d need to keep all the code in mind to know what value a given name refers to at any time. This is a major side effect of not having scopes and relying solely on global names.
+
+Modern languages, like Python, use the concept of variable scoping to avoid this kind of issue. When you use a language that implements scopes, you won’t be able to access all the names in a program from all locations. Instead, your ability to access a name depends on its scope.
+
+Note: In this tutorial, you’ll be using the term name to refer to the identifiers of variables, constants, functions, classes, or any other object that can be assigned a name.
+
+The names in your programs take on the scope of the code block in which you define them. When you can access a name from somewhere in your code, then the name is in scope. If you can’t access the name, then the name is out of scope.
+
+
+Remove ads
+Names and Scopes in Python
+Because Python is a dynamically-typed language, its variables come into existence when you first assign them a value. Similarly, functions and classes are available after you define them using def or class, respectively. Finally, modules exist after you import them into your current scope.
+
+You can create names in Python using any of the following operations:
+
+Operation	Example
+Assignment	variable = value
+Import	import module or from module import name
+Function definition	def func(): pass
+Function argument	func(value1, value2,..., valueN)
+Class definition	class DemoClass: pass
+These are all ways to assign a value to either a variable, constant, function, class, instance, or module. In each case, you end up with a name that has a specific scope. This scope will depend on where in your code you’ve defined the name at hand.
+
+Note: There’s an important difference between assignment operations and reference or access operations. When you assign a name, you’re either creating that name or making it reference a different object. When you reference a name, you’re retrieving the value that the name points to.
+
+Python uses the location of a name definition to associate it with a particular scope. In other words, the place in which you define a name in your code determines the scope or visibility of that name.
+
+For example, if you define a name inside a function, then that name will have a local scope. You can only access the name locally within the function implementation. In contrast, if you define a name at the top level of a module, then that name will have a global scope. You’ll be able to access it from anywhere in your code.
+
+Scope vs Namespace in Python
+The concept of scope is closely related to the concept of namespace. A scope determines the visibility and lifetime of names, while a namespace provides the place where those names are stored.
+
+Python implements namespaces as dictionaries that map names to objects. These dictionaries are the underlying mechanism that Python uses to store names under a specific scope. You can often access them through the .__dict__ attribute of the owning object.
+
+Note: To learn more about namespaces, check out the Namespaces in Python tutorial.
+
+For example, names that you define in a REPL session are stored in __main__.__dict__. Here’s an example:
+
+>>> name = "Pythonista"
+
+>>> dir()
+[
+    '__builtins__',
+    '__doc__',
+    '__loader__',
+    ...
+    'name'
+]
+
+>>> import __main__
+>>> __main__.__dict__
+{
+    '__name__': '__main__',
+    '__doc__': None,
+    ...
+    'name': 'Pythonista',
+    '__main__': <module '.../lib/python3.13/_pyrepl/__main__.py'>
+}
+Without arguments, the built-in dir() function returns a Python list of names from the current scope, sorted in alphabetical order. These names are the keys of the __main__ module’s .__dict__ attribute.
+
+You can access all names defined at the top level of your interactive session directly or from within functions and classes defined there as well:
+
+>>> name
+'Pythonista'
+
+>>> def func():
+...     print(name)
+...
+>>> func()
+Pythonista
+Here, the global variable name is visible and accessible at the top level, as well as inside a function.
+
+In summary, the module’s .__dict__ attribute provides a container for the names and their values, defining the scope of those names. In other words, the names in __main__.__dict__ have a global scope that makes them accessible from anywhere in the interactive session.
+
+The global scope works similarly when you run your code as a Python script or an executable program.
+
+
+Remove ads
+Resolving Names in Python: The LEGB Rule
+Python resolves names using what’s known as the LEGB rule, which defines the order in which the interpreter searches through distinct scopes. The letters in this acronym stand for Local, Enclosing, Global, and Built-in. They’re the four levels of scope that you can find in Python. Here’s what these levels represent:
+
+Local scope is the body of any Python function or lambda expression. This scope contains the names that you define inside the function. These names are only visible from within the function. Python creates a local scope when you call a function, so you’ll have as many different local scopes as function calls. This is true even if you call the same function multiple times, or recursively. Each call creates a new local scope.
+
+Enclosing scope is a scope that exists only for nested functions and is defined by the outer or enclosing function. This scope contains the names that you define within the enclosing function. The names in the enclosing scope are visible from the code of the inner and outer functions.
+
+Global scope is the topmost scope in a Python program or interactive session. This scope contains all of the names that you define at the top level of a script or module. Names in this scope are visible from everywhere in your code.
+
+Built-in scope is a special scope that Python creates or loads whenever you run a script or open an interactive session. This scope contains names such as built-in functions, exceptions, and other attributes that are built into Python. Names in this scope are also available from everywhere in your code.
+
+The LEGB rule defines the order in which Python looks for names. For example, when you reference a given name, Python looks for that name sequentially in the local, enclosing, global, and built-in scope levels if they all exist. If Python finds the name, then you’ll get its first or innermost occurrence. Otherwise, you’ll get a NameError exception.
+
+Here’s a diagram that can help you understand the name lookup process:
+
+Diagram of Local, Enclosed, Global, and Built-in Scopes
+The LEGB Rule in Python
+Python searches from L to B, looking for the name in question. It’ll return the first instance it finds. This means that if a given name exists in both the local and the global scope, then you’ll get the value associated with the name in the local scope.
+
+When you use nested functions, Python resolves names by first checking the local scope or the innermost function’s local scope. Then, it looks at the enclosing scope. If no match is found, then Python looks at the global and built-in scopes. If it can’t find the name, then it raises an exception.
+
+At any given time during execution, you’ll have at most four active scope levels—local, enclosing, global, and built-in—depending on where you are in the code. You’ll always have at least two active scopes: the global and built-in ones. These two scopes will always be available for you.
+
+The Local Scope
+Python creates a local scope for every function call. The local scope for a given function call will exist until the function returns.
+
+The arguments that you pass to a function and the variables that you define inside a function exist only within the function’s local scope. These names are visible only from within the function. When the function returns, this local scope is destroyed, and the names are forgotten.
+
+Consider the following example that shows how you can’t access names defined inside a function:
+
+>>> def square(base):
+...     result = base**2
+...     print(f"The square of {base} is: {result}")
+...
+
+>>> square(10)
+The square of 10 is: 100
+>>> square(20)
+The square of 20 is: 400
+
+>>> result  # Isn't accessible from outside square()
+Traceback (most recent call last):
+    ...
+NameError: name 'result' is not defined
+
+>>> base  # Isn't accessible from outside square()
+Traceback (most recent call last):
+    ...
+NameError: name 'base' is not defined
+The square() function computes the square of a given number, base. When you call the function, Python creates a local scope containing the names base—an argument—and result—a local variable.
+
+After the first call to square(), base holds a value of 10, and result has a value of 100. The second time, the local names won’t remember the values that were stored in them the first time the function was called. Notice that base now holds the value 20, and result holds 400.
+
+If you try to access result or base after the function call, then you get a NameError exception, because these names only exist in the local scope created for each call to square(). When the function returns, these names are removed.
+
+Because you can’t access local names from outside the function, different functions can define objects with the same name. Check out this example:
+
+>>> def cube(base):
+...     result = base**3
+...     print(f"The cube of {base} is: {result}")
+...
+
+>>> cube(30)
+The cube of 30 is: 27000
+In this example, you define cube() using the same variable and parameter names that you used in square(). However, since cube() can’t see the names inside the local scope of square(), and the other way around, both functions work as expected without any name collisions.
+
+The existence of a local scope for functions helps you avoid name collisions in your programs. It also makes functions self-contained and maintainable program units. Additionally, since you can’t change local names from arbitrary places in your code, your programs will be easier to debug, read, and modify.
+
+You can inspect the names in a function’s local scope using the built-in dir() and vars() functions:
+
+>>> def cube(base):
+...     result = base**3
+...     print(dir())
+...     print(vars())
+...     print(f"The cube of {base} is: {result}")
+...
+
+>>> cube(5)
+['base', 'result']
+{'base': 5, 'result': 125}
+The cube of 5 is: 125
+Again, dir() returns a list of variable names. In contrast, vars() returns a dictionary holding the variable names and the associated values.
+
+From outside the function, you can use the .__code__ attribute to check the names:
+
+>>> square.__code__.co_varnames
+('base', 'result')
+>>> square.__code__.co_argcount
+1
+>>> square.__code__.co_consts
+(None, 2, 'The square of ', ' is: ')
+>>> square.__code__.co_name
+'square'
+In this code example, you inspect .__code__ on square(). This is a special attribute that holds information about the code of a Python function. In this case, you see that .co_varnames holds a tuple containing the names that you define inside square(). The .co_argcount holds an integer that represents the number of arguments the function takes.
+
+
+Remove ads
+The Enclosing Scope
+The enclosing or nonlocal scope arises when you nest a function inside another function. This scope was added in Python 2.2 and refers to the namespace of the outer (enclosing) function. The enclosing scope is accessible to the nested functions during their execution.
+
+Names that you define in the enclosing scope are known as nonlocal names because they’re neither local nor global. They’re visible from both the outer and inner functions. Consider the following function:
+
+>>> def outer_func():
+...     # The code block of outer_func() defines its local scope
+...     # It also defines the enclosing scope of inner_func()
+...     variable = 100  # Local to outer_func() and nonlocal to inner_func()
+...     def inner_func():
+...         # The code block of inner_func() defines its local scope
+...         print(f"Printing variable from inner_func(): {variable}")
+...
+...     inner_func()
+...     print(f"Printing variable from outer_func(): {variable}")
+...
+
+>>> outer_func()
+Printing variable from inner_func(): 100
+Printing variable from outer_func(): 100
+
+>>> inner_func()
+Traceback (most recent call last):
+    ...
+NameError: name 'inner_func' is not defined
+When you call outer_func(), Python creates a local scope. The local scope of outer_func() is also the enclosing scope of inner_func(). From inside inner_func(), this scope is neither the global scope nor the local scope. Instead, it’s a special scope that lies in between those two scopes and is known as the enclosing scope.
+
+The inner_func() function comes to life only during the execution of its enclosing function, outer_func(). Therefore, inner_func() is only visible to the code in outer_func() that follows the definition of inner_func(). It’s not visible from the outside, like any other local name.
+
+All the names you create in the enclosing scope are visible from inside inner_func(), except for those created after you call inner_func(). Here’s a modified version of outer_func() that illustrates this point:
+
+>>> def outer_func():
+...     variable = 100
+...     def inner_func():
+...         print(f"Printing variable from inner_func(): {variable}")
+...         print(f"Printing another_var from inner_func(): {another_var}")
+...
+...     inner_func()
+...     another_var = 200  # This variable is defined after calling inner_func()
+...     print(f"Printing variable from outer_func(): {variable}")
+...
+
+>>> outer_func()
+Printing variable from inner_func(): 100
+Traceback (most recent call last):
+    ...
+NameError: cannot access free variable 'another_var' where
+⮑ it is not associated with a value in enclosing scope
+When you call outer_func(), the code runs down to the point at which you call inner_func(). The last statement of inner_func() tries to access another_var. However, at this point, another_var isn’t defined yet, so Python raises a NameError exception because it can’t find the name that you’re trying to use.
+
+Last but not least, you can’t modify names in the enclosing scope from inside a nested function unless you use the nonlocal statement in the nested function.
+
+The Global Scope
+From the moment you launch a Python program, you’re in the global scope. Internally, Python turns your program’s main script into a module called __main__ to hold the main program’s execution. The namespace of this module represents the global scope of your program.
+
+Note: In Python, the notions of global scope and global names are tightly associated with module files. For example, if you define a name at the top level of any Python module, then that name is considered global to the module. That’s the reason why this kind of scope is also called module scope.
+
+If you’re working in a Python interactive session, then you’ll notice that '__main__' is also the name of its main module. To check that out, open an interactive session and access the __name__ variable as shown below:
+
+>>> __name__
+'__main__'
+Whenever you run a Python program or an interactive session, the interpreter executes the code in the module or script that serves as the entry point to your program. This module or script is loaded with the special name, __main__. From this point on, the scope of __main__ is the program’s global scope.
+
+Again, to inspect the names within your global scope, you can use dir(). If you call dir() without arguments, then you’ll get the list of names that live in your current global scope. Take a look at this code:
+
+>>> dir()
+[
+    '__builtins__',
+    '__doc__',
+    '__loader__',
+    ...
+]
+
+>>> var = 100
+>>> dir()
+[
+    '__builtins__',
+    '__doc__',
+    '__loader__',
+    ...
+    'var'
+]
+When you call dir() with no arguments, you get the list of names available in your current global scope. Note that if you assign a new name—like var—at the top level of the module, then that name will be added to the list.
+
+The global scope remains in existence for the duration of a program’s execution, and all names defined there are accessible throughout that time. However, when the program terminates, the global scope is discarded, and its names are forgotten. If you want the computed values to persist between runs, then you’ll need to store them externally, such as in a file or database, and reload them the next time the program runs.
+
+You can access or reference the value of any global name from any place in your code. This includes functions and classes. Here’s an example that clarifies these points:
+
+>>> number = 42
+
+>>> def get_number():
+...     return number  # You can access 'number' from inside get_number()
+...
+
+>>> get_number()
+42
+>>> number  # Remains unchanged
+42
+Inside get_number(), you can access the value of number. This has no effect on your global variable number. On the other hand, you can’t assign global names inside functions unless you explicitly declare them as global names using a global statement.
+
+Inside a function, if you assign a value to a variable that exists in the global scope, then Python creates a new local variable with the same name instead of modifying the global variable. If you follow this logic, then you’ll realize that the following code won’t work as expected:
+
+>>> number = 42
+
+>>> def update_number():
+...     number = 21  # Try to update a global variable
+...     return number
+...
+
+>>> update_number()
+21
+>>> number
+42
+Within update_number(), you try to change the global variable number. However, Python creates a new local variable with the same name, number, inside the function. Note that the local number holds 21, while the global number still holds 42.
+
+Note: You can update or modify global names from any place within your current global scope. To update them from the local scope, you can use the global statement.
+
+However, modifying global names is generally considered bad programming practice because it can lead to code that may have some of the following issues:
+
+Difficult to debug: You can change the value of a global name from almost any top-level code in a program.
+Hard to understand: You need to be aware of all the statements that modify global names.
+Impossible to reuse: You may not be able to reuse the code because it’s dependent on global names that are specific to a concrete program.
+Good programming practice recommends using local names rather than global names. Here are some tips:
+
+Write self-contained functions that rely on arguments and local names rather than global ones.
+Aim to use unique names, regardless of the scope.
+Avoid modifying global names throughout your programs.
+Avoid cross-module name modifications.
+Use global names as constants that don’t change during your program’s execution.
+Up to this point, you’ve covered three different levels of scope in Python. Check out the following example for a summary of where they’re located in your code and how Python looks up names through them:
+
+>>> number = 42
+
+>>> def outer_func():
+...     def inner_func():
+...         print(number)
+...     inner_func()
+...
+
+>>> outer_func()
+42
+When you call outer_func(), you get 42 printed on your screen. How does Python look up the name number in this example? Following the LEGB rule, it’ll look up number in the following places:
+
+Inside inner_func(): This is the local scope, but number doesn’t exist there.
+Inside outer_func(): This is the enclosing scope, but number isn’t defined there either.
+At the top level: This is the global scope, and number is there, so it gets printed to the screen.
+If number weren’t defined in the global scope, then Python would search the built-in scope. This is the last component of the LEGB rule sequence.
+
+
+Remove ads
+The Built-in Scope
+The built-in scope is a special scope that’s implemented as a standard library module named builtins. All of Python’s built-in objects live in this module. Python automatically loads these objects when you run the Python interpreter. Python searches builtins last in its LEGB lookup sequence.
+
+The names in builtins are loaded into your global scope as a mapping with the special name __builtins__, as you can see in the following code:
+
+>>> dir()
+[
+    '__builtins__',
+    ...
+]
+
+>>> list(__builtins__.__dict__.keys())
+[
+    '__name__',
+    '__doc__',
+    '__package__'
+    ...
+    'abs',
+    'all',
+    'any',
+    ...
+    'BaseException',
+    'BaseExceptionGroup',
+    'Exception',
+    ...
+]
+In the output of the call to dir(), you can see that __builtins__ is present in the global scope. If you list the keys of __builtins__.__dict__ itself, then you’ll get the whole list of Python built-in objects, including functions, exceptions, and more.
+
+Even though you can access all of Python’s built-in objects without importing anything, you can also explicitly import builtins and access the names using fully qualified names:
+
+>>> import builtins
+
+>>> dir(builtins)
+[
+    'ArithmeticError',
+    'AssertionError',
+    'AttributeError',
+    ...,
+    'type',
+    'vars',
+    'zip'
+]
+
+>>> builtins.sum([1, 2, 3, 4, 5])
+15
+>>> builtins.max([1, 5, 8, 7, 3])
+8
+>>> builtins.sorted([1, 5, 8, 7, 3])
+[1, 3, 5, 7, 8]
+>>> builtins.pow(10, 2)
+100
+You can import builtins as you would any other Python module. From this point on, you can access all the names in builtins by using the dotted attribute lookup or fully qualified names. This technique can be useful when you want to avoid name collisions if any of your global names override built-in names.
+
+You can override or redefine any built-in name in your global scope. If you do so, then keep in mind that this will affect all your code. Take a look at the following example:
+
+>>> abs(-15)
+15
+>>> abs = 20
+>>> abs(-15)
+Traceback (most recent call last):
+    ...
+TypeError: 'int' object is not callable
+If you define a variable named abs, then the original built-in abs() function is affected throughout your code. Now, suppose you need to call the original abs() and you forget that you reassigned that name. In this case, when you call abs() again, you’d get a TypeError because abs now holds a reference to an integer, which isn’t callable.
+
+Note: Accidentally overriding or redefining built-in names in the global scope can lead to bugs and unexpected behavior, especially for other Python developers reading or using your code. To avoid these issues, it’s best to avoid shadowing built-in names.
+
+If you’re experimenting with some code and you accidentally reassign a built-in name during an interactive session, then you can either restart the session or run del name to remove the redefinition from your global scope. If you revisit the example of abs(), then you can do something like this:
+
+>>> del abs  # Remove the redefined 'abs' from your global scope
+>>> abs(-15)  # Back to the original built-in abs() function
+15
+When you delete the custom abs name, you’re removing the name from your global scope. This allows you to access the original abs() from the built-in scope again.
+
+To handle this kind of situation, you can take advantage of explicitly importing builtins:
+
+>>> import builtins
+
+>>> abs(-15)
+15
+>>> abs = 20
+>>> abs(-15)
+Traceback (most recent call last):
+    ...
+TypeError: 'int' object is not callable
+
+>>> builtins.abs(-15)
+15
+Once you explicitly import builtins, you can use fully qualified names to unambiguously get the names you need from builtins, just like you did with builtins.abs() in the example above.
+
+As a quick summary, some of the implications of scope are shown in the following table:
+
+Action	Global Code	Local Code	Nested Function Code
+Access names in the global scope	Yes	Yes	Yes
+Modify names in the global scope	Yes	No (unless declared global)	No (unless declared global)
+Access names in the local scope	No	Yes (in its own local scope), No (in another local scope)	Yes (in its own local scope), No (in another local scope)
+Override names in the built-in scope	Yes	Yes (during function execution)	Yes (during function execution)
+Access names in their enclosing scope	N/A	Yes	Yes
+Modify names in their enclosing scope	N/A	No (unless declared global)	No (unless declared nonlocal)
+Additionally, code in different scope levels can use the same name for different objects. For example, you can use a local variable named value and also a global variable with the same name, value. However, reusing names across scopes can lead to confusion or unexpected behavior.
+
+
+Remove ads
+Modifying the Behavior of a Python Scope
+So far, you’ve learned how Python scope works and restricts the visibility of variables, functions, classes, and other Python objects to certain parts of your code. You now know that you can access or reference global names from anywhere in your code, but they can be modified or updated from within the local scope.
+
+You also know that you can access local names only from inside the local scope where they were created or from within nested functions. You can’t access them from the global scope or from other local scopes. Additionally, you’ve learned that nonlocal names are accessible from inside nested functions, but you can’t modify or update them directly from there.
+
+Even though Python follows these general rules by default, there are ways to modify this behavior. Python provides two keywords that allow you to modify the content of global and nonlocal names:
+
+global
+nonlocal
+In the next two sections, you’ll learn how to use these keywords to modify the default behavior of name scope in Python.
+
+The global Statement
+You already know that when you try to assign a value to a global variable inside a function, you create a new local variable in the function’s local scope. You can modify this behavior by using the global statement. With this statement, you can set a series of names to treat them as global names.
+
+The global statement consists of the global keyword followed by one or more names separated by commas. You can also use multiple global statements with a name or a list of names. All the names that you list in a global statement will be mapped to the global scope.
+
+Here’s an example where you try to update a global variable from within a function:
+
+>>> counter = 0  # A global variable
+
+>>> def update_counter():
+...     counter = counter + 1  # Fails trying to update 'counter'
+...
+
+>>> update_counter()
+Traceback (most recent call last):
+    ...
+UnboundLocalError: cannot access local variable 'counter' where
+⮑ it is not associated with a value
+Inside update_counter(), you try to update the global counter by using its previous value, 0. However, Python assumes that the counter name is local to update_counter() and raises an UnboundLocalError exception because the name isn’t defined yet, but the code is trying to reuse a previous value.
+
+If you want this code to work the way you expect, then you can use the global statement as shown below:
+
+>>> counter = 0  # A global variable
+
+>>> def update_counter():
+...     global counter  # Declares 'counter' as a global variable
+...     counter = counter + 1  # Successfully updates 'counter'
+...
+
+>>> update_counter()
+>>> counter
+1
+>>> update_counter()
+>>> counter
+2
+>>> update_counter()
+>>> counter
+3
+In this new version of update_counter(), you add the statement global counter to the body of the function right before you try to change counter. With this tiny change, you map the name counter in the function’s local scope to the same name in the global scope. From this point on, you can freely modify counter inside update_counter(), and all changes will affect the global variable instead of creating a new local one.
+
+With the statement global counter, you tell Python to look in the global scope for the name counter. This way, the assignment counter = counter + 1 doesn’t create a new name in the function’s local scope, but updates it in the global scope.
+
+Note: In general, using global is considered bad practice. If you find yourself using global to fix problems like the one above, stop and consider whether there’s a better way to write your code.
+
+For example, you can write a self-contained function that relies on local names rather than global names:
+
+>>> global_counter = 0  # A global variable
+
+>>> def update_counter(counter):
+...     return counter + 1  # Relies on a local variable 'counter'
+...
+
+>>> global_counter = update_counter(global_counter)
+>>> global_counter
+1
+>>> global_counter = update_counter(global_counter)
+>>> global_counter
+2
+>>> global_counter = update_counter(global_counter)
+>>> global_counter
+3
+This implementation of update_counter() defines counter as a parameter and returns its value increased by 1 every time you call the function. This way, the result of update_counter() depends solely on the counter value you pass in, not on any changes to the global variable global_counter.
+
+You can also use a global statement to create global names lazily. Take a look at the following code:
+
+>>> number  # The global variable 'number' doesn't exist
+Traceback (most recent call last):
+    ...
+NameError: name 'number' is not defined
+
+>>> def create_lazy_name():
+...     global number  # Declare the variable 'number' as global
+...     number = 42  # Create a global variable lazily
+...     return number
+...
+
+>>> create_lazy_name()
+42
+>>> number  # The variable 'number' is now available in the global scope
+42
+>>> dir()
+[
+    '__builtins__',
+    ...
+    'number'
+]
+When you call create_lazy_name(), it creates a global variable called number, which didn’t exist before. Note that after calling the function, the number is available in the global scope.
+
+Note: Even though you can use a global statement to create global names lazily, this can be a dangerous practice that can lead to buggy code. So, it’s best to avoid it in your code.
+
+For example, suppose you’re trying to access one of those lazy names and, for some reason, your code hasn’t called the function that creates that name yet. In this case, you’ll get a NameError exception, and your program will crash.
+
+Finally, it’s worth noting that you can use global from inside any function or nested function, and the names listed will always be mapped to names in the global scope.
+
+Finally, even though using a global statement at the top level of a module is legal, it doesn’t make much sense because any name assigned in the global scope is already a global name by definition:
+
+>>> number = 42
+>>> dir()
+[
+    '__builtins__',
+    ...
+    'number'
+]
+
+>>> global number
+>>> dir()
+[
+    '__builtins__',
+    ...
+    'number'
+]
+Using global like in this example doesn’t change anything in your current global scope, as you can see when you compare the outputs of dir(). The variable number is global, whether you use the global statement or not.
+
+
+Remove ads
+The nonlocal Statement
+Like global names, nonlocal names can be accessed from inner functions, but not assigned or updated. If you want to modify them, then you need to use the nonlocal statement. With this statement, you can define a series of names that are going to be treated as nonlocal.
+
+The nonlocal statement consists of the nonlocal keyword followed by one or more names separated by commas. These names refer to the same names in the enclosing scope. The following example shows how you can use nonlocal to modify a variable defined in the enclosing or nonlocal scope:
+
+>>> def function():
+...     number = 42  # A nonlocal variable
+...     def nested():
+...         nonlocal number  # Declare 'number' as nonlocal
+...         number += 42
+...     nested()
+...     print(number)
+...
+
+>>> function()
+84
+With the statement nonlocal number, you tell Python that you’ll be modifying number inside nested(). Then, you increment number using an augmented assignment operation. This change is reflected in the nonlocal name number, which now has a value of 84.
+
+Unlike global, you can’t use nonlocal outside of a nested or inner function. To be more precise, you can’t use a nonlocal statement in either the global scope or in a local scope. Here’s an example:
+
+>>> nonlocal variable  # Try to use nonlocal in the global scope
+  File "<stdin>", line 1
+SyntaxError: nonlocal declaration not allowed at module level
+
+>>> def func():
+...     nonlocal variable  # Try to use nonlocal in a local scope
+...     print(variable)
+...
+  File "<stdin>", line 2
+SyntaxError: no binding for nonlocal 'variable' found
+Here, you first try to use a nonlocal statement in the global scope. Since nonlocal only works inside an inner or nested function, you get a SyntaxError telling you that you can’t use nonlocal in a module scope. Notice that nonlocal doesn’t work inside a local scope either.
+
+Unlike global, you can’t use nonlocal to create nonlocal names lazily. Names must already exist in the enclosing scope if you want to use them as nonlocal names:
+
+>>> def function():
+...     def nested():
+...         nonlocal variable  # Try to declare a nonlocal variable lazily
+...
+  File "<stdin>", line 3
+SyntaxError: no binding for nonlocal 'variable' found
+In this example, when you try to define a nonlocal name using nonlocal variable, Python immediately raises a SyntaxError because variable doesn’t exist in the enclosing scope of nested().
+
+Using the Enclosing Scope to Create Closures
+When you handle a nested function as data, the statements that make up that function are packaged together with the environment in which they execute. The resulting object is known as a closure. In other words, a closure is a callable that carries information about its enclosing scope, even though that scope has completed its execution.
+
+Note: To learn more about closures, check out the Python Closures: Common Use Cases and Examples tutorial.
+
+Closures provide a way to retain state information between function calls. Take a look at the following example:
+
+>>> def power_factory(exponent):
+...     def power(base):
+...         return base**exponent
+...     return power
+...
+
+>>> square = power_factory(2)
+>>> square(10)
+100
+>>> cube = power_factory(3)
+>>> cube(10)
+1000
+>>> cube(5)
+125
+>>> square(15)
+225
+Your closure function power_factory() takes an argument called exponent. You can use this function to build closures that run different power operations. This works because each call to power_factory() gets its own set of state information. In other words, it gets its value for exponent.
+
+Note: Variables like exponent that are referenced within a code block but not defined there are known as free variables. These variables derive their values from the surrounding scope. Free variables are essential to how closures function, as they allow a function to “remember” and retain access to external variables, even after the enclosing scope has finished executing. This mechanism enables closures to preserve state between successive calls.
+
+In the example above, the inner function power() is first assigned to square. In this case, the function remembers that exponent equals 2. In the second example, you call power_factory() using 3 as an argument. This way, cube holds a function object, which remembers that exponent is 3. Notice that you can reuse square and cube because they don’t forget their respective state information.
+
+Bringing Names to Scope With import
+When you write a Python program, you can organize the code into several modules. For your program to work, you need a mechanism that allows you to use the content of those modules in your main program, __main__. Python’s import system allows you to do exactly that.
+
+The import system allows you to load the names defined in a module into your current global scope. Take a look at the following code as an example of what happens when you import some standard modules and names:
+
+>>> dir()
+[__builtins__', ...]
+
+>>> import sys
+>>> dir()
+[
+    '__builtins__',
+    ...
+    'sys'
+]
+
+>>> import os
+>>> dir()
+[
+    '__builtins__',
+    ...
+    'os',
+    'sys'
+]
+
+>>> from functools import partial
+>>> dir()
+[
+    '__builtins__',
+    ...
+    'os',
+    'partial',
+    'sys'
+]
+In this example, you import the sys and os modules from the Python standard library. By calling dir() with no arguments, you can see that these modules are now available for you as names in your current global scope. You can use dot notation to access the names that are defined in sys and os.
+
+Note: If you want to dive deeper into how imports work in Python, then check out the Python import: Advanced Techniques and Tips tutorial.
+
+In the last example, you use the form from module import name, which allows you to import a name directly. In other words, you don’t need to explicitly use dot notation and fully qualified names in this case.
+
+
+Remove ads
+Exploring Other Scope Behaviors in Python
+Some Python structures handle name resolution in ways that don’t fully align with the LEGB rule. These structures include:
+
+Comprehensions
+Exception blocks
+Classes and instances
+In the next few sections, you’ll cover how Python scope works in each of these cases. With this knowledge, you’ll be able to avoid subtle errors related to name scope in these Python structures.
+
+The Scope of Comprehension Variables
+The first structure you’ll learn about is a comprehension. Comprehensions offer a compact way to process all or part of the elements in a collection. You can use comprehensions to create lists, dictionaries, and sets.
+
+Comprehensions consist of a pair of brackets ([]) or curly braces ({}) containing an expression, followed by one or more for clauses, each of which can optionally have an if clause.
+
+The for clause in a comprehension works similarly to a traditional for loop. The loop variable in a comprehension is local to the comprehension itself:
+
+>>> [number**2 for number in range(5)]
+[0, 1, 4, 9, 16]
+
+>>> number  # Try to access the comprehension variable
+Traceback (most recent call last):
+    ...
+NameError: name 'number' is not defined
+Once you run this list comprehension, the variable number is forgotten, and you can’t access its value anymore. It’s unlikely that you need to use this variable outside of the comprehension, but regardless, Python makes sure that its value is no longer available once the comprehension finishes. So, the scope of this variable is limited to the comprehension itself.
+
+Note that this applies only to comprehensions. In regular for loops, the loop variable holds the last value processed by the loop:
+
+>>> for item in range(5):
+...     print(item)
+...
+0
+1
+2
+3
+4
+
+>>> item  # Access the loop variable
+4
+You can access the loop variable item once the loop has finished. Here, the loop variable holds the last value processed by the loop, which is 4 in this example.
+
+The Scope of Exception Variables
+Another atypical scope is related to the optional variable in an except clause. The exception variable is a variable that holds a reference to any exception raised in a try statement. Such a variable is local to the except block and is forgotten when the block ends:
+
+>>> numbers = [1, 2, 3]
+
+>>> try:
+...     numbers[4]
+... except IndexError as error:
+...     # The variable 'error' is local to this block
+...     error
+...
+IndexError('list index out of range')
+
+>>> error
+Traceback (most recent call last):
+    ...
+NameError: name 'error' is not defined
+The error variable holds a reference to the exception raised in the try block. You can only use error inside the except code block. So, the exception variable is local to the except block. When you try to access error from outside the except block, you’ll get a NameError exception.
+
+To work around this behavior, you can use an auxiliary variable:
+
+>>> numbers = [1, 2, 3]
+>>> exception = None
+
+>>> try:
+...     numbers[4]
+... except IndexError as error:
+...     # The variable error is local to this block
+...     exception = error
+...     error
+...
+IndexError('list index out of range')
+
+>>> exception
+IndexError('list index out of range')
+You use exception as an auxiliary variable to hold a reference to the exception raised in the try clause. This can be useful when you need to do something with the exception object once the code block has finished. Note that if no exception is raised, then exception remains None.
+
+
+Remove ads
+The Scope of Class and Instance Attributes
+When you define a class, you’re creating a new namespace. Names assigned at the top level of a class live in its .__dict__ attribute:
+
+>>> class A:
+...     attr = 100
+...
+
+>>> A.__dict__.keys()
+dict_keys(
+    [
+        '__module__',
+        '__firstlineno__',
+        'attr',
+        '__static_attributes__',
+        ...
+    ]
+)
+When you inspect the keys of .__dict__, you’ll notice that "attr" is in the list along with other names. This dictionary represents the class namespace. The names in this space are visible to all instances of the class and to the class itself. This fact defines their scope.
+
+To access a class attribute from outside the class, you need to use the class name:
+
+>>> class A:
+...     attr = 100
+...     print(attr)  # Access a class attribute directly
+...
+100
+
+>>> A.attr  # Access a class attribute from outside the class
+100
+
+>>> attr  # The attribute isn't defined outside A
+Traceback (most recent call last):
+    ...
+NameError: name 'attr' is not defined
+Inside A, you can access the class attributes directly, just like you did in the statement print(attr). To access any class attribute once the code block of the class has been executed, you need to use dot notation or an attribute reference, as you did with A.attr. You’ll get a NameError exception if you try to access .attr without referencing the class.
+
+In class inheritance scenarios—when one class extends another—attribute resolution follows the method resolution order (MRO). So, subclasses may inherit and access attributes defined in their parent classes, unless explicitly overridden.
+
+Note: To learn more about classes, check out the Python Classes: The Power of Object-Oriented Programming tutorial.
+
+You can also access any class attribute using an instance of the class:
+
+>>> a = A()
+>>> a.attr
+100
+Once you have an instance of a class, you can access its attributes using dot notation, as you did here with a.attr.
+
+Class attributes are specific to the class object, but you can access them from any instance of the class. It’s worth noting that class attributes are common to all instances of a class. If you modify a class attribute in one instance, then the changes will be visible in other instances.
+
+Whenever you call a class, you create a new instance of that class. Instances have their own .__dict__ attribute that holds the names associated with the instance itself. These names are commonly called instance attributes and are local and specific to each instance. This means that if you modify an instance attribute, the change will only be visible to that specific instance.
+
+To create, update, or access any instance attribute from inside the class, you need to use self along with the dot notation. Here, self is a special object that represents the current instance. On the other hand, to update or access any instance attribute from outside the class, you need to create an instance and then use the dot notation:
+
+>>> class A:
+...     def __init__(self, var):
+...         self.var = var  # Create a new instance attribute
+...         self.var *= 2  # Update the instance attribute
+...
+
+>>> a = A(100)
+
+>>> a.var
+200
+
+>>> A.var
+Traceback (most recent call last):
+    ...
+AttributeError: type object 'A' has no attribute 'var'
+The A class takes an argument called var, which is automatically doubled inside .__init__() using the assignment operation self.var *= 2. You can access the .var attribute through the a instance. However, it’s not possible to access instance attributes through the class.
+
+Note: For more on how classes work in Python, check out the Object-Oriented Programming (OOP) in Python tutorial.
+
+In summary, to access class attributes, you need to use the class itself or one of its instances. To access instance attributes, you need to use a concrete instance. These rules define the scope of class and instance attributes.
+
+Using Scope-Related Built-in Functions
+There are two Python built-in functions that are closely related to namespaces and, therefore, to the concept of scope:
+
+globals()
+locals()
+In the following sections, you’ll learn the basics about these functions and how to use them in your Python code.
+
+
+Remove ads
+The globals() Function
+The built-in globals() function returns a namespace dictionary with all the names—and associated objects—that are currently in your global scope. Here’s an example of calling the function at the top level of a REPL session:
+
+>>> globals()
+{
+    '__name__': '__main__',
+    '__doc__': None,
+    '__package__': None,
+    ...
+}
+
+>>> number = 42
+
+>>> globals()
+{
+    '__name__': '__main__',
+    '__doc__': None,
+    '__package__': None,
+    ...
+    'number': 42
+}
+The first call to globals() returns a dictionary containing the names in your __main__ program. Note that when you assign a new name at the top level of __main__, then the name is added to the dictionary that globals() returns.
+
+A quick example of how you can use globals() in your code would be to dynamically dispatch functions depending on your current platform. Consider the following toy example:
+
+dispatch.py
+from sys import platform
+
+def linux_print():
+    print("Printing from Linux...")
+
+def win32_print():
+    print("Printing from Windows...")
+
+def darwin_print():
+    print("Printing from macOS...")
+
+printer = globals()[platform + "_print"]
+
+printer()
+If you run this script from the command line, the output will depend on your current platform, which is a cool use case for globals().
+
+Note that you can use the globals() dictionary just like you would use any regular dictionary. For example, you can iterate through it using the standard methods like .keys(), .values(), and .items(). You can also perform key lookups on globals() using square brackets, as in globals()["name"].
+
+You can even modify the content of globals(). Take a look at this example:
+
+>>> globals()["__doc__"] = """Docstring for __main__"""
+
+>>> __doc__
+'Docstring for __main__'
+Here, you change the value associated with the "__doc__" key to add a docstring for __main__. This way, the main module’s docstring will have the value 'Docstring for __main__'.
+
+The locals() Function
+The built-in locals() function returns a dictionary that holds a copy of the current state of the local namespace. When you call locals() in a function block, you get all the names assigned in the local scope down to the point where you call locals().
+
+Here’s a quick toy example:
+
+>>> def function(arg):
+...     var = 100
+...     print(locals())
+...     another = 200
+...
+
+>>> function(300)
+{'var': 100, 'arg': 300}
+Whenever you call locals() inside function(), the resulting dictionary contains the name var mapped to the value 100, and arg mapped to 300. Because locals() only grabs the names assigned before you call it, the another variable isn’t in the dictionary yet.
+
+If you call locals() in the global scope, then you’ll get the same dictionary that you would get if you were to call globals():
+
+>>> locals()
+{
+    '__name__': '__main__',
+    '__doc__': None,
+    '__package__': None,
+    ...
+}
+
+>>> locals() is globals()
+True
+When you call locals() in the global scope, you get a dictionary that’s identical to the dictionary returned by globals().
+
+Note that you can modify the content of locals(), but the changes won’t have an effect on the values of local names:
+
+>>> def function():
+...     var = 100
+...     locals()["var"] = 200
+...     print(var)
+...
+
+>>> function()
+100
+In this example, you modify the content of var using locals(), but the change doesn’t affect the value of var because locals() returns a shallow copy of the local scope.
+
+
+Remove ads
+Conclusion
+You’ve delved into the concept of scope in Python, learning how variable visibility and lifetime are managed within your code. You explored the LEGB rule, which stands for local, enclosing, global, and built-in, and defines how Python resolves variable names across different scope levels.
+
+Additionally, you learned how to modify scope behavior with the global and nonlocal keywords, and how to interact with names in the global and local scopes using the built-in functions globals() and locals().
+
+Grasping the concept of scope is crucial for Python developers, as it helps you avoid common pitfalls such as name collisions and unintended side effects.
+
+
