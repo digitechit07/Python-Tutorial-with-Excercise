@@ -1,0 +1,39 @@
+scope
+Scope defines where in your program a name (like a variable or function) can be accessed.
+
+LEGB Rule
+Python uses lexical scoping with the LEGB rule. The letters in the acronym LEGB stand for Local, Enclosing, Global, and Built-in scopes. This summarizes not only the Python scope hierarchy but also the sequence of steps that Python follows when resolving names in a program:
+
+Local (L)
+Names defined inside the current function.
+
+def my_func():
+    x = 1  # Local scope
+    print(x)
+Enclosing (E)
+Names in any enclosing functions, from inner to outer.
+
+def outer():
+    x = 1
+    def inner():
+        print(x)  # Can access enclosing scope
+    inner()
+Global (G)
+Names defined at the module level.
+
+x = 1  # Global scope
+def my_func():
+    print(x)  # Accesses global x
+Built-In (B)
+Names preassigned in Python’s built-in namespace, such as common functions and data types.
+
+def my_func():
+    items = [1, 2, 3]
+    length = len(items)  # 'len' is from built-in scope
+    return str(length)   # 'str' is from built-in scope
+Key Points
+Python creates a new scope when defining a function or class.
+The global keyword lets you modify global variables from within functions.
+The nonlocal keyword lets you modify variables in an enclosing (but not global) scope.
+List comprehensions create their own scope for the iterator variable.
+
