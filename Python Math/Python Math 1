@@ -1,0 +1,55 @@
+math
+The Python math module provides a comprehensive collection of mathematical functions and constants, making it a go-to tool for performing mathematical operations in Python. It includes functions for trigonometry, logarithms, powers, and other common mathematical calculations.
+
+Here’s a quick example:
+
+>>> import math
+>>> math.sqrt(16)
+4.0
+Key Features
+Provides mathematical constants, such as π (pi) and e
+Offers a range of functions for trigonometry, logarithms, and more
+Supports operations for floating-point numbers
+Frequently Used Classes and Functions
+Object	Type	Description
+math.pi	Constant	The mathematical constant π
+math.e	Constant	The base of natural logarithms, e
+math.sqrt()	Function	Computes the square root of a number
+math.sin()	Function	Computes the sine of a number (radians)
+math.cos()	Function	Computes the cosine of a number (radians)
+math.log()	Function	Computes the natural logarithm (base e)
+Examples
+Calculate the sine of π/2:
+
+>>> import math
+
+>>> math.sin(math.pi / 2)
+1.0
+Compute the logarithm of 10:
+
+>>> math.log(10)
+2.302585092994046
+Find the square root of 25:
+
+>>> math.sqrt(25)
+5.0
+Common Use Cases
+Performing trigonometric calculations for scientific and engineering applications
+Calculating logarithms and exponentials for data analysis
+Using mathematical constants in formulas
+Real-World Example
+Imagine you’re working on a physics simulation and need to calculate the trajectory of a projectile. The math module can help compute the necessary trigonometric values to determine its path:
+
+>>> import math
+>>> velocity = 20  # m/s
+>>> angle = 45  # degrees
+>>> angle_rad = math.radians(angle)
+>>> horizontal_velocity = velocity * math.cos(angle_rad)
+>>> vertical_velocity = velocity * math.sin(angle_rad)
+>>> horizontal_velocity
+14.142135623730951
+>>> vertical_velocity
+14.14213562373095
+In this example, the math module is used to convert degrees to radians and compute the horizontal and vertical components of the velocity, demonstrating its utility in physics calculations.
+
+
