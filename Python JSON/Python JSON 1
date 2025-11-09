@@ -1,0 +1,691 @@
+Introducing JSON
+Examining JSON Syntax
+Exploring JSON Syntax Pitfalls
+Writing JSON With Python
+Convert Python Dictionaries to JSON
+Serialize Other Python Data Types to JSON
+Write a JSON File With Python
+Reading JSON With Python
+Convert JSON Objects to a Python Dictionary
+Deserialize JSON Data Types
+Open an External JSON File With Python
+Interacting With JSON
+Prettify JSON With Python
+Validate JSON in the Terminal
+Pretty Print JSON in the Terminal
+Minify JSON With Python
+Conclusion
+Frequently Asked Questions
+
+Remove ads
+ Watch Now This tutorial has a related video course created by the Real Python team. Watch it together with the written tutorial to deepen your understanding: Working With JSON in Python
+
+Python’s json module provides you with the tools you need to effectively handle JSON data. You can convert Python data types to a JSON-formatted string with json.dumps() or write them to files using json.dump(). Similarly, you can read JSON data from files with json.load() and parse JSON strings with json.loads().
+
+JSON, or JavaScript Object Notation, is a widely-used text-based format for data interchange. Its syntax resembles Python dictionaries but with some differences, such as using only double quotes for strings and lowercase for Boolean values. With built-in tools for validating syntax and manipulating JSON files, Python makes it straightforward to work with JSON data.
+
+By the end of this tutorial, you’ll understand that:
+
+JSON in Python is handled using the standard-library json module, which allows for data interchange between JSON and Python data types.
+JSON is a good data format to use with Python as it’s human-readable and straightforward to serialize and deserialize, which makes it ideal for use in APIs and data storage.
+You write JSON with Python using json.dump() to serialize data to a file.
+You can minify and prettify JSON using Python’s json.tool module.
+Since its introduction, JSON has rapidly emerged as the predominant standard for the exchange of information. Whether you want to transfer data with an API or store information in a document database, it’s likely you’ll encounter JSON. Fortunately, Python provides robust tools to facilitate this process and help you manage JSON data efficiently.
+
+While JSON is the most common format for data distribution, it’s not the only option for such tasks. Both XML and YAML serve similar purposes. If you’re interested in how the formats differ, then you can check out the tutorial on how to serialize your data with Python.
+
+Free Bonus: Click here to download the free sample code that shows you how to work with JSON data in Python.
+
+ Take the Quiz: Test your knowledge with our interactive “Working With JSON Data in Python” quiz. You’ll receive a score upon completion to help you track your learning progress:
+
+Working With JSON Data in Python
+Interactive Quiz
+
+Working With JSON Data in Python
+In this quiz, you'll test your understanding of working with JSON in Python. By working through this quiz, you'll revisit key concepts related to JSON data manipulation and handling in Python.
+
+Introducing JSON
+The acronym JSON stands for JavaScript Object Notation. As the name suggests, JSON originated from JavaScript. However, JSON has transcended its origins to become language-agnostic and is now recognized as the standard for data interchange.
+
+The popularity of JSON can be attributed to native support by the JavaScript language, resulting in excellent parsing performance in web browsers. On top of that, JSON’s straightforward syntax allows both humans and computers to read and write JSON data effortlessly.
+
+To get a first impression of JSON, have a look at this example code:
+
+hello_world.json
+{
+  "greeting": "Hello, world!"
+}
+You’ll learn more about the JSON syntax later in this tutorial. For now, recognize that the JSON format is text-based. In other words, you can create JSON files using the code editor of your choice. Once you set the file extension to .json, most code editors display your JSON data with syntax highlighting out of the box:
+
+Editor screenshot with code highlighting for a JSON file
+The screenshot above shows how VS Code displays JSON data using the Bearded color theme. You’ll have a closer look at the syntax of the JSON format next!
+
+
+Remove ads
+Examining JSON Syntax
+In the previous section, you got a first impression of how JSON data looks. And as a Python developer, the JSON structure probably reminds you of common Python data structures, like a dictionary that contains a string as a key and a value. If you understand the syntax of a dictionary in Python, you already know the general syntax of a JSON object.
+
+Note: Later in this tutorial, you’ll learn that you’re free to use lists and other data types at the top level of a JSON document.
+
+The similarity between Python dictionaries and JSON objects is no surprise. One idea behind establishing JSON as the go-to data interchange format was to make working with JSON as convenient as possible, independently of which programming language you use:
+
+[A collection of key-value pairs and arrays] are universal data structures. Virtually all modern programming languages support them in one form or another. It makes sense that a data format that is interchangeable with programming languages is also based on these structures. (Source)
+
+To explore the JSON syntax further, create a new file named hello_frieda.json and add a more complex JSON structure as the content of the file:
+
+hello_frieda.json
+{
+  "name": "Frieda",
+  "isDog": true,
+  "hobbies": ["eating", "sleeping", "barking"],
+  "age": 8,
+  "address": {
+    "work": null,
+    "home": ["Berlin", "Germany"]
+  },
+  "friends": [
+    {
+      "name": "Philipp",
+      "hobbies": ["eating", "sleeping", "reading"]
+    },
+    {
+      "name": "Mitch",
+      "hobbies": ["running", "snacking"]
+    }
+  ]
+}
+In the code above, you see data about a dog named Frieda, which is formatted as JSON. The top-level value is a JSON object. Just like Python dictionaries, you wrap JSON objects inside curly braces ({}).
+
+In line 1, you start the JSON object with an opening curly brace ({), and then you close the object at the end of line 20 with a closing curly brace (}).
+
+Note: Although whitespace doesn’t matter in JSON, it’s customary for JSON documents to be formatted with two or four spaces to indicate indentation. If the file size of the JSON document is important, then you may consider minifying the JSON file by removing the whitespace. You’ll learn more about minifying JSON data later in the tutorial.
+
+Inside the JSON object, you can define zero, one, or more key-value pairs. If you add multiple key-value pairs, then you must separate them with a comma (,).
+
+A key-value pair in a JSON object is separated by a colon (:). On the left side of the colon, you define a key. A key is a string you must wrap in double quotes ("). Unlike Python, JSON strings don’t support single quotes (').
+
+The values in a JSON document are limited to the following data types:
+
+JSON Data Type	Description
+object	A collection of key-value pairs inside curly braces ({})
+array	A list of values wrapped in square brackets ([])
+string	Text wrapped in double quotes ("")
+number	Integers or floating-point numbers
+boolean	Either true or false without quotes
+null	Represents a null value, written as null
+Just like in dictionaries and lists, you’re able to nest data in JSON objects and arrays. For example, you can include an object as the value of an object. Also, you’re free to use any other allowed value as an item in a JSON array.
+
+As a Python developer, you may need to pay extra attention to the Boolean values. Instead of using True or False in title case, you must use the lowercase JavaScript-style Booleans true or false.
+
+Unfortunately, there are some other details in the JSON syntax that you may stumble over as a developer. You’ll have a look at them next.
+
+Exploring JSON Syntax Pitfalls
+The JSON standard doesn’t allow any comments, trailing commas, or single quotes for strings. This can be confusing to developers who are used to Python dictionaries or JavaScript objects.
+
+Here’s a smaller version of the JSON file from before with invalid syntax:
+
+❌ Invalid JSON
+{
+  "name": 'Frieda',
+  "address": {
+    "work": null, // Doesn't pay rent either
+    "home": "Berlin",
+  },
+  "friends": [
+    {
+      "name": "Philipp",
+      "hobbies": ["eating", "sleeping", "reading",]
+    }
+  ]
+}
+The highlighted lines contain invalid JSON syntax:
+
+Line 2 wraps the string in single quotes.
+Line 4 uses an inline comment.
+Line 5 has a trailing comma after the final key-value pair.
+Line 10 contains a trailing comma in the array.
+Using double quotes is something you can get used to as a Python developer. Comments can be helpful in explaining your code, and trailing commas can make moving lines around in your code less fragile. This is why some developers like to use Human JSON (Hjson) or JSON with comments (JSONC).
+
+Hjson gives you the freedom to use comments, ditch commas between properties, or create quoteless strings. Apart from the curly braces ({}), the Hjson syntax look like a mix of YAML and JSON.
+
+JSONC is a bit stricter than Hjson. Compared to regular JSON, JSONC allows you to use comments and trailing commas. You may have encountered JSONC when editing the settings.json file of VS Code. Inside its configuration files, VS Code works in a JSONC mode. For common JSON files, VS Code is more strict and points out JSON syntax errors.
+
+If you want to make sure you write valid JSON, then your coding editor can be of great help. The invalid JSON document above contains marks for each occurrence of incorrect JSON syntax:
+
+
+When you don’t want to rely on your code editor, you can also use online tools to verify that the JSON syntax you write is correct. Popular online tools for validating JSON are JSON Lint and JSON Formatter.
+
+Later in the tutorial, you’ll learn how to validate JSON documents from the comfort of your terminal. But before that, it’s time to find out how you can work with JSON data in Python.
+
+
+Remove ads
+Writing JSON With Python
+Python supports the JSON format through the built-in module named json. The json module is specifically designed for reading and writing strings formatted as JSON. That means you can conveniently convert Python data types into JSON data and the other way around.
+
+The act of converting data into the JSON format is referred to as serialization. This process involves transforming data into a series of bytes for storage or transmission over a network. The opposite process, deserialization, involves decoding data from the JSON format back into a usable form within Python.
+
+You’ll start with the serialization of Python code into JSON data with the help of the json module.
+
+Convert Python Dictionaries to JSON
+One of the most common actions when working with JSON in Python is to convert a Python dictionary into a JSON object. To get an impression of how this works, hop over to your Python REPL and follow along with the code below:
+
+>>> import json
+>>> food_ratings = {"organic dog food": 2, "human food": 10}
+>>> json.dumps(food_ratings)
+'{"organic dog food": 2, "human food": 10}'
+After importing the json module, you can use .dumps() to convert a Python dictionary to a JSON-formatted string, which represents a JSON object.
+
+It’s important to understand that when you use .dumps(), you get a Python string in return. In other words, you don’t create any kind of JSON data type. The result is similar to what you’d get if you used Python’s built-in str() function:
+
+>>> str(food_ratings)
+"{'organic dog food': 2, 'human food': 10}"
+Using json.dumps() gets more interesting when your Python dictionary doesn’t contain strings as keys or when values don’t directly translate to a JSON format:
+
+>>> numbers_present = {1: True, 2: True, 3: False}
+>>> json.dumps(numbers_present)
+'{"1": true, "2": true, "3": false}'
+In the numbers_present dictionary, the keys 1, 2, and 3 are numbers. Once you use .dumps(), the dictionary keys become strings in the JSON-formatted string.
+
+Note: When you convert a dictionary to JSON, the dictionary keys will always be strings in JSON.
+
+The Boolean Python values of your dictionary become JSON Booleans. As mentioned before, the tiny but significant difference between JSON Booleans and Python Booleans is that JSON Booleans are lowercase.
+
+The cool thing about Python’s json module is that it takes care of the conversion for you. This can come in handy when you’re using variables as dictionary keys:
+
+>>> dog_id = 1
+>>> dog_name = "Frieda"
+>>> dog_registry = {dog_id: {"name": dog_name}}
+>>> json.dumps(dog_registry)
+'{"1": {"name": "Frieda"}}'
+When converting Python data types into JSON, the json module receives the evaluated values. While doing so, json sticks tightly to the JSON standard. For example, when converting integer keys like 1 to the string "1".
+
+Serialize Other Python Data Types to JSON
+The json module allows you to convert common Python data types to JSON. Here’s an overview of all Python data types and values that you can convert to JSON values:
+
+Python	JSON
+dict	object
+list	array
+tuple	array
+str	string
+int	number
+float	number
+True	true
+False	false
+None	null
+Note that different Python data types like lists and tuples serialize to the same JSON array data type. This can cause problems when you convert JSON data back to Python, as the data type may not be the same as before. You’ll explore this pitfall later in this tutorial when you learn how to read JSON.
+
+Dictionaries are probably the most common Python data type that you’ll use as a top-level value in JSON. But you can convert the data types listed above just as smoothly as dictionaries using json.dumps(). Take a Boolean or a list, for example:
+
+>>> json.dumps(True)
+'true'
+
+>>> json.dumps(["eating", "sleeping", "barking"])
+'["eating", "sleeping", "barking"]'
+A JSON document may contain a single scalar value, like a number, at the top level. That’s still valid JSON. But more often than not, you want to work with a collection of key-value pairs. Similar to how not every data type can be used as a dictionary key in Python, not all keys can be converted into JSON key strings:
+
+Python Data Type	Allowed as JSON Key
+dict	❌
+list	❌
+tuple	❌
+str	✅
+int	✅
+float	✅
+bool	✅
+None	✅
+You can’t use dictionaries, lists, or tuples as JSON keys. For dictionaries and lists, this rule makes sense as they’re not hashable. But even when a tuple is hashable and allowed as a key in a dictionary, you’ll get a TypeError when you try to use a tuple as a JSON key:
+
+>>> available_nums = {(1, 2): True, 3: False}
+>>> json.dumps(available_nums)
+Traceback (most recent call last):
+  ...
+TypeError: keys must be str, int, float, bool or None, not tuple
+By providing the skipkeys argument, you can prevent getting a TypeError when creating JSON data with unsupported Python keys:
+
+>>> json.dumps(available_nums, skipkeys=True)
+'{"3": false}'
+When you set skipkeys in json.dumps() to True, then Python skips the keys that are not supported and would otherwise raise a TypeError. The result is a JSON-formatted string that only contains a subset of the input dictionary. In practice, you usually want your JSON data to resemble the input object as close as possible. So, you must use skipkeys with caution to not lose information when calling json.dumps().
+
+Note: If you’re ever in a situation where you need to convert an unsupported object into JSON, then you can consider creating a subclass of the JSONEncoder and implementing a .default() method.
+
+When you use json.dumps(), you can use additional arguments to control the look of the resulting JSON-formatted string. For example, you can sort the dictionary keys by setting the sort_keys parameter to True:
+
+>>> toy_conditions = {"chew bone": 7, "ball": 3, "sock": -1}
+>>> json.dumps(toy_conditions, sort_keys=True)
+'{"ball": 3, "chew bone": 7, "sock": -1}'
+When you set sort_keys to True, then Python sorts the keys alphabetically for you when serializing a dictionary. Sorting the keys of a JSON object can come in handy when your dictionary keys formerly represented the column names of a database, and you want to display them in an organized fashion to the user.
+
+Another notable parameter of json.dumps() is indent, which you’ll probably use the most when serializing JSON data. You’ll explore indent later in this tutorial in the prettify JSON section.
+
+When you convert Python data types into the JSON format, you usually have a goal in mind. Most commonly, you’ll use JSON to persist and exchange data. To do so, you need to save your JSON data outside of your running Python program. Conveniently, you’ll explore saving JSON data to a file next.
+
+
+Remove ads
+Write a JSON File With Python
+The JSON format can come in handy when you want to save data outside of your Python program. Instead of spinning up a database, you may decide to use a JSON file to store data for your workflows. Again, Python has got you covered.
+
+To write Python data into an external JSON file, you use json.dump(). This is a similar function to the one you saw earlier, but without the s at the end of its name:
+
+hello_frieda.py
+import json
+
+dog_data = {
+  "name": "Frieda",
+  "is_dog": True,
+  "hobbies": ["eating", "sleeping", "barking",],
+  "age": 8,
+  "address": {
+    "work": None,
+    "home": ("Berlin", "Germany",),
+  },
+  "friends": [
+    {
+      "name": "Philipp",
+      "hobbies": ["eating", "sleeping", "reading",],
+    },
+    {
+      "name": "Mitch",
+      "hobbies": ["running", "snacking",],
+    },
+  ],
+}
+
+with open("hello_frieda.json", mode="w", encoding="utf-8") as write_file:
+    json.dump(dog_data, write_file)
+In lines 3 to 22, you define a dog_data dictionary that you write to a JSON file in line 25 using a context manager. To properly indicate that the file contains JSON data, you set the file extension to .json.
+
+When you use open(), then it’s good practice to define the encoding. For JSON, you commonly want to use "utf-8" as the encoding when reading and writing files:
+
+The RFC requires that JSON be represented using either UTF-8, UTF-16, or UTF-32, with UTF-8 being the recommended default for maximum interoperability. (Source)
+
+The json.dump() function has two required arguments:
+
+The object you want to write
+The file you want to write into
+Other than that, there are a bunch of optional parameters for json.dump(). The optional parameters of json.dump() are the same as for json.dumps(). You’ll investigate some of them later in this tutorial when you prettify and minify JSON files.
+
+Reading JSON With Python
+In the former sections, you learned how to serialize Python data into JSON-formatted strings and JSON files. Now, you’ll see what happens when you load JSON data back into your Python program.
+
+In parallel to json.dumps() and json.dump(), the json library provides two functions to deserialize JSON data into a Python object:
+
+json.loads(): To deserialize a string, bytes, or byte array instances
+json.load(): To deserialize a text file or a binary file
+As a rule of thumb, you work with json.loads() when your data is already present in your Python program. You use json.load() with external files that are saved on your disk.
+
+The conversion from JSON data types and values to Python follows a similar mapping as before when you converted Python objects into the JSON format:
+
+JSON	Python
+object	dict
+array	list
+string	str
+number	int
+number	float
+true	True
+false	False
+null	None
+When you compare this table to the one in the previous section, you may recognize that Python offers a matching data type for all JSON types. That’s very convenient because this way, you can be sure you won’t lose any information when deserializing JSON data to Python.
+
+Note: Deserialization is not the exact reverse of the serialization process. The reason for this is that JSON keys are always strings, and not all Python data types can be converted to JSON data types. This discrepancy means that certain Python objects may not retain their original type when serialized and then deserialized.
+
+To get a better feeling for the conversion of data types, you’ll start with serializing a Python object to JSON and then convert the JSON data back to Python. That way, you can spot differences between the Python object you serialize and the Python object you end up with after deserializing the JSON data.
+
+
+Remove ads
+Convert JSON Objects to a Python Dictionary
+To investigate how to load a Python dictionary from a JSON object, revisit the example from before. Start by creating a dog_registry dictionary and then serialize the Python dictionary to a JSON string using json.dumps():
+
+>>> import json
+>>> dog_registry = {1: {"name": "Frieda"}}
+>>> dog_json = json.dumps(dog_registry)
+>>> dog_json
+'{"1": {"name": "Frieda"}}'
+By passing dog_registry into json.dumps(), you’re creating a string with a JSON object that you save in dog_json. If you want to convert dog_json back to a Python dictionary, then you can use json.loads():
+
+>>> new_dog_registry = json.loads(dog_json)
+By using json.loads(), you can convert JSON data back into Python objects. With the knowledge about JSON that you’ve gained so far, you may already suspect that the content of the new_dog_registry dictionary is not identical to the content of dog_registry:
+
+>>> new_dog_registry == dog_registry
+False
+
+>>> new_dog_registry
+{'1': {'name': 'Frieda'}}
+
+>>> dog_registry
+{1: {'name': 'Frieda'}}
+The difference between new_dog_registry and dog_registry is subtle but can be impactful in your Python programs. In JSON, the keys must always be strings. When you converted dog_registry to dog_json using json.dumps(), the integer key 1 became the string "1". When you used json.loads(), there was no way for Python to know that the string key should be an integer again. That’s why your dictionary key remained a string after deserialization.
+
+You’ll investigate a similar behavior by doing another conversion roundtrip with other Python data types!
+
+Deserialize JSON Data Types
+To explore how different data types behave in a roundtrip from Python to JSON and back, take a portion of the dog_data dictionary from a former section. Note how the dictionary contains different data types as values:
+
+>>> dog_data = {
+...   "name": "Frieda",
+...   "is_dog": True,
+...   "hobbies": ["eating", "sleeping", "barking",],
+...   "age": 8,
+...   "address": {
+...     "work": None,
+...     "home": ("Berlin", "Germany",),
+...   },
+... }
+The dog_data dictionary contains a bunch of common Python data types as values. For example, a string in line 2, a Boolean in line 3, a NoneType in line 7, and a tuple in line 8, just to name a few.
+
+Next, convert dog_data to a JSON-formatted string and back to Python again. Afterward, have a look at the newly created dictionary:
+
+>>> dog_data_json = json.dumps(dog_data)
+>>> dog_data_json
+'{"name": "Frieda", "is_dog": true, "hobbies": ["eating", "sleeping", "barking"],
+"age": 8, "address": {"work": null, "home": ["Berlin", "Germany"]}}'
+
+>>> new_dog_data = json.loads(dog_data_json)
+>>> new_dog_data
+{'name': 'Frieda', 'is_dog': True, 'hobbies': ['eating', 'sleeping', 'barking'],
+'age': 8, 'address': {'work': None, 'home': ['Berlin', 'Germany']}}
+You can convert every JSON data type perfectly into a matching Python data type. The JSON Boolean true deserializes into True, null converts back into None, and objects and arrays become dictionaries and lists. Still, there’s one exception that you may encounter in roundtrips:
+
+>>> type(dog_data["address"]["home"])
+<class 'tuple'>
+
+>>> type(new_dog_data["address"]["home"])
+<class 'list'>
+When you serialize a Python tuple, it becomes a JSON array. When you load JSON, a JSON array correctly deserializes into a list because Python has no way of knowing that you want the array to be a tuple.
+
+Problems like the one described above can always be an issue when you’re doing data roundtrips. When the roundtrip happens in the same program, you may be more aware of the expected data types. Data type conversions may be even more obfuscated when you’re dealing with external JSON files that originated in another program. You’ll investigate a situation like this next!
+
+Open an External JSON File With Python
+In a previous section, you created a hello_frieda.py file that saved a hello_frieda.json file. If you need to refresh your memory, you can expand the collapsible section below that shows the code again:
+
+
+When you want to write content to a JSON file, you use json.dump(). The counterpart to json.dump() is json.load(). As the name suggests, you can use json.load() to load a JSON file into your Python program.
+
+Jump back into the Python REPL and load the hello_frieda.json JSON file from before:
+
+>>> import json
+>>> with open("hello_frieda.json", mode="r", encoding="utf-8") as read_file:
+...     frie_data = json.load(read_file)
+...
+>>> type(frie_data)
+<class 'dict'>
+
+>>> frie_data["name"]
+'Frieda'
+Just like when writing files, it’s a good idea to use a context manager when reading a file in Python. That way, you don’t need to bother with closing the file again. When you want to read a JSON file, then you use json.load() inside the with statement’s block.
+
+The argument for the load() function must be either a text file or a binary file. The Python object that you get from json.load() depends on the top-level data type of your JSON file. In this case, the JSON file contains an object at the top level, which deserializes into a dictionary.
+
+When you deserialize a JSON file as a Python object, then you can interact with it natively—for example, by accessing the value of the "name" key with square bracket notation ([]). Still, there’s a word of caution here. Import the original dog_data dictionary from before and compare it to frie_data:
+
+>>> from hello_frieda import dog_data
+>>> frie_data == dog_data
+False
+
+>>> type(frie_data["address"]["home"])
+<class 'list'>
+
+>>> type(dog_data["address"]["home"])
+<class 'tuple'>
+When you load a JSON file as a Python object, then any JSON data type happily deserializes into Python. That’s because Python knows about all data types that the JSON format supports. Unfortunately, it’s not the same the other way around.
+
+As you learned before, there are Python data types like tuple that you can convert into JSON, but you’ll end up with an array data type in the JSON file. Once you convert the JSON data back to Python, then an array deserializes into the Python list data type.
+
+Generally, being cautious about data type conversions should be the concern of the Python program that writes the JSON. With the knowledge you have about JSON files, you can always anticipate which Python data types you’ll end up with as long as the JSON file is valid.
+
+If you use json.load(), then the content of the file you load must contain valid JSON syntax. Otherwise, you’ll receive a JSONDecodeError. Luckily, Python caters to you with more tools you can use to interact with JSON. For example, it allows you to check a JSON file’s validity from the convenience of the terminal.
+
+
+Remove ads
+Interacting With JSON
+So far, you’ve explored the JSON syntax and have already spotted some common JSON pitfalls like trailing commas and single quotes for strings. When writing JSON, you may have also spotted some annoying details. For example, neatly indented Python dictionaries end up being a blob of JSON data.
+
+In the last section of this tutorial, you’ll try out some techniques to make your life easier as you work with JSON data in Python. To start, you’ll give your JSON object a well-deserved glow-up.
+
+Prettify JSON With Python
+One huge advantage of the JSON format is that JSON data is human-readable. Even more so, JSON data is human-writable. This means you can open a JSON file in your favorite text editor and change the content to your liking. Well, that’s the idea, at least!
+
+Editing JSON data by hand is not particularly easy when your JSON data looks like this in the text editor:
+
+JSON code without any indentation
+Even with word wrapping and syntax highlighting turned on, JSON data is hard to read when it’s a single line of code. And as a Python developer, you probably miss some whitespace. But worry not, Python has got you covered!
+
+When you call json.dumps() or json.dump() to serialize a Python object, then you can provide the indent argument. Start by trying out json.dumps() with different indentation levels:
+
+>>> import json
+>>> dog_friend = {
+...     "name": "Mitch",
+...     "age": 6.5,
+... }
+
+>>> print(json.dumps(dog_friend))
+{"name": "Mitch", "age": 6.5}
+
+>>> print(json.dumps(dog_friend, indent=0))
+{
+"name": "Mitch",
+"age": 6.5
+}
+
+>>> print(json.dumps(dog_friend, indent=-2))
+{
+"name": "Mitch",
+"age": 6.5
+}
+
+>>> print(json.dumps(dog_friend, indent=""))
+{
+"name": "Mitch",
+"age": 6.5
+}
+
+>>> print(json.dumps(dog_friend, indent=" ⮑ "))
+{
+ ⮑ "name": "Mitch",
+ ⮑ "age": 6.5
+}
+The default value for indent is None. When you call json.dumps() without indent or with None as a value, you’ll end up with one line of a compact JSON-formatted string.
+
+If you want linebreaks in your JSON string, then you can set indent to 0 or provide an empty string. Although probably less useful, you can even provide a negative number as the indentation or any other string.
+
+More commonly, you’ll provide values like 2 or 4 for indent:
+
+>>> print(json.dumps(dog_friend, indent=2))
+{
+  "name": "Mitch",
+  "age": 6.5
+}
+
+>>> print(json.dumps(dog_friend, indent=4))
+{
+    "name": "Mitch",
+    "age": 6.5
+}
+When you use positive integers as the value for indent when calling json.dumps(), then you’ll indent every level of the JSON object with the given indent count as spaces. Also, you’ll have newlines for each key-value pair.
+
+Note: To actually see the whitespace in the REPL, you can wrap the json.dumps() calls in print() function calls.
+
+The indent parameter works exactly the same for json.dump() as it does for json.dumps(). Go ahead and write the dog_friend dictionary into a JSON file with an indentation of 4 spaces:
+
+>>> with open("dog_friend.json", mode="w", encoding="utf-8") as write_file:
+...     json.dump(dog_friend, write_file, indent=4)
+...
+When you set the indentation level when serializing JSON data, then you end up with prettified JSON data. Have a look at how the dog_friend.json file looks in your editor:
+
+Formatted JSON code
+Python can work with JSON files no matter how they’re indented. As a human, you probably prefer a JSON file that contains newlines and is neatly indented. A JSON file that looks like this is way more convenient to edit.
+
+
+Remove ads
+Validate JSON in the Terminal
+The convenience of being able to edit JSON data in the editor comes with a risk. When you move key-value pairs around or add strings with one quote instead of two, you end up with an invalid JSON.
+
+To swiftly check if a JSON file is valid, you can leverage Python’s json.tool. You can run the json.tool module as an executable in the terminal using the -m switch. To see json.tool in action, also provide dog_friend.json as the infile positional argument:
+
+$ python -m json.tool dog_friend.json
+{
+    "name": "Mitch",
+    "age": 6.5
+}
+When you run json.tool only with an infile option, then Python validates the JSON file and outputs the JSON file’s content in the terminal if the JSON is valid. Running json.tool in the example above means that dog_friend.json contains valid JSON syntax.
+
+Note: The json.tool prints the JSON data with an indentation of 4 by default. You’ll explore this behavior in the next section.
+
+To make json.tool complain, you need to invalidate your JSON document. You can make the JSON data of dog_friend.json invalid by removing the comma (,) between the key-value pairs:
+
+dog_friend.json
+{
+    "name": "Mitch"
+    "age": 6.5
+}
+After saving dog_friend.json, run json.tool again to validate the file:
+
+$ python -m json.tool dog_friend.json
+Expecting ',' delimiter: line 3 column 5 (char 26)
+The json.tool module successfully stumbles over the missing comma in dog_friend.json. Python notices that there’s a delimiter missing once the "age" property name enclosed in double quotes starts in line 3 at position 5.
+
+Go ahead and try fixing the JSON file again. You can also be creative with invalidating dog_friend.json and check how json.tool reports your error. But keep in mind that json.tool only reports the first error. So you may need to go back and forth between fixing a JSON file and running json.tool.
+
+Once dog_friend.json is valid, you may notice that the output always looks the same. Of course, like any well-made command-line interface, json.tool offers you some options to control the program.
+
+Pretty Print JSON in the Terminal
+In the previous section, you used json.tool to validate a JSON file. When the JSON syntax was valid, json.tool showed the content with newlines and an indentation of four spaces. To control how json.tool prints the JSON, you can set the --indent option.
+
+If you followed along with the tutorial, then you’ve got a hello_frieda.json file that doesn’t contain newlines or indentation. Alternatively, you can download hello_frieda.json in the materials by clicking the link below:
+
+Free Bonus: Click here to download the free sample code that shows you how to work with JSON data in Python.
+
+When you pass in hello_frieda.json to json.tool, then you can pretty print the content of the JSON file in your terminal. When you set --indent, then you can control which indentation level json.tool uses to display the code:
+
+$ python -m json.tool hello_frieda.json --indent 2
+{
+  "name": "Frieda",
+  "is_dog": true,
+  "hobbies": [
+    "eating",
+    "sleeping",
+    "barking"
+  ],
+  "age": 8,
+  "address": {
+    "work": null,
+    "home": [
+      "Berlin",
+      "Germany"
+    ]
+  },
+  "friends": [
+    {
+      "name": "Philipp",
+      "hobbies": [
+        "eating",
+        "sleeping",
+        "reading"
+      ]
+    },
+    {
+      "name": "Mitch",
+      "hobbies": [
+        "running",
+        "snacking"
+      ]
+    }
+  ]
+}
+Seeing the prettified JSON data in the terminal is nifty. But you can step up your game even more by providing another option to the json.tool run!
+
+By default, json.tool writes the output to sys.stdout, just like you commonly do when calling the print() function. But you can also redirect the output of json.tool into a file by providing a positional outfile argument:
+
+$ python -m json.tool hello_frieda.json pretty_frieda.json
+With pretty_frieda.json as the value of the outfile option, you write the output into the JSON file instead of showing the content in the terminal. If the file doesn’t exist yet, then Python creates the file on the way. If the target file already exists, then you overwrite the file with the new content.
+
+Note: You can prettify a JSON file in place by using the same file as infile and outfile arguments.
+
+You can verify that the pretty_frieda.json file exists by running the ls terminal command:
+
+$ ls -al
+drwxr-xr-x@  8 realpython  staff   256 Jul  3 19:53 .
+drwxr-xr-x@ 12 realpython  staff   384 Jul  3 18:29 ..
+-rw-r--r--@  1 realpython  staff    44 Jul  3 19:25 dog_friend.json
+-rw-r--r--@  1 realpython  staff   286 Jul  3 17:27 hello_frieda.json
+-rw-r--r--@  1 realpython  staff   484 Jul  3 16:53 hello_frieda.py
+-rw-r--r--@  1 realpython  staff    34 Jul  2 19:38 hello_world.json
+-rw-r--r--@  1 realpython  staff   594 Jul  3 19:45 pretty_frieda.json
+The whitespace you added to pretty_frieda.json comes with a price. Compared to the original, unindented hello_frieda.json file, the file size of pretty_frieda.json is now around double that. Here, the 308-byte increase may not be significant. But when you’re dealing with big JSON data, then a good-looking JSON file will take up quite a bit of space.
+
+Having a small data footprint is especially useful when serving data over the web. Since the JSON format is the de facto standard for exchanging data over the web, it’s worth keeping the file size as small as possible. And again, Python’s json.tool has got your back!
+
+
+Remove ads
+Minify JSON With Python
+As you know by now, Python is a great helper when working with JSON. You can minify JSON data with Python in two ways:
+
+Leverage Python’s json.tool module in the terminal
+Use the json module in your Python code
+Before, you used json.tool with the --indent option to add whitespace. Instead of using --indent here, you can provide --compact to do the opposite and remove any whitespace between the key-value pairs of your JSON:
+
+$ python -m json.tool pretty_frieda.json mini_frieda.json --compact
+After calling the json.tool module, you provide a JSON file as the infile and another JSON file as the outfile. If the target JSON file exists, then you overwrite its contents. Otherwise, you create a new file with the filename you provide.
+
+Just like with --indent, you provide the same file as a source and target file to minify the file in-place. In the example above, you minify pretty_frieda.json into mini_frieda.json. Run the ls command to see how many bytes you squeezed out of the original JSON file:
+
+$ ls -al
+drwxr-xr-x@  9 realpython  staff   288 Jul  3 20:12 .
+drwxr-xr-x@ 12 realpython  staff   384 Jul  3 18:29 ..
+-rw-r--r--@  1 realpython  staff    44 Jul  3 19:25 dog_friend.json
+-rw-r--r--@  1 realpython  staff   286 Jul  3 17:27 hello_frieda.json
+-rw-r--r--@  1 realpython  staff   484 Jul  3 16:53 hello_frieda.py
+-rw-r--r--@  1 realpython  staff    34 Jul  2 19:38 hello_world.json
+-rw-r--r--@  1 realpython  staff   257 Jul  3 20:12 mini_frieda.json
+-rw-r--r--@  1 realpython  staff   594 Jul  3 19:45 pretty_frieda.json
+Compared to pretty_frieda.json, the file size of mini_frieda.json is 337 bytes smaller. That’s even 29 bytes less than the original hello_frieda.json file that didn’t contain any indentation.
+
+To investigate where Python managed to remove even more whitespace from the original JSON, open the Python REPL again and minify the content of the original hello_frieda.json file with Python’s json module:
+
+>>> import json
+>>> with open("hello_frieda.json", mode="r", encoding="utf-8") as input_file:
+...     original_json = input_file.read()
+...
+
+>>> json_data = json.loads(original_json)
+>>> mini_json = json.dumps(json_data, indent=None, separators=(",", ":"))
+>>> with open("mini_frieda.json", mode="w", encoding="utf-8") as output_file:
+...     output_file.write(mini_json)
+...
+In the code above, you use Python’s .read() to get the content of hello_frieda.json as text. Then, you use json.loads() to deserialize original_json to json_data, which is a Python dictionary. You could use json.load() to get a Python dictionary right away, but you need the JSON data as a string first to compare it properly.
+
+That’s also why you use json.dumps() to create mini_json and then use .write() instead of leveraging json.dump() directly to save the minified JSON data in mini_frieda.json.
+
+As you learned before, json.dumps needs JSON data as the first argument and then accepts a value for the indentation. The default value for indent is None, so you could skip setting the argument explicitly like you do above. But with indent=None, you’re making your intention clear that you don’t want any indentation, which will be a good thing for others who read your code later.
+
+The separators parameter for json.dumps() allows you to define a tuple with two values:
+
+The separator between the key-value pairs or list items. By default, this separator is a comma followed by a space (", ").
+The separator between the key and the value. By default, this separator is a colon followed by a space (": ").
+By setting separators to (",", ":"), you continue to use valid JSON separators. But you tell Python not to add any spaces after the comma (",") and the colon (":"). That means that the only whitespace left in your JSON data can be whitespace appearing in key names and values. That’s pretty tight!
+
+With both original_json and mini_json containing your JSON strings, it’s time to compare them:
+
+>>> original_json
+'{"name": "Frieda", "is_dog": true, "hobbies": ["eating", "sleeping", "barking"],
+"age": 8, "address": {"work": null, "home": ["Berlin", "Germany"]},
+"friends": [{"name": "Philipp", "hobbies": ["eating", "sleeping", "reading"]},
+{"name": "Mitch", "hobbies": ["running", "snacking"]}]}'
+
+>>> mini_json
+'{"name":"Frieda","is_dog":true,"hobbies":["eating","sleeping","barking"],
+"age":8,"address":{"work":null,"home":["Berlin","Germany"]},
+"friends":[{"name":"Philipp","hobbies":["eating","sleeping","reading"]},
+{"name":"Mitch","hobbies":["running","snacking"]}]}'
+
+>>> len(original_json)
+284
+
+>>> len(mini_json)
+256
+You can already spot the difference between original_json and mini_json when you look at the output. You then use the len() function to verify that the size of mini_json is indeed smaller. If you’re curious about why the length of the JSON strings almost exactly matches the file size of the written files, then looking into Unicode & character encodings in Python is a great idea.
+
+Both json and json.tool are excellent helpers when you want to make JSON data look prettier, or if you want to minify JSON data to save some bytes. With the json module, you can conveniently interact with JSON data in your Python programs. That’s great when you need to have more control over the way you interact with JSON. The json.tool module comes in handy when you want to work with JSON data directly in your terminal.
+
+
+
+Whether you want to transfer data with an API or store information in a document database, it’s likely that you’ll encounter JSON. Python provides robust tools to facilitate this process and help you manage JSON data efficiently. You need to be a bit careful when you do data roundtrips between Python and JSON because they don’t share the same set of data types. Still, the JSON format is a great way to save and exchange data.
+
