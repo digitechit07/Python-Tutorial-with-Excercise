@@ -1,0 +1,107 @@
+Python Regex Components
+Python regex components are the building blocks that empower developers to perform powerful string manipulations and pattern matching. These components, when combined strategically, offer a versatile toolkit for various automation testing tasks. Here’s a breakdown of these components:
+
+Anchors (^ and $):
+Define the start and end positions of a match within a string.
+Character Classes ([ ]):
+Specify sets of characters that can match at a certain position, including ranges and predefined classes.
+Quantifiers (*, +, ?, { }):
+Determine the number of occurrences of a character or group, from zero to specific ranges.
+Escape Sequences (\):
+Match special characters literally, ensuring accurate pattern matching.
+Alternation (|):
+Select from multiple alternatives, allowing flexible pattern choices.
+Groups and Capturing (( )):
+Create subexpressions for complex patterns and capture matched text portions.
+Character Escapes (\d, \w, \s, etc.):
+Shortcut character classes for digits, word characters, whitespace, and more.
+Lazy Matching (*?, +?, ??, { }?):
+Perform minimal matches, useful for avoiding overly greedy patterns.
+Assertions ((?= ) and (?! )):
+Enforce conditions on the patterns that follow or don’t follow the current position.
+Backreferences (\1, \2, etc.):
+Reference and match previously captured groups within the pattern.
+Flags (re.IGNORECASE, re.DOTALL, etc.):
+Modify regex behavior, such as making matches case-insensitive or matching newlines.
+Mastering these Python regex components empowers automation testers with the ability to efficiently validate inputs, parse logs, and manipulate strings, ultimately enhancing the precision and effectiveness of automation testing processes.
+
+How to do Python Regex Testing ?
+Performing Python regex testing involves a systematic process to validate and manipulate strings based on specific patterns. Here’s a step-by-step guide to help you conduct regex testing effectively:
+
+Step 1: Import the re Module To use regex in Python, you need to import the built-in re module:
+
+import re
+Step 2: Define the Regex Pattern Identify the pattern you want to match or search for within a string. Regular expressions are written as strings, so define your regex pattern accordingly.
+
+Recommended Read: python selenium tutorial
+
+Step 3: Choose the Appropriate Function Depending on your objective, choose the appropriate re function to match, search, or replace patterns in the text.
+
+re.match(): Checks if the pattern matches at the beginning of the string.
+re.search(): Searches the entire string for a match.
+re.findall(): Finds all occurrences of the pattern in the string.
+re.finditer(): Returns an iterator of match objects for all occurrences.
+re.sub(): Substitutes the pattern with a replacement string.
+Supercharge your QA process
+
+Step 4: Apply the Regex Function Use the chosen re function along with the regex pattern and the target string to perform the operation. Capture the result in a variable if needed.
+
+Step 5: Process the Results Process the results based on the function you used:
+
+For re.match(), re.search(), and re.finditer(), work with the returned match object to access matched text and groups.
+For re.findall(), you get a list of matched substrings.
+For re.sub(), the function replaces matches with the specified replacement.
+Example: Validating Email Addresses 
+Let’s say you want to validate if an email address follows a standard format:
+
+import re
+
+email_pattern = r‘^[\w\.-]+@[\w\.-]+\.\w+$’
+email = “sid@example.com”
+
+if re.match(email_pattern, email):
+    print(“Valid email address”)
+else:
+    print(“Invalid email address”)
+Example: Extracting URLs 
+If you want to extract URLs from a text, use re.findall():
+
+import re
+
+text = “Visit my website at https://www.qatouch.com and learn more.”
+url_pattern = r‘https?://\S+’
+
+urls = re.findall(url_pattern, text)
+print(urls)
+Example: Validating and Extracting Phone Numbers
+Imagine you’re working on a form where users enter their phone numbers. You want to validate that the phone numbers are in a valid format and extract them for further processing. Here’s how you can achieve this using Python regex:
+
+import re
+
+# Sample text with phone numbers
+text = “Contact us at 123-456-7890 or 9876543210 for assistance.”
+
+# Define the regex pattern for phone numbers
+phone_pattern = r‘\b\d{3}-\d{3}-\d{4}\b|\b\d{10}\b’
+
+# Find all matches using re.findall()
+phone_numbers = re.findall(phone_pattern, text)
+
+# Validate and print the extracted phone numbers
+for phone in phone_numbers:
+    print(f“Valid phone number: {phone}”)
+In this example, the phone_pattern regex is designed to match phone numbers in two formats: ###-###-#### and ##########, where # represents a digit. The \b word boundary ensures that the pattern matches complete phone numbers.
+
+The re.findall() function extracts all matched phone numbers from the text, and the loop validates and prints the extracted phone numbers.
+
+Python Libraries for Regex Testing:
+re (Built-in Library):
+Python’s built-in re-library provides essential regex functionality. Documentation
+regex (Third-party Library):
+The regex library enhances Python’s regex capabilities, offering advanced features like look behind and lookahead assertions. Documentation
+PyTest:
+PyTest, a popular testing framework, supports regex-based assertions, allowing you to easily validate strings and patterns. Documentation
+Behave:
+For Behavior-Driven Development (BDD) enthusiasts, the Behave framework supports regex-based step definitions for more expressive and readable tests. Documentation
+
+Python regex testing is a useful ability that can greatly improve your efforts at automation testing. Regex offers a flexible and effective solution for everything from data validation to log parsing. You may develop more reliable and efficient automation tests by becoming an expert in Python regex and utilizing tools like re and regex. So go into the world of regex to bring your automation testing to a new level of accuracy!
