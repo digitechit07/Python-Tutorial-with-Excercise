@@ -1,0 +1,200 @@
+1. Raw Strings
+A ‘raw string’ in Python is created by prefixing a string literal with r or R, like so: r”Hello world”.
+
+The difference between regular strings and raw strings is that raw strings treat the backslash ('\’) as a literal character.
+
+However, in regular Python strings, backslashes are used to indicate escape sequences like \n (new line character), \r (carriage return character) or \t (tab character).
+
+So when we want to create a string that contains a backslash and we don’t want it to be treated as an escape character, we use raw strings.
+
+And this is why we create RegEx strings in Python using raw strings. Because the RegEx engine interprets backslashes in a special way, and we don’t want Python to modify the string because of its own interpretation of the backslash.
+
+From Python’s official documentation:
+
+Regular expressions use the backslash character ('\') to indicate special forms or to allow special characters to be used without invoking their special meaning. This collides with Python’s usage of the same character for the same purpose in string literals; for example, to match a literal backslash, one might have to write '\\\\' as the pattern string, because the regular expression must be \\, and each backslash must be expressed as \\ inside a regular Python string literal. Also, please note that any invalid escape sequences in Python’s usage of the backslash in string literals now generate a DeprecationWarning and in the future this will become a SyntaxError. This behaviour will happen even if it is a valid escape sequence for a regular expression.
+
+Takeaway: While it’s not necessary to use raw strings for creating RegEx patterns in Python, it is strongly recommended to do so. You will see a lot of programmers create RegEx patterns using raw strings in Python.
+
+2. Two modes of method invocation in re
+First of all, there are only 4 matching functions in Python’s RegEx module re. By matching functions, I mean functions that perform the actual pattern matching between a RegEx pattern and the target string:
+
+match(...) — returns the first matching substring in the target string, as a re.Match object, if found at the start of string
+search(...) — returns the first matching substring in the target string, as a re.Match object, found anywhere in the string
+findall(...) — returns all matching substrings in the target string, as a list of strings
+finditer(...) — returns an iterator of re.Match objects, for all matching substrings in the target string
+But the re module actually allows you to call all 4 of these matching functions in 2 equivalent ways — either
+
+Through a re.Pattern object, which is created by compiling a RegEx pattern string (p = re.compile(regex_pattern)), or
+Through module-level functions (re.search() for example)
+Example of Approach 1:
+
+
+Pattern level invocation
+Example of Approach 2:
+
+
+Module level invocation
+Both ways of invoking a method in this module will produce the same result. You may prefer one over the other for aesthetics, but that’s it.
+
+The performance is also equivalent because the re module caches your pattern objects. So repeatedly calling module-level functions is not any worse than using a pre-compiled pattern object for the same RegEx string.
+
+Takeaway: There are two equivalent ways of using matching functions in Python’s RegEx module. You will see both types of code on Stack Overflow and code repositories, but don’t stress about the difference between the two types because they’re equivalent.
+
+Grouping
+Finally, let’s dive into Groups.
+
+In RegEx patterns, a Group is anything that’s surrounded by round parentheses.
+
+In other words, anything between the ( and ) metacharacters is a Group.
+
+Conceptually, they are interpreted in the same way that parenthesized expressions are interpreted in mathematical expressions.
+
+For example, when you see (2+3)*5 in an algebraic expression, you know that the 2+3 is its own entity, or a group, and by the rule of BODMAS, it’s evaluated before anything else.
+
+Similarly, in the RegEx pattern r”(ab)c”, ab is a Group.
+
+There are numerous benefits of using Groups. For starters, a RegEx Group can be individually retrieved or collectively retrieved with other Groups.
+
+It can also be combined with other metacharacters like * to create meaningful patterns.
+
+For example r”(ab)*c” will catch expressions where you have 0 or more instances of the Group ab followed by a c.
+
+Similarly, r”(ab)?c” will catch strings that are either "c" or "abc" (allowing for 0 or 1 instance of the Group ab)
+
+
+So that’s what a Group is. Now let’s see some important Grouping features in RegEx:
+
+Grouping feature #1
+Once you match a RegEx pattern containing Groups to a target string, the individual Groups in the match (stored in a re.Match object) can be separately or collectively retrieved by invoking .group() or .groups() on the re.Match Object.
+
+As I mentioned above, a re.Match object is returned by calling one of the 4 matching functions of the re module.
+
+For example:
+
+
+Here we retrieved the first, and only, Group in our RegEx pattern. And yeah, the indexing of Groups starts at 1, not 0.
+
+Actually m.group(0) is a special case, because it returns the whole matched string, as opposed to any individual Group. In the above case, that is abc.
+
+Further, m.group(0) is equivalent to saying m.group(), or passing no argument to the method, since the default argument is 0.
+
+This is probably why indexing of Groups starts at 1 — the developers of re want to reserve 0 for this special function?
+
+In fact, when you see RegEx code on Stackoverflow, most of the times, the matched string is returned by calling .group() on the match object.
+
+Grouping feature #2
+The second important feature of Grouping is that you can reference a Group later in the same RegEx pattern.
+
+Get Kanak Singh’s stories in your inbox
+Join Medium for free to get updates from this writer.
+
+Enter your email
+Subscribe
+This lets you dynamically reference a substring from the target string, without knowing exactly what it is in advance.
+
+You do that using a backslash in conjunction with the Group index. For example:
+
+
+Here, \1 matches with the Group ab since that is the first Group in our RegEx pattern.
+
+Grouping feature #3 — Non-capturing Groups
+Now we get to the feature mentioned in the beginning of the article — the Non-capturing Group.
+
+When your group starts with a question mark and colon ?:, it’s called a Non-capturing Group.
+
+For example, we can modify the previous RegEx pattern to be r”(?:ab)c”, to indicate that the Group ab is ‘non-capturing’.
+
+In other words, you’re telling the RegEx engine to not bother remembering this Group, because you’re not interested in referencing it later or retrieving it individually.
+
+Let’s see this in action:
+
+
+Trying to reference a Non-capturing Group
+This returns an error because we tried referencing a Group later in the expression but there was no captured Group to reference.
+
+Let’s see another example:
+
+
+Trying to retrieve a Non-capturing Group
+This time we get an error because we tried retrieving the first Group (index starting at 1) from the matched object, but same as before, there was no captured group.
+
+This is useful for large and complex RegEx patterns, where you may have a lot of different Groups, but you’re only interested in referencing or retrieving a few of them.
+
+A related feature of RegEx Groups in Python is Named Groups, where you can give names to your groups, and then reference them by name.
+
+That’s it. That’s the core Grouping logic and some important Grouping features to get you started. If you’d like to practice some RegEx code, now is a good time to pause and internalize the above concepts.
+
+The rest of the article talks about more RegEx features that leverage Groups, and I consider them to be very useful also.
+
+I’ll term them as intermediate features, but I know that’s subjective, so take it with a pinch of salt, please.
+
+m.groups() vs. m.group()
+These are 2 very common RegEx methods, which are very easy to follow once you understand Groups, but they’re important to mention for the sake of comprehensiveness.
+
+m.groups() gives you a list of all capturing Groups from the match between a regular expression and target string. As you can imagine, Non-capturing Groups are not included.
+m.group([group1, …]) gives you specific Group(s) corresponding to the index parameters. If you specify multiple Group indices, you will get a tuple of the respective Group strings. And as mentioned before, m.group() or m.group(0) will return the whole matched string.
+Let’s see this in action:
+
+
+First, let’s break down what’s happening in the RegEx pattern above. This pattern expects the following from the target string:
+
+There should be at least 1 ab at the start, but there can be as many of them, back to back (that’s what the metacharacter + signifies). Also, ab is the first capturing Group
+This should be followed by the letter c
+This should be followed by de, and this is our second capturing Group
+This should be followed by whatever our first capturing Group is
+Finally, this should be followed by an f
+
+findall() vs. finditer()
+This is another important dichotomy of functions, which confused me for quite a while:
+
+findall(): As the name suggests, this returns a list of all matches between a RegEx pattern and target string, in the order that they are found. But actually there are 3 different scenarios of using this function, each of which gives a different type of result. First let’s define a target string that we’ll match our RegEx pattern against:
+
+Scenario 1: If you’re not using any capturing Groups in your RegEx, findall() will return a list of all substrings that match with the whole RegEx pattern. Simple.
+
+Scenario 2: If you’re using 1 capturing Group in your RegEx, findall() will return a list of all substrings that match that Group (not the whole matched substring)
+
+As explained, this only returns ['ab', 'ab', 'ab'], and not ['ab c', 'ab c', 'ab c'].
+
+Actually, there’s another subtlety here — the substring ab test doesn’t get caught because it doesn't have ab c in it.
+
+Since in this case .findall() is returning a list of all occurences of ab, you may think there’d be 4 ab’s in the answer.
+
+But that’s not the case since the RegEx pattern r"(ab) c" hasn't matched with "ab test".
+
+Scenario 3: If you’re using multiple capturing Groups (more than 1) in your RegEx pattern, findall() will return a list of tuples of all Groups, for all matches, in the format [..(<group 1>, <group 2>…, <group m>)..]
+
+So that’s it.
+
+Honestly speaking, I tripped over this function a lot until I read its documentation, and I still don’t know a valid use case for it.
+
+I’m including it here simply to demystify it, but I don’t use it in my code.
+
+If I want all matches for a RegEx pattern in a string, I use the finditer() function, which is explained below:
+
+2. finditer(): This function returns an iterator (read: Lazy Evaluation) to iterate over all matches of the RegEx pattern in the target string (regardless of how many Groups there are in the RegEx pattern). This is what it looks like:
+
+
+The type of the objects in the iterator object is re.Match, which can be used to access the whole matched substring (m.group()), or access specific groups like so m.group(1, 2).
+
+Creating RegEx patterns using formatted strings
+If you want to create regular expressions dynamically, maybe to incorporate user input into the pattern, you can pass formatted strings to the RegEx engine in Python.
+
+As you may know, formatted strings, denoted by f"...", evaluate the expression inside curly braces {…} and insert the result in the string.
+
+So if variable1 = "world”, then the formatted string f“Hello {variable1}” evaluates to “Hello world”.
+
+It is not surprising that you can pass a formatted string to the RegEx engine since a formatted string is really just a string.
+
+However, you may not know that you can make a formatted raw string! For example a = fr"Hello {variable1} \d" is a valid string as well.
+
+Of course, this section would be boring if it didn’t have a nuance, so here it goes: what happens when you want to use curly braces {} in your RegEx pattern, which indicates a repeating qualifier in the RegEx engine?
+
+Remember, curly braces have a special purpose in formatted strings, so they will be interpreted by the formatted string construct and your final string will not actually have the braces.
+
+For example, r"hello{1,4}" as a RegEx pattern means that the matching string needs to have at least 1 hello, and can have as many as 4 hello's repeated. But to a formatted string, it means something else.
+
+So fr"hello{1,4}" actually evaluates to “hello(1, 4)” because the formatted string construct in Python interprets 1,4 as a tuple.
+
+Answer: In order to preserve the curly braces in the evaluated string, you need to escape them by using double curly braces! So the correct way to construct this pattern is fr"hello{{1,4}}", which will translate into "hello{1,4}".
+
+That’s it. This is all the RegEx content I have for now. Hopefully, you take away something useful from this article.
