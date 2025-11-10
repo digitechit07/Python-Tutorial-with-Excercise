@@ -1,0 +1,138 @@
+Installing pip
+If you are using Python 3.4 or above, pip is already included. However, if you don't have pip installed, you can install it using the following steps −
+
+Download get-pip.py script −
+
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+Run the Script
+
+python get-pip.py
+Installing Packages with pip
+You can use pip to install any package from the Python Package Index (PyPI), which is the official third-party software repository for Python.
+
+PyPI hosts thousands of packages that you can easily integrate into your projects. These packages range from essential libraries for scientific computing, such as numpy and pandas, to web development frameworks like Django and Flask, and many more.
+Syntax
+Following is the basic syntax to install packages with pip in Python −
+
+pip install package_name
+Example
+To install the requests library, you can use the following command −
+
+pip install requests
+Example: Specifying Versions
+Sometimes, you may need a specific version of a package to ensure compatibility with your project. You can specify the version by using the == operator −
+
+pip install requests==2.25.1
+Example: Installing Multiple Packages
+You can also install multiple packages at once by listing their names separated by spaces −
+
+pip install numpy pandas matplotlib
+Upgrading Packages
+To upgrade a package to the latest version, you can use the --upgrade option with the pip install command.
+
+Syntax
+Following is the basic syntax to upgrade a package in Python −
+
+pip install --upgrade package_name
+Example
+To upgrade the requests library, you can use the following command −
+
+pip install --upgrade requests
+Listing Installed Packages
+You can list all the installed packages in your Python environment using the pip list command.
+
+When working on Python projects, it is often necessary to know which packages and versions are installed in your environment. pip provides several commands to list and manage installed packages.
+
+Basic Listing
+To list all installed packages in your current environment, use the following command −
+
+pip list
+This command outputs a list of all installed packages along with their respective versions. This is useful for quickly checking the state of your environment.
+
+Detailed Information
+For more detailed information about each installed package, you can use the pip show command followed by the package name −
+
+pip show requests
+This command displays detailed information about the specified package, including −
+
+Name
+Version
+Summary
+Home-page
+Author
+Author-email
+License
+Location
+Requires
+Required-by
+Outdated Packages
+To check for outdated packages in your environment, you can use the following command −
+
+pip list --outdated
+This command lists all installed packages that have newer versions available. The output includes the current version and the latest version available.
+
+Uninstalling Packages
+To uninstall a package, you can use the pip uninstall command.
+
+When you no longer need a Python package in your environment, you can uninstall it using pip. Here is how you can uninstall packages −
+
+Uninstalling a Single Package
+To uninstall a single package, use the pip uninstall command followed by the package name. For example, to uninstall the requests package −
+
+pip uninstall requests
+You will be prompted to confirm the uninstallation. Type y and press "Enter" to proceed.
+
+Uninstalling Multiple Packages
+You can also uninstall multiple packages in a single command by listing them all after pip uninstall −
+
+pip uninstall numpy pandas
+This command will uninstall both numpy and pandas packages.
+
+Freezing Installed Packages
+Freezing installed packages in Python refers to generating a list of all packages installed in your environment along with their versions. This list is saved to a "requirements.txt" file and can be used to recreate the exact environment elsewhere.
+
+Using "pip freeze"
+The pip freeze command lists all installed packages and their versions. You can direct its output to a "requirements.txt" file using the shell redirection > operator −
+
+pip freeze > requirements.txt
+This command creates or overwrites "requirements.txt" with a list of packages and versions in the format "package==version".
+
+Using a requirements.txt File
+A requirements.txt file is a way to specify a list of packages to be installed using pip. This is useful for ensuring that all dependencies are installed for a project.
+
+Creating requirements.txt
+To create a "requirements.txt" file with the current environment's packages, you can use the following command −
+
+pip freeze > requirements.txt
+Installing from requirements.txt
+To install all packages listed in a requirements.txt file, you can use the following command −
+
+pip install -r requirements.txt
+Using Virtual Environments
+Virtual environments allow you to create isolated Python environments for different projects. This ensures that dependencies for different projects do not interfere with each other.
+
+Creating a Virtual Environment
+You can create a virtual environment using the following command −
+
+python -m venv myenv
+Replace myenv with your preferred name for the virtual environment. This command creates a directory named myenv (or your specified name) containing a self-contained Python environment.
+
+Activating the Virtual Environment
+Depending on your operating system, activate the virtual environment −
+
+On Windows −
+myenv\Scripts\activate
+On macOS and Linux −
+source myenv/bin/activate
+Once activated, your command prompt will change to show the name of the virtual environment (myenv in this case), indicating that you are now working within it.
+
+Deactivating the Virtual Environment
+To deactivate the virtual environment and return to the global Python environment, you can use the following command −
+
+deactivate
+Deleting the Virtual Environment
+If you no longer need the virtual environment, simply delete its directory (myenv or your chosen name) using the following command −
+
+rm -rf myenv   # On macOS and Linux
+rmdir /s myenv # On Windows
+
