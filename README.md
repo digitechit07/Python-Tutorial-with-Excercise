@@ -4,9 +4,13 @@ Python-Tutorial-with-Excercise. Step by step instruction. Hope you enjoy!
 # Module 1: An Introduction to Python
 
 • What can Python do?
+
 • Why Python?
+
 • Good to know
+
 • Python Syntax compared to other programming languages
+
 • Python Install
 
 # Module 2: Beginning Python Basics
